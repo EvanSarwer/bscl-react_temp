@@ -7,15 +7,22 @@ import TotalUser from './Components/CurrentStatus/TotalUser';
 import ActiveUser from './Components/CurrentStatus/ActiveUser';
 import TotalChannel from './Components/CurrentStatus/TotalChannel';
 import ActiveChannel from './Components/CurrentStatus/ActiveChannel';
+import Header from './Components/Header/Header';
+import MainMenu from './Components/MainMenu/MainMenu';
+import CurrentStatus from './Components/CurrentStatus/CurrentStatus';
+import Dashboard from './Components/Dashboard/Dashboard';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     {/* <App /> */}
-    <TotalUser/>
+    {/* <TotalUser/>
     <ActiveUser/>
     <TotalChannel/>
-    <ActiveChannel/>
+    <ActiveChannel/> */}
+    <Header/>
+    <MainMenu/>
+    <Dashboard/>
 
 
 
