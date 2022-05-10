@@ -3,11 +3,22 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import TotalUser from './Components/CurrentStatus/TotalUser';
+import ActiveUser from './Components/CurrentStatus/ActiveUser';
+import TotalChannel from './Components/CurrentStatus/TotalChannel';
+import ActiveChannel from './Components/CurrentStatus/ActiveChannel';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    {/* <App /> */}
+    <TotalUser/>
+    <ActiveUser/>
+    <TotalChannel/>
+    <ActiveChannel/>
+
+
+
   </React.StrictMode>
 );
 
