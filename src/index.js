@@ -7,11 +7,16 @@ import TotalUser from './Components/CurrentStatus/TotalUser';
 import ActiveUser from './Components/CurrentStatus/ActiveUser';
 import TotalChannel from './Components/CurrentStatus/TotalChannel';
 import ActiveChannel from './Components/CurrentStatus/ActiveChannel';
+import ActiveDetails from './Components/CurrentStatus/ActiveDetails';
+import Graph from './Components/Graph/Graph';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     {/* <App /> */}
+    
+    <ActiveDetails/>
+    <Graph/>
     <TotalUser/>
     <ActiveUser/>
     <TotalChannel/>
