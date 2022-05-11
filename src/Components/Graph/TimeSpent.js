@@ -2,6 +2,9 @@ import React from 'react';
 import {Bar} from 'react-chartjs-2';
 import { Chart as ChartJS } from 'chart.js/auto';
 
+const TimeSpent = ()=>{
+    
+
 const state = {
     labels: [
     "BTV",
@@ -34,9 +37,6 @@ const state = {
         borderColor: "transparent"
     }]
 }
-
-export default class ReachPercent extends React.Component {
-  render() {
     return (
       <div>
           <div>
@@ -44,7 +44,7 @@ export default class ReachPercent extends React.Component {
     
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">Daily Top 10 Reach</h4>
+                <h4 class="card-title">Daily Top 10 Time Spent</h4>
                 
             </div>
             <div class="card-content collapse show">
@@ -69,5 +69,6 @@ export default class ReachPercent extends React.Component {
         </div>
     
     );
-  }
 }
+
+export default TimeSpent;

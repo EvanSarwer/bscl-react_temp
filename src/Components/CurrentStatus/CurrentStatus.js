@@ -55,7 +55,7 @@ const CurrentStatus =() =>{
                                 <div class="media d-flex">
                                     <div class="media-body text-left">
                                         <h3 class="warning">120</h3>
-                                        <h6>Total Chanel</h6>
+                                        <h6>Total Channel</h6>
                                     </div>
                                     <div>
                                         <i class="icon-pie-chart warning font-large-2 float-right"></i>

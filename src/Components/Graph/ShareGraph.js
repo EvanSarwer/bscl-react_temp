@@ -2,41 +2,44 @@ import React from 'react';
 import {Bar} from 'react-chartjs-2';
 import { Chart as ChartJS } from 'chart.js/auto';
 
-const state = {
-    labels: [
-    "BTV",
-    "BTV World",
-    "BTV Sangsad",
-    "BTV Chattrogram",
-    "Independent TV",
-    "ATN Bangla",
-    "Channel I HD",
-    "Ekushey TV",
-    "NTV",
-    "RTV HD"
-],
-    datasets: [{
-        label: "Number of user",
-        data: [
-    8,
-    8,
-    7,
-    9,
-    9,
-    9,
-    6,
-    8,
-    8,
-    9
-],
-        backgroundColor: "#28D094",
-        hoverBackgroundColor: "rgba(22,211,154,.9)",
-        borderColor: "transparent"
-    }]
-}
 
-export default class ReachPercent extends React.Component {
-  render() {
+const ShareGraph =() =>{
+
+
+    const state = {
+        labels: [
+        "BTV",
+        "BTV World",
+        "BTV Sangsad",
+        "BTV Chattrogram",
+        "Independent TV",
+        "ATN Bangla",
+        "Channel I HD",
+        "Ekushey TV",
+        "NTV",
+        "RTV HD"
+    ],
+        datasets: [{
+            label: "Number of user",
+            data: [
+        8,
+        8,
+        7,
+        9,
+        9,
+        9,
+        6,
+        8,
+        8,
+        9
+    ],
+            backgroundColor: "#28D094",
+            hoverBackgroundColor: "rgba(22,211,154,.9)",
+            borderColor: "transparent"
+        }]
+    }
+
+
     return (
       <div>
           <div>
@@ -44,7 +47,7 @@ export default class ReachPercent extends React.Component {
     
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">Daily Top 10 Reach</h4>
+                <h4 class="card-title">Daily Top 10 Share</h4>
                 
             </div>
             <div class="card-content collapse show">
@@ -69,5 +72,5 @@ export default class ReachPercent extends React.Component {
         </div>
     
     );
-  }
 }
+export default ShareGraph;

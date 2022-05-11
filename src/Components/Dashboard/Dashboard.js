@@ -4,6 +4,9 @@ import CurrentStatus from "../CurrentStatus/CurrentStatus";
 import Graph from "../Graph/Graph";
 import ReachGraph from "../Graph/ReachGraph";
 import ReachPercent from "../Graph/ReachPercent";
+import TvrGraph from "../Graph/TvrGraph";
+import ShareGraph from "../Graph/ShareGraph";
+import TimeSpent from "../Graph/TimeSpent";
 import ActiveChannelTable from "../Table/ActiveChannelTable";
 import ActiveUserTable from "../Table/ActiveUserTable";
 
@@ -53,16 +56,16 @@ const Dashboard =()=>{
                         <ReachPercent/>
                         </div>
                         <div class="col-md-6">
-                        <ReachPercent/>
+                        <TvrGraph/>
                         </div>
                         </div>
                         <div class="row">
                         
                         <div class="col-md-6">
-                        <ReachPercent/>
+                        <ShareGraph/>
                         </div>
                         <div class="col-md-6">
-                        <ReachPercent/>
+                        <TimeSpent/>
                         </div>
                         </div>
                         
