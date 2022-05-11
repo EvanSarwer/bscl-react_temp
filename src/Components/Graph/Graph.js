@@ -99,13 +99,15 @@ type:"bar"
       };
       //debugger;
     return (
+      <div class="content-wrapper">
+      <div class="content-body">
         <Plot
         data={[
       
             {
               type: 'bar',
-              x: [1, 2, 3],
-              y: [2, 5, 3]
+              x: xArray,
+              y: yArray
             }
           ]}
         layout={ {
@@ -113,7 +115,8 @@ type:"bar"
             yaxis: { title: "Reach (number of users)",tickformat: 'd'},
             title: "Channel vs Reach"
           }}
-      />
+      /></div>
+      </div>
     )
 } 
 export default Graph;

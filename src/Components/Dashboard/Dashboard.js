@@ -1,4 +1,6 @@
 import CurrentStatus from "../CurrentStatus/CurrentStatus";
+import Graph from "../Graph/Graph";
+import ReachGraph from "../Graph/ReachGraph";
 
 const Dashboard =()=>{
     return(
@@ -10,6 +12,10 @@ const Dashboard =()=>{
                     <div class="content-body">
 
                         <CurrentStatus/>
+                        
+                        <div class="row match-height"><ReachGraph/></div>
+                        
+                        <Graph/>
 
 
 

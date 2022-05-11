@@ -13,6 +13,7 @@ import CurrentStatus from './Components/CurrentStatus/CurrentStatus';
 import Dashboard from './Components/Dashboard/Dashboard';
 import ActiveDetails from './Components/CurrentStatus/ActiveDetails';
 import Graph from './Components/Graph/Graph';
+import ReachGraph from './Components/Graph/ReachGraph';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -27,8 +28,6 @@ root.render(
     <Header/>
     <MainMenu/>
     <Dashboard/>
-    <Graph/>
-    <Graph/>
 
 
 
