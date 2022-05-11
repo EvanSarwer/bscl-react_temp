@@ -25,7 +25,7 @@ const ActiveUserTable =()=>{
                                                     </td>
                                                     <td>Dean Stanley</td>
                                                     <td>30/04/2019</td>
-                                                    <td>No</td>
+                                                    <td>ATN News</td>
                                                     <td>Staff</td>
                                                 </tr>
                                                 <tr>
@@ -34,7 +34,7 @@ const ActiveUserTable =()=>{
                                                     </td>
                                                     <td>Zena Buckley</td>
                                                     <td>06/04/2020</td>
-                                                    <td>Yes</td>
+                                                    <td>BTV</td>
                                                     <td>User </td>
                                                 </tr>
                                                 <tr>
@@ -43,7 +43,7 @@ const ActiveUserTable =()=>{
                                                     </td>
                                                     <td>Delilah Moon</td>
                                                     <td>03/01/2020</td>
-                                                    <td>Yes</td>
+                                                    <td>BTV Chattrogram</td>
                                                     <td>User </td>
                                                 </tr>
                                                 
