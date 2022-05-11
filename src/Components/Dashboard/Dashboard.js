@@ -1,7 +1,11 @@
+import React from 'react';
+import {Line} from 'react-chartjs-2';
 import CurrentStatus from "../CurrentStatus/CurrentStatus";
 import Graph from "../Graph/Graph";
 import ReachGraph from "../Graph/ReachGraph";
+import ReachPercent from "../Graph/ReachPercent";
 import ActiveChannelTable from "../Table/ActiveChannelTable";
+import ActiveUserTable from "../Table/ActiveUserTable";
 
 
 const Dashboard =()=>{
@@ -16,14 +20,14 @@ const Dashboard =()=>{
                         <CurrentStatus/>
                         <div class="row">
                         <div class="col-md-8">
-                        <ActiveChannelTable/>
+                        <ActiveUserTable/>
                         </div>
                         
                         <div class="col-md-4">
                         <ActiveChannelTable/>
                         </div>
                         </div>
-                        
+{/* 
                         <div class="row">
                         
                         <div class="col-md-6">
@@ -41,9 +45,28 @@ const Dashboard =()=>{
                         <div class="col-md-6">
                         <ReachGraph/>
                         </div>
+                        </div> */}
+                        
+                        <div class="row">
+                        
+                        <div class="col-md-6">
+                        <ReachPercent/>
+                        </div>
+                        <div class="col-md-6">
+                        <ReachPercent/>
+                        </div>
+                        </div>
+                        <div class="row">
+                        
+                        <div class="col-md-6">
+                        <ReachPercent/>
+                        </div>
+                        <div class="col-md-6">
+                        <ReachPercent/>
+                        </div>
                         </div>
                         
-                        
+                        {/* <ReachPercent/> */}
 
 
 
