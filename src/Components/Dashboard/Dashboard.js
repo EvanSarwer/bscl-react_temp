@@ -27,7 +27,7 @@ const Dashboard =()=>{
                             <div class="col-xl-8 col-12">
                                 <ActiveUserTable/>
                             </div>
-                            <div class="col-xl-4 col-lg-12">
+                            <div class="col-xl-4 col-12">
                                 <ActiveChannelTable/>
                             </div>
                         </div>

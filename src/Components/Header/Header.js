@@ -20,30 +20,30 @@ const Header = ()=>{
                         <li class="dropdown nav-item mega-dropdown d-none d-lg-block"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown">Menu</a>
                             <ul class="mega-dropdown-menu dropdown-menu row p-1">
                                 <li class="col-md-4 bg-mega p-2">
-                                    <h3 class="text-white mb-1 font-weight-bold">Mega Menu Sidebar</h3>
-                                    <p class="text-white line-height-2">Candy canes bonbon toffee. Cheesecake dragée gummi bears chupa chups powder bonbon. Apple pie cookie sweet.</p>
-                                    <button class="btn btn-outline-white">Learn More</button>
+                                    <h5 class="text-white mb-1 font-weight-bold">Bangladesh Satellite Company, Ltd</h5>
+                                    <p class="text-white line-height-2">BSCL is a state owned company operating the Bangabandhu-1 satellite, named after the father of the nation, Bangabandhu Sheikh Mujibur Rahman.</p>
+                                    <a href="http://www.bscl.gov.bd/" class="btn btn-outline-white" target="_blank">Learn More</a>
                                 </li>
                                 <li class="col-md-5 px-2">
                                     <h6 class="font-weight-bold font-medium-2 ml-1">Admin Panel</h6>
                                     <ul class="row mt-2">
-                                        <li class="col-6 col-xl-4"><a class="text-center mb-2 mb-xl-3" href="../ecommerce-menu-template" target="_blank"><i class="la la-shopping-cart font-large-1 mr-0"></i>
-                                                <p class="font-medium-2 mt-25 mb-0">eCommerce</p>
+                                        <li class="col-6 col-xl-4"><a class="text-center mb-2 mb-xl-3" href="../ecommerce-menu-template" target="_blank"><i class="la la-history font-large-1 mr-0"></i>
+                                                <p class="font-medium-2 mt-25 mb-0">Overview</p>
                                             </a></li>
-                                        <li class="col-6 col-xl-4"><a class="text-center mb-2 mb-xl-3" href="../travel-menu-template" target="_blank"><i class="la la-plane font-large-1 mr-0"></i>
-                                                <p class="font-medium-2 mt-25 mb-0">Travel</p>
+                                        <li class="col-6 col-xl-4"><a class="text-center mb-2 mb-xl-3" href="../travel-menu-template" target="_blank"><i class="la la-user font-large-1 mr-0"></i>
+                                                <p class="font-medium-2 mt-25 mb-0">Users</p>
                                             </a></li>
-                                        <li class="col-6 col-xl-4"><a class="text-center mb-2 mb-xl-3 mt-75 mt-xl-0" href="../hospital-menu-template" target="_blank"><i class="la la-stethoscope font-large-1 mr-0"></i>
-                                                <p class="font-medium-2 mt-25 mb-0">Hospital</p>
+                                        <li class="col-6 col-xl-4"><a class="text-center mb-2 mb-xl-3 mt-75 mt-xl-0" href="../hospital-menu-template" target="_blank"><i class="la la-television font-large-1 mr-0"></i>
+                                                <p class="font-medium-2 mt-25 mb-0">Channels</p>
                                             </a></li>
-                                        <li class="col-6 col-xl-4"><a class="text-center mb-2 mt-75 mt-xl-0" href="../crypto-menu-template" target="_blank"><i class="la la-bitcoin font-large-1 mr-0"></i>
-                                                <p class="font-medium-2 mt-25 mb-50">Crypto</p>
+                                        <li class="col-6 col-xl-4"><a class="text-center mb-2 mt-75 mt-xl-0" href="../crypto-menu-template" target="_blank"><i class="la la-tencent-weibo font-large-1 mr-0"></i>
+                                                <p class="font-medium-2 mt-25 mb-50">Live Channels</p>
                                             </a></li>
-                                        <li class="col-6 col-xl-4"><a class="text-center mb-2 mt-75 mt-xl-0" href="../support-menu-template" target="_blank"><i class="la la-tag font-large-1 mr-0"></i>
-                                                <p class="font-medium-2 mt-25 mb-50">Support</p>
+                                        <li class="col-6 col-xl-4"><a class="text-center mb-2 mt-75 mt-xl-0" href="../support-menu-template" target="_blank"><i class="la la-download font-large-1 mr-0"></i>
+                                                <p class="font-medium-2 mt-25 mb-50">Download Report</p>
                                             </a></li>
-                                        <li class="col-6 col-xl-4"><a class="text-center mb-2 mt-75 mt-xl-0" href="../bank-menu-template" target="_blank"><i class="la la-bank font-large-1 mr-0"></i>
-                                                <p class="font-medium-2 mt-25 mb-50">Bank</p>
+                                        <li class="col-6 col-xl-4"><a class="text-center mb-2 mt-75 mt-xl-0" href="../bank-menu-template" target="_blank"><i class="la la-cogs font-large-1 mr-0"></i>
+                                                <p class="font-medium-2 mt-25 mb-50">Device Monitor</p>
                                             </a></li>
                                     </ul>
                                 </li>
@@ -60,7 +60,7 @@ const Header = ()=>{
                                         </li>
                                         <li class="col-12 col-xl-6 pl-0">
                                             <ul class="mega-component-list">
-                                                <li class="mega-component-item"><a class="mb-1 mb-xl-2" href="component-dropdowns.html" target="_blank">Info</a></li>
+                                                <li class="mega-component-item"><a class="mb-1 mb-xl-2" href="component-dropdowns.html" target="_blank">Support</a></li>
                                                 <li class="mega-component-item"><a class="mb-1 mb-xl-2" href="component-list-group.html" target="_blank">Contact Us</a></li>
                                                 {/* <li class="mega-component-item"><a class="mb-1 mb-xl-2" href="component-modals.html" target="_blank">Modals</a></li>
                                                 <li class="mega-component-item"><a class="mb-1 mb-xl-2" href="component-pagination.html" target="_blank">Pagination</a></li> */}
