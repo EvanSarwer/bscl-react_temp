@@ -21,36 +21,21 @@ const Dashboard =()=>{
                     <div class="content-body">
 
                         <CurrentStatus/>
-                        <div class="row">
-                        <div class="col-md-8">
-                        <ActiveUserTable/>
+                        
+                        {/* Dashboard Table Start */}
+                        <div class="row match-height">
+                            <div class="col-xl-8 col-12">
+                                <ActiveUserTable/>
+                            </div>
+                            <div class="col-xl-4 col-lg-12">
+                                <ActiveChannelTable/>
+                            </div>
                         </div>
                         
-                        <div class="col-md-4">
-                        <ActiveChannelTable/>
-                        </div>
-                        </div>
-{/* 
+
+                        {/* Dashboard Graph Start */}
                         <div class="row">
-                        
-                        <div class="col-md-6">
-                        <ReachGraph/>
-                        </div>
-                        <div class="col-md-6">
-                        <ReachGraph/>
-                        </div>
-                        </div>
-                        <div class="row">
-                        
-                        <div class="col-md-6">
-                        <ReachGraph/>
-                        </div>
-                        <div class="col-md-6">
-                        <ReachGraph/>
-                        </div>
-                        </div> */}
-                        
-                        <div class="row">
+
                         
                         <div class="col-md-4">
                         <Graph title="Reach(%) Graph" text="Channel vs Reach" url="reach/percent/dashboard" label="Reach of Channels" color="#28D094" />
@@ -62,8 +47,11 @@ const Dashboard =()=>{
                         <div class="col-md-4">
                         <Graph title="Reach(%) Graph" text="Channel vs Reach" url="reach/percent/dashboard" label="Reach of Channels" color="blue" />
                         </div>
+
                         </div>
+
                         <div class="row">
+                          
                         
                         <div class="col-md-4">
                         <TvrGraph title="TVR(%) Graph" text="Channel vs TVR" url="tvrgraph/dashboard" label="TVR of Channels" color="yellow" />
@@ -79,6 +67,7 @@ const Dashboard =()=>{
                         
                         
                         {/* <ReachPercent/> */}
+
 
 
 
