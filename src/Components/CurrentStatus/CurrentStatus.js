@@ -1,97 +1,35 @@
+import CountComponent from "./CountComponent";
+
 const CurrentStatus =() =>{
     return (
             
         // {/* <!-- eCommerce statistic --> */}
-        <div class="row">
-
-                <div class="col-xl-3 col-lg-6 col-12">
-                    <div class="card pull-up">
-                        <div class="card-content">
-                            <div class="card-body">
-                                <div class="media d-flex">
-                                    <div class="media-body text-left">
-                                        <h3 class="success">200</h3>
-                                        <h6>Total User</h6>
-                                    </div>
-                                    <div>
-                                        <i class="icon-user-follow success font-large-2 float-right"></i>
-                                    </div>
-                                </div>
-                                <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                                    {/* <div class="progress-bar bg-gradient-x-success" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div> */}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="col-xl-3 col-lg-6 col-12">
-                    <div class="card pull-up">
-                        <div class="card-content">
-                            <div class="card-body">
-                                <div class="media d-flex">
-                                    <div class="media-body text-left">
-                                        <h3 class="success">147</h3>
-                                        <h6>Active User</h6>
-                                    </div>
-                                    <div>
-                                        <i class="icon-user-follow success font-large-2 float-right"></i>
-                                    </div>
-                                </div>
-                                <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                                    {/* <div class="progress-bar bg-gradient-x-success" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div> */}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="col-xl-3 col-lg-6 col-12">
-                    <div class="card pull-up">
-                        <div class="card-content">
-                            <div class="card-body">
-                                <div class="media d-flex">
-                                    <div class="media-body text-left">
-                                        <h3 class="warning">120</h3>
-                                        <h6>Total Channel</h6>
-                                    </div>
-                                    <div>
-                                        <i class="icon-pie-chart warning font-large-2 float-right"></i>
-                                    </div>
-                                </div>
-                                <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                                    {/* <div class="progress-bar bg-gradient-x-warning" role="progressbar" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div> */}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-
-                <div class="col-xl-3 col-lg-6 col-12">
-                    <div class="card pull-up">
-                        <div class="card-content">
-                            <div class="card-body">
-                                <div class="media d-flex">
-                                    <div class="media-body text-left">
-                                        <h3 class="warning">109</h3>
-                                        <h6>Active Channel</h6>
-                                    </div>
-                                    <div>
-                                        <i class="icon-pie-chart warning font-large-2 float-right"></i>
-                                    </div>
-                                </div>
-                                <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                                    {/* <div class="progress-bar bg-gradient-x-warning" role="progressbar" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div> */}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
+        <div class="row gx-1">
+            
+            <div class="col-xl-2 col-lg-1 col-12">
+                <CountComponent title="Total User" count="200" icon="icon-user-follow success" color="success" percentage="100%"/>
+            </div>
+            <div class="col-xl-2 col-lg-1 col-12">
+                <CountComponent title="Active User" count="147" icon="icon-user-follow success" color="success" percentage="74%"/>
+            </div>
+            <div class="col-xl-2 col-lg-1 col-12">
+                <CountComponent title="Top Reach" count="ATN" icon="icon-pie-chart warning" color="warning" percentage=""/>
+            </div>
+            <div class="col-xl-2 col-lg-1 col-12">
+                <CountComponent title="Top TVR" count="BTV" icon="icon-pie-chart info" color="info" percentage=""/>
+            </div>
+            <div class="col-xl-2 col-lg-1 col-12">
+                <CountComponent title="Top Share" count="NTV" icon="icon-pie-chart danger" color="danger" percentage=""/>
+            </div>
+            <div class="col-xl-2 col-lg-1 col-12">
+                <CountComponent title="Top Program" count="Tom & Jerry" icon="icon-pie-chart warning" color="" percentage=""/>
+            </div>
+            {/* <div class="col-xl-2 col-lg-1 col-12">
+                <CountComponent title="" count="" icon="" color="" percentage=""/>
+            </div>
+            <div class="col-xl-2 col-lg-1 col-12">
+                <CountComponent title="" count="" icon="" color="" percentage=""/>
+            </div> */}
         </div>
 
 

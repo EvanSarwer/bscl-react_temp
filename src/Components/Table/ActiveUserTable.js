@@ -10,41 +10,38 @@ const ActiveUserTable =()=>{
                                         <table id="users-list-datatable" class="table">
                                             <thead>
                                                 <tr>
-                                                    <th>id</th>
-                                                    <th>username</th>
-                                                    <th>name</th>
-                                                    <th>Started watching at</th>
-                                                    <th>Channel Name</th>
-                                                    <th>Channel Logo</th>
+                                                    <th>ID</th>
+                                                    <th>Name</th>
+                                                    <th>Started watching</th>
+                                                    <th>Channel</th>
+                                                    <th>Duration</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr>
                                                     <td>300</td>
-                                                    <td><a href="../../../html/ltr/vertical-menu-template/page-users-view.html">dean3004</a>
+                                                    <td><a href="../../../html/ltr/vertical-menu-template/page-users-view.html">BSCL_Prototype_1</a>
                                                     </td>
-                                                    <td>Dean Stanley</td>
-                                                    <td>30/04/2019</td>
+                                                    <td><div style={{whiteSpace: 'nowrap'}}>30/04/2019 00:10:33</div></td>
                                                     <td>ATN News</td>
-                                                    <td>Staff</td>
+                                                    <td>00:05:00</td>
+
                                                 </tr>
                                                 <tr>
                                                     <td>301</td>
-                                                    <td><a href="../../../html/ltr/vertical-menu-template/page-users-view.html">zena0604</a>
+                                                    <td><a href="../../../html/ltr/vertical-menu-template/page-users-view.html">BSCL_Prototype_2</a>
                                                     </td>
-                                                    <td>Zena Buckley</td>
-                                                    <td>06/04/2020</td>
+                                                    <td>06/04/2020 00:10:33</td>
                                                     <td>BTV</td>
-                                                    <td>User </td>
+                                                    <td>00:10:33</td>
                                                 </tr>
                                                 <tr>
                                                     <td>302</td>
-                                                    <td><a href="../../../html/ltr/vertical-menu-template/page-users-view.html">delilah0301</a>
+                                                    <td><a href="../../../html/ltr/vertical-menu-template/page-users-view.html">BSCL_Prototype_3</a>
                                                     </td>
-                                                    <td>Delilah Moon</td>
-                                                    <td>03/01/2020</td>
-                                                    <td>BTV Chattrogram</td>
-                                                    <td>User </td>
+                                                    <td>03/01/2020 00:10:33</td>
+                                                    <td ><div style={{whiteSpace: 'nowrap'}}>BTV Chattrogram</div></td>
+                                                    <td>00:02:00</td>
                                                 </tr>
                                                 
                                             </tbody>
