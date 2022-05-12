@@ -1,73 +1,66 @@
 import React from 'react';
 import {Bar} from 'react-chartjs-2';
 import { Chart as ChartJS } from 'chart.js/auto';
+import { useState,useEffect } from "react";
+import axios from 'axios';
 
-const state = {
-    labels: [
-    "BTV",
-    "BTV World",
-    "BTV Sangsad",
-    "BTV Chattrogram",
-    "Independent TV",
-    "ATN Bangla",
-    "Channel I HD",
-    "Ekushey TV",
-    "NTV",
-    "RTV HD"
-],
-    datasets: [{
-        label: "Number of user",
-        data: [
-    8,
-    8,
-    7,
-    9,
-    9,
-    9,
-    6,
-    8,
-    8,
-    9
-],
-        backgroundColor: "#28D094",
-        hoverBackgroundColor: "rgba(22,211,154,.9)",
-        borderColor: "transparent"
-    }]
-}
 
-export default class ReachPercent extends React.Component {
-  render() {
-    return (
-      <div>
-          <div>
-        
+
+const ReachPercent =(props) =>{
+
+
+
     
-        <div class="card">
-            <div class="card-header">
-                <h4 class="card-title">Daily Top 10 Reach</h4>
-                
+
+
+    const [channelData, setChannelData] = useState({
+      labels: [],
+      datasets: []
+  });
+  useEffect(()=>{
+      axios.get("http://127.0.0.1:8000/api/"+props.url)
+      .then(rsp=>{
+        //debugger;
+          //console.log(rsp.data.channels);
+
+          setChannelData(()=>({labels: rsp.data.channels,datasets: [{label: props.label,data:rsp.data.reach,
+          backgroundColor: props.color,
+          //borderColor: "black",
+          borderWidth:1 }]}));
+          console.log(channelData);
+      }).catch(err=>{
+
+      })
+  }, []);
+
+    return (
+        <div>
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">{props.title}</h4>
+                    
+                </div>
+                <div class="card-content collapse show">
+                    <div class="card-body"></div>
+                    <Bar
+                    data={channelData}
+                    options={{
+                        title:{
+                        display:true,
+                        text:props.text,
+                        fontSize:20
+                        },
+                        legend:{
+                        display:true,
+                        position:'right'
+                        }
+                    }}
+                    />
+                </div>
             </div>
-            <div class="card-content collapse show">
-                <div class="card-body"></div>
-        <Bar
-          data={state}
-          options={{
-            title:{
-              display:true,
-              text:'Reach Vs Channel',
-              fontSize:20
-            },
-            legend:{
-              display:true,
-              position:'right'
-            }
-          }}
-        />
-      </div>
-      </div>
-            </div>
+            
         </div>
     
     );
-  }
 }
+export default ReachPercent;

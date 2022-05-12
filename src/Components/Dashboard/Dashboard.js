@@ -52,22 +52,31 @@ const Dashboard =()=>{
                         
                         <div class="row">
                         
-                        <div class="col-md-6">
-                        <ReachPercent/>
+                        <div class="col-md-4">
+                        <Graph title="Reach(%) Graph" text="Channel vs Reach" url="reach/percent/dashboard" label="Reach of Channels" color="#28D094" />
                         </div>
-                        <div class="col-md-6">
-                        <TvrGraph/>
+                        <div class="col-md-4">
+                        <Graph title="Reach(000) Graph" text="Channel vs Reach" url="reachuser/dashboard" label="Reach of Channels" color="red" />
+                        </div>
+                        
+                        <div class="col-md-4">
+                        <Graph title="Reach(%) Graph" text="Channel vs Reach" url="reach/percent/dashboard" label="Reach of Channels" color="blue" />
                         </div>
                         </div>
                         <div class="row">
                         
-                        <div class="col-md-6">
-                        <ShareGraph/>
+                        <div class="col-md-4">
+                        <TvrGraph title="TVR(%) Graph" text="Channel vs TVR" url="tvrgraph/dashboard" label="TVR of Channels" color="yellow" />
                         </div>
-                        <div class="col-md-6">
-                        <TimeSpent/>
+                        <div class="col-md-4">
+                        <TvrGraph title="TVR(000) Graph" text="Channel vs TVR" url="tvrgraphzero/dashboard" label="TVR of Channels" color="cyan" />
+                        </div>
+                        
+                        <div class="col-md-4">
+                        <TvrGraph title="TVR(%) Graph" text="Channel vs TVR" url="tvrgraph/dashboard" label="TVR of Channels" color="black" />
                         </div>
                         </div>
+                        
                         
                         {/* <ReachPercent/> */}
 
