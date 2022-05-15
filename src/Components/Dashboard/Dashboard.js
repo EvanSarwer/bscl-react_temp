@@ -38,14 +38,14 @@ const Dashboard =()=>{
 
                         
                         <div class="col-md-4">
-                        <Graph title="Reach(%) Graph" text="Channel vs Reach" url="reach/percent/dashboard" label="Reach of Channels" color="#28D094" />
+                        <Graph title="Daily Top Reach(%)" text="Channel vs Reach" url="reach/percent/dashboard" label="Reach of Channels" color="#28D094" />
                         </div>
                         <div class="col-md-4">
-                        <Graph title="Reach(000) Graph" text="Channel vs Reach" url="reachuser/dashboard" label="Reach of Channels" color="red" />
+                        <Graph title="Daily Top Reach(000)" text="Channel vs Reach" url="reachuser/dashboard" label="Reach of Channels" color="red" />
                         </div>
                         
                         <div class="col-md-4">
-                        <Graph title="Reach(%) Graph" text="Channel vs Reach" url="reach/percent/dashboard" label="Reach of Channels" color="blue" />
+                        <Graph title="Daily Top Time Spent(Universe)" text="Channel vs Reach" url="reach/percent/dashboard" label="Reach of Channels" color="blue" />
                         </div>
 
                         </div>
@@ -54,14 +54,14 @@ const Dashboard =()=>{
                           
                         
                         <div class="col-md-4">
-                        <TvrGraph title="TVR(%) Graph" text="Channel vs TVR" url="tvrgraph/dashboard" label="TVR of Channels" color="yellow" />
+                        <TvrGraph title="Daily Top Share" text="Channel vs TVR" url="tvrgraph/dashboard" label="TVR of Channels" color="yellow" />
                         </div>
                         <div class="col-md-4">
-                        <TvrGraph title="TVR(000) Graph" text="Channel vs TVR" url="tvrgraphzero/dashboard" label="TVR of Channels" color="cyan" />
+                        <TvrGraph title="Daily Top TVR(000)" text="Channel vs TVR" url="tvrgraphzero/dashboard" label="TVR of Channels" color="cyan" />
                         </div>
                         
                         <div class="col-md-4">
-                        <TvrGraph title="TVR(%) Graph" text="Channel vs TVR" url="tvrgraph/dashboard" label="TVR of Channels" color="black" />
+                        <TvrGraph title="Daily Top TVR(%)" text="Channel vs TVR" url="tvrgraph/dashboard" label="TVR of Channels" color="black" />
                         </div>
                         </div>
                         
