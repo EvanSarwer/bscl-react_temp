@@ -1,11 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
+
+import { BrowserRouter,Routes,Route } from "react-router-dom";
 import reportWebVitals from './reportWebVitals';
 import Header from './Components/Header/Header';
 import MainMenu from './Components/MainMenu/MainMenu';
 import Dashboard from './Components/Dashboard/Dashboard';
+import LiveChannels from './Components/LiveChannels/LiveChannels';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -13,7 +15,13 @@ root.render(
     
     <Header/>
     <MainMenu/>
-    <Dashboard/>
+    <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Dashboard/>}></Route>
+          <Route path="/livechannels" element={<LiveChannels/>}></Route>
+        </Routes>
+      </BrowserRouter>
+    {/* <Dashboard/> */}
 
 
 

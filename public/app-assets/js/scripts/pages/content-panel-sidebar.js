@@ -13,7 +13,7 @@ $(document).ready(function() {
     ************************************/
 
     var sm_options = {
-        start: [1000,3500],
+        start: [15,100],
         behaviour: 'drag',
         connect: true,
         tooltips: [wNumb({
@@ -22,8 +22,8 @@ $(document).ready(function() {
             decimals: 0
         })],
         range: {
-            'min': 100,
-            'max': 5000
+            'min': 15,
+            'max': 100
         }
     };
     var smallSlider = document.getElementById('small-slider');
