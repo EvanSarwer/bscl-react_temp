@@ -1,12 +1,14 @@
 import React from 'react';
 import CurrentStatus from "../CurrentStatus/CurrentStatus";
 import Graph from "../Graph/Graph";
+import PostGraph from "../Graph/PostGraph";
 import TvrGraph from "../Graph/TvrGraph";
 import ActiveChannelTable from "../Table/ActiveChannelTable";
 import ActiveUserTable from "../Table/ActiveUserTable";
 
 
 const Dashboard =()=>{
+    var credential = {start:"2021-01-01 00:00:00",finish:"2022-01-01 00:00:00"};
     return(
         <div class="app-content content">
                 <div class="content-overlay"></div>
@@ -77,8 +79,12 @@ const Dashboard =()=>{
                         </div>    
                               
                     </div>
-                    <div class="">
-                        <Graph title="Active Channels" text="Active Channels" url="reach/percent/dashboard" label="Active Channels" color="blue" />
+
+                    <div class="row justify-content-md-center">
+                        <div class="col-md-11">
+                        <PostGraph title="Active Users" text="Active Channels" url="reach/percent" label="Active Users" color="blue" credentials={credential} />
+                        
+                        </div>
                         </div>  
                 </div>
 
