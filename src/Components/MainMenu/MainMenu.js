@@ -14,7 +14,7 @@ const MainMenu = () =>{
                     </li>
                     <li class=" nav-item"><a href="#"><i class="la la-user"></i><span class="menu-title" data-i18n="Templates">Users</span></a>  
                     </li>
-                    <li class=" nav-item"><a href="#"><i class="la la-television"></i><span class="menu-title" data-i18n="Templates">Channels</span></a>  
+                    <li class=" nav-item"><a href="/channelstatus"><i class="la la-television"></i><span class="menu-title" data-i18n="Templates">Channels</span></a>  
                     </li>
                     <li class=" nav-item"><a href="#"><i class="la la-download"></i><span class="menu-title" data-i18n="Templates">Download Report</span></a>  
                     </li>
