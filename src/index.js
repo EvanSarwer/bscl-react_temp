@@ -9,6 +9,7 @@ import MainMenu from './Components/MainMenu/MainMenu';
 import Dashboard from './Components/Dashboard/Dashboard';
 import LiveChannels from './Components/LiveChannels/LiveChannels';
 import ChannelStatus from './Components/Channel/ChannelStatus';
+import UserStatus from './Components/User/UserStatus';
 //import ChannelStatus from './Components/Channel/ChannelStatus';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -22,6 +23,7 @@ root.render(
           <Route exact path="/" element={<Dashboard/>}></Route>
           <Route exact path="/livechannels" element={<LiveChannels/>}></Route>
           <Route exact path="/channelstatus" element={<ChannelStatus/>}></Route>
+          <Route exact path="/userstatus" element={<UserStatus/>}></Route>
         </Routes>
       </BrowserRouter>
 
