@@ -7,7 +7,7 @@ import ActiveChannelTable from "../Table/ActiveChannelTable";
 import ActiveUserTable from "../Table/ActiveUserTable";
 
 
-const Dashboard =()=>{
+const LiveChannels =()=>{
     var credential = {start:"2021-01-01 00:00:00",finish:"2022-01-01 00:00:00"};
     return(
         <div class="app-content content">
@@ -93,4 +93,4 @@ const Dashboard =()=>{
         
     )
 }
-export default Dashboard;
+export default LiveChannels;
