@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
+import ReactDOM from 'react-dom';
 import './index.css';
 
 import { BrowserRouter,Routes,Route } from "react-router-dom";
@@ -19,12 +19,11 @@ root.render(
     <MainMenu/>
     <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Dashboard/>}></Route>
-          <Route path="/livechannels" element={<LiveChannels/>}></Route>
-          <Route path="/channelstatus" element={<ChannelStatus/>}></Route>
+          <Route exact path="/" element={<Dashboard/>}></Route>
+          <Route exact path="/livechannels" element={<LiveChannels/>}></Route>
+          <Route exact path="/channelstatus" element={<ChannelStatus/>}></Route>
         </Routes>
       </BrowserRouter>
-    {/* <Dashboard/> */}
 
 
 
