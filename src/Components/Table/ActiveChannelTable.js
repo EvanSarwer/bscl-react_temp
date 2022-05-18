@@ -16,7 +16,7 @@ const ActiveChannelTable =()=>{
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td><img class="img-fluid" alt="" style={{maxWidth: "3rem"}} src={require('../../channels/logos/BTV Chattogram.jpg')} />BTV Chattrogram</td>
+                                                    <td><div style={{whiteSpace: 'nowrap'}}><img class="img-fluid" alt="" style={{maxWidth: "3rem"}} src={require('../../channels/logos/BTV Chattogram.jpg')} />BTV Chattrogram</div></td>
                                                     <td>7</td>
                                                 </tr>
                                                 <tr><td><img class="img-fluid" alt="" style={{maxWidth: "3rem"}} src={require('../../channels/logos/BTV.png')} />BTV</td>
