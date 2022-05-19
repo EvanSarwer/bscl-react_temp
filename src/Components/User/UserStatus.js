@@ -7,50 +7,50 @@ import ActiveChannelTable from "../Table/ActiveChannelTable";
 import ActiveUserTable from "../Table/ActiveUserTable";
 
 
-const UserStatus =()=>{
-    var credential = {start:"2021-01-01 00:00:00",finish:"2022-01-01 00:00:00"};
-    return(
+const UserStatus = () => {
+    var credential = { start: "2021-01-01 00:00:00", finish: "2022-01-01 00:00:00" };
+    return (
         <div class="app-content content">
-                <div class="content-overlay"></div>
-                <div class="content-wrapper" style={{backgroundColor: "azure"}} >
-                    <div class="content-header row">
-                    </div>
-                    <div class="content-body">
+            <div class="content-overlay"></div>
+            <div class="content-wrapper" style={{ backgroundColor: "azure" }} >
+                <div class="content-header row">
+                </div>
+                <div class="content-body">
 
-                        <div class="row">
-                            <div class="col-md-5">
+                    <div class="row">
+                        <div class="col-md-5">
                             <select class="custom-select d-block w-100" id="gender" required="">
-                                    <option value="">Select User</option>
-                                    <option>AIUB_Prototype</option>
-                                    <option>BSCL_Prototype_1</option>
-                                    <option>BSCL_Prototype_2</option>
-                                    <option>BSCL_CHAIRMAN_SIR_HOME</option>
-                                    <option>BSCL_Prototype_4</option>
-                                    <option>BSCL_Prototype_5</option>
-                                    <option>BSCL_Prototype_6</option>
-                                    <option>BSCL_CHAIRMAN_SIR_OFFICE</option>
-                                    <option>BSCL_Prototype_8</option>
-                                    <option>BSCL_Prototype_9</option>
-                                    <option>BSCL_Prototype_10</option>
-                                </select>
-                            </div>
-                            <div class="col-md-5">
+                                <option value="">Select User</option>
+                                <option>AIUB_Prototype</option>
+                                <option>BSCL_Prototype_1</option>
+                                <option>BSCL_Prototype_2</option>
+                                <option>BSCL_CHAIRMAN_SIR_HOME</option>
+                                <option>BSCL_Prototype_4</option>
+                                <option>BSCL_Prototype_5</option>
+                                <option>BSCL_Prototype_6</option>
+                                <option>BSCL_CHAIRMAN_SIR_OFFICE</option>
+                                <option>BSCL_Prototype_8</option>
+                                <option>BSCL_Prototype_9</option>
+                                <option>BSCL_Prototype_10</option>
+                            </select>
+                        </div>
+                        <div class="col-md-5">
                             <select class="custom-select d-block w-100" id="gender" required="">
-                                    <option value="">Choose Time Frame</option>
-                                    <option>Daily</option>
-                                    <option>Weekly</option>
-                                    <option>Monthly</option>
-                                    <option>Yearly</option>
-                                </select>
-                            </div>
-                            <div class="col-md-2">
+                                <option value="">Choose Time Frame</option>
+                                <option>Daily</option>
+                                <option>Weekly</option>
+                                <option>Monthly</option>
+                                <option>Yearly</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
                             <button class="btn btn-danger">Download CSV</button>
-                            </div>
-                                                    
-                        </div>  
-                        <br/>  
-                        
-                        
+                        </div>
+
+                    </div>
+                    <br />
+
+
 
                     {/* <div class="row">
                         <div class="col-md-4">
@@ -76,18 +76,18 @@ const UserStatus =()=>{
                         
                         </div> */}
                         <div class="col-md-12">
-                        <PostGraph title="Time Spent" text="Channels" url="reach/percent" label="Time Spent" color="blue" credentials={credential} />
-                        
+                            <PostGraph title="Time Spent" text="Channels" url="reach/percent" label="Time Spent" color="blue" credentials={credential} />
+
                         </div>
-                        </div>  
+                    </div>
                 </div>
-                </div>    
-                              
-                </div>
+            </div>
 
-        
+        </div>
 
-        
+
+
+
     )
 }
 export default UserStatus;
