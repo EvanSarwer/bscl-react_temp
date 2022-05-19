@@ -18,7 +18,7 @@ const LiveChannels =()=>{
                     <div class="content-body">
 
                         <div class="row">
-                        <div class="col-md-3">
+                        <div class="col-md-2">
                         <select class="custom-select d-block w-100" id="gender" required="">
                                 <option value="">Choose Region</option>
                                 <option>Dhaka</option>
@@ -57,7 +57,7 @@ const LiveChannels =()=>{
                                 <option>Rural</option>
                             </select>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                             
                             <div class="price-range">
                                     <div class="form-group">
@@ -71,6 +71,9 @@ const LiveChannels =()=>{
                                         
                                     </div>
                                 </div>
+                            </div>
+                            <div class="col-md-2">
+                            <button class="btn btn-danger">Download CSV</button>
                             </div>
 
                         

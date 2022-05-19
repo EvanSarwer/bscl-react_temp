@@ -27,6 +27,7 @@ const DemoGraph =(props) =>{
           setChannelData(()=>({labels: rsp.data.range,datasets: [{label: props.label,data:rsp.data.values,
             backgroundColor: props.color,
             fill:false,
+            pointRadius: 1,
             borderColor: props.color,
           borderWidth:3
         }]}));
@@ -48,6 +49,11 @@ const DemoGraph =(props) =>{
                     <Line
                     data={channelData}
                     options={{
+                        scales:{
+                            x: {
+                                display: false
+                            }
+                        },
                         tension:0.4,
                         title:{
                         display:true,
