@@ -2,12 +2,12 @@
 import Header from '../Header/Header';
 import MainMenu from '../MainMenu/MainMenu';
 import Dashboard from '../Dashboard/Dashboard';
-const WholeDashboard =()=>{
-    return(
+const WholeDashboard = () => {
+    return (
         <div>
-            <Header/>
-            <MainMenu/>
-            <Dashboard/>
+            <Header />
+            <MainMenu />
+            <Dashboard />
         </div>
     )
 }

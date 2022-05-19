@@ -74,10 +74,6 @@ const UserStatus = () => {
                             <div class="col-md-2">
                                 <input class="btn btn-success" type="submit" value="Get Data"></input>
                             </div>
-
-
-
-
                         </div>
                     </form>
                     <br />
@@ -108,8 +104,6 @@ const UserStatus = () => {
                             <DailyTimeSpentList/>
                         </div>
                     </div>
-
-
 
 
                 </div>
