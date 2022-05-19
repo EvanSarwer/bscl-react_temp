@@ -87,7 +87,7 @@ const DownloadReport = () => {
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="card">
                         <div class="card-content">
                             <div class="card-body">

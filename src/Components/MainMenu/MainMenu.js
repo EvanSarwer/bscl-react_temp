@@ -19,7 +19,7 @@ const MainMenu = () =>{
                     </li>
                     <li class=" nav-item"><a href="/downloadreport"><i class="la la-download"></i><span class="menu-title" data-i18n="Templates">Download Report</span></a>  
                     </li>
-                    <li class=" nav-item"><a href="#"><i class="la la-cogs"></i><span class="menu-title" data-i18n="Templates">Device Monitor</span></a>  
+                    <li class=" nav-item"><a href="/devicemonitor"><i class="la la-cogs"></i><span class="menu-title" data-i18n="Templates">Device Monitor</span></a>  
                     </li>
                 </ul>
             </div>
