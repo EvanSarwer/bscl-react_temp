@@ -1,4 +1,6 @@
-import PostGraph from "../Graph/PostGraph";
+import React from 'react';
+import { Bar } from 'react-chartjs-2';
+import { Chart as ChartJS } from 'chart.js/auto';
 import { useState, useEffect } from "react";
 import axios from "axios";
 import TotalTimeSpentList from "./TotalTimeSpentList";
@@ -11,30 +13,69 @@ const UserStatus = () => {
 
     const [user, setUser] = useState("");
     const [time, setTime] = useState("");
-    const [msg, setMsg] = useState({});
+    const [msg, setMsg] = useState("");
+    const [channelData, setChannelData] = useState({
+        labels: [],
+        datasets: []
+    });
 
-    const handleForm = (e) => {
-        e.preventDefault();
-
-
+    useEffect(() => {
         var data = {
             user: user,
             time: time,
         };
-        //debugger;
-        axios.post("http://127.0.0.1:8000/api/testing", data).then((rsp) => {
-            setMsg(msg => ({ ...msg, ...rsp.data }));
-            console.log(msg);
 
-            //console.warn("all data", user, time);
-            //window.location.href="/url";
-        }, (err) => {
+        axios.post("http://127.0.0.1:8000/api/user/usertimespent", data).then(rsp => {
+            setMsg(rsp.data.error);
+            setChannelData(() => ({
+                labels: rsp.data.channels, datasets: [{
+                    label: "Time Spent", data: rsp.data.totaltime,
+                    backgroundColor: ["#50AF95", "#f3ba2f", "#2a71d0"],
+                    //borderColor: "black",
+                    borderWidth: 1,
+                    categoryPercentage: 0.9,
+                    barPercentage: 1
+                }]
+            }));
+            //console.log(channelData);
+        }).catch(err => {
 
         })
-    }
+    }, [user, time]);
 
 
-    var credential = { start: "2021-01-01 00:00:00", finish: "2022-01-01 00:00:00" };
+    // const handleForm = (e) => {
+    //     e.preventDefault();
+    //     var data = {
+    //         user: user,
+    //         time: time,
+    //     };
+    //     axios.post("http://127.0.0.1:8000/api/user/usertimespent", data).then((rsp) => {
+    //         console.log(rsp.data);
+    //         setMsg(rsp.data.error);
+    //         setChannelData(() => ({
+    //             labels: rsp.data.channels, datasets: [{
+    //                 label: "Time Spent", data: rsp.data.totaltime,
+    //                 backgroundColor: ["#50AF95", "#f3ba2f", "#2a71d0"],
+    //                 //borderColor: "black",
+    //                 borderWidth: 1,
+    //                 categoryPercentage: 0.9,
+    //                 barPercentage: 1
+    //             }]
+    //         }));
+    //         //console.log(channelData);
+
+    //         //console.warn("all data", user, time);
+    //         //window.location.href="/url";
+    //     }, (err) => {
+
+    //     })
+    // }
+
+
+
+
+    // var credential = { start: "2021-01-01 00:00:00", finish: "2022-01-01 00:00:00" };
     return (
         <div class="app-content content">
             <div class="content-overlay"></div>
@@ -42,28 +83,28 @@ const UserStatus = () => {
                 <div class="content-header row">
                 </div>
                 <div class="content-body">
-                    <form onSubmit={handleForm} >
+                    <form  >
                         <div class="row">
 
                             <div class="col-md-5">
-                                <select class="custom-select d-block w-100" onChange={(e) => { setUser(e.target.value); }} >
-                                    <option>Select User</option>
-                                    <option value="AIUB_Prototype 0000">AIUB_Prototype</option>
-                                    <option value="BSCL_Prototype_11111">BSCL_Prototype_1</option>
-                                    <option value="BSCL_Prototype_22222">BSCL_Prototype_2</option>
-                                    <option>BSCL_CHAIRMAN_SIR_HOME</option>
-                                    <option>BSCL_Prototype_4</option>
-                                    <option>BSCL_Prototype_5</option>
-                                    <option>BSCL_Prototype_6</option>
-                                    <option>BSCL_CHAIRMAN_SIR_OFFICE</option>
-                                    <option>BSCL_Prototype_8</option>
-                                    <option>BSCL_Prototype_9</option>
-                                    <option>BSCL_Prototype_10</option>
+                                <select class="custom-select d-block w-100" onChange={(e) => { setUser(e.target.value) }}>
+                                    <option value="">Select User</option>
+                                    <option value="0">AIUB_Prototype</option>
+                                    <option value="1">BSCL_Prototype_1</option>
+                                    <option value="2">BSCL_Prototype_2</option>
+                                    <option value="3">BSCL_CHAIRMAN_SIR_HOME</option>
+                                    <option value="4">BSCL_Prototype_4</option>
+                                    <option value="5">BSCL_Prototype_5</option>
+                                    <option value="6">BSCL_Prototype_6</option>
+                                    <option value="7">BSCL_CHAIRMAN_SIR_OFFICE</option>
+                                    <option value="8">BSCL_Prototype_8</option>
+                                    <option value="9">BSCL_Prototype_9</option>
+                                    <option value="10">BSCL_Prototype_10</option>
                                 </select>
                             </div>
                             <div class="col-md-5">
                                 <select class="custom-select d-block w-100" onChange={(e) => { setTime(e.target.value) }}>
-                                    <option>Select Time Frame</option>
+                                    <option value="">Select Time Frame</option>
                                     <option value="Daily">Daily</option>
                                     <option value="Weekly">Weekly</option>
                                     <option value="Monthly">Monthly</option>
@@ -83,25 +124,63 @@ const UserStatus = () => {
                         <div class="card col-md-12">
                             <div class="card-content ">
                                 <div class="card-body ">
-                                    <div class="col-md-2 float-right">
-                                        <button class="btn btn-danger">Download CSV</button>
-                                    </div>
-                                    <PostGraph title="Time Spent" text="Channels" url="reach/percent" label="Time Spent" color="blue" credentials={credential} />
 
+                                    {/* <PostGraph title="Time Spent" text="Channels" url="reach/percent" label="Time Spent" color="blue" credentials={credential} /> */}
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h4 class="card-title">Time Spent
+                                            {(() => {
+                                                if (msg === "Error") {
+                                                    return null;
+                                                } else {
+                                                    return <button class="btn btn-danger float-right">Download CSV</button>;
+
+                                                }
+                                            })()}
+                                                
+                                            </h4>
+                                        </div>
+                                        <div class="card-content collapse show">
+
+                                            {(() => {
+                                                if (msg === "Error") {
+                                                    return <h4><span class="danger">Please Select User & Time Frame</span></h4>;
+                                                } else {
+                                                    return <div>
+                                                        <Bar
+                                                            data={channelData}
+                                                            options={{
+                                                                title: {
+                                                                    display: true,
+                                                                    text: "Channels",
+                                                                    fontSize: 20
+                                                                },
+                                                                legend: {
+                                                                    display: true,
+                                                                    position: 'right'
+                                                                }
+                                                            }}
+                                                        />
+                                                    </div>;
+
+                                                }
+                                            })()}
+
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-
                     </div>
 
                     <br />
 
                     <div class="row match-height">
-                        <div class="col-xl-6 col-12">
-                            <TotalTimeSpentList/>
+                        <div class="col-xl-6  col-12">
+                            <TotalTimeSpentList />
                         </div>
                         <div class="col-xl-6 col-12">
-                            <DailyTimeSpentList/>
+                            <DailyTimeSpentList />
                         </div>
                     </div>
 
