@@ -5,6 +5,7 @@ import PostGraph from "../Graph/PostGraph";
 import TvrGraph from "../Graph/TvrGraph";
 import ActiveChannelTable from "../Table/ActiveChannelTable";
 import ActiveUserTable from "../Table/ActiveUserTable";
+import Map from "../Map/Map";
 
 
 const LiveChannels = () => {
