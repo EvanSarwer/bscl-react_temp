@@ -6,7 +6,7 @@ import axios from 'axios';
 
 
 
-const GetLineGraph = (props) => {
+const PostLineGraph = (props) => {
 
 
 
@@ -19,13 +19,13 @@ const GetLineGraph = (props) => {
     });
     useEffect(() => {
 
-        axios.get("http://127.0.0.1:8000/api/" + props.url)
+        axios.post("http://127.0.0.1:8000/api/" + props.url,props.credentials)
             .then(rsp => {
                 //debugger;
-                //console.log(rsp.data.channels);
+                console.log(rsp.data);
 
                 setGraphData(() => ({
-                    labels: rsp.data.range, datasets: [{
+                    labels: rsp.data.label, datasets: [{
                         label: props.label, data: rsp.data.values,
                         backgroundColor: props.color,
                         fill: false,
@@ -34,11 +34,11 @@ const GetLineGraph = (props) => {
                         borderWidth: 3
                     }]
                 }));
-                //console.log(graphData);
+                console.log(graphData);
             }).catch(err => {
 
             })
-    }, []);
+    }, [props.credentials]);
 
     return (
         <div>
@@ -76,4 +76,4 @@ const GetLineGraph = (props) => {
 
     );
 }
-export default GetLineGraph;
+export default PostLineGraph;

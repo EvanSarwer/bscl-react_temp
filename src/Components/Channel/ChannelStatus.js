@@ -1,14 +1,34 @@
 import React from 'react';
+import { useState, useEffect } from "react";
+import axios from "axios";
 import CurrentStatus from "../CurrentStatus/CurrentStatus";
 import Graph from "../Graph/Graph";
 import DemoGraph from "../Graph/DemoGraph";
 import GetLineGraph from "../Graph/GetLineGraph";
-import TvrGraph from "../Graph/TvrGraph";
-import ActiveChannelTable from "../Table/ActiveChannelTable";
-import ActiveUserTable from "../Table/ActiveUserTable";
+import PostLineGraph from "../Graph/PostLineGraph";
 
 
 const ChannelStatus = () => {
+    const [time, setTime] = useState("Daily");
+    const [id, setId] = useState(1);
+    const [channels, setchannels] = useState([]);
+    const [channellist, setchannellist] = useState([]);
+    useEffect(() => {
+
+        axios.get("http://127.0.0.1:8000/api/trend/channels").then(rsp => {
+            //console.log(rsp.data);
+            setchannels(rsp.data.channels);
+            //console.log(channels);
+            setchannellist(channels.map((channel) => 
+                <option key={channel.id} value={channel.id}>{channel.name}</option>
+
+            ))
+
+        }).catch(err => {
+
+        })
+
+    }, [])
     var credential = { start: "2021-01-01 00:00:00", finish: "2022-01-01 00:00:00" };
     return (
         <div class="app-content content">
@@ -20,27 +40,20 @@ const ChannelStatus = () => {
 
                     <div class="row">
                         <div class="col-md-5">
-                            <select class="custom-select d-block w-100" id="gender" required="">
+                            <select class="custom-select d-block w-100" id="gender" required="" onChange={(e) => { setId(parseInt(e.target.value)) }}>
                                 <option value="">Choose Channel</option>
-                                <option>BTV</option>
-                                <option>BTV World</option>
-                                <option>BTV Chattogarm</option>
-                                <option>NTV</option>
-                                <option>ATN Bangla</option>
-                                <option>ATN News</option>
-                                <option>Bijoy TV</option>
-                                <option>Channel I</option>
-                                <option>Bangla Vision</option>
-                                <option>Ekattor</option>
-                                <option>Ekushey ETV</option>
+                                {channels.map((channel) => 
+                <option key={channel.id} value={channel.id}>{channel.name}</option>
+
+            )}
                             </select>
                         </div>
                         <div class="col-md-5">
-                            <select class="custom-select d-block w-100" id="gender" required="">
+                            <select class="custom-select d-block w-100" id="gender" required="" onChange={(e) => { setTime(e.target.value) }}>
                                 <option value="">Choose Time Frame</option>
                                 <option>Daily</option>
                                 <option>Weekly</option>
-                                <option>Montly</option>
+                                <option>Monthly</option>
                                 <option>Yearly</option>
                             </select>
                         </div>
@@ -56,6 +69,14 @@ const ChannelStatus = () => {
                     <div class="row">
                         <div class="col-md-4">
                             <GetLineGraph title="Reach (%)" text="Active Channels" url="trend/reach/percent" label="Reach (%)" color="blue"  />
+
+                        </div>
+                        <div class="col-md-4">
+                            <PostLineGraph title="Reach (%)" text="Active Channels" url="trend/reach/percent" label="Reach (%)" color="blue" credentials={{"id":id,"time":time}} />
+
+                        </div>
+                        <div class="col-md-4">
+                            <PostLineGraph title="Reach (000)" text="Active Channels" url="trend/reach/zero" label="Reach (%)" color="blue" credentials={{"id":id,"time":time}} />
 
                         </div>
                         <div class="col-md-4">
@@ -83,7 +104,7 @@ const ChannelStatus = () => {
                     </div>
                 </div>
             </div>
-
+<h1>{id}</h1>
         </div>
 
 
