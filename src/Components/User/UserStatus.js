@@ -14,10 +14,23 @@ const UserStatus = () => {
     const [user, setUser] = useState("");
     const [time, setTime] = useState("");
     const [msg, setMsg] = useState("");
+    const [users, setUsers] = useState([]);
     const [channelData, setChannelData] = useState({
         labels: [],
         datasets: []
     });
+
+    useEffect(() => {
+
+        axios.get("http://127.0.0.1:8000/api/getchannellist").then(rsp => {
+            
+            setUsers(rsp.data.users);
+
+        }).catch(err => {
+
+        })
+
+    }, [])
 
     useEffect(() => {
         var data = {
@@ -42,6 +55,8 @@ const UserStatus = () => {
 
         })
     }, [user, time]);
+
+
 
 
     // const handleForm = (e) => {
@@ -89,7 +104,17 @@ const UserStatus = () => {
                             <div class="col-md-5">
                                 <select class="custom-select d-block w-100" onChange={(e) => { setUser(e.target.value) }}>
                                     <option value="">Select User</option>
-                                    <option value="0">AIUB_Prototype</option>
+
+
+                                    {users.map((user) => 
+                                        <option key={user.id} value={user.id}>{user.user_name}</option>
+
+                                    )}
+
+
+
+
+                                    {/* <option value="0">AIUB_Prototype</option>
                                     <option value="1">BSCL_Prototype_1</option>
                                     <option value="2">BSCL_Prototype_2</option>
                                     <option value="3">BSCL_CHAIRMAN_SIR_HOME</option>
@@ -99,7 +124,7 @@ const UserStatus = () => {
                                     <option value="7">BSCL_CHAIRMAN_SIR_OFFICE</option>
                                     <option value="8">BSCL_Prototype_8</option>
                                     <option value="9">BSCL_Prototype_9</option>
-                                    <option value="10">BSCL_Prototype_10</option>
+                                    <option value="10">BSCL_Prototype_10</option> */}
                                 </select>
                             </div>
                             <div class="col-md-5">
@@ -129,15 +154,15 @@ const UserStatus = () => {
                                     <div class="card">
                                         <div class="card-header">
                                             <h4 class="card-title">Time Spent
-                                            {(() => {
-                                                if (msg === "Error") {
-                                                    return null;
-                                                } else {
-                                                    return <button class="btn btn-danger float-right">Download CSV</button>;
+                                                {(() => {
+                                                    if (msg === "Error") {
+                                                        return null;
+                                                    } else {
+                                                        return <button class="btn btn-danger float-right">Download CSV</button>;
 
-                                                }
-                                            })()}
-                                                
+                                                    }
+                                                })()}
+
                                             </h4>
                                         </div>
                                         <div class="card-content collapse show">
