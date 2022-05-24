@@ -12,6 +12,7 @@ import ChannelStatus from './Components/Channel/ChannelStatus';
 import DeviceMonitor from './Components/DeviceMonitor/DeviceMonitor';
 import DownloadReport from './Components/DownloadReport/DownloadReport';
 import UserStatus from './Components/User/UserStatus';
+//import Map from './Components/Map/Map';
 //import ChannelStatus from './Components/Channel/ChannelStatus';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -28,6 +29,7 @@ root.render(
         <Route exact path="/userstatus" element={<UserStatus />}></Route>
         <Route exact path="/downloadreport" element={<DownloadReport />}></Route>
         <Route exact path="/devicemonitor" element={<DeviceMonitor />}></Route>
+        {/* <Route exact path="/map" element={<Map />}></Route> */}
       </Routes>
     </BrowserRouter>
 
