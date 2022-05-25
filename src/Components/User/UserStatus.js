@@ -14,7 +14,9 @@ const UserStatus = () => {
     const [user, setUser] = useState("");
     const [time, setTime] = useState("");
     const [msg, setMsg] = useState("");
+    const [erroralltime, setErroralltime] = useState("");
     const [users, setUsers] = useState([]);
+    const [channelalltime, setChannelalltime] = useState([]);
     const [channelData, setChannelData] = useState({
         labels: [],
         datasets: []
@@ -22,8 +24,8 @@ const UserStatus = () => {
 
     useEffect(() => {
 
-        axios.get("http://127.0.0.1:8000/api/getchannellist").then(rsp => {
-            
+        axios.get("http://127.0.0.1:8000/api/getuserlist").then(rsp => {
+            console.log(rsp.data.users);
             setUsers(rsp.data.users);
 
         }).catch(err => {
@@ -53,7 +55,18 @@ const UserStatus = () => {
             //console.log(channelData);
         }).catch(err => {
 
-        })
+        });
+
+        axios.post("http://127.0.0.1:8000/api/user/useralltimeview", data).then(rsp => {
+            setErroralltime(rsp.data.error);
+            setChannelalltime(rsp.data.channels);
+            
+            //console.log(channelData);
+        }).catch(err => {
+
+        });
+
+
     }, [user, time]);
 
 
@@ -102,29 +115,14 @@ const UserStatus = () => {
                         <div class="row">
 
                             <div class="col-md-5">
-                                <select class="custom-select d-block w-100" onChange={(e) => { setUser(e.target.value) }}>
+                                <select type="Text" class="custom-select d-block w-100" onChange={(e) => { setUser(e.target.value) }}>
                                     <option value="">Select User</option>
 
-
-                                    {users.map((user) => 
+                                    {users.map((user) =>
                                         <option key={user.id} value={user.id}>{user.user_name}</option>
 
                                     )}
 
-
-
-
-                                    {/* <option value="0">AIUB_Prototype</option>
-                                    <option value="1">BSCL_Prototype_1</option>
-                                    <option value="2">BSCL_Prototype_2</option>
-                                    <option value="3">BSCL_CHAIRMAN_SIR_HOME</option>
-                                    <option value="4">BSCL_Prototype_4</option>
-                                    <option value="5">BSCL_Prototype_5</option>
-                                    <option value="6">BSCL_Prototype_6</option>
-                                    <option value="7">BSCL_CHAIRMAN_SIR_OFFICE</option>
-                                    <option value="8">BSCL_Prototype_8</option>
-                                    <option value="9">BSCL_Prototype_9</option>
-                                    <option value="10">BSCL_Prototype_10</option> */}
                                 </select>
                             </div>
                             <div class="col-md-5">
@@ -202,7 +200,7 @@ const UserStatus = () => {
 
                     <div class="row match-height">
                         <div class="col-xl-6  col-12">
-                            <TotalTimeSpentList />
+                            <TotalTimeSpentList channels={channelalltime} error={erroralltime} />
                         </div>
                         <div class="col-xl-6 col-12">
                             <DailyTimeSpentList />
