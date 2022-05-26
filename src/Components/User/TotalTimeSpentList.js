@@ -1,62 +1,78 @@
+import { useMemo } from "react";
+import { useTable, useSortBy, useGlobalFilter } from "react-table";
+
 const TotalTimeSpentList = (props) => {
+
+    
+    const COLUMNS = [
+        {
+            Header: 'Id',
+            accessor: 'id'
+        },
+        {
+            Header: 'Logo',
+            accessor: 'logo'
+        },
+        {
+            Header: 'Channel Name',
+            accessor: 'channel_name'
+        },
+        {
+            Header: 'Duration',
+            accessor: 'totaltime',
+        },
+
+    ]
+
+    const columns = useMemo(() => COLUMNS, [])
+    const data = useMemo(() => props.channels, [props.channels])
+
+    const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable({
+        columns: columns,
+        data: data
+    },
+    useSortBy)
 
 
     return (
-        <div class="users-list-table">
-            <div class="card">
-                <div class="card-content">
-                    <div class="card-body">
-
-                        <h4>All Time Channel Views</h4>
-                        {/* <input type="text" class="search form-control round border-primary mb-1" placeholder="Search"></input> */}
-
-
-                        {(() => {
-                            if (props.error === "Error") {
-                                return <h4><span class="danger">Please Select User</span></h4>;
-                            } else {
-                                return <div class="table-responsive">
-                                    <table id="users-list-datatable" class="table">
-                                        <thead>
-                                            <tr>
-                                                <th>ID</th>
-                                                <th>Channel</th>
-                                                <th>Duration (min)</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {props.channels.map((channel) => 
-                                                //var log = "../../channels/logos/" + channel.logo;../../channels/logos/BTV Chattogram.jpg
-
-                                                //<option key={user.id} value={user.id}>{user.user_name}</option>
-                                               
-                                                    <tr key={channel.id}>
-                                                        <td>{channel.id}</td>
-                                                        <td><a href="#"><div style={{ whiteSpace: 'nowrap' }}><img class="img-fluid" alt="" style={{ maxWidth: "3rem" }} src={"../../channels/logos/" + channel.logo} />{channel.channel_name}</div></a>
-                                                        </td>
-                                                        <td>{channel.totaltime}</td>
-                                                    </tr>
-                                                
-                                                
-
-                                                )}
-
-
-                                        </tbody>
-                                    </table>
-                                </div>;
-
+        <div class="table-responsive">
+            <table {...getTableProps()} class="table display nowrap table-striped table-bordered" >
+                <thead>
+                    {headerGroups.map((headerGroup) => (
+                        <tr {...headerGroup.getHeaderGroupProps()}>
+                            {
+                                headerGroup.headers.map((column) => (
+                                    <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                                        {column.render('Header')}
+                                        <span>
+                                            {column.isSorted ? (column.isSortedDesc ? ' 🔼' : ' 🔽'): ' 🔃'}
+                                        </span>
+                                        </th>
+                                ))
                             }
-                        })()}
 
+                        </tr>
+                    ))}
+                </thead>
+                <tbody {...getTableBodyProps()}>
+                    {
+                        rows.map((row) => {
+                            prepareRow(row)
+                            return (
+                                <tr {...row.getRowProps()}>
+                                    {
+                                        row.cells.map((cell) => {
+                                            return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+                                        })
+                                    }
 
-
-
-
-                    </div>
-                </div>
-            </div>
+                                </tr>
+                            )
+                        })}
+                </tbody>
+            </table>
         </div>
+
     )
 }
 export default TotalTimeSpentList;

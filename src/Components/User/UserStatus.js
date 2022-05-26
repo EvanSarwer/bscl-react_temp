@@ -3,8 +3,9 @@ import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS } from 'chart.js/auto';
 import { useState, useEffect } from "react";
 import axios from "axios";
-import TotalTimeSpentList from "./TotalTimeSpentList";
+import TotalTimeSpentList, { Products } from "./TotalTimeSpentList";
 import DailyTimeSpentList from "./DailyTimeSpentList";
+import Select from 'react-select';
 
 
 
@@ -15,6 +16,8 @@ const UserStatus = () => {
     const [time, setTime] = useState("");
     const [msg, setMsg] = useState("");
     const [erroralltime, setErroralltime] = useState("");
+    const [errordaytime, setErrordaytime] = useState("");
+    const [channeldaytime, setChanneldaytime] = useState([]);
     const [users, setUsers] = useState([]);
     const [channelalltime, setChannelalltime] = useState([]);
     const [channelData, setChannelData] = useState({
@@ -52,7 +55,6 @@ const UserStatus = () => {
                     barPercentage: 1
                 }]
             }));
-            //console.log(channelData);
         }).catch(err => {
 
         });
@@ -60,16 +62,19 @@ const UserStatus = () => {
         axios.post("http://127.0.0.1:8000/api/user/useralltimeview", data).then(rsp => {
             setErroralltime(rsp.data.error);
             setChannelalltime(rsp.data.channels);
-            
-            //console.log(channelData);
+        }).catch(err => {
+
+        });
+
+        axios.post("http://127.0.0.1:8000/api/user/userdaytimeviewlist", data).then(rsp => {
+            setErrordaytime(rsp.data.error);
+            setChanneldaytime(rsp.data.channels);
         }).catch(err => {
 
         });
 
 
     }, [user, time]);
-
-
 
 
     // const handleForm = (e) => {
@@ -101,8 +106,6 @@ const UserStatus = () => {
     // }
 
 
-
-
     // var credential = { start: "2021-01-01 00:00:00", finish: "2022-01-01 00:00:00" };
     return (
         <div class="app-content content">
@@ -115,7 +118,7 @@ const UserStatus = () => {
                         <div class="row">
 
                             <div class="col-md-5">
-                                <select type="Text" class="custom-select d-block w-100" onChange={(e) => { setUser(e.target.value) }}>
+                                {/* <select type="Text" class="custom-select d-block w-100" onChange={(e) => { setUser(e.target.value) }}>
                                     <option value="">Select User</option>
 
                                     {users.map((user) =>
@@ -123,7 +126,14 @@ const UserStatus = () => {
 
                                     )}
 
-                                </select>
+                                </select> */}
+
+                                <Select
+                                    placeholder="Select User"
+                                    options={users.map(user => ({ label: user.user_name, value: user.id }))}
+                                    onChange={opt => setUser(opt.value)}
+                                />
+
                             </div>
                             <div class="col-md-5">
                                 <select class="custom-select d-block w-100" onChange={(e) => { setTime(e.target.value) }}>
@@ -200,21 +210,31 @@ const UserStatus = () => {
 
                     <div class="row match-height">
                         <div class="col-xl-6  col-12">
-                            <TotalTimeSpentList channels={channelalltime} error={erroralltime} />
+                            {(() => {
+                                if (channelalltime) {
+                                    return <DailyTimeSpentList title="All Time Channel Views" channels={channelalltime} error={erroralltime} />
+
+                                } else {
+                                    return <h4><span class="danger">Please Select User To Show The Table</span></h4>;
+
+                                }
+                            })()}
                         </div>
                         <div class="col-xl-6 col-12">
-                            <DailyTimeSpentList />
+                            {(() => {
+                                if (channeldaytime) {
+                                    return <DailyTimeSpentList title="Last 24 Hour Channel Views" channels={channeldaytime} error={errordaytime} />
+
+                                } else {
+                                    return <h4><span class="danger">Please Select User To Show The Table</span></h4>;
+
+                                }
+                            })()}
                         </div>
                     </div>
-
-
                 </div>
             </div>
-
         </div>
-
-
-
 
     )
 }
