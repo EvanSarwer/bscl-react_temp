@@ -7,7 +7,7 @@ const DailyTimeSpentList = (props) => {
                     <div class="card">
                         <div class="card-header">
                             <h4 class="card-title">{props.title}</h4>
-                            
+
                         </div>
                         <div class="card-content collapse show">
                             <div class="card-body card-dashboard">
@@ -21,7 +21,7 @@ const DailyTimeSpentList = (props) => {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {props.channels.map((channel) =>
+                                            {/* {props.channels.map((channel) =>
 
                                                 <tr key={channel.id}>
                                                     <td>{channel.id}</td>
@@ -30,8 +30,20 @@ const DailyTimeSpentList = (props) => {
                                                     <td>{channel.totaltime}</td>
                                                 </tr>
 
-                                            )}
-                                            
+                                            )} */}
+                                            <tr>
+                                                <td>545564</td>
+                                                <td><a href="index.html"><div style={{ whiteSpace: 'nowrap' }}><img class="img-fluid" alt="" style={{ maxWidth: "3rem" }} src={"../../channels/logos/Bangla Vision.jpg"} />Bangla Vision</div></a>
+                                                </td>
+                                                <td>00:54:20</td>
+                                            </tr>
+                                            <tr>
+                                                <td>22829</td>
+                                                <td><a href="index.html"><div style={{ whiteSpace: 'nowrap' }}><img class="img-fluid" alt="" style={{ maxWidth: "3rem" }} src={"../../channels/logos/Bangla Vision.jpg"} />Somoy Tv</div></a>
+                                                </td>
+                                                <td>01:30:20</td>
+                                            </tr>
+
                                         </tbody>
                                     </table>
                                 </div>
