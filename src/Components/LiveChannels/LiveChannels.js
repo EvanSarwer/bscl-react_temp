@@ -6,10 +6,46 @@ import TvrGraph from "../Graph/TvrGraph";
 import ActiveChannelTable from "../Table/ActiveChannelTable";
 import ActiveUserTable from "../Table/ActiveUserTable";
 import Map from "../Map/Map";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { Bar } from 'react-chartjs-2';
+import { Chart as ChartJS } from 'chart.js/auto';
 
 
 const LiveChannels = () => {
-    var credential = { start: "2021-01-01 00:00:00", finish: "2022-01-01 00:00:00" };
+    const [region, setRegion] = useState("");
+    const [channelData, setChannelData] = useState({
+        labels: [],
+        datasets: []
+    });
+
+
+    useEffect(() => {
+        var data = {
+            region: region,
+
+        };
+
+        axios.post("http://127.0.0.1:8000/api/livechannel/activechannellistgraph", data).then(rsp => {
+            setChannelData(() => ({
+                labels: rsp.data.channels, datasets: [{
+                    label: "Active User", data: rsp.data.user_count,
+                    backgroundColor: ["#50AF95", "#f3ba2f", "#2a71d0"],
+                    //borderColor: "black",
+                    borderWidth: 1,
+                    categoryPercentage: 0.9,
+                    barPercentage: 1
+                }]
+            }));
+        }).catch(err => {
+
+        });
+
+    }, [region]);
+
+
+
+
     return (
         <div class="app-content content">
             <div class="content-overlay"></div>
@@ -20,16 +56,17 @@ const LiveChannels = () => {
 
                     <div class="row">
                         <div class="col-md-2">
-                            <select class="custom-select d-block w-100" id="gender" required="">
+                            <select class="custom-select d-block w-100" onChange={(e) => { setRegion(e.target.value) }}>
                                 <option value="">Choose Region</option>
-                                <option>Dhaka</option>
-                                <option>Chittagong</option>
-                                <option>Rajshahi</option>
-                                <option>Sylhet</option>
-                                <option>Mymensingh</option>
-                                <option>Khulna</option>
-                                <option>Rongpur</option>
-                                <option>Barishal</option>
+                                <option value="Dhaka">Dhaka</option>
+                                <option value="Tangail">Tangail</option>
+                                <option value="Chittagong">Chittagong</option>
+                                <option value="Rajshahi">Rajshahi</option>
+                                <option value="Sylhet">Sylhet</option>
+                                <option value="Mymensingh">Mymensingh</option>
+                                <option value="Khulna">Khulna</option>
+                                <option value="Rongpur">Rongpur</option>
+                                <option value="Barishal">Barishal</option>
                             </select>
                         </div>
                         <div class="col-md-2">
@@ -86,8 +123,32 @@ const LiveChannels = () => {
 
             <div class="row justify-content-md-center">
                 <div class="col-md-11">
-                    <PostGraph title="Active Users" text="Active Channels" url="reach/percent" label="Active Users" color="blue" credentials={credential} />
+                    {/* <PostGraph title="Active Users" text="Active Channels" url="reach/percent" label="Active Users" color="blue" credentials={credential} /> */}
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Active User</h4>
+                        </div>
+                        <div class="card-content collapse show">
 
+
+                            <Bar
+                                data={channelData}
+                                options={{
+                                    title: {
+                                        display: true,
+                                        text: "Channels",
+                                        fontSize: 20
+                                    },
+                                    legend: {
+                                        display: true,
+                                        position: 'right'
+                                    }
+                                }}
+                            />
+
+
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
