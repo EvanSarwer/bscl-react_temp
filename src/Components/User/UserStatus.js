@@ -6,6 +6,7 @@ import axios from "axios";
 import TotalTimeSpentList, { Products } from "./TotalTimeSpentList";
 import DailyTimeSpentList from "./DailyTimeSpentList";
 import Select from 'react-select';
+import Table from './Table';
 
 
 
@@ -147,6 +148,10 @@ const UserStatus = () => {
                                                             text: "Channels",
                                                             fontSize: 20
                                                         },
+                                                        scales: {
+                                                            y: {
+                                                              beginAtZero: true
+                                                            }},
                                                         legend: {
                                                             display: true,
                                                             position: 'right'
@@ -169,7 +174,7 @@ const UserStatus = () => {
                         <div class="col-xl-6  col-12">
                             {(() => {
                                 if (channelalltime) {
-                                    return <DailyTimeSpentList title="All Time Channel Views" channels={channelalltime} error={erroralltime} />
+                                    return <Table title="All Time Channel Views" channels={channelalltime} error={erroralltime} />
 
                                 } else {
                                     return <h4><span class="danger">Please Select User To Show The Table</span></h4>;
@@ -178,16 +183,16 @@ const UserStatus = () => {
                             })()}
                         </div>
                         <div class="col-xl-6 col-12">
-                            {/* {(() => {
+                            {(() => {
                                 if (channeldaytime) {
-                                    return <DailyTimeSpentList title="Last 24 Hour Channel Views" channels={channeldaytime} error={errordaytime} />
+                                    return <Table title="Last 24 Hour Channel Views" channels={channeldaytime} error={errordaytime} />
 
                                 } else {
                                     return <h4><span class="danger">Please Select User To Show The Table</span></h4>;
 
                                 }
-                            })()} */}
-                            <DailyTimeSpentList />
+                            })()}
+                            {/* <DailyTimeSpentList /> */}
                         </div>
                     </div>
                 
