@@ -68,29 +68,21 @@ const ChannelStatus = () => {
 
                     <div class="row">
                         <div class="col-md-4">
-                            <GetLineGraph title="Reach (%)" text="Active Channels" url="trend/reach/percent" label="Reach (%)" color="blue"  />
-
-                        </div>
-                        <div class="col-md-4">
                             <PostLineGraph title="Reach (%)" text="Active Channels" url="trend/reach/percent" label="Reach (%)" color="blue" credentials={{"id":id,"time":time}} />
 
                         </div>
                         <div class="col-md-4">
-                            <PostLineGraph title="Reach (000)" text="Active Channels" url="trend/reach/zero" label="Reach (%)" color="blue" credentials={{"id":id,"time":time}} />
+                            <PostLineGraph title="Reach (000)" text="Active Channels" url="trend/reach/zero" label="Reach (000)" color="red" credentials={{"id":id,"time":time}} />
 
                         </div>
                         <div class="col-md-4">
-                            <GetLineGraph title="Reach (000)" text="Active Channels" url="trend/reach/percent" label="Reach (000)" color="pink"  />
-
-                        </div>
-                        <div class="col-md-4">
-                            <GetLineGraph title="TVR (000)" text="Active Channels" url="trend/tvr/percent" label="TVR (000)" color="green"  />
+                            <PostLineGraph title="TVR (%)" text="Active Channels" url="trend/tvr/percent" label="TVR (%)" color="green" credentials={{"id":id,"time":time}} />
 
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-4">
-                            <GetLineGraph title="TVR (%)" text="Active Channels" url="trend/tvr/percent" label="TVR (%)" color="red"  />
+                            <PostLineGraph title="TVR (000)" text="Active Channels" url="trend/tvr/zero" label="TVR (000)" color="violet" credentials={{"id":id,"time":time}} />
 
                         </div>
                         <div class="col-md-4">
@@ -104,7 +96,6 @@ const ChannelStatus = () => {
                     </div>
                 </div>
             </div>
-<h1>{id}</h1>
         </div>
 
 
