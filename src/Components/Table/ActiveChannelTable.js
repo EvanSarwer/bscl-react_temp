@@ -1,31 +1,51 @@
-const ActiveChannelTable = () => {
+import { useState, useEffect } from 'react';
+
+const ActiveChannelTable = (props) => {
+    const [channeldata, setChannelData] = useState([]);
+    const [ query, setQuery ] = useState("");
+
+    useEffect(() => {
+        setChannelData(props.data);
+
+    }, [props.data])
+
+    const Search = (data) => {
+        return data.filter(
+            (item) =>
+                item.channel_name.toLowerCase().includes(query.toLowerCase()) ||
+                item.channel_id.toString().includes(query)
+        );
+    };
+
+
+
+
+
     return (
         <div class="users-list-table">
             <div class="card">
                 <div class="card-content">
                     <div class="card-body">
                         <h4>Active Channels</h4>
-                        <input type="text" class="search form-control round border-primary mb-1" placeholder="Search"></input>
-                        <div class="table-responsive">
-                            <table id="users-list-datatable" class="table">
+                        <input type="text" class="search form-control round border-primary mb-1" placeholder="Search" onChange={e => setQuery(e.target.value)}/>
+                        <div class="table-responsive " style={{maxHeight:'260px'}}>
+                            <table id="users-list-datatable" class="table table-bordered">
                                 <thead>
                                     <tr>
-                                        <th>Channel</th>
+                                        <th>ID</th>
+                                        <th>Channel Name</th>
                                         <th>Active User</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td><div style={{ whiteSpace: 'nowrap' }}><img class="img-fluid" alt="" style={{ maxWidth: "3rem" }} src={require('../../channels/logos/BTV Chattogram.jpg')} />BTV Chattrogram</div></td>
-                                        <td>7</td>
-                                    </tr>
-                                    <tr><td><img class="img-fluid" alt="" style={{ maxWidth: "3rem" }} src={require('../../channels/logos/BTV.png')} />BTV</td>
-                                        <td>6 </td>
-                                    </tr>
-                                    <tr>
-                                        <td><img class="img-fluid" alt="" style={{ maxWidth: "3rem" }} src={require('../../channels/logos/ATN News.png')} />ATN News</td>
-                                        <td>3</td>
-                                    </tr>
+                                {Search(channeldata).map((channel) =>
+                                                <tr key={channel.channel_id}>
+                                                    <td>{channel.channel_id}</td>
+                                                    <td><a href="index.html"><div style={{ whiteSpace: 'nowrap' }}><img class="img-fluid" alt="" style={{ maxWidth: "3rem" }} src={"../../channels/logos/" + channel.channel_logo} />{channel.channel_name}</div></a>
+                                                    </td>
+                                                    <td>{channel.user_count}</td>
+                                                </tr>
+                                            )}
 
                                 </tbody>
                             </table>

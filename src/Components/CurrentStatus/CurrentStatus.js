@@ -7,10 +7,10 @@ const CurrentStatus = () => {
         <div class="row gx-1">
 
             <div class="col-xl-2 col-lg-1 col-12">
-                <CountComponent title="Total User" count="200" icon="icon-user-follow success" color="success" percentage="100%" />
+                <CountComponent title="Total User" count="200" icon="icon-users success" color="success" percentage="100%" />
             </div>
             <div class="col-xl-2 col-lg-1 col-12">
-                <CountComponent title="Active User" count="147" icon="icon-user-follow success" color="success" percentage="74%" />
+                <CountComponent title="Active User" count="147" icon="icon-user-following success" color="success" percentage="74%" />
             </div>
             <div class="col-xl-2 col-lg-1 col-12">
                 <CountComponent title="Top Reach" count="ATN" icon="icon-pie-chart warning" color="warning" percentage="" />
