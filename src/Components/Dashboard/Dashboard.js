@@ -4,9 +4,36 @@ import Graph from "../Graph/Graph";
 import TvrGraph from "../Graph/TvrGraph";
 import ActiveChannelTable from "../Table/ActiveChannelTable";
 import ActiveUserTable from "../Table/ActiveUserTable";
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 
 const Dashboard = () => {
+    const [activeChannelList, setActiveChannelList] = useState([]);
+    const [activeUserList, setActiveUserList] = useState([]);
+
+    useEffect(() => {
+
+        axios.get("http://127.0.0.1:8000/api/dashboard/activechannellist").then(rsp => {
+            console.log(rsp.data);
+            setActiveChannelList(rsp.data.activeChannels);
+        }).catch(err => {
+
+        })
+
+        axios.get("http://127.0.0.1:8000/api/dashboard/activeuserlist").then(rsp => {
+            console.log(rsp.data);
+            setActiveUserList(rsp.data.activeUsers);
+        }).catch(err => {
+
+        })
+
+
+
+    },[])
+
+
+
     return (
         <div class="app-content content">
             <div class="content-overlay"></div>
@@ -18,12 +45,12 @@ const Dashboard = () => {
                     <CurrentStatus />
 
                     {/* Dashboard Table Start */}
-                    <div class="row match-height">
-                        <div class="col-xl-8 col-12">
-                            <ActiveUserTable />
+                    <div class="row">
+                        <div class="col-xl-8 col-12"  style={{maxHeight:'400px'}}>
+                            <ActiveUserTable data={activeUserList}/>
                         </div>
-                        <div class="col-xl-4 col-12">
-                            <ActiveChannelTable />
+                        <div class="col-xl-4 col-12" style={{maxHeight:'400px'}}>
+                            <ActiveChannelTable data={activeChannelList} />
                         </div>
                     </div>
 

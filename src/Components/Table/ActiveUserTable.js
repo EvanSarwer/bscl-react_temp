@@ -1,15 +1,40 @@
-const ActiveUserTable = () => {
+import { useState, useEffect } from 'react';
+
+
+const ActiveUserTable = (props) => {
+
+    const [userdata, setUserData] = useState([]);
+    const [ query, setQuery ] = useState("");
+
+    useEffect(() => {
+        setUserData(props.data);
+
+    }, [props.data])
+
+    const Search = (data) => {
+        return data.filter(
+            (item) =>
+                item.user_name.toLowerCase().includes(query.toLowerCase()) ||
+                item.user_id.toString().includes(query) ||
+                item.channel_name.toLowerCase().includes(query.toLowerCase()) ||
+                item.channel_id.toString().includes(query)
+
+
+        );
+    };
+
+
+
     return (
         <div class="users-list-table">
             <div class="card">
                 <div class="card-content">
                     <div class="card-body">
-
-                        <h4>Active Users</h4>
-                        <input type="text" class="search form-control round border-primary mb-1" placeholder="Search"></input>
-
-                        <div class="table-responsive">
-                            <table id="users-list-datatable" class="table">
+                        <div class="row"><h4 class="col float-left">Active Users</h4>
+                            <input type="text" class="search form-control round border-primary mb-1 col float-right" placeholder="Search" onChange={e => setQuery(e.target.value)} />
+                        </div>
+                        <div class="table-responsive" style={{maxHeight:'290px'}}>
+                            <table id="users-list-datatable" class="table nowrap table-bordered">
                                 <thead>
                                     <tr>
                                         <th>ID</th>
@@ -20,32 +45,17 @@ const ActiveUserTable = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>300</td>
-                                        <td><a href="../../../html/ltr/vertical-menu-template/page-users-view.html">BSCL_Prototype_1</a>
-                                        </td>
-                                        <td><div style={{ whiteSpace: 'nowrap' }}>30/04/2019 00:10:33</div></td>
-                                        <td><img class="img-fluid" alt="" style={{ maxWidth: "3rem" }} src={require('../../channels/logos/ATN News.png')} />ATN News</td>
-                                        <td>00:05:00</td>
-
-                                    </tr>
-                                    <tr>
-                                        <td>301</td>
-                                        <td><a href="../../../html/ltr/vertical-menu-template/page-users-view.html">BSCL_Prototype_2</a>
-                                        </td>
-                                        <td>06/04/2020 00:10:33</td>
-                                        <td><img class="img-fluid" alt="" style={{ maxWidth: "3rem" }} src={require('../../channels/logos/BTV.png')} />BTV</td>
-                                        <td>00:10:33</td>
-                                    </tr>
-                                    <tr>
-                                        <td>302</td>
-                                        <td><a href="../../../html/ltr/vertical-menu-template/page-users-view.html">BSCL_Prototype_3</a>
-                                        </td>
-                                        <td>03/01/2020 00:10:33</td>
-                                        <td ><div style={{ whiteSpace: 'nowrap' }}><img class="img-fluid" alt="" style={{ maxWidth: "3rem" }} src={require('../../channels/logos/BTV Chattogram.jpg')} />BTV Chattrogram</div></td>
-                                        <td>00:02:00</td>
-                                    </tr>
-
+                                {Search(userdata).map((user) =>
+                                                <tr key={user.user_id}>
+                                                    <td>{user.user_id}</td>
+                                                    <td><a href="index.html">{user.user_name}</a></td>
+                                                    <td style={{ whiteSpace: 'nowrap' }}>{user.start_watching}</td>
+                                                    <td><a href="index.html"><div style={{ whiteSpace: 'nowrap' }}><img class="img-fluid" alt="" style={{ maxWidth: "3rem" }} src={"../../channels/logos/" + user.channel_logo} />{user.channel_name}</div></a>
+                                                    </td>
+                                                    <td style={{ whiteSpace: 'nowrap' }}>{user.totaltime} min ago</td>
+                                                </tr>
+                                            )}
+                    
                                 </tbody>
                             </table>
                         </div>

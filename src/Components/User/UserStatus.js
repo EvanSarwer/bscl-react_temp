@@ -124,22 +124,29 @@ const UserStatus = () => {
                     </form>
                     <br />
 
-                    </div>
-                    </div>
+
                     <div class="row justify-content-md-center">
-                        <div class="col-md-11">
+                        <div class="col">
                             {/* <PostGraph title="Time Spent" text="Channels" url="reach/percent" label="Time Spent" color="blue" credentials={credential} /> */}
-                            <div class="card">
-                                <div class="card-header">
-                                    <h4 class="card-title">Time Spent</h4>
-                                </div>
-                                <div class="card-content collapse show">
+
+
+                            {(() => {
+                                if (msg === "Error") {
+                                    return <div class="card">
+                                    <div class="card-header">
+                                        <h4 class="card-title">Time Spent</h4>
+                                        <h4><span class="danger">Please Select User & Time Frame</span></h4>
+                                    </div>
+                                    </div>
                                     
-                                    {(() => {
-                                        if (msg === "Error") {
-                                            return <h4><span class="danger">Please Select User & Time Frame</span></h4>;
-                                        } else {
-                                            return <div>
+                                    
+                                } else {
+                                    return <div class="card">
+                                        <div class="card-header">
+                                            <h4 class="card-title">Time Spent</h4>
+                                        </div>
+                                        <div class="card-content collapse show">
+                                            <div>
                                                 <Bar
                                                     data={channelData}
                                                     options={{
@@ -150,21 +157,24 @@ const UserStatus = () => {
                                                         },
                                                         scales: {
                                                             y: {
-                                                              beginAtZero: true
-                                                            }},
+                                                                beginAtZero: true
+                                                            }
+                                                        },
                                                         legend: {
                                                             display: true,
                                                             position: 'right'
                                                         }
                                                     }}
                                                 />
-                                            </div>;
+                                            </div>
 
-                                        }
-                                    })()}
+                                        </div>
+                                    </div>
 
-                                </div>
-                            </div>
+                                }
+                            })()}
+
+
                         </div>
                     </div>
 
@@ -177,7 +187,11 @@ const UserStatus = () => {
                                     return <Table title="All Time Channel Views" channels={channelalltime} error={erroralltime} />
 
                                 } else {
-                                    return <h4><span class="danger">Please Select User To Show The Table</span></h4>;
+                                    return <div class="card">
+                                        <div class="card-header">
+                                            <h4 class="card-title"><span class="danger">Please Select User To Show The Table</span></h4>
+                                        </div>
+                                    </div>
 
                                 }
                             })()}
@@ -188,15 +202,20 @@ const UserStatus = () => {
                                     return <Table title="Last 24 Hour Channel Views" channels={channeldaytime} error={errordaytime} />
 
                                 } else {
-                                    return <h4><span class="danger">Please Select User To Show The Table</span></h4>;
+                                    return <div class="card">
+                                        <div class="card-header">
+                                            <h4 class="card-title"><span class="danger">Please Select User To Show The Table</span></h4>
+                                        </div>
+                                    </div>
 
                                 }
                             })()}
                             {/* <DailyTimeSpentList /> */}
                         </div>
                     </div>
-                
-            
+                </div>
+            </div>
+
         </div>
 
     )
