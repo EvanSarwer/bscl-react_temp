@@ -24,7 +24,7 @@ const ActiveChannelTable = (props) => {
     return (
         <div class="users-list-table">
             <div class="card">
-                <div class="card-content">
+                <div class="card-content"> 
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-6">
