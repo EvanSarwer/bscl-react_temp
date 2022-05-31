@@ -4,6 +4,7 @@ import axios from "axios";
 import CurrentStatus from "../CurrentStatus/CurrentStatus";
 import Graph from "../Graph/Graph";
 import DemoGraph from "../Graph/DemoGraph";
+import Select from 'react-select';
 import GetLineGraph from "../Graph/GetLineGraph";
 import PostLineGraph from "../Graph/PostLineGraph";
 
@@ -18,7 +19,7 @@ const ChannelStatus = () => {
         axios.get("http://127.0.0.1:8000/api/trend/channels").then(rsp => {
             //console.log(rsp.data);
             setchannels(rsp.data.channels);
-            //console.log(channels);
+            console.log(channels);
             setchannellist(channels.map((channel) => 
                 <option key={channel.id} value={channel.id}>{channel.name}</option>
 
@@ -40,13 +41,11 @@ const ChannelStatus = () => {
 
                     <div class="row">
                         <div class="col-md-5">
-                            <select class="custom-select d-block w-100" id="gender" required="" onChange={(e) => { setId(parseInt(e.target.value)) }}>
-                                <option value="">Choose Channel</option>
-                                {channels.map((channel) => 
-                <option key={channel.id} value={channel.id}>{channel.name}</option>
-
-            )}
-                            </select>
+                        <Select
+                                    placeholder="Select channel"
+                                    options={channels.map(channel => ({ label: channel.name, value: channel.id }))}
+                                    onChange={opt => setId(opt.value)}
+                                />
                         </div>
                         <div class="col-md-5">
                             <select class="custom-select d-block w-100" id="gender" required="" onChange={(e) => { setTime(e.target.value) }}>
@@ -96,6 +95,7 @@ const ChannelStatus = () => {
                     </div>
                 </div>
             </div>
+            <div class="h1">{id}</div>
         </div>
 
 

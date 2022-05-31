@@ -6,26 +6,23 @@ import axios from 'axios';
 
 
 
-const Graph = (props) => {
+const BarGraph = (props) => {
 
 
-
-
-
-
-    const [channelData, setChannelData] = useState({
+    const [Data, setData] = useState({
         labels: [],
         datasets: []
     });
     useEffect(() => {
-        axios.get("http://127.0.0.1:8000/api/" + props.url)
+        if(props.get){
+            axios.get("http://127.0.0.1:8000/api/" + props.url)
             .then(rsp => {
                 //debugger;
-                //console.log(rsp.data.channels);
+                //console.log(rsp.data.label);
 
-                setChannelData(() => ({
-                    labels: rsp.data.channels, datasets: [{
-                        label: props.label, data: rsp.data.reach,
+                setData(() => ({
+                    labels: rsp.data.label, datasets: [{
+                        label: props.label, data: rsp.data.value,
                         backgroundColor: props.color,
                         //borderColor: "black",
                         borderWidth: 1,
@@ -33,23 +30,45 @@ const Graph = (props) => {
                         barPercentage: 0.7
                     }]
                 }));
-                console.log(channelData);
+                console.log(Data);
             }).catch(err => {
 
             })
-    }, []);
+        }
+        else{
+            axios.post("http://127.0.0.1:8000/api/" + props.url,props.credentials)
+            .then(rsp => {
+                //debugger;
+                //console.log(rsp.data.label);
+
+                setData(() => ({
+                    labels: rsp.data.label, datasets: [{
+                        label: props.label, data: rsp.data.value,
+                        backgroundColor: props.color,
+                        //borderColor: "black",
+                        borderWidth: 1,
+                        categoryPercentage: 0.7,
+                        barPercentage: 0.7
+                    }]
+                }));
+                console.log(Data);
+            }).catch(err => {
+
+            })
+        }
+            }, [props]);
 
     return (
         <div>
             <div class="card">
+                
+                <div class="card-content collapse show">
                 <div class="card-header">
                     <h4 class="card-title">{props.title}</h4>
 
                 </div>
-                <div class="card-content collapse show">
-                    <div class="card-body"></div>
                     <Bar
-                        data={channelData}
+                        data={Data}
                         options={{
                             title: {
                                 display: true,
@@ -69,4 +88,4 @@ const Graph = (props) => {
 
     );
 }
-export default Graph;
+export default BarGraph;

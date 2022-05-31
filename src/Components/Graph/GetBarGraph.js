@@ -6,7 +6,7 @@ import axios from 'axios';
 
 
 
-const BarGraph = (props) => {
+const GetBarGraph = (props) => {
 
 
     const [Data, setData] = useState({
@@ -62,12 +62,12 @@ const BarGraph = (props) => {
         <div>
             <div class="card">
                 
-                <div class="card-content collapse show" >
+                <div class="card-content collapse show">
                 <div class="card-header">
                     <h4 class="card-title">{props.title}</h4>
 
                 </div>
-                    <Bar 
+                    <Bar
                         data={Data}
                         options={{
                             title: {
@@ -88,4 +88,4 @@ const BarGraph = (props) => {
 
     );
 }
-export default BarGraph;
+export default GetBarGraph;
