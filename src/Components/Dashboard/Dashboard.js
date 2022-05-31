@@ -1,6 +1,6 @@
 import React from 'react';
 import CurrentStatus from "../CurrentStatus/CurrentStatus";
-import Graph from "../Graph/Graph";
+import BarGraph from "../Graph/BarGraph";
 import TvrGraph from "../Graph/TvrGraph";
 import ActiveChannelTable from "../Table/ActiveChannelTable";
 import ActiveUserTable from "../Table/ActiveUserTable";
@@ -60,14 +60,14 @@ const Dashboard = () => {
 
 
                         <div class="col-md-4">
-                            <Graph title="Daily Top Reach(%)" text="Channel vs Reach" url="reach/percent/dashboard" label="Reach of Channels" color="#28D094" />
+                            <BarGraph title="Daily Top Reach(%)" text="Channel vs Reach" url="reach/percent/dashboard" label="Reach of Channels" color="#28D094" get={true} />
                         </div>
                         <div class="col-md-4">
-                            <TvrGraph title="Daily Top Share" text="Channel vs TVR" url="tvrgraph/dashboard" label="TVR of Channels" color="yellow" />
+                            <BarGraph title="Daily Top Share" text="Channel vs TVR" url="tvrgraph/dashboard" label="TVR of Channels" color="yellow"  get={true} />
                         </div>
 
                         <div class="col-md-4">
-                            <Graph title="Daily Top Time Spent(Universe)" text="Channel vs Reach" url="reach/percent/dashboard" label="Reach of Channels" color="blue" />
+                            <BarGraph title="Daily Top Time Spent(Universe)" text="Channel vs Reach" url="reach/percent/dashboard" label="Reach of Channels" color="blue"  get={true}/>
                         </div>
 
                     </div>
@@ -77,14 +77,14 @@ const Dashboard = () => {
 
 
                         <div class="col-md-4">
-                            <TvrGraph title="Daily Top TVR(000)" text="Channel vs TVR" url="tvrgraphzero/dashboard" label="TVR of Channels" color="cyan" />
+                            <BarGraph title="Daily Top TVR(000)" text="Channel vs TVR" url="tvrgraphzero/dashboard" label="TVR of Channels" color={["cyan","blue"]}  get={true} />
                         </div>
 
                         <div class="col-md-4">
-                            <Graph title="Daily Top Reach(000)" text="Channel vs Reach" url="reachuser/dashboard" label="Reach of Channels" color="red" />
+                            <BarGraph title="Daily Top Reach(000)" text="Channel vs Reach" url="reachuser/dashboard" label="Reach of Channels" color="red"  get={true} />
                         </div>
                         <div class="col-md-4">
-                            <TvrGraph title="Daily Top TVR(%)" text="Channel vs TVR" url="tvrgraph/dashboard" label="TVR of Channels" color="black" />
+                            <BarGraph title="Daily Top TVR(%)" text="Channel vs TVR" url="tvrgraph/dashboard" label="TVR of Channels" color="black"  get={true} />
                         </div>
                     </div>
 

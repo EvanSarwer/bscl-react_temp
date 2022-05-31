@@ -5,7 +5,7 @@ const DeviceOff = () => {
             <div class="card">
                 <div class="card-content">
                     <div class="card-body">
-                        <h4>Device's which are off</h4>
+                        <h4>Device off</h4>
                         <input type="text" class="search form-control round border-primary mb-1" placeholder="Search"></input>
                         <div class="table-responsive">
                             <table id="users-list-datatable" class="table">
