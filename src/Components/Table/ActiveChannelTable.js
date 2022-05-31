@@ -26,8 +26,14 @@ const ActiveChannelTable = (props) => {
             <div class="card">
                 <div class="card-content">
                     <div class="card-body">
-                        <h4>Active Channels</h4>
-                        <input type="text" class="search form-control round border-primary mb-1" placeholder="Search" onChange={e => setQuery(e.target.value)}/>
+                        <div class="row">
+                            <div class="col-md-6">
+                            <h4>Active Channels</h4>
+                            </div>
+                            <div class="col-md-6">
+                            <input type="text" class="search form-control round border-primary mb-1" placeholder="Search" onChange={e => setQuery(e.target.value)}/>
+                            </div>
+                        </div>
                         <div class="table-responsive " style={{maxHeight:'260px'}}>
                             <table id="users-list-datatable" class="table table-bordered">
                                 <thead>
