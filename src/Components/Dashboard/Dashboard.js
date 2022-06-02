@@ -45,11 +45,11 @@ const Dashboard = () => {
                     <CurrentStatus />
 
                     {/* Dashboard Table Start */}
-                    <div class="row">
-                        <div class="col-xl-8 col-12"  style={{maxHeight:'400px'}}>
+                    <div class="row" style={{minHeight:'390px'}}>
+                        <div class="col-xl-8 col-12">
                             <ActiveUserTable data={activeUserList}/>
                         </div>
-                        <div class="col-xl-4 col-12" style={{maxHeight:'400px'}}>
+                        <div class="col-xl-4 col-12">
                             <ActiveChannelTable data={activeChannelList} />
                         </div>
                     </div>

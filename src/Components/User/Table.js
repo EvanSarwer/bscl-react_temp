@@ -42,7 +42,7 @@ const Table = (props) => {
 
                             </div>
 
-                                <div class="table-responsive" style={{maxHeight:'400px'}}>
+                                <div class="table-responsive" style={{maxHeight:'400px',minHeight:'400px'}}>
                                     <table class="table display nowrap table-striped table-bordered scroll-horizontal-vertical">
                                         <thead>
                                             <tr>

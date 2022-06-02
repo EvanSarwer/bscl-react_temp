@@ -26,15 +26,15 @@ const ActiveUserTable = (props) => {
 
 
     return (
-        <div class="users-list-table">
+        
             <div class="card">
                 <div class="card-content">
                     <div class="card-body">
                         <div class="row"><h4 class="col float-left">Active Users</h4>
                             <input type="text" class="search form-control round border-primary mb-1 col float-right" placeholder="Search" onChange={e => setQuery(e.target.value)} />
                         </div>
-                        <div class="table-responsive" style={{maxHeight:'290px'}}>
-                            <table id="users-list-datatable" class="table nowrap table-bordered">
+                        <div class="table-responsive" style={{maxHeight:'290px',minHeight:'290px'}}>
+                            <table class="table nowrap table-bordered">
                                 <thead>
                                     <tr>
                                         <th>ID</th>
@@ -62,7 +62,7 @@ const ActiveUserTable = (props) => {
                     </div>
                 </div>
             </div>
-        </div>
+        
     )
 }
 export default ActiveUserTable;
