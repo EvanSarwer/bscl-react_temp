@@ -22,7 +22,7 @@ const ActiveChannelTable = (props) => {
 
 
     return (
-        <div class="users-list-table">
+        
             <div class="card">
                 <div class="card-content"> 
                     <div class="card-body">
@@ -34,7 +34,7 @@ const ActiveChannelTable = (props) => {
                             <input type="text" class="search form-control round border-primary mb-1" placeholder="Search" onChange={e => setQuery(e.target.value)}/>
                             </div>
                         </div>
-                        <div class="table-responsive " style={{maxHeight:'260px'}}>
+                        <div class="table-responsive " style={{maxHeight:'290px',minHeight:'290px'}}>
                             <table id="users-list-datatable" class="table table-bordered">
                                 <thead>
                                     <tr>
@@ -59,7 +59,7 @@ const ActiveChannelTable = (props) => {
                     </div>
                 </div>
             </div>
-        </div>
+    
     )
 }
 export default ActiveChannelTable;
