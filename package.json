@@ -10,6 +10,7 @@
     "chart.js": "^3.7.1",
     "mapbox-gl": "^2.8.2",
     "react": "^18.1.0",
+    "react-advanced-datetimerange-picker": "^1.0.14",
     "react-chartjs-2": "^4.1.0",
     "react-dom": "^18.1.0",
     "react-google-maps": "^9.4.5",
