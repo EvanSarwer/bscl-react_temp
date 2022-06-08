@@ -12,6 +12,8 @@ import ChannelStatus from './Components/Channel/ChannelStatus';
 import DeviceMonitor from './Components/DeviceMonitor/DeviceMonitor';
 import DownloadReport from './Components/DownloadReport/DownloadReport';
 import UserStatus from './Components/User/UserStatus';
+import UserDefined from './Components/User/UserDefined';
+import Overview from './Components/Overview/Overview';
 //import Map from './Components/Map/Map';
 //import ChannelStatus from './Components/Channel/ChannelStatus';
 
@@ -24,9 +26,11 @@ root.render(
     <BrowserRouter>
       <Routes>
         <Route exact path="/" element={<Dashboard />}></Route>
+        <Route exact path="/overview" element={<Overview />}></Route>
         <Route exact path="/livechannels" element={<LiveChannels />}></Route>
         <Route exact path="/channelstatus" element={<ChannelStatus />}></Route>
         <Route exact path="/userstatus" element={<UserStatus />}></Route>
+        <Route exact path="/userdefined" element={<UserDefined />}></Route>
         <Route exact path="/downloadreport" element={<DownloadReport />}></Route>
         <Route exact path="/devicemonitor" element={<DeviceMonitor />}></Route>
         {/* <Route exact path="/map" element={<Map />}></Route> */}
