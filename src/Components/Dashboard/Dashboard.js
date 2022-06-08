@@ -1,38 +1,16 @@
 import React from 'react';
 import CurrentStatus from "../CurrentStatus/CurrentStatus";
+import ActiveUserTable from "../Table/ActiveUserTable";
+import ActiveChannelTable from "../Table/ActiveChannelTable";
 import BarGraph from "../Graph/BarGraph";
 import TvrGraph from "../Graph/TvrGraph";
-import ActiveChannelTable from "../Table/ActiveChannelTable";
-import ActiveUserTable from "../Table/ActiveUserTable";
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import axiosConfig from "../axiosConfig";
+
 
 
 const Dashboard = () => {
-    const [activeChannelList, setActiveChannelList] = useState([]);
-    const [activeUserList, setActiveUserList] = useState([]);
-
-    useEffect(() => {
-
-        axios.get("http://127.0.0.1:8000/api/dashboard/activechannellist").then(rsp => {
-            console.log(rsp.data);
-            setActiveChannelList(rsp.data.activeChannels);
-        }).catch(err => {
-
-        })
-
-        axios.get("http://127.0.0.1:8000/api/dashboard/activeuserlist").then(rsp => {
-            console.log(rsp.data);
-            setActiveUserList(rsp.data.activeUsers);
-        }).catch(err => {
-
-        })
-
-
-
-    },[])
-
-
 
     return (
         <div class="app-content content">
@@ -47,10 +25,10 @@ const Dashboard = () => {
                     {/* Dashboard Table Start */}
                     <div class="row" style={{minHeight:'390px'}}>
                         <div class="col-xl-8 col-12">
-                            <ActiveUserTable data={activeUserList}/>
+                            <ActiveUserTable/>
                         </div>
                         <div class="col-xl-4 col-12">
-                            <ActiveChannelTable data={activeChannelList} />
+                            <ActiveChannelTable/>
                         </div>
                     </div>
 

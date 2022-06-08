@@ -1,15 +1,23 @@
 import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 
-const ActiveUserTable = (props) => {
+const ActiveUserTable = () => {
 
-    const [userdata, setUserData] = useState([]);
+ 
     const [ query, setQuery ] = useState("");
+    const [activeUserList, setActiveUserList] = useState([]);
 
     useEffect(() => {
-        setUserData(props.data);
 
-    }, [props.data])
+        axios.get("http://127.0.0.1:8000/api/dashboard/activeuserlist").then(rsp => {
+            console.log(rsp.data);
+            setActiveUserList(rsp.data.activeUsers);
+        }).catch(err => {
+
+        })
+
+    },[])
 
     const Search = (data) => {
         return data.filter(
@@ -45,14 +53,14 @@ const ActiveUserTable = (props) => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                {Search(userdata).map((user) =>
+                                {Search(activeUserList).map((user) =>
                                                 <tr key={user.user_id}>
                                                     <td>{user.user_id}</td>
                                                     <td><a href="index.html">{user.user_name}</a></td>
                                                     <td style={{ whiteSpace: 'nowrap' }}>{user.start_watching}</td>
                                                     <td><a href="index.html"><div style={{ whiteSpace: 'nowrap' }}><img class="img-fluid" alt="" style={{ maxWidth: "3rem" }} src={"../../channels/logos/" + user.channel_logo} />{user.channel_name}</div></a>
                                                     </td>
-                                                    <td style={{ whiteSpace: 'nowrap' }}>{user.totaltime} min ago</td>
+                                                    <td style={{ whiteSpace: 'nowrap' }}>{user.totaltime} min</td>
                                                 </tr>
                                             )}
                     

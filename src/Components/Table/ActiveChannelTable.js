@@ -1,13 +1,27 @@
 import { useState, useEffect } from 'react';
+import axios from 'axios';
 
-const ActiveChannelTable = (props) => {
+const ActiveChannelTable = () => {
     const [channeldata, setChannelData] = useState([]);
     const [ query, setQuery ] = useState("");
+    const [activeChannelList, setActiveChannelList] = useState([]);
+
 
     useEffect(() => {
-        setChannelData(props.data);
 
-    }, [props.data])
+        axios.get("http://127.0.0.1:8000/api/dashboard/activechannellist").then(rsp => {
+            console.log(rsp.data);
+            setActiveChannelList(rsp.data.activeChannels);
+        }).catch(err => {
+
+        })
+
+    },[])
+
+    // useEffect(() => {
+    //     setChannelData(props.data);
+
+    // }, [props.data])
 
     const Search = (data) => {
         return data.filter(
@@ -44,7 +58,7 @@ const ActiveChannelTable = (props) => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                {Search(channeldata).map((channel) =>
+                                {Search(activeChannelList).map((channel) =>
                                                 <tr key={channel.channel_id}>
                                                     <td>{channel.channel_id}</td>
                                                     <td><a href="index.html"><div style={{ whiteSpace: 'nowrap' }}><img class="img-fluid" alt="" style={{ maxWidth: "3rem" }} src={"../../channels/logos/" + channel.channel_logo} />{channel.channel_name}</div></a>
