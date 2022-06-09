@@ -9,6 +9,7 @@ import MainMenu from './Components/MainMenu/MainMenu';
 import Dashboard from './Components/Dashboard/Dashboard';
 import LiveChannels from './Components/LiveChannels/LiveChannels';
 import ChannelStatus from './Components/Channel/ChannelStatus';
+import DefinedChannelStatus from './Components/Channel/DefinedChannelStatus';
 import DeviceMonitor from './Components/DeviceMonitor/DeviceMonitor';
 import DownloadReport from './Components/DownloadReport/DownloadReport';
 import UserStatus from './Components/User/UserStatus';
@@ -29,6 +30,7 @@ root.render(
         <Route exact path="/overview" element={<Overview />}></Route>
         <Route exact path="/livechannels" element={<LiveChannels />}></Route>
         <Route exact path="/channelstatus" element={<ChannelStatus />}></Route>
+        <Route exact path="/definedchannelstatus" element={<DefinedChannelStatus />}></Route>
         <Route exact path="/userstatus" element={<UserStatus />}></Route>
         <Route exact path="/userdefined" element={<UserDefined />}></Route>
         <Route exact path="/downloadreport" element={<DownloadReport />}></Route>
