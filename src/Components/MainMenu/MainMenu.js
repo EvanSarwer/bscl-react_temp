@@ -1,6 +1,23 @@
 import { Link } from "react-router-dom";
 
+import { useState, useEffect } from "react";
+
 const MainMenu = () => {
+    const [submenu, setsubmenu] = useState("");
+    const opensubmenu=(event)=>{
+        if(document.querySelector("#submenu").innerHTML==""){
+            document.querySelector("#submenu").innerHTML=`<ul class="menu-content">
+            <li><a class="menu-item" href="/channelstatus"><i></i><span data-i18n="Crypto">General</span></a>
+            </li>
+            <li><a class="menu-item" href="/definedchannelstatus"><i></i><span data-i18n="Crypto">User Defined</span></a>
+            </li>
+        </ul>`
+        }
+        else{
+            document.querySelector("#submenu").innerHTML="";
+        }
+        
+    }
     return (
         // <!-- BEGIN: Main Menu-->
 
@@ -21,7 +38,8 @@ const MainMenu = () => {
                             </li>
                         </ul>
                     </li>
-                    <li class=" nav-item"><a href="/channelstatus"><i class="la la-television"></i><span class="menu-title" data-i18n="Templates">Channels</span></a>
+                    <li class=" nav-item"><a onClick={opensubmenu} ><i class="la la-television"></i><span class="menu-title" data-i18n="Templates">Channels</span></a>
+                        <div id="submenu"></div>
                     </li>
                     <li class=" nav-item"><a href="/downloadreport"><i class="la la-download"></i><span class="menu-title" data-i18n="Templates">Download Report</span></a>
                     </li>
