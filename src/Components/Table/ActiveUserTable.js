@@ -48,8 +48,8 @@ const ActiveUserTable = () => {
                                         <th>ID</th>
                                         <th>Name</th>
                                         <th>Started watching</th>
-                                        <th>Channel</th>
                                         <th>Duration</th>
+                                        <th>Channel</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -58,9 +58,10 @@ const ActiveUserTable = () => {
                                                     <td>{user.user_id}</td>
                                                     <td><a href="index.html">{user.user_name}</a></td>
                                                     <td style={{ whiteSpace: 'nowrap' }}>{user.start_watching}</td>
+                                                    <td style={{ whiteSpace: 'nowrap' }}>{user.totaltime}</td>
                                                     <td><a href="index.html"><div style={{ whiteSpace: 'nowrap' }}><img class="img-fluid" alt="" style={{ maxWidth: "3rem" }} src={"../../channels/logos/" + user.channel_logo} />{user.channel_name}</div></a>
                                                     </td>
-                                                    <td style={{ whiteSpace: 'nowrap' }}>{user.totaltime} min</td>
+                                                    
                                                 </tr>
                                             )}
                     
