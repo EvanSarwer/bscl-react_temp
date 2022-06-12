@@ -10,7 +10,7 @@ const ActiveChannelTable = () => {
 
     useEffect(() => {
 
-        axiosConfig.get("/api/dashboard/activechannellist").then(rsp => {
+        axiosConfig.get("/dashboard/activechannellist").then(rsp => {
             console.log(rsp.data);
             setActiveChannelList(rsp.data.activeChannels);
         }).catch(err => {
