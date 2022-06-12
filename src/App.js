@@ -1,25 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import Admin from './Components/MainPages/Admin';
+import Login from './Components/MainPages/Login';
+import User from './Components/MainPages/User';
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  if(2==1){
+    return (
+      <div>
+        
+  <Admin/>
+      </div>
+    );
+  }
+  else if(2==2){
+    return (
+      <div>
+        
+  <Login/>
+      </div>
+    );
+  }
+  else{
+    return (
+      <div>
+        
+  <User/>
+      </div>
+    );
+  }
+
 }
 
 export default App;
