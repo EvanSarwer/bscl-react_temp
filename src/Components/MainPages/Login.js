@@ -16,9 +16,11 @@ function Login() {
     var validate=()=>{
         if(document.querySelector("#user-name").value=='admin' &&document.querySelector("#user-password").value=='admin'){
         localStorage.setItem("user","admin");
+        window.open("http://localhost:3000/","_self");
     }
         if(document.querySelector("#user-name").value=='user' &&document.querySelector("#user-password").value=='user'){
         localStorage.setItem("user","user");
+        window.open("http://localhost:3000/","_self");
     }
     }
   return (
@@ -58,7 +60,7 @@ function Login() {
                                                 </div>
                                                 <div class="col-sm-6 col-12 text-center text-sm-right"><a href="recover-password.html" class="card-link">Forgot Password?</a></div>
                                             </div>
-                                            <button onClick={validate} type="submit" class="btn btn-info btn-block"><i class="ft-unlock"></i> Login</button>
+                                            <button type="button" onClick={validate}  class="btn btn-info btn-block"><i class="ft-unlock"></i> Login</button>
                                         </form>
                                     </div>
                                 </div>
