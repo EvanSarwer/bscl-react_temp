@@ -124,7 +124,7 @@ console.log(day);
                                         <input type="checkbox" name="day" value="5" onChange={function(event){checkbox('day');}} />Saturday<br />
                                     </div>
                                     <div class="col-md-3">
-                                        <div class="h3 font-weight-bold">Select Day</div>
+                                        <div class="h3 font-weight-bold">Select Time</div>
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <fieldset class="form-group form-group-style">
