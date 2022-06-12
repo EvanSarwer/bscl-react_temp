@@ -12,7 +12,7 @@ import UserStatus from '../User/UserStatus';
 import UserDefined from '../User/UserDefined';
 import Overview from '../Overview/Overview';
 
-function Admin() {
+function User() {
 
   return (
     <div>
@@ -23,4 +23,4 @@ function Admin() {
     );
 }
 
-export default Admin;
+export default User;
