@@ -4,7 +4,8 @@ import User from './Components/MainPages/User';
 
 
 function App() {
-  if(2==2){
+
+  if(localStorage.getItem("user")=="admin"){
     return (
       <div>
         
@@ -12,19 +13,20 @@ function App() {
       </div>
     );
   }
-  else if(2==1){
+
+  else if(localStorage.getItem("user")=="user"){
     return (
       <div>
         
-  <Login/>
+        <User/>
       </div>
     );
   }
   else{
     return (
       <div>
-        
-  <User/>
+        <Login/>
+  
       </div>
     );
   }
