@@ -4,7 +4,7 @@ import User from './Components/MainPages/User';
 
 
 function App() {
-  if(2==1){
+  if(2==2){
     return (
       <div>
         
@@ -12,7 +12,7 @@ function App() {
       </div>
     );
   }
-  else if(2==2){
+  else if(2==1){
     return (
       <div>
         
