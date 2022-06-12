@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import axiosConfig from '../axiosConfig';
 
 const ActiveChannelTable = () => {
     const [channeldata, setChannelData] = useState([]);
@@ -9,7 +10,7 @@ const ActiveChannelTable = () => {
 
     useEffect(() => {
 
-        axios.get("http://127.0.0.1:8000/api/dashboard/activechannellist").then(rsp => {
+        axiosConfig.get("/api/dashboard/activechannellist").then(rsp => {
             console.log(rsp.data);
             setActiveChannelList(rsp.data.activeChannels);
         }).catch(err => {
