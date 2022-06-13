@@ -4,6 +4,7 @@ import User from './Components/MainPages/User';
 
 
 function App() {
+
   if(localStorage.getItem("user")=="admin"){
     return (
       <div>
@@ -12,6 +13,7 @@ function App() {
       </div>
     );
   }
+
   else if(localStorage.getItem("user")=="user"){
     return (
       <div>
@@ -20,6 +22,16 @@ function App() {
       </div>
     );
   }
+
+  else if(localStorage.getItem("user")=="logout"){
+    return (
+      <div>
+        
+        <Login/>
+      </div>
+    );
+  }
+
   else{
     return (
       <div>

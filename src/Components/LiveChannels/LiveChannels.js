@@ -14,19 +14,27 @@ import { Chart as ChartJS } from 'chart.js/auto';
 
 const LiveChannels = () => {
     const [region, setRegion] = useState("");
+    const [gender, setGender] = useState("");
+    const [economic, setEconomic] = useState("");
+    const [socio, setSocio] = useState("");
+    const [age, setAge] = useState("");
     const [channelData, setChannelData] = useState({
         labels: [],
         datasets: []
     });
 
-
     useEffect(() => {
         var data = {
             region: region,
-
+            gender: gender,
+            economic: economic,
+            socio: socio,
+            age1: parseInt(document.querySelector("#small-slider > div > div:nth-child(2) > div > div.noUi-tooltip").innerHTML),
+            age2: parseInt(document.querySelector("#small-slider > div > div:nth-child(3) > div > div.noUi-tooltip").innerHTML)
         };
 
         axios.post("http://127.0.0.1:8000/api/livechannel/activechannellistgraph", data).then(rsp => {
+            console.log(rsp.data);
             setChannelData(() => ({
                 labels: rsp.data.channels, datasets: [{
                     label: "Active User", data: rsp.data.user_count,
@@ -41,7 +49,8 @@ const LiveChannels = () => {
 
         });
 
-    }, [region]);
+    }, [region,gender,economic,socio,age]);
+
 
 
 
@@ -70,29 +79,29 @@ const LiveChannels = () => {
                             </select>
                         </div>
                         <div class="col-md-2">
-                            <select class="custom-select d-block w-100" id="gender" required="">
+                            <select class="custom-select d-block w-100" onChange={(e) => { setGender(e.target.value) }}>
                                 <option value="">Choose Gender</option>
-                                <option>Male</option>
-                                <option>Female</option>
+                                <option value="m">Male</option>
+                                <option value="f">Female</option>
                             </select>
                         </div>
                         <div class="col-md-2">
 
-                            <select class="custom-select d-block w-100" id="gender" required="">
+                            <select class="custom-select d-block w-100" onChange={(e) => { setEconomic(e.target.value) }}>
                                 <option value="">Economic Status</option>
-                                <option>Lower Class</option>
-                                <option>Upper Middle Class</option>
-                                <option>Lower Middle Class</option>
-                                <option>Upper Class</option>
+                                <option value="a1">Lower Class</option>
+                                <option value="c1">Upper Middle Class</option>
+                                <option value="d1">Lower Middle Class</option>
+                                <option value="b1">Upper Class</option>
                             </select>
                         </div>
                         <div class="col-md-2">
 
 
-                            <select class="custom-select d-block w-100" id="gender" required="">
+                            <select class="custom-select d-block w-100" onChange={(e) => { setSocio(e.target.value) }}>
                                 <option value="">Socio Status</option>
-                                <option>Urban</option>
-                                <option>Rural</option>
+                                <option value="u">Urban</option>
+                                <option value="r">Rural</option>
                             </select>
                         </div>
                         <div class="col-md-2">
