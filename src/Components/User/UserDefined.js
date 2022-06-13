@@ -7,6 +7,8 @@ import TotalTimeSpentList, { Products } from "./TotalTimeSpentList";
 import DailyTimeSpentList from "./DailyTimeSpentList";
 import Select from 'react-select';
 import Table from './Table';
+import 'chartjs-adapter-date-fns';
+import 'chartjs-adapter-moment';
 
 
 
@@ -26,6 +28,29 @@ const UserDefined = () => {
         labels: [],
         datasets: []
     });
+    const [row1, setRow1] = useState("");
+    const [channel72Data, setChannel72Data] = useState({
+        labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+        datasets: [{
+            label: 'Sales',
+            data:[
+                ['2022-02-01', '2022-02-03'],
+                ['2022-02-03', '2022-02-06'],
+                ['2022-02-06', '2022-02-07'],
+                ['2022-02-07', '2022-02-09'],
+                ['2022-02-09', '2022-02-13'],
+                ['2022-02-13', '2022-02-15'],
+                ['2022-02-15', '2022-02-21'],
+            ],
+            
+            backgroundColor: ["#50AF95", "#f3ba2f", "#2a71d0"],
+            //borderColor: "black",
+            borderWidth: 1,
+            categoryPercentage: 0.9,
+            barPercentage: 1
+        }]
+    });
+    
 
     useEffect(() => {
 
@@ -61,6 +86,22 @@ const UserDefined = () => {
         }).catch(err => {
 
         });
+
+        axios.post("http://127.0.0.1:8000/api/user/LastSeventyTwoViewsGraph", data).then(rsp => {
+            setRow1(rsp.data.rows);
+            // setChannel72Data(() => ({
+            //     labels: rsp.data.chart_labels, datasets: [{
+            //         label: "Time Spent(min)", data: rsp.data.chart_data,
+            //         backgroundColor: ["#50AF95", "#f3ba2f", "#2a71d0"],
+            //         //borderColor: "black",
+            //         borderWidth: 1,
+            //         categoryPercentage: 0.9,
+            //         barPercentage: 1
+            //     }]
+            // }));
+        }).catch(err => {
+
+        }); 
 
         axios.post("http://127.0.0.1:8000/api/user/useralltimeview", data).then(rsp => {
             setErroralltime(rsp.data.error);
@@ -219,14 +260,23 @@ const UserDefined = () => {
                                         <div class="card-content collapse show">
                                             <div>
                                                 <Bar
-                                                    data={channelData}
+                                                    data={channel72Data}
                                                     options={{
                                                         title: {
                                                             display: true,
                                                             text: "Channels",
                                                             fontSize: 20
                                                         },
+                                                        indexAxis: 'y',
                                                         scales: {
+                                                            
+                                                            x: {
+                                                                min: '2022-02-01',
+                                                                type: 'time',
+                                                                time: {
+                                                                    unit: 'day'
+                                                                }
+                                                            },
                                                             y: {
                                                                 beginAtZero: true
                                                             }
