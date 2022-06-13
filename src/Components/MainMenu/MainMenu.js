@@ -3,8 +3,10 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 const MainMenu = () => {
-    const open_channel_menu=(event)=>{
-        if(document.querySelector("#channelmenu").innerHTML===""){
+
+    const open_channel_menu=()=>{
+        if(document.querySelector("#channelmenu").innerHTML==""){
+
             document.querySelector("#channelmenu").innerHTML=`<ul class="menu-content">
             <li><a class="menu-item" href="/channelstatus"><i></i><span data-i18n="Crypto">General</span></a>
             </li>
@@ -17,8 +19,10 @@ const MainMenu = () => {
         }
         
     }
-    const open_user_menu=(event)=>{
-        if(document.querySelector("#usermenu").innerHTML===""){
+
+    const open_user_menu=()=>{
+        if(document.querySelector("#usermenu").innerHTML==""){
+
             document.querySelector("#usermenu").innerHTML=`<ul class="menu-content">
             <li><a class="menu-item" href="/userstatus"><i></i><span data-i18n="Crypto">General</span></a>
             </li>
