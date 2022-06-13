@@ -2,11 +2,6 @@ import React from 'react';
 import CurrentStatus from "../CurrentStatus/CurrentStatus";
 import ActiveUserTable from "../Table/ActiveUserTable";
 import ActiveChannelTable from "../Table/ActiveChannelTable";
-import BarGraph from "../Graph/BarGraph";
-import TvrGraph from "../Graph/TvrGraph";
-import { useState, useEffect } from 'react';
-import axios from 'axios';
-import axiosConfig from "../axiosConfig";
 
 
 
