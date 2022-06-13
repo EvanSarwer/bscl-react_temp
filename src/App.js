@@ -22,6 +22,16 @@ function App() {
       </div>
     );
   }
+
+  else if(localStorage.getItem("user")=="logout"){
+    return (
+      <div>
+        
+        <Login/>
+      </div>
+    );
+  }
+
   else{
     return (
       <div>

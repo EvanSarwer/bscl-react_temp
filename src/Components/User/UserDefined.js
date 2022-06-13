@@ -193,6 +193,63 @@ const UserDefined = () => {
 
                         </div>
                     </div>
+                
+                    <br/>
+
+                    <div class="row justify-content-md-center">
+                        <div class="col">
+                            {/* <PostGraph title="Time Spent" text="Channels" url="reach/percent" label="Time Spent" color="blue" credentials={credential} /> */}
+
+
+                            {(() => {
+                                if (!users) {
+                                    return <div class="card">
+                                        <div class="card-header">
+                                            <h4 class="card-title">Watch History Of Last 72 Hours</h4>
+                                            <h4><span class="danger">Please Select User To See Last 72 Hour Data</span></h4>
+                                        </div>
+                                    </div>
+
+
+                                } else {
+                                    return <div class="card">
+                                        <div class="card-header">
+                                            <h4 class="card-title">Watch History Of Last 72 Hours</h4>
+                                        </div>
+                                        <div class="card-content collapse show">
+                                            <div>
+                                                <Bar
+                                                    data={channelData}
+                                                    options={{
+                                                        title: {
+                                                            display: true,
+                                                            text: "Channels",
+                                                            fontSize: 20
+                                                        },
+                                                        scales: {
+                                                            y: {
+                                                                beginAtZero: true
+                                                            }
+                                                        },
+                                                        legend: {
+                                                            display: true,
+                                                            position: 'right'
+                                                        }
+                                                    }}
+                                                />
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                }
+                            })()}
+
+
+                        </div>
+                    </div>
+
+
 
                     <br />
 

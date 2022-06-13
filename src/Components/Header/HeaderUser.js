@@ -1,4 +1,11 @@
 const HeaderUser = () => {
+    var validate=()=>{
+        
+       
+        localStorage.setItem("user","logout");
+        window.open("http://localhost:3000/","_self");
+    
+    }
     return (
         // <!-- BEGIN: Header-->
         <nav class="header-navbar navbar-expand-md navbar navbar-with-menu navbar-without-dd-arrow fixed-top navbar-semi-light bg-info navbar-shadow">
@@ -181,7 +188,7 @@ const HeaderUser = () => {
                             </li>
                             <li class="dropdown dropdown-user nav-item"><a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown"><span class="mr-1 user-name text-bold-700">bscl-User</span><span class="avatar avatar-online"><img src="../../../app-assets/images/portrait/small/avater-bd.png" alt="avatar" /><i></i></span></a>
                                 <div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="user-profile.html"><i class="ft-user"></i> Edit Profile</a><a class="dropdown-item" href="app-kanban.html"><i class="ft-clipboard"></i> Todo</a><a class="dropdown-item" href="user-cards.html"><i class="ft-check-square"></i> Task</a>
-                                    <div class="dropdown-divider"></div><a class="dropdown-item" href="login-with-bg-image.html"><i class="ft-power"></i> Logout</a>
+                                    <div class="dropdown-divider"></div><a class="dropdown-item" onClick={validate} ><i class="ft-power"></i> Logout</a>
                                 </div>
                             </li>
                         </ul>
