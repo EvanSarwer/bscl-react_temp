@@ -9,6 +9,7 @@ import Select from 'react-select';
 import Table from './Table';
 import 'chartjs-adapter-date-fns';
 import 'chartjs-adapter-moment';
+import TimelineChart from './TimelineChart';
 
 
 
@@ -256,7 +257,7 @@ const UserDefined = () => {
                                     <div class="col-md-2">
 
                                         <div class="dropdown">
-                                            <button class="btn btn-danger dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">Tutorials
+                                            <button class="btn btn-danger dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">Download
                                                 <span class="caret"></span></button>
                                             <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
                                                 {(() => {
@@ -443,7 +444,7 @@ const UserDefined = () => {
 
 
                             {(() => {
-                                if (!row1) {
+                                if (!user) {
                                     return <div class="card">
                                         <div class="card-header">
                                             <h4 class="card-title">Watch History Of Last 72 Hours</h4>
@@ -459,7 +460,7 @@ const UserDefined = () => {
                                         </div>
                                         <div class="card-content collapse show">
                                             <div>
-                                                <Bar
+                                                {/* <Bar
                                                     data={channel72Data}
                                                     options={{
                                                         title: {
@@ -487,7 +488,8 @@ const UserDefined = () => {
                                                             position: 'right'
                                                         }
                                                     }}
-                                                />
+                                                /> */}
+                                                <TimelineChart user={user}/>
                                             </div>
 
                                         </div>
