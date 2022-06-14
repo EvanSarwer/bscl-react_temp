@@ -69,7 +69,7 @@ const UserStatus = () => {
         }
     }
     var getCSV = (scsv,user,username) => {
-        exportToCsv(user+"-"+username+"-Export.csv", scsv)
+        exportToCsv(user+"_"+username+"-Time_Spent.csv", scsv)
     }
 
     const userstatusDownloadfunc = () => {
