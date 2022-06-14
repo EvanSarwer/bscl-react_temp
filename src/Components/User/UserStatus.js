@@ -203,7 +203,7 @@ const UserStatus = () => {
 
                             <div class="col-md-2">
                                 <div class="dropdown">
-                                    <button class="btn btn-danger dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">Tutorials
+                                    <button class="btn btn-danger dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">Download
                                         <span class="caret"></span></button>
                                     <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
                                         {(() => {
