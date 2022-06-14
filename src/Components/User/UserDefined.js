@@ -99,7 +99,7 @@ const UserDefined = () => {
         }
     }
     var getCSV = (scsv,user,username) => {
-        exportToCsv(user+"-"+username+"-Export.csv", scsv)
+        exportToCsv(user+"-"+username+"-Time_Spent.csv", scsv)
     }
 
     const userstatusDownloadfunc = () => {
