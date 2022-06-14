@@ -14,6 +14,7 @@ import Table from './Table';
 const UserStatus = () => {
 
     const [user, setUser] = useState("");
+    const [userName, setUserName] = useState("");
     const [time, setTime] = useState("");
     const [msg, setMsg] = useState("");
     const [erroralltime, setErroralltime] = useState("");
@@ -21,10 +22,66 @@ const UserStatus = () => {
     const [channeldaytime, setChanneldaytime] = useState([]);
     const [users, setUsers] = useState([]);
     const [channelalltime, setChannelalltime] = useState([]);
+    const [timeSpentCSV, setTimeSpentCSV] = useState({});
     const [channelData, setChannelData] = useState({
         labels: [],
         datasets: []
     });
+
+
+
+    function exportToCsv(filename, rows) {
+        var processRow = function (row) {
+            var finalVal = '';
+            for (var j = 0; j < row.length; j++) {
+                var innerValue = row[j] === null ? '' : row[j].toString();
+                if (row[j] instanceof Date) {
+                    innerValue = row[j].toLocaleString();
+                };
+                var result = innerValue.replace(/"/g, '""');
+                if (result.search(/("|,|\n)/g) >= 0)
+                    result = '"' + result + '"';
+                if (j > 0)
+                    finalVal += ',';
+                finalVal += result;
+            }
+            return finalVal + '\n';
+        };
+        var csvFile = '';
+        for (var i = 0; i < rows.length; i++) {
+            csvFile += processRow(rows[i]);
+        }
+        var blob = new Blob([csvFile], { type: 'text/csv;charset=utf-8;' });
+        if (navigator.msSaveBlob) { // IE 10+
+            navigator.msSaveBlob(blob, filename);
+        } else {
+            var link = document.createElement("a");
+            if (link.download !== undefined) { // feature detection
+                // Browsers that support HTML5 download attribute
+                var url = URL.createObjectURL(blob);
+                link.setAttribute("href", url);
+                link.setAttribute("download", filename);
+                link.style.visibility = 'hidden';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
+        }
+    }
+    var getCSV = (scsv,user,username) => {
+        exportToCsv(user+"-"+username+"-Export.csv", scsv)
+    }
+
+    const userstatusDownloadfunc = () => {
+        //console.log(liveChannelData.labels[0]);
+        var csv = [["Channel", "Time Spent (min)", "Time Frame"]];
+        var sampleLive = timeSpentCSV;
+        for (var i = 0; i < sampleLive.labels.length; i++) {
+            csv.push([sampleLive.labels[i], sampleLive.values[i], time]);
+        }
+        console.log(csv);
+        getCSV(csv,user,userName);
+    }
 
     useEffect(() => {
 
@@ -55,6 +112,9 @@ const UserStatus = () => {
                     categoryPercentage: 0.9,
                     barPercentage: 1
                 }]
+            }));
+            setTimeSpentCSV(() => ({
+                labels: rsp.data.channels, values: rsp.data.totaltime
             }));
         }).catch(err => {
 
@@ -94,7 +154,7 @@ const UserStatus = () => {
                                 <Select
                                     placeholder="Select User"
                                     options={users.map(user => ({ label: user.user_name, value: user.id }))}
-                                    onChange={opt => setUser(opt.value)}
+                                    onChange={opt => setUser(opt.value) & setUserName(opt.label)}
                                 />
                             </div>
                             <div class="col-md-5">
@@ -113,7 +173,7 @@ const UserStatus = () => {
                                     if (msg === "Error") {
                                         return null;
                                     } else {
-                                        return <button class="btn btn-danger float-right">Download CSV</button>;
+                                        return <button onClick={userstatusDownloadfunc} class="btn btn-danger float-right">Download CSV</button>;
 
                                     }
                                 })()}
