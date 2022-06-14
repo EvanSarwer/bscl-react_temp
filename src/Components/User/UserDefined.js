@@ -30,9 +30,14 @@ const UserDefined = () => {
     });
     const [row1, setRow1] = useState("");
     const [channel72Data, setChannel72Data] = useState({
-        labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+        labels: [],
+        datasets: []
+    });
+    const [row2, setRow2] = useState("");
+    const [channel24Data, setChannel24Data] = useState({
+        labels: ['BTV', 'unknown', 'Asian TV HD', 'Channel 24', 'T Sports HD', 'nexus', 'Nagorik TV HD'],
         datasets: [{
-            label: 'Sales',
+            label: 'View',
             data:[
                 ['2022-02-01', '2022-02-03'],
                 ['2022-02-03', '2022-02-06'],
@@ -89,16 +94,10 @@ const UserDefined = () => {
 
         axios.post("http://127.0.0.1:8000/api/user/LastSeventyTwoViewsGraph", data).then(rsp => {
             setRow1(rsp.data.rows);
-            // setChannel72Data(() => ({
-            //     labels: rsp.data.chart_labels, datasets: [{
-            //         label: "Time Spent(min)", data: rsp.data.chart_data,
-            //         backgroundColor: ["#50AF95", "#f3ba2f", "#2a71d0"],
-            //         //borderColor: "black",
-            //         borderWidth: 1,
-            //         categoryPercentage: 0.9,
-            //         barPercentage: 1
-            //     }]
-            // }));
+            setChannel72Data(() => ({
+                labels: rsp.data.chart_labels, 
+                datasets: rsp.data.chart_data
+            }));
         }).catch(err => {
 
         }); 
@@ -234,6 +233,71 @@ const UserDefined = () => {
 
                         </div>
                     </div>
+
+                    <br/>
+
+                    <div class="row justify-content-md-center">
+                        <div class="col">
+                            {/* <PostGraph title="Time Spent" text="Channels" url="reach/percent" label="Time Spent" color="blue" credentials={credential} /> */}
+
+
+                            {(() => {
+                                if (!user) {
+                                    return <div class="card">
+                                        <div class="card-header">
+                                            <h4 class="card-title">Watch History Of Last 24 Hours</h4>
+                                            <h4><span class="danger">Please Select User To See Last 24 Hour Data</span></h4>
+                                        </div>
+                                    </div>
+
+
+                                } else {
+                                    return <div class="card">
+                                        <div class="card-header">
+                                            <h4 class="card-title">Watch History Of Last 24 Hours</h4>
+                                        </div>
+                                        <div class="card-content collapse show">
+                                            <div>
+                                                <Bar
+                                                    data={channel24Data}
+                                                    options={{
+                                                        title: {
+                                                            display: true,
+                                                            text: "Channels",
+                                                            fontSize: 20
+                                                        },
+                                                        indexAxis: 'y',
+                                                        scales: {
+                                                            
+                                                            x: {
+                                                                min: '2022-02-02',
+                                                                type: 'time',
+                                                                time: {
+                                                                    unit: 'minute'
+                                                                },
+                                                                stacked: true,
+                                                            },
+                                                            y: {
+                                                                stacked: true,
+                                                            }
+                                                        },
+                                                        legend: {
+                                                            display: true,
+                                                            position: 'right'
+                                                        }
+                                                    }}
+                                                />
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                }
+                            })()}
+
+
+                        </div>
+                    </div>
                 
                     <br/>
 
@@ -243,7 +307,7 @@ const UserDefined = () => {
 
 
                             {(() => {
-                                if (!users) {
+                                if (!row1) {
                                     return <div class="card">
                                         <div class="card-header">
                                             <h4 class="card-title">Watch History Of Last 72 Hours</h4>
@@ -271,14 +335,15 @@ const UserDefined = () => {
                                                         scales: {
                                                             
                                                             x: {
-                                                                min: '2022-02-01',
+                                                                min: '2022-05-15T11:57:29.000000Z',
                                                                 type: 'time',
                                                                 time: {
-                                                                    unit: 'day'
-                                                                }
+                                                                    unit: 'minute'
+                                                                },
+                                                                stacked: true,
                                                             },
                                                             y: {
-                                                                beginAtZero: true
+                                                                stacked: true,
                                                             }
                                                         },
                                                         legend: {
