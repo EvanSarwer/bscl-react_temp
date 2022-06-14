@@ -40,7 +40,7 @@ const UserDefined = () => {
         labels: ['BTV', 'unknown', 'Asian TV HD', 'Channel 24', 'T Sports HD', 'nexus', 'Nagorik TV HD'],
         datasets: [{
             label: 'View',
-            data:[
+            data: [
                 ['2022-02-01', '2022-02-03'],
                 ['2022-02-03', '2022-02-06'],
                 ['2022-02-06', '2022-02-07'],
@@ -49,7 +49,7 @@ const UserDefined = () => {
                 ['2022-02-13', '2022-02-15'],
                 ['2022-02-15', '2022-02-21'],
             ],
-            
+
             backgroundColor: ["#50AF95", "#f3ba2f", "#2a71d0"],
             //borderColor: "black",
             borderWidth: 1,
@@ -98,19 +98,51 @@ const UserDefined = () => {
             }
         }
     }
-    var getCSV = (scsv,user,username) => {
-        exportToCsv(user+"-"+username+"-Export.csv", scsv)
+    var getCSV = (scsv, user, username) => {
+        exportToCsv(user + "_" + username + "-Time_Spent.csv", scsv)
     }
 
-    const userstatusDownloadfunc = () => {
+    const AllTogetherDownloadfunc = () => {
         //console.log(liveChannelData.labels[0]);
-        var csv = [["Channel", "Time Spent (min)"]];
+        var csv = [["Channel", "Time Spent(min) ("+start+" To "+finish+")", "Time Spent(min)/All Time Spent", "Time Spent(min)/Last 24hr"]];
+        var sampleLive = timeSpentCSV;
+        var sampleLive1 = channelalltime;
+        var sampleLive2 = channeldaytime;
+        for (var i = 0; i < sampleLive.labels.length; i++) {
+            csv.push([sampleLive.labels[i], sampleLive.values[i], sampleLive1[i].totaltime, sampleLive2[i].totaltime]);
+        }
+        console.log(csv);
+        getCSV(csv, user, userName);
+    }
+    const TimeSpentTimeFrameDownloadfunc = () => {
+        //console.log(liveChannelData.labels[0]);
+        var csv = [["Channel", "Time Spent (min) ("+start+" To "+finish+")"]];
         var sampleLive = timeSpentCSV;
         for (var i = 0; i < sampleLive.labels.length; i++) {
             csv.push([sampleLive.labels[i], sampleLive.values[i]]);
         }
         console.log(csv);
-        getCSV(csv,user,userName);
+        getCSV(csv, user, userName);
+    }
+    const AlltimeDownloadfunc = () => {
+        //console.log(liveChannelData.labels[0]);
+        var csv = [["Channel", "Time Spent (min)/All Time Spent"]];
+        var sampleLive = channelalltime;
+        for (var i = 0; i < sampleLive.length; i++) {
+            csv.push([sampleLive[i].channel_name, sampleLive[i].totaltime]);
+        }
+        console.log(csv);
+        getCSV(csv, user, userName);
+    }
+    const OneDayDownloadfunc = () => {
+        //console.log(liveChannelData.labels[0]);
+        var csv = [["Channel", "Time Spent (min)/Last 24hr"]];
+        var sampleLive = channeldaytime;
+        for (var i = 0; i < sampleLive.length; i++) {
+            csv.push([sampleLive[i].channel_name, sampleLive[i].totaltime]);
+        }
+        console.log(csv);
+        getCSV(csv, user, userName);
     }
 
     useEffect(() => {
@@ -154,12 +186,12 @@ const UserDefined = () => {
         axios.post("http://127.0.0.1:8000/api/user/LastSeventyTwoViewsGraph", data).then(rsp => {
             setRow1(rsp.data.rows);
             setChannel72Data(() => ({
-                labels: rsp.data.chart_labels, 
+                labels: rsp.data.chart_labels,
                 datasets: rsp.data.chart_data
             }));
         }).catch(err => {
 
-        }); 
+        });
 
         axios.post("http://127.0.0.1:8000/api/user/useralltimeview", data).then(rsp => {
             setErroralltime(rsp.data.error);
@@ -191,48 +223,91 @@ const UserDefined = () => {
                     <div class="card">
                         <div class="card-content">
                             <div class="card-body">
-                                
-                                    <div class="row col-md-12">
 
-                                        <div class="col-md-4">
-                                            <label for="dateTime1">User List</label>
-                                            <Select
-                                                placeholder="Select User"
-                                                options={users.map(user => ({ label: user.user_name, value: user.id }))}
-                                                onChange={opt => setUser(opt.value) & setUserName(opt.label)}
-                                            />
+                                <div class="row col-md-12">
+
+                                    <div class="col-md-4">
+                                        <label for="dateTime1">User List</label>
+                                        <Select
+                                            placeholder="Select User"
+                                            options={users.map(user => ({ label: user.user_name, value: user.id }))}
+                                            onChange={opt => setUser(opt.value) & setUserName(opt.label)}
+                                        />
+                                    </div>
+                                    <div class="row col-md-3">
+
+                                        <fieldset class="form-group form-group-style">
+                                            <label for="dateTime1">Start Time</label>
+                                            <input type="datetime-local" class="form-control" id="dateTime1" step="1" onChange={(e) => { setStart(e.target.value) }} />
+                                        </fieldset>
+                                    </div>
+                                    <div class="row col-md-3">
+                                        <fieldset class="form-group form-group-style">
+                                            <label for="dateTime1">Finish Time</label>
+                                            <input type="datetime-local" class="form-control" id="dateTime1" step="1" onChange={(e) => { setFinish(e.target.value) }} />
+                                        </fieldset>
+                                    </div>
+
+
+
+
+                                    <div class="col-md-2">
+
+                                        <div class="dropdown">
+                                            <button class="btn btn-danger dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">Tutorials
+                                                <span class="caret"></span></button>
+                                            <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                                                {(() => {
+                                                    if (msg === "Error") {
+                                                        return null;
+                                                    } else {
+                                                        return <li role="presentation"><button onClick={TimeSpentTimeFrameDownloadfunc} class="btn btn-info btn-sm btn-block" role="menuitem" tabindex="-1" >Time Spent (Time Frame)</button></li>
+
+                                                    }
+                                                })()}
+
+                                                {(() => {
+                                                    if (channelalltime) {
+                                                        return <div><li role="presentation"><button onClick={AlltimeDownloadfunc} class="btn btn-info btn-sm btn-block" role="menuitem" tabindex="-1" >Time Spent All Time</button></li>
+                                                            <li role="presentation"><button onClick={OneDayDownloadfunc} class="btn btn-info btn-block btn-sm" role="menuitem" tabindex="-1" >Time Spent 24 hr</button></li></div>
+                                                    } else {
+
+                                                        return null;
+                                                    }
+                                                })()}
+
+                                                {(() => {
+                                                    if (msg === "Error") {
+                                                        return null;
+
+                                                    } else {
+                                                        if (channelalltime) {
+                                                            return <li role="presentation"><button onClick={AllTogetherDownloadfunc} class="btn btn-info btn-sm btn-block" role="menuitem" tabindex="-1" >All In One</button></li>
+                                                        } else {
+                                                            return null;
+                                                        }
+
+                                                    }
+                                                })()}
+
+                                                {/* <li role="presentation" class="divider"></li>
+                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Information</a></li> */}
+                                            </ul>
                                         </div>
-                                        <div class="row col-md-3">
-
-                                            <fieldset class="form-group form-group-style">
-                                                <label for="dateTime1">Start Time</label>
-                                                <input type="datetime-local" class="form-control" id="dateTime1" step="1" onChange={(e)=> {setStart(e.target.value)}}/>
-                                            </fieldset>
-                                        </div>
-                                        <div class="row col-md-3">
-                                            <fieldset class="form-group form-group-style">
-                                                <label for="dateTime1">Finish Time</label>
-                                                <input type="datetime-local" class="form-control" id="dateTime1" step="1" onChange={(e)=> {setFinish(e.target.value)}}/>
-                                            </fieldset>
-                                        </div>
 
 
-
-
-                                        <div class="col-md-2">
-
-                                            {(() => {
+                                        {/* {(() => {
                                                 if (msg === "Error") {
                                                     return null;
                                                 } else {
                                                     return <button onClick={userstatusDownloadfunc} class="btn btn-danger float-right">Download CSV</button>;
 
                                                 }
-                                            })()}
+                                            })()} */}
 
 
-                                        </div>
                                     </div>
+                                </div>
 
                             </div>
                         </div>
@@ -293,7 +368,7 @@ const UserDefined = () => {
                         </div>
                     </div>
 
-                    <br/>
+                    <br />
 
                     <div class="row justify-content-md-center">
                         <div class="col">
@@ -327,7 +402,7 @@ const UserDefined = () => {
                                                         },
                                                         indexAxis: 'y',
                                                         scales: {
-                                                            
+
                                                             x: {
                                                                 min: '2022-02-02',
                                                                 type: 'time',
@@ -357,8 +432,8 @@ const UserDefined = () => {
 
                         </div>
                     </div>
-                
-                    <br/>
+
+                    <br />
 
                     <div class="row justify-content-md-center">
                         <div class="col">
@@ -392,7 +467,7 @@ const UserDefined = () => {
                                                         },
                                                         indexAxis: 'y',
                                                         scales: {
-                                                            
+
                                                             x: {
                                                                 min: '2022-05-15T11:57:29.000000Z',
                                                                 type: 'time',
