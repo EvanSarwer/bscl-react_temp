@@ -68,11 +68,26 @@ const UserStatus = () => {
             }
         }
     }
-    var getCSV = (scsv,user,username) => {
-        exportToCsv(user+"_"+username+"-Time_Spent.csv", scsv)
+
+    var getCSV = (scsv, user, username) => {
+        exportToCsv(user + "_" + username + "-Time_Spent.csv", scsv)
+
     }
 
-    const userstatusDownloadfunc = () => {
+    const AllTogetherDownloadfunc = () => {
+        //console.log(liveChannelData.labels[0]);
+        var csv = [["Channel", "Time Spent(min)/" + time, "Time Spent(min)/All Time Spent", "Time Spent(min)/Last 24hr"]];
+        var sampleLive = timeSpentCSV;
+        var sampleLive1 = channelalltime;
+        var sampleLive2 = channeldaytime;
+        for (var i = 0; i < sampleLive.labels.length; i++) {
+            csv.push([sampleLive.labels[i], sampleLive.values[i], sampleLive1[i].totaltime, sampleLive2[i].totaltime]);
+        }
+        console.log(csv);
+        getCSV(csv, user, userName);
+    }
+
+    const TimeSpentTimeFrameDownloadfunc = () => {
         //console.log(liveChannelData.labels[0]);
         var csv = [["Channel", "Time Spent (min)", "Time Frame"]];
         var sampleLive = timeSpentCSV;
@@ -80,13 +95,32 @@ const UserStatus = () => {
             csv.push([sampleLive.labels[i], sampleLive.values[i], time]);
         }
         console.log(csv);
-        getCSV(csv,user,userName);
+        getCSV(csv, user, userName);
+    }
+    const AlltimeDownloadfunc = () => {
+        //console.log(liveChannelData.labels[0]);
+        var csv = [["Channel", "Min/All Time Spent"]];
+        var sampleLive = channelalltime;
+        for (var i = 0; i < sampleLive.length; i++) {
+            csv.push([sampleLive[i].channel_name, sampleLive[i].totaltime]);
+        }
+        console.log(csv);
+        getCSV(csv, user, userName);
+    }
+    const OneDayDownloadfunc = () => {
+        //console.log(liveChannelData.labels[0]);
+        var csv = [["Channel", "Min/Last 24hr"]];
+        var sampleLive = channeldaytime;
+        for (var i = 0; i < sampleLive.length; i++) {
+            csv.push([sampleLive[i].channel_name, sampleLive[i].totaltime]);
+        }
+        console.log(csv);
+        getCSV(csv, user, userName);
     }
 
     useEffect(() => {
 
         axios.get("http://127.0.0.1:8000/api/getuserlist").then(rsp => {
-            console.log(rsp.data.users);
             setUsers(rsp.data.users);
 
         }).catch(err => {
@@ -168,15 +202,58 @@ const UserStatus = () => {
                             </div>
 
                             <div class="col-md-2">
+                                <div class="dropdown">
+                                    <button class="btn btn-danger dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">Tutorials
+                                        <span class="caret"></span></button>
+                                    <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                                        {(() => {
+                                            if (msg === "Error") {
+                                                return null;
+                                            } else {
+                                                return <li role="presentation"><button onClick={TimeSpentTimeFrameDownloadfunc} class="btn btn-info btn-sm btn-block" role="menuitem" tabindex="-1" >Time Spent (Time Frame)</button></li>
 
-                                {(() => {
+                                            }
+                                        })()}
+
+                                        {(() => {
+                                            if (channelalltime) {
+                                                return <div><li role="presentation"><button onClick={AlltimeDownloadfunc} class="btn btn-info btn-sm btn-block" role="menuitem" tabindex="-1" >Time Spent All Time</button></li>
+                                                    <li role="presentation"><button onClick={OneDayDownloadfunc} class="btn btn-info btn-block btn-sm" role="menuitem" tabindex="-1" >Time Spent 24 hr</button></li></div>
+                                            } else {
+
+                                                return null;
+                                            }
+                                        })()}
+
+                                        {(() => {
+                                            if (msg === "Error") {
+                                                return null;
+
+                                            } else {
+                                                if (channelalltime) {
+                                                    return <li role="presentation"><button onClick={AllTogetherDownloadfunc} class="btn btn-info btn-sm btn-block" role="menuitem" tabindex="-1" >All In One</button></li>
+                                                } else {
+                                                    return null;
+                                                }
+
+                                            }
+                                        })()}
+
+                                        {/* <li role="presentation" class="divider"></li>
+                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Information</a></li> */}
+                                    </ul>
+                                </div>
+
+
+
+                                {/* {(() => {
                                     if (msg === "Error") {
                                         return null;
                                     } else {
                                         return <button onClick={userstatusDownloadfunc} class="btn btn-danger float-right">Download CSV</button>;
 
                                     }
-                                })()}
+                                })()} */}
 
 
                             </div>
@@ -193,13 +270,13 @@ const UserStatus = () => {
                             {(() => {
                                 if (msg === "Error") {
                                     return <div class="card">
-                                    <div class="card-header">
-                                        <h4 class="card-title">Time Spent</h4>
-                                        <h4><span class="danger">Please Select User & Time Frame</span></h4>
+                                        <div class="card-header">
+                                            <h4 class="card-title">Time Spent</h4>
+                                            <h4><span class="danger">Please Select User & Time Frame</span></h4>
+                                        </div>
                                     </div>
-                                    </div>
-                                    
-                                    
+
+
                                 } else {
                                     return <div class="card">
                                         <div class="card-header">
