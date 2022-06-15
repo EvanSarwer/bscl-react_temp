@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+import axiosConfig from '../axiosConfig';
 
 
 const ActiveUserTable = () => {
@@ -10,7 +10,7 @@ const ActiveUserTable = () => {
 
     useEffect(() => {
 
-        axios.get("http://127.0.0.1:8000/api/dashboard/activeuserlist").then(rsp => {
+        axiosConfig.get("/dashboard/activeuserlist").then(rsp => {
             console.log(rsp.data);
             setActiveUserList(rsp.data.activeUsers);
         }).catch(err => {

@@ -2,11 +2,12 @@ import React from 'react';
 import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS } from 'chart.js/auto';
 import { useState, useEffect } from "react";
-import axios from "axios";
+import axiosConfig from '../axiosConfig';
 import TotalTimeSpentList, { Products } from "./TotalTimeSpentList";
 import DailyTimeSpentList from "./DailyTimeSpentList";
 import Select from 'react-select';
 import Table from './Table';
+import TimelineChart from './TimelineChart';
 
 
 
@@ -120,7 +121,7 @@ const UserStatus = () => {
 
     useEffect(() => {
 
-        axios.get("http://127.0.0.1:8000/api/getuserlist").then(rsp => {
+        axiosConfig.get("/getuserlist").then(rsp => {
             setUsers(rsp.data.users);
 
         }).catch(err => {
@@ -135,7 +136,7 @@ const UserStatus = () => {
             time: time,
         };
 
-        axios.post("http://127.0.0.1:8000/api/user/usertimespent", data).then(rsp => {
+        axiosConfig.post("/user/usertimespent", data).then(rsp => {
             setMsg(rsp.data.error);
             setChannelData(() => ({
                 labels: rsp.data.channels, datasets: [{
@@ -154,14 +155,14 @@ const UserStatus = () => {
 
         });
 
-        axios.post("http://127.0.0.1:8000/api/user/useralltimeview", data).then(rsp => {
+        axiosConfig.post("/user/useralltimeview", data).then(rsp => {
             setErroralltime(rsp.data.error);
             setChannelalltime(rsp.data.channels);
         }).catch(err => {
 
         });
 
-        axios.post("http://127.0.0.1:8000/api/user/userdaytimeviewlist", data).then(rsp => {
+        axiosConfig.post("/user/userdaytimeviewlist", data).then(rsp => {
             setErrordaytime(rsp.data.error);
             setChanneldaytime(rsp.data.channels);
         }).catch(err => {
@@ -311,6 +312,41 @@ const UserStatus = () => {
                                 }
                             })()}
 
+
+                        </div>
+                    </div>
+
+                    
+                    <br />
+
+                    <div class="row justify-content-md-center">
+                        <div class="col" >
+
+                            {(() => {
+                                if (!user) {
+                                    return <div class="card">
+                                        <div class="card-header">
+                                            <h4 class="card-title">Watch History Of Last 24 Hours</h4>
+                                            <h4><span class="danger">Please Select User To See Last 24 Hour Data</span></h4>
+                                        </div>
+                                    </div>
+
+
+                                } else {
+                                    return <div class="card">
+                                        <div class="card-header">
+                                            <h4 class="card-title">Watch History Of Last 24 Hours</h4>
+                                        </div>
+                                        <div class="card-content collapse show">
+
+                                            <TimelineChart class="w-100" user={user} />
+
+
+                                        </div>
+                                    </div>
+
+                                }
+                            })()}
 
                         </div>
                     </div>
