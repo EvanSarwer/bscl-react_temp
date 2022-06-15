@@ -2,7 +2,7 @@ import React from 'react';
 import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS } from 'chart.js/auto';
 import { useState, useEffect } from "react";
-import axios from "axios";
+import axiosConfig from '../axiosConfig';
 import TotalTimeSpentList, { Products } from "./TotalTimeSpentList";
 import DailyTimeSpentList from "./DailyTimeSpentList";
 import Select from 'react-select';
@@ -30,33 +30,6 @@ const UserDefined = () => {
     const [channelData, setChannelData] = useState({
         labels: [],
         datasets: []
-    });
-    const [row1, setRow1] = useState("");
-    const [channel72Data, setChannel72Data] = useState({
-        labels: [],
-        datasets: []
-    });
-    const [row2, setRow2] = useState("");
-    const [channel24Data, setChannel24Data] = useState({
-        labels: ['BTV', 'unknown', 'Asian TV HD', 'Channel 24', 'T Sports HD', 'nexus', 'Nagorik TV HD'],
-        datasets: [{
-            label: 'View',
-            data: [
-                ['2022-02-01', '2022-02-03'],
-                ['2022-02-03', '2022-02-06'],
-                ['2022-02-06', '2022-02-07'],
-                ['2022-02-07', '2022-02-09'],
-                ['2022-02-09', '2022-02-13'],
-                ['2022-02-13', '2022-02-15'],
-                ['2022-02-15', '2022-02-21'],
-            ],
-
-            backgroundColor: ["#50AF95", "#f3ba2f", "#2a71d0"],
-            //borderColor: "black",
-            borderWidth: 1,
-            categoryPercentage: 0.9,
-            barPercentage: 1
-        }]
     });
 
 
@@ -107,7 +80,7 @@ const UserDefined = () => {
 
     const AllTogetherDownloadfunc = () => {
         //console.log(liveChannelData.labels[0]);
-        var csv = [["Channel", "Time Spent(min) ("+start+" To "+finish+")", "Time Spent(min)/All Time Spent", "Time Spent(min)/Last 24hr"]];
+        var csv = [["Channel", "Time Spent(min) (" + start + " To " + finish + ")", "Time Spent(min)/All Time Spent", "Time Spent(min)/Last 24hr"]];
         var sampleLive = timeSpentCSV;
         var sampleLive1 = channelalltime;
         var sampleLive2 = channeldaytime;
@@ -119,7 +92,7 @@ const UserDefined = () => {
     }
     const TimeSpentTimeFrameDownloadfunc = () => {
         //console.log(liveChannelData.labels[0]);
-        var csv = [["Channel", "Time Spent (min) ("+start+" To "+finish+")"]];
+        var csv = [["Channel", "Time Spent (min) (" + start + " To " + finish + ")"]];
         var sampleLive = timeSpentCSV;
         for (var i = 0; i < sampleLive.labels.length; i++) {
             csv.push([sampleLive.labels[i], sampleLive.values[i]]);
@@ -150,7 +123,7 @@ const UserDefined = () => {
 
     useEffect(() => {
 
-        axios.get("http://127.0.0.1:8000/api/getuserlist").then(rsp => {
+        axiosConfig.get("/getuserlist").then(rsp => {
             console.log(rsp.data.users);
             setUsers(rsp.data.users);
 
@@ -167,7 +140,7 @@ const UserDefined = () => {
             finish: finish,
         };
 
-        axios.post("http://127.0.0.1:8000/api/user/userdefined/usertimespent", data).then(rsp => {
+        axiosConfig.post("/user/userdefined/usertimespent", data).then(rsp => {
             setMsg(rsp.data.error);
             setChannelData(() => ({
                 labels: rsp.data.channels, datasets: [{
@@ -186,24 +159,14 @@ const UserDefined = () => {
 
         });
 
-        axios.post("http://127.0.0.1:8000/api/user/LastSeventyTwoViewsGraph", data).then(rsp => {
-            setRow1(rsp.data.rows);
-            setChannel72Data(() => ({
-                labels: rsp.data.chart_labels,
-                datasets: rsp.data.chart_data
-            }));
-        }).catch(err => {
-
-        });
-
-        axios.post("http://127.0.0.1:8000/api/user/useralltimeview", data).then(rsp => {
+        axiosConfig.post("/user/useralltimeview", data).then(rsp => {
             setErroralltime(rsp.data.error);
             setChannelalltime(rsp.data.channels);
         }).catch(err => {
 
         });
 
-        axios.post("http://127.0.0.1:8000/api/user/userdaytimeviewlist", data).then(rsp => {
+        axiosConfig.post("/user/userdaytimeviewlist", data).then(rsp => {
             setErrordaytime(rsp.data.error);
             setChanneldaytime(rsp.data.channels);
         }).catch(err => {
@@ -297,18 +260,6 @@ const UserDefined = () => {
                                         <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Information</a></li> */}
                                             </ul>
                                         </div>
-
-
-                                        {/* {(() => {
-                                                if (msg === "Error") {
-                                                    return null;
-                                                } else {
-                                                    return <button onClick={userstatusDownloadfunc} class="btn btn-danger float-right">Download CSV</button>;
-
-                                                }
-                                            })()} */}
-
-
                                     </div>
                                 </div>
 
@@ -324,7 +275,7 @@ const UserDefined = () => {
 
 
                             {(() => {
-                                if (msg === "Error") {
+                                if (msg) {
                                     return <div class="card">
                                         <div class="card-header">
                                             <h4 class="card-title">Time Spent</h4>
@@ -374,9 +325,7 @@ const UserDefined = () => {
                     <br />
 
                     <div class="row justify-content-md-center">
-                        <div class="col">
-                            {/* <PostGraph title="Time Spent" text="Channels" url="reach/percent" label="Time Spent" color="blue" credentials={credential} /> */}
-
+                        <div class="col" >
 
                             {(() => {
                                 if (!user) {
@@ -394,37 +343,9 @@ const UserDefined = () => {
                                             <h4 class="card-title">Watch History Of Last 24 Hours</h4>
                                         </div>
                                         <div class="card-content collapse show">
-                                            <div>
-                                                <Bar
-                                                    data={channel24Data}
-                                                    options={{
-                                                        title: {
-                                                            display: true,
-                                                            text: "Channels",
-                                                            fontSize: 20
-                                                        },
-                                                        indexAxis: 'y',
-                                                        scales: {
 
-                                                            x: {
-                                                                min: '2022-02-02',
-                                                                type: 'time',
-                                                                time: {
-                                                                    unit: 'minute'
-                                                                },
-                                                                stacked: true,
-                                                            },
-                                                            y: {
-                                                                stacked: true,
-                                                            }
-                                                        },
-                                                        legend: {
-                                                            display: true,
-                                                            position: 'right'
-                                                        }
-                                                    }}
-                                                />
-                                            </div>
+                                            <TimelineChart class="w-100" user={user} />
+
 
                                         </div>
                                     </div>
@@ -432,77 +353,8 @@ const UserDefined = () => {
                                 }
                             })()}
 
-
                         </div>
                     </div>
-
-                    <br />
-
-                    <div class="row justify-content-md-center">
-                        <div class="col">
-                            {/* <PostGraph title="Time Spent" text="Channels" url="reach/percent" label="Time Spent" color="blue" credentials={credential} /> */}
-
-
-                            {(() => {
-                                if (!user) {
-                                    return <div class="card">
-                                        <div class="card-header">
-                                            <h4 class="card-title">Watch History Of Last 72 Hours</h4>
-                                            <h4><span class="danger">Please Select User To See Last 72 Hour Data</span></h4>
-                                        </div>
-                                    </div>
-
-
-                                } else {
-                                    return <div class="card">
-                                        <div class="card-header">
-                                            <h4 class="card-title">Watch History Of Last 72 Hours</h4>
-                                        </div>
-                                        <div class="card-content collapse show">
-                                            <div>
-                                                {/* <Bar
-                                                    data={channel72Data}
-                                                    options={{
-                                                        title: {
-                                                            display: true,
-                                                            text: "Channels",
-                                                            fontSize: 20
-                                                        },
-                                                        indexAxis: 'y',
-                                                        scales: {
-
-                                                            x: {
-                                                                min: '2022-05-15T11:57:29.000000Z',
-                                                                type: 'time',
-                                                                time: {
-                                                                    unit: 'minute'
-                                                                },
-                                                                stacked: true,
-                                                            },
-                                                            y: {
-                                                                stacked: true,
-                                                            }
-                                                        },
-                                                        legend: {
-                                                            display: true,
-                                                            position: 'right'
-                                                        }
-                                                    }}
-                                                /> */}
-                                                <TimelineChart user={user}/>
-                                            </div>
-
-                                        </div>
-                                    </div>
-
-                                }
-                            })()}
-
-
-                        </div>
-                    </div>
-
-
 
                     <br />
 

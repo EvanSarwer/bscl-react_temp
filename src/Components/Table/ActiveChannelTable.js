@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
 import axiosConfig from '../axiosConfig';
 
 const ActiveChannelTable = () => {
