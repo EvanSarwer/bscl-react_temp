@@ -107,7 +107,7 @@ const LiveChannels = () => {
 
         });
 
-    }, [region,gender,economic,socio,age]);
+    }, [region, gender, economic, socio, age]);
 
 
 
@@ -184,39 +184,41 @@ const LiveChannels = () => {
 
                     </div>
 
-                
-
-            <div class="row justify-content-md-center">
-                <div class="col">
-                    {/* <PostGraph title="Active Users" text="Active Channels" url="reach/percent" label="Active Users" color="blue" credentials={credential} /> */}
-                    <div class="card">
-                        <div class="card-header">
-                            <h4 class="card-title">Active User</h4>
-                        </div>
-                        <div class="card-content collapse show">
 
 
-                            <Bar
-                                data={channelData}
-                                options={{
-                                    title: {
-                                        display: true,
-                                        text: "Channels",
-                                        fontSize: 20
-                                    },
-                                    legend: {
-                                        display: true,
-                                        position: 'right'
-                                    }
-                                }}
-                            />
+                    <div class="row justify-content-md-center">
+                        <div class="col">
+                            {/* <PostGraph title="Active Users" text="Active Channels" url="reach/percent" label="Active Users" color="blue" credentials={credential} /> */}
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Active User</h4>
+                                </div>
+                                <div class="card-content collapse show" style={{height: "40em"}}>
 
 
+                                    <Bar
+                                        data={channelData}
+                                        options={{
+                                            responsive: true,
+                                            maintainAspectRatio: false,
+                                            title: {
+                                                display: true,
+                                                text: "Channels",
+                                                fontSize: 20
+                                            },
+                                            legend: {
+                                                display: true,
+                                                position: 'right'
+                                            }
+                                        }}
+                                    />
+
+
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            </div>
 
             </div>
         </div>

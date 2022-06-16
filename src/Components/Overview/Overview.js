@@ -152,7 +152,7 @@ const Overview = () => {
 
                 });
             }
-            
+
         }
 
 
@@ -214,14 +214,16 @@ const Overview = () => {
                             {/* <PostGraph title="Active Users" text="Active Channels" url="reach/percent" label="Active Users" color="blue" credentials={credential} /> */}
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title">Channels {category}, From {start} to {finish} </h4>
+                                    <div class=" h2 card-title font-weight-bold">Channels {category}, From {start} to {finish} </div>
                                 </div>
-                                <div class="card-content collapse show">
+                                <div class="card-content collapse show" style={{height:"35em"}}>
 
 
                                     <Bar
                                         data={channelData}
                                         options={{
+                                            responsive: true,
+                                            maintainAspectRatio: false,
                                             title: {
                                                 display: true,
                                                 text: "Channels",
