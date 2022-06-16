@@ -213,10 +213,10 @@ const Overview = () => {
                         <div class="col">
                             {/* <PostGraph title="Active Users" text="Active Channels" url="reach/percent" label="Active Users" color="blue" credentials={credential} /> */}
                             <div class="card">
-                                <div class="card-header">
-                                    <div class=" h2 card-title font-weight-bold">Channels {category}, From {start} to {finish} </div>
+                                <div class="row card-header">
+                                    <div class="col h2 card-title font-weight-bold">Channels {category}</div><div class="col h2 card-title text-right">From {start} to {finish} </div>
                                 </div>
-                                <div class="card-content collapse show" style={{height:"35em"}}>
+                                <div class="card-body collapse show" style={{height:"35em"}}>
 
 
                                     <Bar
