@@ -283,11 +283,13 @@ const UserStatus = () => {
                                         <div class="card-header">
                                             <h4 class="card-title">Time Spent</h4>
                                         </div>
-                                        <div class="card-content collapse show">
-                                            <div>
+                                        <div class="card-content collapse show ">
+                                            <div  style={{height:"35em"}}>
                                                 <Bar
                                                     data={channelData}
                                                     options={{
+                                                        responsive: true,
+                                                        maintainAspectRatio: false,
                                                         title: {
                                                             display: true,
                                                             text: "Channels",
@@ -316,7 +318,7 @@ const UserStatus = () => {
                         </div>
                     </div>
 
-                    
+
                     <br />
 
                     <div class="row justify-content-md-center">
@@ -339,7 +341,7 @@ const UserStatus = () => {
                                         </div>
                                         <div class="card-content collapse show">
 
-                                            <TimelineChart class="w-100" user={user} url="/user/last24WatchingData" time="24"/>
+                                            <TimelineChart class="w-100" user={user} url="/user/last24WatchingData" time="24" />
 
 
                                         </div>
@@ -351,7 +353,7 @@ const UserStatus = () => {
                         </div>
                     </div>
 
-                    
+
                     <br />
 
                     <div class="row justify-content-md-center">
@@ -374,7 +376,7 @@ const UserStatus = () => {
                                         </div>
                                         <div class="card-content collapse show">
 
-                                            <TimelineChart class="w-100" user={user} url="/user/last72WatchingData" time="72"/>
+                                            <TimelineChart class="w-100" user={user} url="/user/last72WatchingData" time="72" />
 
 
                                         </div>
