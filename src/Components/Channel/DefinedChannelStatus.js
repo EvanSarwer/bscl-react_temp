@@ -42,12 +42,30 @@ const ChannelStatus = () => {
         },function(err){});
         
     }
+    
+    
+    const weekend=()=>{
+        var checkboxes=document.querySelectorAll('input[name=day]')
+    
+        for (var i = 5; i < 7; i++) {
+            if(!(checkboxes[i].checked)){
+          checkboxes[i].click();}
+        }
+    }    
+    const weekday=()=>{
+        var checkboxes=document.querySelectorAll('input[name=day]')
+    
+        for (var i = 0; i < 5; i++) {
+            if(!(checkboxes[i].checked)){
+          checkboxes[i].click();}
+        }
+    }
     const checkbox=(val)=>{
-        var array = [];
+    var array = [];
 var checkboxes=document.querySelectorAll('input[name='+val+']:checked')
 
 for (var i = 0; i < checkboxes.length; i++) {
-  array.push(checkboxes[i].value)
+array.push(checkboxes[i].value)
 }
 if(val=='month'){
 setmonth(array);
@@ -115,6 +133,14 @@ console.log(day);
                                     </div>
                                     <div class="col-md-3">
                                         <div class="h3 font-weight-bold">Select Day</div>
+                                        <div class="row">
+                                        <div class="col-md-5">
+                                        <button onClick={weekday} class="btn btn-danger">Week Day</button>
+                                        </div>
+                                        <div class="col-md-3">
+                                        <button onClick={weekend} class="btn btn-danger">Weekend</button>
+                                        </div>
+                                        </div>
                                         <input type="checkbox" name="day" value="6" onChange={function(event){checkbox('day');}} />Sunday<br />
                                         <input type="checkbox" name="day" value="0" onChange={function(event){checkbox('day');}} />Monday<br />
                                         <input type="checkbox" name="day" value="1" onChange={function(event){checkbox('day');}} />Tuesday<br />
