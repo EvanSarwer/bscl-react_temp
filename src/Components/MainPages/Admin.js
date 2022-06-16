@@ -11,6 +11,7 @@ import DownloadReport from '../DownloadReport/DownloadReport';
 import UserStatus from '../User/UserStatus';
 import UserDefined from '../User/UserDefined';
 import Overview from '../Overview/Overview';
+import ViewLog from '../ViewLog/ViewLog';
 
 function Admin() {
 
@@ -29,6 +30,7 @@ function Admin() {
         <Route exact path="/userdefined" element={<UserDefined />}></Route>
         <Route exact path="/downloadreport" element={<DownloadReport />}></Route>
         <Route exact path="/devicemonitor" element={<DeviceMonitor />}></Route>
+        <Route exact path="/logs" element={<ViewLog />}></Route>
         {/* <Route exact path="/map" element={<Map />}></Route> */}
       </Routes>
     </BrowserRouter>

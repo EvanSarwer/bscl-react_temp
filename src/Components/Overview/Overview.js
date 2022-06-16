@@ -214,7 +214,7 @@ const Overview = () => {
                             {/* <PostGraph title="Active Users" text="Active Channels" url="reach/percent" label="Active Users" color="blue" credentials={credential} /> */}
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title">Channels {category}</h4>
+                                    <h4 class="card-title">Channels {category}, From {start} to {finish} </h4>
                                 </div>
                                 <div class="card-content collapse show">
 
@@ -225,7 +225,7 @@ const Overview = () => {
                                             title: {
                                                 display: true,
                                                 text: "Channels",
-                                                fontSize: 20
+                                                fontSize: 1
                                             },
                                             legend: {
                                                 display: true,
