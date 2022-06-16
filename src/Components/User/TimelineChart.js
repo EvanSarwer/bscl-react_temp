@@ -18,7 +18,7 @@ const TimelineChart = (props) => {
 
     };
 
-    axiosConfig.post("/user/last24WatchingData", data).then(rsp => {
+    axiosConfig.post(props.url, data).then(rsp => {
       setRows(rsp.data.rows);
       var sample = rsp.data.channels;
 
@@ -91,7 +91,7 @@ const TimelineChart = (props) => {
 
       } else {
         
-          return <span><h4 class="p-2" >Nothing Watched In Last 24 Hours</h4></span>
+          return <span><h4 class="p-2" >Nothing Watched In Last {props.time} Hours</h4></span>
 
       }
   })()}
