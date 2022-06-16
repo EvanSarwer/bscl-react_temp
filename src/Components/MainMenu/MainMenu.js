@@ -49,26 +49,31 @@ const MainMenu = () => {
                     </li>
                     <li class=" nav-item"><a  ><i class="la la-user"></i><span class="menu-title" data-i18n="Dashboard">Users</span><span class="badge badge badge-info badge-pill float-right mr-2"></span></a>
                         {/* <div id="usermenu"></div> */}
-                        <ul class="menu-content">
-                            <li><a class="menu-item" href="/userstatus"><i></i><span data-i18n="Crypto">General</span></a>
-                            </li>
-                            <li><a class="menu-item" href="/userdefined"><i></i><span data-i18n="Crypto">User Defined</span></a>
-                            </li>
-                        </ul>
+                        <div id="usermenu">
+                            <ul class="menu-content">
+                                <li><a class="menu-item" href="/userstatus"><i></i><span data-i18n="Crypto">General</span></a>
+                                </li>
+                                <li><a class="menu-item" href="/userdefined"><i></i><span data-i18n="Crypto">User Defined</span></a>
+                                </li>
+                            </ul>
+                        </div>
 
                     </li>
                     <li class=" nav-item"><a  ><i class="la la-television"></i><span class="menu-title" data-i18n="Templates">Trend Analysis</span></a>
-                        
-                        <ul class="menu-content">
-                            <li><a class="menu-item" href="/channelstatus"><i></i><span data-i18n="Crypto">General</span></a>
-                            </li>
-                            <li><a class="menu-item" href="/definedchannelstatus"><i></i><span data-i18n="Crypto">User Defined</span></a>
-                            </li>
-                        </ul>
+                        <div>
+                            <ul class="menu-content">
+                                <li><a class="menu-item" href="/channelstatus"><i></i><span data-i18n="Crypto">General</span></a>
+                                </li>
+                                <li><a class="menu-item" href="/definedchannelstatus"><i></i><span data-i18n="Crypto">User Defined</span></a>
+                                </li>
+                            </ul>
+                        </div>
                     </li>
                     <li class=" nav-item"><a href="/downloadreport"><i class="la la-download"></i><span class="menu-title" data-i18n="Templates">Report Generation</span></a>
                     </li>
                     <li class=" nav-item"><a href="/devicemonitor"><i class="la la-cogs"></i><span class="menu-title" data-i18n="Templates">Device Monitor</span></a>
+                    </li>
+                    <li class=" nav-item"><a href="/app/users"><i class="la la-users"></i><span class="menu-title" data-i18n="Templates">App users</span></a>
                     </li>
                 </ul>
             </div>

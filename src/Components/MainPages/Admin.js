@@ -12,6 +12,11 @@ import UserStatus from '../User/UserStatus';
 import UserDefined from '../User/UserDefined';
 import Overview from '../Overview/Overview';
 import ViewLog from '../ViewLog/ViewLog';
+import AppUserList from "../AppUsers/AppUserList";
+import AddAppUser from "../AppUsers/AddAppUser";
+import EditAppUser from "../AppUsers/EditAppUser";
+import AppUserForm from "../AppUsers/AppUserForm";
+import DeviceInfo from "../Devices/DeviceInfo";
 
 function Admin() {
 
@@ -31,6 +36,10 @@ function Admin() {
         <Route exact path="/downloadreport" element={<DownloadReport />}></Route>
         <Route exact path="/devicemonitor" element={<DeviceMonitor />}></Route>
         <Route exact path="/logs" element={<ViewLog />}></Route>
+        <Route exact path="/app/users" element={<AppUserList />}></Route>
+        <Route exact path="/app/user/create" element={<AddAppUser />}></Route>
+        <Route exact path="/app/user/edit/:id" element={<EditAppUser />}></Route>
+        <Route exact path="/device/details/:id" element={<DeviceInfo />}></Route>
         {/* <Route exact path="/map" element={<Map />}></Route> */}
       </Routes>
     </BrowserRouter>

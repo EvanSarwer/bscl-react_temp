@@ -48,14 +48,18 @@ const TimelineChart = (props) => {
     ],
     options: {
       chart: {
-        height: 450,
+        height: 50,
         type: 'rangeBar'
       },
       plotOptions: {
         bar: {
           horizontal: true,
-          barHeight: '80%'
-        }
+          barHeight: '30%',
+          dataLabels: {
+            enabled:true,
+            position: 'top',
+          },          
+        },
       },
       xaxis: {
         type: 'datetime'
@@ -65,7 +69,7 @@ const TimelineChart = (props) => {
       },
       fill: {
         type: 'solid',
-        opacity: 0.6
+        opacity: 1,
       },
       legend: {
         position: 'top',
