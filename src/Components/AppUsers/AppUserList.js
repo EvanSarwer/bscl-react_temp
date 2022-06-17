@@ -1,5 +1,5 @@
 import { useState,useEffect } from "react";
-import axios from "axios";
+import axiosConfig from '../axiosConfig';
 
 
 
@@ -7,14 +7,14 @@ const AppUserList=()=>{
 
     const [appUsers,setAppUsers] = useState([]);
     useEffect(()=>{
-        axios.get("http://127.0.0.1:8000/api/appuser/list").then((rsp)=>{
+        axiosConfig.get("/appuser/list").then((rsp)=>{
             setAppUsers(rsp.data);
         },(err)=>{});
 
     },[]);
     const activateDeactivate=(user_name,flag)=>{
         const obj = {user_name:user_name,flag:flag};
-        axios.post("http://127.0.0.1:8000/api/appuser/activate",obj).then((rsp)=>{
+        axiosConfig.post("/api/appuser/activate",obj).then((rsp)=>{
             window.location.reload(false);
         },(err)=>{
             debugger;
@@ -22,7 +22,7 @@ const AppUserList=()=>{
     };
     const deleteUser = (user_name) => {
         const obj = {user_name:user_name};
-        axios.post("http://127.0.0.1:8000/api/appuser/delete",obj).then((rsp)=>{
+        axiosConfig.post("/api/appuser/delete",obj).then((rsp)=>{
             window.location.reload(false);
         },(err)=>{
             debugger;

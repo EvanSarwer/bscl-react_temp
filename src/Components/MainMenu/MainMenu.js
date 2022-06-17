@@ -47,7 +47,8 @@ const MainMenu = () => {
                     </li>
                     <li class=" nav-item"><a href="/livechannels"><i class="la la-tencent-weibo"></i><span class="menu-title" data-i18n="Templates">Live Channels</span></a>
                     </li>
-                    <li class=" nav-item"><a  ><i class="la la-user"></i><span class="menu-title" data-i18n="Dashboard">Users</span><span class="badge badge badge-info badge-pill float-right mr-2"></span></a>
+    
+                    <li class=" nav-item"><a  ><i class="la la-user"></i><span class="menu-title" data-i18n="Dashboard">Audience Profiles</span><span class="badge badge badge-info badge-pill float-right mr-2"></span></a>
                         {/* <div id="usermenu"></div> */}
                         <div id="usermenu">
                             <ul class="menu-content">
@@ -64,7 +65,7 @@ const MainMenu = () => {
                             <ul class="menu-content">
                                 <li><a class="menu-item" href="/channelstatus"><i></i><span data-i18n="Crypto">General</span></a>
                                 </li>
-                                <li><a class="menu-item" href="/definedchannelstatus"><i></i><span data-i18n="Crypto">User Defined</span></a>
+                                <li><a class="menu-item" href="/definedchannelstatus"><i></i><span data-i18n="Crypto">Day Parts</span></a>
                                 </li>
                             </ul>
                         </div>

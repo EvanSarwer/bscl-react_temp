@@ -1,5 +1,6 @@
 import { useState,useEffect} from "react";
 import axios from "axios";
+import axiosConfig from '../axiosConfig';
 
 const AppUserForm=(props)=>{
     const [user_name,setUsername] = useState("");
@@ -11,7 +12,7 @@ const AppUserForm=(props)=>{
 
     useEffect(()=>{
         if(props.mode == "edit"){
-                axios.get("http://127.0.0.1:8000/api/appuser/get/"+props.id).then((rsp)=>{
+            axiosConfig.get("/appuser/get/"+props.id).then((rsp)=>{
                 debugger;
                 var obj = rsp.data;    
                 setUsername(obj.user_name);
@@ -47,7 +48,7 @@ const AppUserForm=(props)=>{
         e.preventDefault();
         if(props.mode == "edit"){
             const obj = {user_name:user_name,email:email,address:address,phone:phone};
-            axios.post("http://127.0.0.1:8000/api/appuser/edit",obj).then((rsp)=>{
+            axiosConfig.post("/appuser/edit",obj).then((rsp)=>{
                 
                 alert(rsp.data.message);
                 window.location.href="/app/users";
@@ -61,7 +62,7 @@ const AppUserForm=(props)=>{
         }
         else{
             const obj = {user_name:user_name,email:email,address:address,phone:phone,password:password,c_password:c_password};
-            axios.post("http://127.0.0.1:8000/api/appuser/create",obj).then((rsp)=>{
+            axiosConfig.post("/appuser/create",obj).then((rsp)=>{
                 
                 alert(rsp.data.message);
                 window.location.href="/app/users";

@@ -7,23 +7,20 @@ const instance = axios.create({
 });
 
 // Where you would set stuff like your 'Authorization' header, etc ...
-instance.defaults.headers.common['Authorization'] = 'AUTH TOKEN FROM INSTANCE';
+//instance.defaults.headers.common['Authorization'] = localStorage.getItem("_authToken");
 
 // Also add/ configure interceptors && all the other cool stuff
 
-// axios.interceptors.request.use(
-//     config => {
-//       if (!config.headers.Authorization) {
-//         const token = JSON.parse(localStorage.getItem("keyCloak")).token;
-  
-//         if (token) {
-//           config.headers.Authorization = `Bearer ${token}`;
-//         }
-//       }
-  
-//       return config;
-//     },
-//     error => Promise.reject(error)
-//   );
+instance.interceptors.request.use(function (config) {
+    // Do something before request is sent
+    config.headers.common['Authorization'] =  localStorage.getItem("_authToken");
+    debugger;
+    console.log("intercepted");
+    return config;
+  }, function (error) {
+    // Do something with request error
+    return Promise.reject(error);
+  });
+
 
 export default instance;

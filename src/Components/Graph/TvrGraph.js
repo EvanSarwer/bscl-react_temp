@@ -2,7 +2,7 @@ import React from 'react';
 import {Bar} from 'react-chartjs-2';
 import { Chart as ChartJS } from 'chart.js/auto';
 import { useState,useEffect } from "react";
-import axios from 'axios';
+import axiosConfig from '../axiosConfig';
 
 
 
@@ -18,7 +18,7 @@ const TvrGraph =(props) =>{
       datasets: []
   });
   useEffect(()=>{
-      axios.get("http://127.0.0.1:8000/api/"+props.url)
+    axiosConfig.get("/"+props.url)
       .then(rsp=>{
         //debugger;
           //console.log(rsp.data.channels);

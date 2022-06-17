@@ -7,7 +7,7 @@ import ActiveChannelTable from "../Table/ActiveChannelTable";
 import ActiveUserTable from "../Table/ActiveUserTable";
 import Map from "../Map/Map";
 import { useState, useEffect } from "react";
-import axios from "axios";
+import axiosConfig from "../axiosConfig";
 import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS } from 'chart.js/auto';
 
@@ -88,7 +88,7 @@ const LiveChannels = () => {
             age2: parseInt(document.querySelector("#small-slider > div > div:nth-child(3) > div > div.noUi-tooltip").innerHTML)
         };
 
-        axios.post("http://127.0.0.1:8000/api/livechannel/activechannellistgraph", data).then(rsp => {
+        axiosConfig.post("/livechannel/activechannellistgraph", data).then(rsp => {
             console.log(rsp.data);
             setChannelData(() => ({
                 labels: rsp.data.channels, datasets: [{

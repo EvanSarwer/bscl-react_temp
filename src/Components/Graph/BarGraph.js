@@ -2,7 +2,6 @@ import React from 'react';
 import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS } from 'chart.js/auto';
 import { useState, useEffect } from "react";
-import axios from 'axios';
 import axiosConfig from '../axiosConfig';
 
 
@@ -37,7 +36,7 @@ const BarGraph = (props) => {
             })
         }
         else{
-            axios.post("http://127.0.0.1:8000/api/" + props.url,props.credentials)
+            axiosConfig.post("/" + props.url,props.credentials)
             .then(rsp => {
                 //debugger;
                 //console.log(rsp.data.label);

@@ -2,7 +2,7 @@ import React from 'react';
 import { Line } from 'react-chartjs-2';
 import { Chart as ChartJS } from 'chart.js/auto';
 import { useState, useEffect } from "react";
-import axios from 'axios';
+import axiosConfig from '../axiosConfig';
 
 
 
@@ -19,7 +19,7 @@ const GetLineGraph = (props) => {
     });
     useEffect(() => {
 
-        axios.get("http://127.0.0.1:8000/api/" + props.url)
+        axiosConfig.get("/" + props.url)
             .then(rsp => {
                 //debugger;
                 //console.log(rsp.data.channels);
