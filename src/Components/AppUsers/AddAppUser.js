@@ -1,7 +1,8 @@
-import AppUserForm from "./AppUserForm";
+import AppUserForm from './AppUserForm'
+
 const AddAppUser=()=>{
     return (
-        <AppUserForm mode="create"/>
+        <AppUserForm mode="Create" />
     )
 }
 export default AddAppUser;
