@@ -1,29 +1,34 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
+
+import { useState,useEffect } from "react";
+import axiosConfig from '../axiosConfig';
+
 
 
 
 const AppUserList = () => {
 
-    const [appUsers, setAppUsers] = useState([]);
+    const [appUsers,setAppUsers] = useState([]);
     const [query, setQuery] = useState("");
-    useEffect(() => {
-        axios.get("http://127.0.0.1:8000/api/appuser/list").then((rsp) => {
+    useEffect(()=>{
+        axiosConfig.get("/appuser/list").then((rsp)=>{
             setAppUsers(rsp.data);
         }, (err) => { });
 
-    }, []);
-    const activateDeactivate = (user_name, flag) => {
-        const obj = { user_name: user_name, flag: flag };
-        axios.post("http://127.0.0.1:8000/api/appuser/activate", obj).then((rsp) => {
+
+    },[]);
+    const activateDeactivate=(user_name,flag)=>{
+        const obj = {user_name:user_name,flag:flag};
+        axiosConfig.post("/api/appuser/activate",obj).then((rsp)=>{
             window.location.reload(false);
         }, (err) => {
             debugger;
         });
     };
     const deleteUser = (user_name) => {
-        const obj = { user_name: user_name };
-        axios.post("http://127.0.0.1:8000/api/appuser/delete", obj).then((rsp) => {
+
+        const obj = {user_name:user_name};
+        axiosConfig.post("/api/appuser/delete",obj).then((rsp)=>{
+
             window.location.reload(false);
         }, (err) => {
             debugger;
@@ -45,23 +50,7 @@ const AppUserList = () => {
                 <div class="content-header row">
                 </div>
                 <div class="content-body">
-                    {/* <form  >
-                        <div class="row">
-
-                        <div class="col-md-5">
-                                <Select
-                                    placeholder="Select User"
-                                    options={users.map(user => ({ label: user.user_name, value: user.id }))}
-                                    onChange={opt => setUser(opt.value) & setUserName(opt.label)}
-                                />
-                            </div>
-                            <div class="col-md-5">
-                            <button type="button" onClick={Download} class="btn btn-danger">Download CSV</button>
-                            </div>
-                            
-                        </div>
-                    </form>
-                    <br /> */}
+                
 
 
                     <div class="row justify-content-md-center">

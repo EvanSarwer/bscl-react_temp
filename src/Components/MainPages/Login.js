@@ -1,28 +1,28 @@
+import {useState,useEffect} from 'react';
+import axiosConfig from '../axiosConfig';
+const Login=()=> {
+    const [uname,setUname] = useState("");
+    const [pass,setPass] = useState("");
+    const [err,setErr] = useState({});
 
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Header from '../Header/Header';
-import MainMenu from '../MainMenu/MainMenu';
-import Dashboard from '../Dashboard/Dashboard';
-import LiveChannels from '../LiveChannels/LiveChannels';
-import ChannelStatus from '../Channel/ChannelStatus';
-import DefinedChannelStatus from '../Channel/DefinedChannelStatus';
-import DeviceMonitor from '../DeviceMonitor/DeviceMonitor';
-import DownloadReport from '../DownloadReport/DownloadReport';
-import UserStatus from '../User/UserStatus';
-import UserDefined from '../User/UserDefined';
-import Overview from '../Overview/Overview';
+    const handleForm=(e)=>{
+        e.preventDefault();
+        debugger;
+        const obj = {username:uname,password:pass};
+        axiosConfig.post("/auth/sign-in",obj).then((rsp)=>{
+            localStorage.setItem("_authToken",rsp.data.data.token);
+            localStorage.setItem("_role",rsp.data.data.role);
+            window.location.href="/";
 
-function Login() {
-    var validate=()=>{
-        if(document.querySelector("#user-name").value=='admin' &&document.querySelector("#user-password").value=='admin'){
-        localStorage.setItem("user","admin");
-        window.open("http://localhost:3000/","_self");
+        },(err)=>{
+            if(err.response.status===401){
+                debugger;
+                setErr(err.response.data);
+                
+            }
+        });
     }
-        if(document.querySelector("#user-name").value=='user' &&document.querySelector("#user-password").value=='user'){
-        localStorage.setItem("user","user");
-        window.open("http://localhost:3000/","_self");
-    }
-    }
+
   return (
     
         <div class="content-wrapper">
@@ -38,15 +38,15 @@ function Login() {
                                 </div>
                                 <div class="card-content">
                                     <div class="card-body">
-                                        <form class="form-horizontal form-simple" action="index.html" novalidate>
+                                        <form onSubmit={handleForm } class="form-horizontal form-simple">
                                             <fieldset class="form-group position-relative has-icon-left mb-0">
-                                                <input type="text" class="form-control" id="user-name" placeholder="Your Username" required/>
+                                                <input type="text" class="form-control" id="user-name" onChange={(e)=>{setUname(e.target.value)}} value={uname} placeholder="Your Username" required/>
                                                 <div class="form-control-position">
                                                     <i class="la la-user"></i>
                                                 </div>
                                             </fieldset>
                                             <fieldset class="form-group position-relative has-icon-left">
-                                                <input type="password" class="form-control" id="user-password" placeholder="Enter Password" required/>
+                                                <input type="password" class="form-control" id="user-password" onChange={(e)=>{setPass(e.target.value)}} value={pass} placeholder="Enter Password" required/>
                                                 <div class="form-control-position">
                                                     <i class="la la-key"></i>
                                                 </div>
@@ -60,7 +60,7 @@ function Login() {
                                                 </div>
                                                 <div class="col-sm-6 col-12 text-center text-sm-right"><a href="recover-password.html" class="card-link">Forgot Password?</a></div>
                                             </div>
-                                            <button type="button" onClick={validate}  class="btn btn-info btn-block"><i class="ft-unlock"></i> Login</button>
+                                            <button type="submit"  class="btn btn-info btn-block"><i class="ft-unlock"></i> Login</button>
                                         </form>
                                     </div>
                                 </div>

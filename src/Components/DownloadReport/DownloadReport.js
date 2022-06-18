@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
+import axiosConfig from "../axiosConfig";
 import React from 'react';
 import Select from 'react-select';
 
@@ -89,7 +89,7 @@ const DownloadReport = () => {
             age2: parseInt(document.querySelector("#small-slider > div > div:nth-child(3) > div > div.noUi-tooltip").innerHTML)
         };
 
-        axios.post("http://127.0.0.1:8000/api/livechannel/activechannellistgraph", data).then(rsp => {
+        axiosConfig.post("/livechannel/activechannellistgraph", data).then(rsp => {
             //console.log(rsp.data);
             setLiveChannelData(() => ({
                 labels: rsp.data.channels, values: rsp.data.user_count
@@ -125,7 +125,7 @@ const DownloadReport = () => {
 
     useEffect(() => {
 
-        axios.get("http://127.0.0.1:8000/api/getuserlist").then(rsp => {
+        axiosConfig.get("/getuserlist").then(rsp => {
             console.log(rsp.data.users);
             setUsers(rsp.data.users);
 
@@ -141,7 +141,7 @@ const DownloadReport = () => {
             time: time,
         };
 
-        axios.post("http://127.0.0.1:8000/api/user/usertimespent", data).then(rsp => {
+        axiosConfig.post("/user/usertimespent", data).then(rsp => {
             console.log(rsp.data);
             setuserstatusChannelData(() => ({
                 labels: rsp.data.channels, values: rsp.data.totaltime
@@ -180,7 +180,7 @@ const DownloadReport = () => {
 
         if (start !== "" && finish !== "") {
             if (category === "Reach(000)") {
-                axios.post("http://127.0.0.1:8000/api/overview/reachusergraph", data).then(rsp => {
+                axiosConfig.post("/overview/reachusergraph", data).then(rsp => {
                     setbasicChannelData(() => ({
                         labels: rsp.data.channels, values: rsp.data.reach
                     }));
@@ -189,7 +189,7 @@ const DownloadReport = () => {
                 });
             }
             else if (category === "Reach(%)") {
-                axios.post("http://127.0.0.1:8000/api/overview/reachpercentgraph", data).then(rsp => {
+                axiosConfig.post("/overview/reachpercentgraph", data).then(rsp => {
                     setbasicChannelData(() => ({
                         labels: rsp.data.channels, values: rsp.data.reach
                     }));
@@ -198,7 +198,7 @@ const DownloadReport = () => {
                 });
             }
             else if (category === "TVR(000)") {
-                axios.post("http://127.0.0.1:8000/api/overview/tvrgraphallchannelzero", data).then(rsp => {
+                axiosConfig.post("/overview/tvrgraphallchannelzero", data).then(rsp => {
                     setbasicChannelData(() => ({
                         labels: rsp.data.channels, values: rsp.data.tvrs
                     }));
@@ -207,7 +207,7 @@ const DownloadReport = () => {
                 });
             }
             else if (category === "TVR(%)") {
-                axios.post("http://127.0.0.1:8000/api/overview/tvrgraphallchannelpercent", data).then(rsp => {
+                axiosConfig.post("/overview/tvrgraphallchannelpercent", data).then(rsp => {
                     setbasicChannelData(() => ({
                         labels: rsp.data.channels, values: rsp.data.tvrs
                     }));
@@ -216,7 +216,7 @@ const DownloadReport = () => {
                 });
             }
             else if (category === "TVR Share(%)") {
-                axios.post("http://127.0.0.1:8000/api/overview/tvrsharegraph", data).then(rsp => {
+                axiosConfig.post("/overview/tvrsharegraph", data).then(rsp => {
                     //console.log(rsp.data);
                     setbasicChannelData(() => ({
                         labels: rsp.data.channels, values: rsp.data.share
@@ -226,7 +226,7 @@ const DownloadReport = () => {
                 });
             }
             else if (category === "Time Spent(Uni)") {
-                axios.post("http://127.0.0.1:8000/api/overview/timespentgraph", data).then(rsp => {
+                axiosConfig.post("/overview/timespentgraph", data).then(rsp => {
                     console.log(rsp.data);
                     setbasicChannelData(() => ({
                         labels: rsp.data.channels, values: rsp.data.totaltime

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from "react";
-import axios from "axios";
+import axiosConfig from "../axiosConfig";
 import CurrentStatus from "../CurrentStatus/CurrentStatus";
 import Graph from "../Graph/Graph";
 import DemoGraph from "../Graph/DemoGraph";
@@ -16,7 +16,7 @@ const ChannelStatus = () => {
     const [channellist, setchannellist] = useState([]);
     useEffect(() => {
 
-        axios.get("http://127.0.0.1:8000/api/trend/channels").then(rsp => {
+        axiosConfig.get("/trend/channels").then(rsp => {
             //console.log(rsp.data);
             setchannels(rsp.data.channels);
             console.log(channels);

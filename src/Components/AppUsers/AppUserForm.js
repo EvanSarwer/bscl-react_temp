@@ -1,17 +1,18 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import axiosConfig from '../axiosConfig';
 
-const AppUserForm = (props) => {
-    const [user_name, setUsername] = useState("");
-    const [email, setEmail] = useState("");
-    const [address, setAddress] = useState("");
-    const [phone, setPhone] = useState("");
-    const [password, setPassword] = useState("");
-    const [c_password, setCPassword] = useState("");
+const AppUserForm=(props)=>{
+    const [user_name,setUsername] = useState("");
+    const [email,setEmail] = useState("");
+    const [address,setAddress] = useState("");
+    const [phone,setPhone] = useState("");
+    const [password,setPassword] = useState("");
+    const [c_password,setCPassword] = useState("");
 
-    useEffect(() => {
-        if (props.mode == "Edit") {
-            axios.get("http://127.0.0.1:8000/api/appuser/get/" + props.id).then((rsp) => {
+    useEffect(()=>{
+        if(props.mode == "Edit"){
+            axiosConfig.get("/appuser/get/"+props.id).then((rsp)=>{
                 debugger;
                 var obj = rsp.data;
                 setUsername(obj.user_name);
@@ -45,9 +46,10 @@ const AppUserForm = (props) => {
 
     const handleForm = (e) => {
         e.preventDefault();
-        if (props.mode == "Edit") {
-            const obj = { user_name: user_name, email: email, address: address, phone: phone };
-            axios.post("http://127.0.0.1:8000/api/appuser/edit", obj).then((rsp) => {
+        if(props.mode == "Edit"){
+            const obj = {user_name:user_name,email:email,address:address,phone:phone};
+            axiosConfig.post("/appuser/edit",obj).then((rsp)=>{
+                
 
                 alert(rsp.data.message);
                 window.location.href = "/app/users";
@@ -59,10 +61,10 @@ const AppUserForm = (props) => {
                 }
             });
         }
-        else {
-            const obj = { user_name: user_name, email: email, address: address, phone: phone, password: password, c_password: c_password };
-            axios.post("http://127.0.0.1:8000/api/appuser/create", obj).then((rsp) => {
 
+        else{
+            const obj = {user_name:user_name,email:email,address:address,phone:phone,password:password,c_password:c_password};
+            axiosConfig.post("/appuser/create",obj).then((rsp)=>{
                 alert(rsp.data.message);
                 window.location.href = "/app/users";
 

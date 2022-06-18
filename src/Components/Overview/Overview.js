@@ -7,7 +7,7 @@ import ActiveChannelTable from "../Table/ActiveChannelTable";
 import ActiveUserTable from "../Table/ActiveUserTable";
 import Map from "../Map/Map";
 import { useState, useEffect } from "react";
-import axios from "axios";
+import axiosConfig from "../axiosConfig";
 import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS } from 'chart.js/auto';
 
@@ -28,7 +28,7 @@ const Overview = () => {
             finish: finish
         };
 
-        axios.post("http://127.0.0.1:8000/api/overview/reachusergraph", data).then(rsp => {
+        axiosConfig.post("/overview/reachusergraph", data).then(rsp => {
             console.log(rsp.data);
             setChannelData(() => ({
                 labels: rsp.data.channels, datasets: [{
@@ -55,7 +55,7 @@ const Overview = () => {
 
         if (start !== "" && finish !== "") {
             if (category === "Reach(000)") {
-                axios.post("http://127.0.0.1:8000/api/overview/reachusergraph", data).then(rsp => {
+                axiosConfig.post("/overview/reachusergraph", data).then(rsp => {
                     setChannelData(() => ({
                         labels: rsp.data.channels, datasets: [{
                             label: "Reach (000)", data: rsp.data.reach,
@@ -71,7 +71,7 @@ const Overview = () => {
                 });
             }
             else if (category === "Reach(%)") {
-                axios.post("http://127.0.0.1:8000/api/overview/reachpercentgraph", data).then(rsp => {
+                axiosConfig.post("/overview/reachpercentgraph", data).then(rsp => {
                     setChannelData(() => ({
                         labels: rsp.data.channels, datasets: [{
                             label: "Reach (%)", data: rsp.data.reach,
@@ -87,7 +87,7 @@ const Overview = () => {
                 });
             }
             else if (category === "TVR(000)") {
-                axios.post("http://127.0.0.1:8000/api/overview/tvrgraphallchannelzero", data).then(rsp => {
+                axiosConfig.post("/overview/tvrgraphallchannelzero", data).then(rsp => {
                     setChannelData(() => ({
                         labels: rsp.data.channels, datasets: [{
                             label: "TVR (000)", data: rsp.data.tvrs,
@@ -103,7 +103,7 @@ const Overview = () => {
                 });
             }
             else if (category === "TVR(%)") {
-                axios.post("http://127.0.0.1:8000/api/overview/tvrgraphallchannelpercent", data).then(rsp => {
+                axiosConfig.post("/overview/tvrgraphallchannelpercent", data).then(rsp => {
                     setChannelData(() => ({
                         labels: rsp.data.channels, datasets: [{
                             label: "TVR (%)", data: rsp.data.tvrs,
@@ -119,7 +119,7 @@ const Overview = () => {
                 });
             }
             else if (category === "TVR Share(%)") {
-                axios.post("http://127.0.0.1:8000/api/overview/tvrsharegraph", data).then(rsp => {
+                axiosConfig.post("/overview/tvrsharegraph", data).then(rsp => {
                     console.log(rsp.data);
                     setChannelData(() => ({
                         labels: rsp.data.channels, datasets: [{
@@ -136,7 +136,7 @@ const Overview = () => {
                 });
             }
             else if (category === "Time Spent(Uni)") {
-                axios.post("http://127.0.0.1:8000/api/overview/timespentgraph", data).then(rsp => {
+                axiosConfig.post("/overview/timespentgraph", data).then(rsp => {
                     console.log(rsp.data);
                     setChannelData(() => ({
                         labels: rsp.data.channels, datasets: [{

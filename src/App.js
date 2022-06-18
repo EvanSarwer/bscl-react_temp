@@ -5,7 +5,7 @@ import User from './Components/MainPages/User';
 
 function App() {
 
-  if(localStorage.getItem("user")=="admin"){
+  if(localStorage.getItem("_authToken")!= null && localStorage.getItem("_role")=="admin"){
     return (
       <div>
         
@@ -14,7 +14,7 @@ function App() {
     );
   }
 
-  else if(localStorage.getItem("user")=="user"){
+  else if(localStorage.getItem("_authToken")!= null && localStorage.getItem("_role")=="general"){
     return (
       <div>
         
@@ -23,7 +23,7 @@ function App() {
     );
   }
 
-  else if(localStorage.getItem("user")=="logout"){
+  else if(localStorage.getItem("_authToken")==null){
     return (
       <div>
         

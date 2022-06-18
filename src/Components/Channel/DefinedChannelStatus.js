@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from "react";
-import axios from "axios";
+import axiosConfig from "../axiosConfig";
 import Select from 'react-select';
 
 
@@ -18,7 +18,7 @@ const ChannelStatus = () => {
     const [channels, setchannels] = useState([]);
     useEffect(() => {
 
-        axios.get("http://127.0.0.1:8000/api/trend/channels").then(rsp => {
+        axiosConfig.get("/api/trend/channels").then(rsp => {
             //console.log(rsp.data);
             setchannels(rsp.data.channels);
             console.log(channels);
@@ -31,7 +31,7 @@ const ChannelStatus = () => {
     }, [])
     const getData=(event)=>{
         console.log("sent req");
-        axios.post("http://localhost:8000/api/channel/definedtrend",{id:id,month:month,year:year,day:day,start:start,finish:finish}).then(function(rsp){
+        axiosConfig.post("/channel/definedtrend",{id:id,month:month,year:year,day:day,start:start,finish:finish}).then(function(rsp){
         
             console.log({id:id,month:month,year:year,day:day,start:start,finish:finish});
             console.log(rsp.data);    
