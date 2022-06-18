@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 const EditAppUser=()=>{
     const {id} = useParams();
     return (
-            <AppUserForm mode="edit" id={id}/>
+            <AppUserForm mode="Edit" id={id}/>
     )
 }
 export default EditAppUser;
