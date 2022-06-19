@@ -13,9 +13,16 @@ import { Chart as ChartJS } from 'chart.js/auto';
 
 
 const Overview = () => {
+
+    var yesterday = new Date(new Date().getTime() - (24 * 60 * 60 * 1000)),
+    y_datetime = yesterday.getFullYear() + '-' + (yesterday.getMonth() + 1) + '-' + yesterday.getDate() + ' ' + yesterday.getHours() + ':' + yesterday.getMinutes() + ':' + yesterday.getSeconds();
+
+    var today = new Date(),
+    datetime = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate() + ' ' + today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+
     const [category, setCategory] = useState("Reach(000)");
-    const [start, setStart] = useState("2022-05-18 00:00:00");
-    const [finish, setFinish] = useState("2022-05-18 23:59:59");
+    const [start, setStart] = useState(y_datetime);
+    const [finish, setFinish] = useState(datetime);
 
     const [channelData, setChannelData] = useState({
         labels: [],
