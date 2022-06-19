@@ -56,6 +56,8 @@ const MainMenu = () => {
                                 </li>
                                 <li><a class="menu-item" href="/userdefined"><i></i><span data-i18n="Crypto">User Defined</span></a>
                                 </li>
+                                <li><a class="menu-item" href="/logs"><i></i><span data-i18n="Crypto">View Logs</span></a>
+                                </li>
                             </ul>
                         </div>
 
