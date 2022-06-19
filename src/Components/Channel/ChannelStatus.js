@@ -66,36 +66,29 @@ const ChannelStatus = () => {
 
 
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <PostLineGraph title="Reach (%)" text="Active Channels" url="trend/reach/percent" label="Reach (%)" color="blue" credentials={{"id":id,"time":time}} />
 
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <PostLineGraph title="Reach (000)" text="Active Channels" url="trend/reach/zero" label="Reach (000)" color="red" credentials={{"id":id,"time":time}} />
 
                         </div>
-                        <div class="col-md-4">
-                            <PostLineGraph title="TVR (%)" text="Active Channels" url="trend/tvr/percent" label="TVR (%)" color="green" credentials={{"id":id,"time":time}} />
-
-                        </div>
+                        
                     </div>
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <PostLineGraph title="TVR (000)" text="Active Channels" url="trend/tvr/zero" label="TVR (000)" color="violet" credentials={{"id":id,"time":time}} />
 
                         </div>
-                        <div class="col-md-4">
-                            <GetLineGraph title="Share" text="Active Channels" url="trend/tvr/percent" label="Share" color="yellow"  />
+                        <div class="col-md-6">
+                            <PostLineGraph title="TVR (%)" text="Active Channels" url="trend/tvr/percent" label="TVR (%)" color="green" credentials={{"id":id,"time":time}} />
 
                         </div>
-                        <div class="col-md-4">
-                            <GetLineGraph title="Time Spent(Universe)" text="Active Channels" url="trend/reach/percent" label="Time Spent(Universe)" color="blue"  />
-
-                        </div>
+                        
                     </div>
                 </div>
             </div>
-            <div class="h1">{id}</div>
         </div>
 
 

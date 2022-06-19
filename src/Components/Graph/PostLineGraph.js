@@ -52,11 +52,7 @@ const PostLineGraph = (props) => {
                     <Line
                         data={graphData}
                         options={{
-                            scales: {
-                                x: {
-                                    display: false
-                                }
-                            },
+                            
                             tension: 0.4,
                             title: {
                                 display: true,

@@ -281,7 +281,7 @@ const UserStatus = () => {
                                 } else {
                                     return <div class="card">
                                         <div class="card-header">
-                                            <h4 class="card-title">Time Spent</h4>
+                                            <h4 class="card-title">Time Spent Last {time}</h4>
                                         </div>
                                         <div class="card-content collapse show ">
                                             <div  style={{height:"35em"}}>
