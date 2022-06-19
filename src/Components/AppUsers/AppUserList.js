@@ -18,20 +18,18 @@ const AppUserList = () => {
     },[]);
     const activateDeactivate=(user_name,flag)=>{
         const obj = {user_name:user_name,flag:flag};
-        axiosConfig.post("/api/appuser/activate",obj).then((rsp)=>{
+        axiosConfig.post("/appuser/activate",obj).then((rsp)=>{
+
             window.location.reload(false);
-        }, (err) => {
-            debugger;
+        }, (err) => { 
         });
     };
     const deleteUser = (user_name) => {
 
         const obj = {user_name:user_name};
-        axiosConfig.post("/api/appuser/delete",obj).then((rsp)=>{
-
+        axiosConfig.post("/appuser/delete",obj).then((rsp)=>{
             window.location.reload(false);
         }, (err) => {
-            debugger;
         });
     };
 
@@ -84,7 +82,7 @@ const AppUserList = () => {
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
-                                                                {Search(appUsers).map((log) => (user) =>
+                                                                {Search(appUsers).map((user) =>
                                                                     <tr>
                                                                         <td>{user.user_name} <span class={`badge badge-${user.active ? "success" : "danger"}`} >{user.active ? 'Active' : 'Inactive'}</span></td>
                                                                         <td>{user.email}</td>

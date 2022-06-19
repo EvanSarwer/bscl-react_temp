@@ -6,17 +6,18 @@ const ActiveChannelTable = () => {
     const [ query, setQuery ] = useState("");
     const [activeChannelList, setActiveChannelList] = useState([]);
 
-
     useEffect(() => {
-
-        axiosConfig.get("/dashboard/activechannellist").then(rsp => {
-            console.log(rsp.data);
-            setActiveChannelList(rsp.data.activeChannels);
-        }).catch(err => {
-
-        })
-
-    },[])
+        const interval = setInterval(() => {
+            axiosConfig.get("/dashboard/activechannellist").then(rsp => {
+                console.log(rsp.data);
+                setActiveChannelList(rsp.data.activeChannels);
+            }).catch(err => {
+    
+            })
+        }, 2000);
+      
+        return () => clearInterval(interval);
+      }, []);
 
     // useEffect(() => {
     //     setChannelData(props.data);
@@ -61,7 +62,7 @@ const ActiveChannelTable = () => {
                                 {Search(activeChannelList).map((channel) =>
                                                 <tr key={channel.channel_id}>
                                                     <td>{channel.channel_id}</td>
-                                                    <td><a href="index.html"><div style={{ whiteSpace: 'nowrap' }}><img class="img-fluid" alt="" style={{ maxWidth: "3rem" }} src={"../../channels/logos/" + channel.channel_logo} />{channel.channel_name}</div></a>
+                                                    <td><a><div style={{ whiteSpace: 'nowrap' }}><img class="img-fluid" alt="" style={{ maxWidth: "3rem" }} src={"../../channels/logos/" + channel.channel_logo} />{channel.channel_name}</div></a>
                                                     </td>
                                                     <td>{channel.user_count}</td>
                                                 </tr>

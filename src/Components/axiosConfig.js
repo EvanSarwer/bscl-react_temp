@@ -14,7 +14,7 @@ const instance = axios.create({
 instance.interceptors.request.use(function (config) {
     // Do something before request is sent
     config.headers.common['Authorization'] =  localStorage.getItem("_authToken");
-    debugger;
+    //this.$Progress.start(); 
     console.log("intercepted");
     return config;
   }, function (error) {

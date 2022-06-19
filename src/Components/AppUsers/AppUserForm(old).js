@@ -12,7 +12,6 @@ const AppUserForm=(props)=>{
     useEffect(()=>{
         if(props.mode == "edit"){
                 axios.get("http://127.0.0.1:8000/api/appuser/get/"+props.id).then((rsp)=>{
-                debugger;
                 var obj = rsp.data;    
                 setUsername(obj.user_name);
                 setEmail(obj.email);

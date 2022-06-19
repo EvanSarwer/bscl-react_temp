@@ -2,12 +2,12 @@ import axiosConfig from '../axiosConfig';
 const HeaderUser = () => {
     var logout=()=>{
         axiosConfig.get("/logout").then((rsp)=>{
-            debugger;
+         
             localStorage.removeItem("_authToken");
             localStorage.removeItem("_role");
             window.open("http://localhost:3000/","_self");
         },(err)=>{
-            debugger;
+        
         });
         
     }

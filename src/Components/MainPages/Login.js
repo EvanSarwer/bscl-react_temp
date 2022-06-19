@@ -7,7 +7,7 @@ const Login=()=> {
 
     const handleForm=(e)=>{
         e.preventDefault();
-        debugger;
+      
         const obj = {username:uname,password:pass};
         axiosConfig.post("/auth/sign-in",obj).then((rsp)=>{
             localStorage.setItem("_authToken",rsp.data.data.token);
@@ -16,7 +16,7 @@ const Login=()=> {
 
         },(err)=>{
             if(err.response.status===401){
-                debugger;
+        
                 setErr(err.response.data);
                 
             }

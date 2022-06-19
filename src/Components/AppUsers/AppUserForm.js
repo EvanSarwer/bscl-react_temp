@@ -13,7 +13,6 @@ const AppUserForm=(props)=>{
     useEffect(()=>{
         if(props.mode == "Edit"){
             axiosConfig.get("/appuser/get/"+props.id).then((rsp)=>{
-                debugger;
                 var obj = rsp.data;
                 setUsername(obj.user_name);
                 setEmail(obj.email);
