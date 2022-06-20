@@ -53,7 +53,6 @@ const ActiveChannelTable = () => {
                             <table id="users-list-datatable" class="table table-bordered">
                                 <thead>
                                     <tr>
-                                        <th>ID</th>
                                         <th>Channel Name</th>
                                         <th>Active User</th>
                                     </tr>
@@ -61,7 +60,6 @@ const ActiveChannelTable = () => {
                                 <tbody>
                                 {Search(activeChannelList).map((channel) =>
                                                 <tr key={channel.channel_id}>
-                                                    <td>{channel.channel_id}</td>
                                                     <td><a><div style={{ whiteSpace: 'nowrap' }}><img class="img-fluid" alt="" style={{ maxWidth: "3rem" }} src={"../../channels/logos/" + channel.channel_logo} />{channel.channel_name}</div></a>
                                                     </td>
                                                     <td>{channel.user_count}</td>
