@@ -27,7 +27,7 @@ function App() {
     return (
       <div>
         
-        <Login/>
+        <Admin/>
       </div>
     );
   }
@@ -35,7 +35,7 @@ function App() {
   else{
     return (
       <div>
-        <Login/>
+        <Admin/>
   
       </div>
     );
