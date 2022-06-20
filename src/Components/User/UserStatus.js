@@ -17,6 +17,8 @@ const UserStatus = () => {
     const [user, setUser] = useState("");
     const [userName, setUserName] = useState("");
     const [time, setTime] = useState("");
+    const [start,setStart] = useState("");
+    const [finish,setFinish] = useState("");
     const [msg, setMsg] = useState("");
     const [erroralltime, setErroralltime] = useState("");
     const [errordaytime, setErrordaytime] = useState("");
@@ -138,6 +140,8 @@ const UserStatus = () => {
 
         axiosConfig.post("/user/usertimespent", data).then(rsp => {
             setMsg(rsp.data.error);
+            setStart(rsp.data.start);
+            setFinish(rsp.data.finish);
             setChannelData(() => ({
                 labels: rsp.data.channels, datasets: [{
                     label: "Time Spent(min)", data: rsp.data.totaltime,
@@ -245,18 +249,6 @@ const UserStatus = () => {
                                     </ul>
                                 </div>
 
-
-
-                                {/* {(() => {
-                                    if (msg === "Error") {
-                                        return null;
-                                    } else {
-                                        return <button onClick={userstatusDownloadfunc} class="btn btn-danger float-right">Download CSV</button>;
-
-                                    }
-                                })()} */}
-
-
                             </div>
                         </div>
                     </form>
@@ -265,8 +257,7 @@ const UserStatus = () => {
 
                     <div class="row justify-content-md-center">
                         <div class="col">
-                            {/* <PostGraph title="Time Spent" text="Channels" url="reach/percent" label="Time Spent" color="blue" credentials={credential} /> */}
-
+                           
 
                             {(() => {
                                 if (msg === "Error") {
@@ -281,7 +272,7 @@ const UserStatus = () => {
                                 } else {
                                     return <div class="card">
                                         <div class="card-header">
-                                            <h4 class="card-title">Time Spent Last {time}</h4>
+                                            <div class="row card-title"><div class="col h5 font-weight-bold">Time Spent</div><div class="col h5 card-title text-right">From {start} to {finish}</div></div>
                                         </div>
                                         <div class="card-content collapse show ">
                                             <div  style={{height:"35em"}}>
