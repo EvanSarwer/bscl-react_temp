@@ -78,7 +78,6 @@ const AppUserList = () => {
                                                                     <th>Address</th>
                                                                     <th>Phone</th>
                                                                     <th>Status</th>
-                                                                    <th></th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
@@ -88,10 +87,10 @@ const AppUserList = () => {
                                                                         <td>{user.email}</td>
                                                                         <td>{user.address}</td>
                                                                         <td>{user.phone}</td>
-                                                                        <td>
+                                                                        <td style={{ whiteSpace: 'nowrap' }}>
                                                                             <a class="btn btn-secondary" href={`/app/user/edit/${user.user_name}`}>Edit</a>
-                                                                            <burtton class="offset-1 btn btn-danger" onClick={() => { if (window.confirm('Delete the item?')) { deleteUser(user.user_name) }; }} >Delete</burtton>
-                                                                            <burtton class={`offset-1 btn btn-${user.active ? "danger" : "success"}`} onClick={() => { if (window.confirm('Change Status?')) { activateDeactivate(user.user_name, !user.active) }; }} >{user.active ? 'Deactivate' : 'Activate'}</burtton>
+                                                                            <button class="offset-1 btn btn-danger" onClick={() => { if (window.confirm('Delete the item?')) { deleteUser(user.user_name) }; }} >Delete</button>
+                                                                            <button class={`offset-1 btn btn-${user.active ? "danger" : "success"}`} onClick={() => { if (window.confirm('Change Status?')) { activateDeactivate(user.user_name, !user.active) }; }} >{user.active ? 'Deactivate' : 'Activate'}</button>
                                                                         </td>
 
                                                                     </tr>

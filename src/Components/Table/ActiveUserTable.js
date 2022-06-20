@@ -48,8 +48,7 @@ const ActiveUserTable = () => {
                             <table class="table nowrap table-bordered">
                                 <thead>
                                     <tr>
-                                        <th>ID</th>
-                                        <th>Name</th>
+                                        <th>User Name</th>
                                         <th>Started watching</th>
                                         <th>Duration</th>
                                         <th>Channel</th>
@@ -58,7 +57,6 @@ const ActiveUserTable = () => {
                                 <tbody>
                                 {Search(activeUserList).map((user) =>
                                                 <tr key={user.user_id}>
-                                                    <td>{user.user_id}</td>
                                                     <td><a href={`/device/details/${user.user_id}`}>{user.user.user_name}</a></td>
                                                     <td style={{ whiteSpace: 'nowrap' }}>{user.started_watching_at}</td>
                                                     <td style={{ whiteSpace: 'nowrap' }}>{user.duration}</td>
