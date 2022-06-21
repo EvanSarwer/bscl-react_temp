@@ -13,12 +13,18 @@ const BarGraph = (props) => {
         labels: [],
         datasets: []
     });
+    const [startrange,setStartRange] = useState("");
+    const [finishrange,setFinishRange] = useState("");
     useEffect(() => {
         if(props.get){
             axiosConfig.get(props.url)
             .then(rsp => {
                 //debugger;
                 //console.log(rsp.data.label);
+                if(props.timerange){
+                    setStartRange(rsp.data.start);
+                    setFinishRange(rsp.data.finish);
+                }
 
                 setData(() => ({
                     labels: rsp.data.label, datasets: [{
@@ -40,6 +46,10 @@ const BarGraph = (props) => {
             .then(rsp => {
                 //debugger;
                 //console.log(rsp.data.label);
+                if(props.timerange){
+                    setStartRange(rsp.data.start);
+                    setFinishRange(rsp.data.finish);
+                }
 
                 setData(() => ({
                     labels: rsp.data.label, datasets: [{
@@ -65,7 +75,16 @@ const BarGraph = (props) => {
                 <div class="card-content collapse show" >
                 <div class="card-header">
                     <h4 class="card-title">{props.title}</h4>
+                    {(() => {
+                                if (props.timerange) {
+                                    return <h4 class="h6">From {startrange} To {finishrange}</h4>
 
+
+                                } else {
+                                    return 
+
+                                }
+                            })()}
                 </div>
                     <Bar 
                         data={Data}
