@@ -145,10 +145,10 @@ const ChannelStatus = () => {
 
 
                         <div class="col-md-6">
-                            <BarGraph title="Reach(%)" text="Channel vs Reach(%)" url="channel/definedtrendreachp" label="Reach of Channels" color="#28D094" get={false} credentials={{ month: month, year: year, day: day, start: start, finish: finish }} />
+                            <BarGraph title="Reach(%)" text="Channel vs Reach(%)" url="channel/definedtrendreachp" color="#28D094" get={false} credentials={{ month: month, year: year, day: day, start: start, finish: finish }} />
                         </div>
                         <div class="col-md-6">
-                            <BarGraph title="Reach(000)" text="Channel vs Reach(000)" url="channel/definedtrendreach0" label="Reach of Channels" color="yellow" get={false} credentials={{ month: month, year: year, day: day, start: start, finish: finish }} />
+                            <BarGraph title="Reach(000)" text="Channel vs Reach(000)" url="channel/definedtrendreach0" color="yellow" get={false} credentials={{ month: month, year: year, day: day, start: start, finish: finish }} />
                         </div>
 
 
@@ -158,10 +158,10 @@ const ChannelStatus = () => {
 
 
                         <div class="col-md-6">
-                            <BarGraph title="TVR(%)" text="Channel vs TVR(%)" url="channel/definedtrendtvrp" label="TVR of Channels" color="#68D094" get={false} credentials={{ month: month, year: year, day: day, start: start, finish: finish }} />
+                            <BarGraph title="TVR(%)" text="Channel vs TVR(%)" url="channel/definedtrendtvrp"  color="#68D094" get={false} credentials={{ month: month, year: year, day: day, start: start, finish: finish }} />
                         </div>
                         <div class="col-md-6">
-                            <BarGraph title="TVR(000)" text="Channel vs TVR(000)" url="channel/definedtrendtvr0" label="TVR of Channels" color="#8D0394" get={false} credentials={{ month: month, year: year, day: day, start: start, finish: finish }} />
+                            <BarGraph title="TVR(000)" text="Channel vs TVR(000)" url="channel/definedtrendtvr0"  color="#8D0394" get={false} credentials={{ month: month, year: year, day: day, start: start, finish: finish }} />
                         </div>
 
 

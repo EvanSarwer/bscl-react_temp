@@ -22,7 +22,7 @@ const BarGraph = (props) => {
 
                 setData(() => ({
                     labels: rsp.data.label, datasets: [{
-                        label: props.label, data: rsp.data.value,
+                        data: rsp.data.value,
                         backgroundColor: props.color,
                         //borderColor: "black",
                         borderWidth: 1,
@@ -43,7 +43,7 @@ const BarGraph = (props) => {
 
                 setData(() => ({
                     labels: rsp.data.label, datasets: [{
-                        label: props.label, data: rsp.data.value,
+                        data: rsp.data.value,
                         backgroundColor: props.color,
                         //borderColor: "black",
                         borderWidth: 1,
@@ -79,6 +79,15 @@ const BarGraph = (props) => {
                                 display: true,
                                 position: 'right'
                             }
+                            ,plugins: {
+                                legend: {
+                                  display: false  //remove if want to show label
+                                }
+                              }
+
+
+
+
                         }}
                     />
                 </div>
