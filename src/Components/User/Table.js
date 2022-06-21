@@ -23,15 +23,7 @@ const Table = (props) => {
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        {/* <div class="card-header">
-                            <div class="row">
-                                <div class="col-md-7"><h4 class="card-title">{props.title}</h4></div>
-                                <div class="col-md-5"><input type="text" class="search form-control round border-primary mb-1" placeholder="Search" onChange={e => setQuery(e.target.value)} />
-                                </div>
-
-                            </div>
-
-                        </div> */}
+                        
                         <div class="card-content collapse show">
                             <div class="card-body card-dashboard">
 
@@ -43,7 +35,7 @@ const Table = (props) => {
                             </div>
 
                                 <div class="table-responsive" style={{maxHeight:'400px',minHeight:'400px'}}>
-                                    <table class="table display nowrap table-striped table-bordered scroll-horizontal-vertical">
+                                    <table class="table display nowrap table-striped table-bordered">
                                         <thead>
                                             <tr>
                                                 <th>ID</th>

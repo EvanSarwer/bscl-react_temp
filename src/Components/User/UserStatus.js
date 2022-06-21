@@ -76,7 +76,7 @@ const UserStatus = () => {
 
     var getCSV = (scsv, user, username) => {
         var today = new Date(),
-        datetime = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate() + ' ' + today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+            datetime = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate() + ' ' + today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
         exportToCsv(user + "_" + username + "-Time_Spent(" + datetime + ").csv", scsv)
     }
 
@@ -228,8 +228,15 @@ const UserStatus = () => {
 
                                         {(() => {
                                             if (channelalltime) {
-                                                return <div><li role="presentation"><button onClick={AlltimeDownloadfunc} class="btn btn-info btn-sm btn-block" role="menuitem" tabindex="-1" >Time Spent All Time</button></li>
-                                                    <li role="presentation"><button onClick={OneDayDownloadfunc} class="btn btn-info btn-block btn-sm" role="menuitem" tabindex="-1" >Time Spent 24 hr</button></li></div>
+                                                return <div><li role="presentation"><button onClick={AlltimeDownloadfunc} class="btn btn-info btn-sm btn-block" role="menuitem" tabindex="-1" >Time Spent All Time</button></li></div>
+                                            } else {
+
+                                                return null;
+                                            }
+                                        })()}
+                                        {(() => {
+                                            if (last24hrData.length > 0) {
+                                                return <div><li role="presentation"><button onClick={OneDayDownloadfunc} class="btn btn-info btn-block btn-sm" role="menuitem" tabindex="-1" >Time Spent 24 hr</button></li></div>
                                             } else {
 
                                                 return null;
@@ -402,11 +409,14 @@ const UserStatus = () => {
                             {(() => {
                                 if (channelalltime) {
                                     return <Table title="All Time Channel Views" channels={channelalltime} error={erroralltime} />
-
+                                
                                 } else {
                                     return <div class="card">
                                         <div class="card-header">
-                                            <h4 class="card-title"><span class="danger">Please Select User To Show The Table</span></h4>
+                                            <h4 class="card-title"><span>All Time Channel Views</span></h4>
+                                        </div>
+                                        <div class="card-body">
+                                        <h4 ><span class="danger">Please Select User To Show The Table</span></h4>
                                         </div>
                                     </div>
 
@@ -416,12 +426,27 @@ const UserStatus = () => {
                         <div class="col-xl-6 col-12">
                             {(() => {
                                 if (channeldaytime) {
-                                    return <Table title="Last 24 Hour Channel Views" channels={last24hrData} error={errordaytime} />
+                                    if(last24hrData.length > 0){
+                                        return <Table title="Last 24 Hour Channel Views" channels={last24hrData} error={errordaytime} />
+                                    }else{
+                                        return <div class="card">
+                                        <div class="card-header">
+                                            <h4 class="card-title"><span >Last 24 Hour Channel Views</span></h4>
+                                        </div>
+                                        <div class="card-body">
+                                        <h4 ><span class="danger">No Data Available For Last 24 hr</span></h4>
+                                        </div>
+                                    </div>
+                                    }
+                                    
 
                                 } else {
                                     return <div class="card">
                                         <div class="card-header">
-                                            <h4 class="card-title"><span class="danger">Please Select User To Show The Table</span></h4>
+                                            <h4 class="card-title"><span >Last 24 Hour Channel Views</span></h4>
+                                        </div>
+                                        <div class="card-body">
+                                        <h4 ><span class="danger">Please Select User To Show The Table</span></h4>
                                         </div>
                                     </div>
 
