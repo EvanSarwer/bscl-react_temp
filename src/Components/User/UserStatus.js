@@ -17,8 +17,8 @@ const UserStatus = () => {
     const [user, setUser] = useState("");
     const [userName, setUserName] = useState("");
     const [time, setTime] = useState("");
-    const [start,setStart] = useState("");
-    const [finish,setFinish] = useState("");
+    const [start, setStart] = useState("");
+    const [finish, setFinish] = useState("");
     const [msg, setMsg] = useState("");
     const [erroralltime, setErroralltime] = useState("");
     const [errordaytime, setErrordaytime] = useState("");
@@ -173,10 +173,7 @@ const UserStatus = () => {
 
         });
 
-
     }, [user, time]);
-
-
 
 
     return (
@@ -257,50 +254,60 @@ const UserStatus = () => {
 
                     <div class="row justify-content-md-center">
                         <div class="col">
-                           
+
 
                             {(() => {
-                                if (msg === "Error") {
+                                if (!user) {
                                     return <div class="card">
                                         <div class="card-header">
                                             <h4 class="card-title">Time Spent</h4>
                                             <h4><span class="danger">Please Select User & Time Frame</span></h4>
                                         </div>
                                     </div>
-
-
                                 } else {
-                                    return <div class="card">
-                                        <div class="card-header">
-                                            <div class="row card-title"><div class="col h5 font-weight-bold">Time Spent</div><div class="col h5 card-title text-right">From {start} to {finish}</div></div>
-                                        </div>
-                                        <div class="card-content collapse show ">
-                                            <div  style={{height:"35em"}}>
-                                                <Bar
-                                                    data={channelData}
-                                                    options={{
-                                                        responsive: true,
-                                                        maintainAspectRatio: false,
-                                                        title: {
-                                                            display: true,
-                                                            text: "Channels",
-                                                            fontSize: 20
-                                                        },
-                                                        scales: {
-                                                            y: {
-                                                                beginAtZero: true
-                                                            }
-                                                        },
-                                                        legend: {
-                                                            display: true,
-                                                            position: 'right'
-                                                        }
-                                                    }}
-                                                />
+                                    if (msg === "Error") {
+                                        return <div class="card">
+                                            <div class="card-header">
+                                                <h4 class="card-title">Time Spent</h4>
+                                                <h4><span class="danger">Please Select User & Time Frame</span></h4>
                                             </div>
-
                                         </div>
-                                    </div>
+
+
+                                    } else {
+                                        return <div class="card">
+                                            <div class="card-header">
+                                                <div class="row card-title"><div class="col h5 font-weight-bold">Time Spent</div><div class="col h5 card-title text-right">From {start} to {finish}</div></div>
+                                            </div>
+                                            <div class="card-content collapse show ">
+                                                <div style={{ height: "35em" }}>
+                                                    <Bar
+                                                        data={channelData}
+                                                        options={{
+                                                            responsive: true,
+                                                            maintainAspectRatio: false,
+                                                            title: {
+                                                                display: true,
+                                                                text: "Channels",
+                                                                fontSize: 20
+                                                            },
+                                                            scales: {
+                                                                y: {
+                                                                    beginAtZero: true
+                                                                }
+                                                            },
+                                                            legend: {
+                                                                display: true,
+                                                                position: 'right'
+                                                            }
+                                                        }}
+                                                    />
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    }
 
                                 }
                             })()}
@@ -411,7 +418,6 @@ const UserStatus = () => {
 
                                 }
                             })()}
-                            {/* <DailyTimeSpentList /> */}
                         </div>
                     </div>
                 </div>
