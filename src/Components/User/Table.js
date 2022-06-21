@@ -48,7 +48,7 @@ const Table = (props) => {
                                             <tr>
                                                 <th>ID</th>
                                                 <th>Channel</th>
-                                                <th>Duration (min)</th>
+                                                <th>Duration</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -57,7 +57,7 @@ const Table = (props) => {
                                                     <td>{channel.id}</td>
                                                     <td><a href="index.html"><div style={{ whiteSpace: 'nowrap' }}><img class="img-fluid" alt="" style={{ maxWidth: "3rem" }} src={"../../channels/logos/" + channel.logo} />{channel.channel_name}</div></a>
                                                     </td>
-                                                    <td>{channel.totaltime}</td>
+                                                    <td>{channel.duration}</td>
                                                 </tr>
                                             )}
                                         </tbody>

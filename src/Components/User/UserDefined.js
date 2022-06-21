@@ -32,6 +32,8 @@ const UserDefined = () => {
         labels: [],
         datasets: []
     });
+    const [last24hrData, setLast24hrData] = useState([]);
+    let dArray = [];
 
 
 
@@ -75,13 +77,14 @@ const UserDefined = () => {
     }
 
     var getCSV = (scsv, user, username) => {
-        exportToCsv(user + "_" + username + "-Time_Spent.csv", scsv)
-
+        var today = new Date(),
+        datetime = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate() + ' ' + today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+        exportToCsv(user + "_" + username + "-Time_Spent(" + datetime + ").csv", scsv)
     }
 
     const AllTogetherDownloadfunc = () => {
         //console.log(liveChannelData.labels[0]);
-        var csv = [["Channel", "Time Spent(min) (" + start + " To " + finish + ")", "Time Spent(min)/All Time Spent", "Time Spent(min)/Last 24hr"]];
+        var csv = [["Channel", "Time Spent(min)/ (" + start + " To " + finish + ")", "Time Spent(min)/All Time Spent", "Time Spent(min)/Last 24hr"]];
         var sampleLive = timeSpentCSV;
         var sampleLive1 = channelalltime;
         var sampleLive2 = channeldaytime;
@@ -93,7 +96,7 @@ const UserDefined = () => {
     }
     const TimeSpentTimeFrameDownloadfunc = () => {
         //console.log(liveChannelData.labels[0]);
-        var csv = [["Channel", "Time Spent (min) (" + start + " To " + finish + ")"]];
+        var csv = [["Channel", "Time Spent (min)/ (" + start + " To " + finish + ")"]];
         var sampleLive = timeSpentCSV;
         for (var i = 0; i < sampleLive.labels.length; i++) {
             csv.push([sampleLive.labels[i], sampleLive.values[i]]);
@@ -149,6 +152,13 @@ const UserDefined = () => {
         axiosConfig.post("/user/userdaytimeviewlist", data).then(rsp => {
             setErrordaytime(rsp.data.error);
             setChanneldaytime(rsp.data.channels);
+            for (var i = 0; i < rsp.data.channels.length; i++) {
+                if (rsp.data.channels[i].totaltime > 0) {
+                    dArray.push(rsp.data.channels[i]);
+                }
+            }
+            setLast24hrData(dArray);
+
         }).catch(err => {
 
         });
@@ -237,7 +247,7 @@ const UserDefined = () => {
                                                     <span class="caret"></span></button>
                                                 <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
                                                     {(() => {
-                                                        if (msg === "Error") {
+                                                        if (errorChannelData==="Error" || msg === "Error") {
                                                             return null;
                                                         } else {
                                                             return <li role="presentation"><button onClick={TimeSpentTimeFrameDownloadfunc} class="btn btn-info btn-sm btn-block" role="menuitem" tabindex="-1" >Time Spent (Time Frame)</button></li>
@@ -256,7 +266,7 @@ const UserDefined = () => {
                                                     })()}
 
                                                     {(() => {
-                                                        if (msg === "Error") {
+                                                        if (errorChannelData==="Error" || msg === "Error") {
                                                             return null;
 
                                                         } else {
@@ -284,8 +294,6 @@ const UserDefined = () => {
 
                     <div class="row justify-content-md-center">
                         <div class="col">
-                            {/* <PostGraph title="Time Spent" text="Channels" url="reach/percent" label="Time Spent" color="blue" credentials={credential} /> */}
-
 
                             {(() => {
                                 if (errorChannelData==="Error" || msg === "Error") {
@@ -428,7 +436,7 @@ const UserDefined = () => {
                         <div class="col-xl-6 col-12">
                             {(() => {
                                 if (channeldaytime) {
-                                    return <Table title="Last 24 Hour Channel Views" channels={channeldaytime} error={errordaytime} />
+                                    return <Table title="Last 24 Hour Channel Views" channels={last24hrData} error={errordaytime} />
 
                                 } else {
                                     return <div class="card">

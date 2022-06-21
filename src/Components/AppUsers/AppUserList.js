@@ -70,7 +70,7 @@ const AppUserList = () => {
                                                     <a class="btn btn-primary" href="/app/user/create">Create New</a>
 
                                                     <div class="table-responsive" style={{ maxHeight: '400px', minHeight: '500px' }}>
-                                                        <table class="table display nowrap table-striped table-bordered scroll-horizontal-vertical">
+                                                        <table class="table display nowrap table-striped table-bordered">
                                                             <thead>
                                                                 <tr>
                                                                     <th>Username</th>
