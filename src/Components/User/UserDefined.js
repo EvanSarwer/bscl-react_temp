@@ -21,6 +21,7 @@ const UserDefined = () => {
     const [start, setStart] = useState("");
     const [finish, setFinish] = useState("");
     const [msg, setMsg] = useState("");
+    const [errorChannelData,setErrorChannelData] =useState("Error");
     const [erroralltime, setErroralltime] = useState("");
     const [errordaytime, setErrordaytime] = useState("");
     const [channeldaytime, setChanneldaytime] = useState([]);
@@ -87,7 +88,7 @@ const UserDefined = () => {
         for (var i = 0; i < sampleLive.labels.length; i++) {
             csv.push([sampleLive.labels[i], sampleLive.values[i], sampleLive1[i].totaltime, sampleLive2[i].totaltime]);
         }
-        console.log(csv);
+        //console.log(csv);
         getCSV(csv, user, userName);
     }
     const TimeSpentTimeFrameDownloadfunc = () => {
@@ -97,7 +98,7 @@ const UserDefined = () => {
         for (var i = 0; i < sampleLive.labels.length; i++) {
             csv.push([sampleLive.labels[i], sampleLive.values[i]]);
         }
-        console.log(csv);
+        //console.log(csv);
         getCSV(csv, user, userName);
     }
     const AlltimeDownloadfunc = () => {
@@ -107,7 +108,7 @@ const UserDefined = () => {
         for (var i = 0; i < sampleLive.length; i++) {
             csv.push([sampleLive[i].channel_name, sampleLive[i].totaltime]);
         }
-        console.log(csv);
+        //console.log(csv);
         getCSV(csv, user, userName);
     }
     const OneDayDownloadfunc = () => {
@@ -117,14 +118,14 @@ const UserDefined = () => {
         for (var i = 0; i < sampleLive.length; i++) {
             csv.push([sampleLive[i].channel_name, sampleLive[i].totaltime]);
         }
-        console.log(csv);
+        //console.log(csv);
         getCSV(csv, user, userName);
     }
 
     useEffect(() => {
 
         axiosConfig.get("/getuserlist").then(rsp => {
-            console.log(rsp.data.users);
+            //console.log(rsp.data.users);
             setUsers(rsp.data.users);
 
         }).catch(err => {
@@ -135,13 +136,38 @@ const UserDefined = () => {
 
     useEffect(() => {
         var data = {
+            user: user
+        };
+
+        axiosConfig.post("/user/useralltimeview", data).then(rsp => {
+            setErroralltime(rsp.data.error);
+            setChannelalltime(rsp.data.channels);
+        }).catch(err => {
+
+        });
+
+        axiosConfig.post("/user/userdaytimeviewlist", data).then(rsp => {
+            setErrordaytime(rsp.data.error);
+            setChanneldaytime(rsp.data.channels);
+        }).catch(err => {
+
+        });
+
+
+    }, [user]);
+
+    const handleForm = (e) => {
+        e.preventDefault();
+        var data = {
             user: user,
             start: start,
             finish: finish,
         };
 
         axiosConfig.post("/user/userdefined/usertimespent", data).then(rsp => {
+            console.log(rsp.data);
             setMsg(rsp.data.error);
+            setErrorChannelData("");
             setChannelData(() => ({
                 labels: rsp.data.channels, datasets: [{
                     label: "Time Spent(min)", data: rsp.data.totaltime,
@@ -159,22 +185,8 @@ const UserDefined = () => {
 
         });
 
-        axiosConfig.post("/user/useralltimeview", data).then(rsp => {
-            setErroralltime(rsp.data.error);
-            setChannelalltime(rsp.data.channels);
-        }).catch(err => {
 
-        });
-
-        axiosConfig.post("/user/userdaytimeviewlist", data).then(rsp => {
-            setErrordaytime(rsp.data.error);
-            setChanneldaytime(rsp.data.channels);
-        }).catch(err => {
-
-        });
-
-
-    }, [user, start, finish]);
+    }
 
 
 
@@ -187,84 +199,85 @@ const UserDefined = () => {
                 </div>
                 <div class="content-body">
                     <div class="card">
-                        <div class="card-content">
                             <div class="card-body">
+                                <form onSubmit={handleForm}>
+                                    <div class="row">
 
-                                <div class="row col-md-12">
+                                        <div class="col-3">
+                                            <label for="dateTime1">User List</label>
+                                            <Select
+                                                placeholder="Select User"
+                                                options={users.map(user => ({ label: user.user_name, value: user.id }))}
+                                                onChange={opt => setUser(opt.value) & setUserName(opt.label)}
+                                            />
+                                        </div>
+                                        <div class="row col-3">
 
-                                    <div class="col-md-4">
-                                        <label for="dateTime1">User List</label>
-                                        <Select
-                                            placeholder="Select User"
-                                            options={users.map(user => ({ label: user.user_name, value: user.id }))}
-                                            onChange={opt => setUser(opt.value) & setUserName(opt.label)}
-                                        />
-                                    </div>
-                                    <div class="row col-md-3">
+                                            <fieldset class="form-group form-group-style">
+                                                <label for="dateTime1">Start Time</label>
+                                                <input type="datetime-local" class="form-control" id="dateTime1" step="1" onChange={(e) => { setStart(e.target.value) }} />
+                                            </fieldset>
+                                        </div>
+                                        <div class="row col-3">
+                                            <fieldset class="form-group form-group-style">
+                                                <label for="dateTime1">Finish Time</label>
+                                                <input type="datetime-local" class="form-control" id="dateTime1" step="1" onChange={(e) => { setFinish(e.target.value) }} />
+                                            </fieldset>
+                                        </div>
 
-                                        <fieldset class="form-group form-group-style">
-                                            <label for="dateTime1">Start Time</label>
-                                            <input type="datetime-local" class="form-control" id="dateTime1" step="1" onChange={(e) => { setStart(e.target.value) }} />
-                                        </fieldset>
-                                    </div>
-                                    <div class="row col-md-3">
-                                        <fieldset class="form-group form-group-style">
-                                            <label for="dateTime1">Finish Time</label>
-                                            <input type="datetime-local" class="form-control" id="dateTime1" step="1" onChange={(e) => { setFinish(e.target.value) }} />
-                                        </fieldset>
-                                    </div>
+                                        <div class="col-1">
+                                            <button type="submit" className="btn btn-sm btn-success">Get Data</button>
+                                        </div>
 
 
+                                        <div class="col-2">
 
-
-                                    <div class="col-md-2">
-
-                                        <div class="dropdown">
-                                            <button class="btn btn-danger dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">Download
-                                                <span class="caret"></span></button>
-                                            <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-                                                {(() => {
-                                                    if (msg === "Error") {
-                                                        return null;
-                                                    } else {
-                                                        return <li role="presentation"><button onClick={TimeSpentTimeFrameDownloadfunc} class="btn btn-info btn-sm btn-block" role="menuitem" tabindex="-1" >Time Spent (Time Frame)</button></li>
-
-                                                    }
-                                                })()}
-
-                                                {(() => {
-                                                    if (channelalltime) {
-                                                        return <div><li role="presentation"><button onClick={AlltimeDownloadfunc} class="btn btn-info btn-sm btn-block" role="menuitem" tabindex="-1" >Time Spent All Time</button></li>
-                                                            <li role="presentation"><button onClick={OneDayDownloadfunc} class="btn btn-info btn-block btn-sm" role="menuitem" tabindex="-1" >Time Spent 24 hr</button></li></div>
-                                                    } else {
-
-                                                        return null;
-                                                    }
-                                                })()}
-
-                                                {(() => {
-                                                    if (msg === "Error") {
-                                                        return null;
-
-                                                    } else {
-                                                        if (channelalltime) {
-                                                            return <li role="presentation"><button onClick={AllTogetherDownloadfunc} class="btn btn-info btn-sm btn-block" role="menuitem" tabindex="-1" >All In One</button></li>
+                                            <div class="dropdown">
+                                                <button class="btn btn-danger dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">Download
+                                                    <span class="caret"></span></button>
+                                                <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                                                    {(() => {
+                                                        if (msg === "Error") {
+                                                            return null;
                                                         } else {
+                                                            return <li role="presentation"><button onClick={TimeSpentTimeFrameDownloadfunc} class="btn btn-info btn-sm btn-block" role="menuitem" tabindex="-1" >Time Spent (Time Frame)</button></li>
+
+                                                        }
+                                                    })()}
+
+                                                    {(() => {
+                                                        if (channelalltime) {
+                                                            return <div><li role="presentation"><button onClick={AlltimeDownloadfunc} class="btn btn-info btn-sm btn-block" role="menuitem" tabindex="-1" >Time Spent All Time</button></li>
+                                                                <li role="presentation"><button onClick={OneDayDownloadfunc} class="btn btn-info btn-block btn-sm" role="menuitem" tabindex="-1" >Time Spent 24 hr</button></li></div>
+                                                        } else {
+
                                                             return null;
                                                         }
+                                                    })()}
 
-                                                    }
-                                                })()}
+                                                    {(() => {
+                                                        if (msg === "Error") {
+                                                            return null;
 
-                                                {/* <li role="presentation" class="divider"></li>
+                                                        } else {
+                                                            if (channelalltime) {
+                                                                return <li role="presentation"><button onClick={AllTogetherDownloadfunc} class="btn btn-info btn-sm btn-block" role="menuitem" tabindex="-1" >All In One</button></li>
+                                                            } else {
+                                                                return null;
+                                                            }
+
+                                                        }
+                                                    })()}
+
+                                                    {/* <li role="presentation" class="divider"></li>
                                         <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Information</a></li> */}
-                                            </ul>
+                                                </ul>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-
+                                </form>
                             </div>
-                        </div>
+                        
                     </div>
                     <br />
 
@@ -275,7 +288,7 @@ const UserDefined = () => {
 
 
                             {(() => {
-                                if (msg) {
+                                if (errorChannelData==="Error" || msg === "Error") {
                                     return <div class="card">
                                         <div class="card-header">
                                             <h4 class="card-title">Time Spent</h4>
@@ -287,7 +300,7 @@ const UserDefined = () => {
                                 } else {
                                     return <div class="card">
                                         <div class="card-header">
-                                            <h4 class="card-title">Time Spent  From {start} To {finish}</h4>
+                                        <div class="row card-title"><div class="col h5 font-weight-bold">Time Spent</div><div class="col h5 card-title text-right">From {start} to {finish}</div></div>
                                         </div>
                                         <div class="card-content collapse show">
                                             <div>
@@ -357,7 +370,7 @@ const UserDefined = () => {
                     </div>
 
 
-                    
+
                     <br />
 
                     <div class="row justify-content-md-center">
