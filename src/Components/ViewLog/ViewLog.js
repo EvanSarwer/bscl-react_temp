@@ -107,7 +107,7 @@ const ViewLog = () => {
     return (
         <div class="app-content content">
             <div class="content-overlay"></div>
-            <div class="content-wrapper" style={{ backgroundColor: "azure" }} >
+            <div class="content-wrapper" style={{ backgroundColor: "azure", minHeight:"35em" }} >
                 <div class="content-header row">
                 </div>
                 <div class="content-body">

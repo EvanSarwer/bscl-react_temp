@@ -105,8 +105,10 @@ const Overview = () => {
     var getCSV = (scsv) => {
         exportToCsv("Export.csv", scsv)
     }
-
-    useEffect(() => {
+    const GetData = () => {
+        
+    
+  
         var data = {
             start: start,
             finish: finish,
@@ -215,7 +217,8 @@ const Overview = () => {
         }
 
 
-    }, [category, start, finish]);
+    
+}
 
 
 
@@ -231,7 +234,7 @@ const Overview = () => {
                         <div class="card-content">
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-md-4">
+                                    <div class="col-md-2">
                                         <label>Graph Category</label>
                                         <select class="custom-select d-block w-100" onChange={(e) => { setCategory(e.target.value) }}>
                                             <option value="Reach(000)">Reach (000)</option>
@@ -256,6 +259,10 @@ const Overview = () => {
                                     </fieldset>
 
 
+                                    <div class="col-md-2 text-right">    
+                                    <button onClick={GetData} class="btn btn-info">Refresh</button>
+                                    
+                                    </div>
                                     <div class="col-md-2 text-right">    
                                     <button onClick={BasicchannelDownloadfunc} class="btn btn-danger">Download CSV</button>
                                     
