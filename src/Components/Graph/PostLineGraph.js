@@ -59,6 +59,11 @@ const PostLineGraph = (props) => {
                                 text: props.text,
                                 fontSize: 10
                             },
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            },
                             legend: {
                                 display: true,
                                 position: 'right'

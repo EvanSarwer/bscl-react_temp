@@ -55,6 +55,9 @@ const GetLineGraph = (props) => {
                             scales: {
                                 x: {
                                     display: false
+                                },
+                                y: {
+                                    beginAtZero: true
                                 }
                             },
                             tension: 0.4,
