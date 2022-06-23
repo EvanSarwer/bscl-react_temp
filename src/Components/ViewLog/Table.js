@@ -12,7 +12,7 @@ const Table = (props) => {
     const Search = (data) => {
         return data.filter(
             (item) =>
-            item.channel_id.toString().includes(query)
+            item.channel_name.toString().includes(query)
         );
     };
 
@@ -45,7 +45,7 @@ const Table = (props) => {
                                     <table class="table display nowrap table-striped table-bordered scroll-horizontal-vertical">
                                         <thead>
                                             <tr>
-                                                <th>Channel ID</th>
+                                                <th>Channel Name</th>
                                                 <th>started_watching_at</th>
                                                 <th>finished_watching_at</th>
                                                 <th>Duration (min)</th>
@@ -54,7 +54,7 @@ const Table = (props) => {
                                         <tbody>
                                             {Search(data).map((log) =>
                                                 <tr key={log.id}>
-                                                    <td>{log.channel_id}</td>
+                                                    <td>{log.channel_name}</td>
                                                     <td>{log.started_watching_at}</td>
                                                     <td>{log.finished_watching_at}</td>
                                                     <td>{log.duration_minute}</td>
