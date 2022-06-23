@@ -16,6 +16,7 @@ import AppUserList from "../AppUsers/AppUserList";
 import AddAppUser from "../AppUsers/AddAppUser";
 import EditAppUser from "../AppUsers/EditAppUser";
 import DeviceInfo from "../Devices/DeviceInfo";
+import Footer from "../Footer/Footer";
 
 
 function Admin() {
@@ -43,6 +44,7 @@ function Admin() {
         {/* <Route exact path="/map" element={<Map />}></Route> */}
       </Routes>
     </BrowserRouter>
+    <Footer/>
     </div>
     );
 }
