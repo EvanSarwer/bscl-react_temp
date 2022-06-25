@@ -7,17 +7,26 @@ import Select from 'react-select';
 
 
 const ChannelStatus = () => {
-    const [id, setId] = useState(1);
-    const [reachp, setreachp] = useState(0);
-    const [reach0, setreach0] = useState(0);
-    const [tvr0, settvr0] = useState(0);
-    const [tvrp, settvrp] = useState(0);
+    const [id, setId] = useState("");
     const [year, setYear] = useState([]);
     const [month, setmonth] = useState([]);
     const [day, setday] = useState([]);
     const [start, setstart] = useState("");
     const [finish, setfinish] = useState("");
     const [channels, setchannels] = useState([]);
+    useEffect(() => {
+
+        axiosConfig.get("/trend/channels").then(rsp => {
+            //console.log(rsp.data);
+            setchannels(rsp.data.channels);
+            console.log(channels);
+            
+
+        }).catch(err => {
+
+        })
+
+    }, [])
 
 
 
@@ -67,8 +76,18 @@ const ChannelStatus = () => {
                         <div class="card-content">
                             <div class="card-body">
                                 <div class="row">
+                                <div class="col-md-5">
+                        <Select
+                                    placeholder="Select channel"
+                                    options={channels.map(channel => ({ label: channel.name, value: channel.id }))}
+                                    onChange={opt => setId(opt.value)}
+                                />
+                        </div>
+                                </div>
+                                <div class="row">
 
                                     <div class="col-md-2">
+                                        <br/>
                                         <div class="h4 font-weight-bold">Select Year</div>
                                         <input type="checkbox" name="year" value="2018" onChange={function (event) { checkbox('year'); }} />2018<br />
                                         <input type="checkbox" name="year" value="2019" onChange={function (event) { checkbox('year'); }} />2019<br />
@@ -79,6 +98,7 @@ const ChannelStatus = () => {
                                    
                                     
                                     <div class="col-md-2">
+                                        <br/>
                                         <div class="h4 font-weight-bold">Select Month</div>
                                         <input type="checkbox" name="month" value="1" onChange={function (event) { checkbox('month'); }} />January<br />
                                         <input type="checkbox" name="month" value="2" onChange={function (event) { checkbox('month'); }} />February<br />
@@ -90,6 +110,7 @@ const ChannelStatus = () => {
                                     </div>
                                     <div class="col-md-2">
                                     <br></br><br/>
+                                        <br/>
                                         <input type="checkbox" name="month" value="7" onChange={function (event) { checkbox('month'); }} />July<br />
                                         <input type="checkbox" name="month" value="8" onChange={function (event) { checkbox('month'); }} />August<br />
                                         <input type="checkbox" name="month" value="9" onChange={function (event) { checkbox('month'); }} />September<br />
@@ -145,10 +166,10 @@ const ChannelStatus = () => {
 
 
                         <div class="col-md-6">
-                            <BarGraph title="Reach(%)" text="Channel vs Reach(%)" url="channel/definedtrendreachp" color="#28D094" get={false} credentials={{ month: month, year: year, day: day, start: start, finish: finish }} />
+                            <BarGraph title="Reach(%)" text="Channel vs Reach(%)" url="channel/definedtrendreachp" color="#28D094" get={false} credentials={{ id:id,month: month, year: year, day: day, start: start, finish: finish }} />
                         </div>
                         <div class="col-md-6">
-                            <BarGraph title="Reach(000)" text="Channel vs Reach(000)" url="channel/definedtrendreach0" color="yellow" get={false} credentials={{ month: month, year: year, day: day, start: start, finish: finish }} />
+                            <BarGraph title="Reach(000)" text="Channel vs Reach(000)" url="channel/definedtrendreach0" color="yellow" get={false} credentials={{ id:id,month: month, year: year, day: day, start: start, finish: finish }} />
                         </div>
 
 
@@ -158,10 +179,10 @@ const ChannelStatus = () => {
 
 
                         <div class="col-md-6">
-                            <BarGraph title="TVR(%)" text="Channel vs TVR(%)" url="channel/definedtrendtvrp"  color="#68D094" get={false} credentials={{ month: month, year: year, day: day, start: start, finish: finish }} />
+                            <BarGraph title="TVR(%)" text="Channel vs TVR(%)" url="channel/definedtrendtvrp"  color="#68D094" get={false} credentials={{id:id, month: month, year: year, day: day, start: start, finish: finish }} />
                         </div>
                         <div class="col-md-6">
-                            <BarGraph title="TVR(000)" text="Channel vs TVR(000)" url="channel/definedtrendtvr0"  color="#8D0394" get={false} credentials={{ month: month, year: year, day: day, start: start, finish: finish }} />
+                            <BarGraph title="TVR(000)" text="Channel vs TVR(000)" url="channel/definedtrendtvr0"  color="#8D0394" get={false} credentials={{ id:id,month: month, year: year, day: day, start: start, finish: finish }} />
                         </div>
 
 
