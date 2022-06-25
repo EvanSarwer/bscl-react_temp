@@ -11,19 +11,15 @@ import PostLineGraph from "../Graph/PostLineGraph";
 
 const ChannelStatus = () => {
     const [time, setTime] = useState("Daily");
-    const [id, setId] = useState(1);
+    const [id, setId] = useState("");
     const [channels, setchannels] = useState([]);
-    const [channellist, setchannellist] = useState([]);
     useEffect(() => {
 
         axiosConfig.get("/trend/channels").then(rsp => {
             //console.log(rsp.data);
             setchannels(rsp.data.channels);
             console.log(channels);
-            setchannellist(channels.map((channel) => 
-                <option key={channel.id} value={channel.id}>{channel.name}</option>
-
-            ))
+            
 
         }).catch(err => {
 
@@ -89,6 +85,7 @@ const ChannelStatus = () => {
                     </div>
                 </div>
             </div>
+            {id}
         </div>
 
 
