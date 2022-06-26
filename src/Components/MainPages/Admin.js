@@ -15,6 +15,7 @@ import ViewLog from '../ViewLog/ViewLog';
 import AppUserList from "../AppUsers/AppUserList";
 import AddAppUser from "../AppUsers/AddAppUser";
 import EditAppUser from "../AppUsers/EditAppUser";
+import ChangePass from "../AppUsers/ChangePass";
 import DeviceInfo from "../Devices/DeviceInfo";
 import Footer from "../Footer/Footer";
 
@@ -40,6 +41,7 @@ function Admin() {
         <Route exact path="/app/users" element={<AppUserList />}></Route>
         <Route exact path="/app/user/create" element={<AddAppUser />}></Route>
         <Route exact path="/app/user/edit/:id" element={<EditAppUser />}></Route>
+        <Route exact path="/app/user/changepass" element={<ChangePass />}></Route>
         <Route exact path="/device/details/:id" element={<DeviceInfo />}></Route>
         {/* <Route exact path="/map" element={<Map />}></Route> */}
       </Routes>
