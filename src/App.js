@@ -5,38 +5,38 @@ import User from './Components/MainPages/User';
 
 function App() {
 
-  if(localStorage.getItem("_authToken")!= null && localStorage.getItem("_role")=="admin"){
+  if (localStorage.getItem("_authToken") != null && localStorage.getItem("_role") == "admin") {
     return (
       <div>
-        
-  <Admin/>
+
+        <Admin />
       </div>
     );
   }
 
-  else if(localStorage.getItem("_authToken")!= null && localStorage.getItem("_role")=="general"){
+  else if (localStorage.getItem("_authToken") != null && localStorage.getItem("_role") == "general") {
     return (
       <div>
-        
-        <User/>
+
+        <User />
       </div>
     );
   }
 
-  else if(localStorage.getItem("_authToken")==null){
+  else if (localStorage.getItem("_authToken") == null) {
     return (
       <div>
-        
-        <Login/>
+
+        <Login />
       </div>
     );
   }
 
-  else{
+  else {
     return (
       <div>
-        <Login/>
-  
+        <Login />
+
       </div>
     );
   }

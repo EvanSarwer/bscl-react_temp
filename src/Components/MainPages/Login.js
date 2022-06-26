@@ -10,13 +10,14 @@ const Login=()=> {
       
         const obj = {username:uname,password:pass};
         axiosConfig.post("/auth/sign-in",obj).then((rsp)=>{
+            console.log(rsp.data);
             localStorage.setItem("_authToken",rsp.data.data.token);
             localStorage.setItem("_role",rsp.data.data.role);
             window.location.href="/";
 
         },(err)=>{
             if(err.response.status===401){
-        
+                console.log(err.response.data);
                 setErr(err.response.data);
                 
             }
@@ -38,18 +39,21 @@ const Login=()=> {
                                 </div>
                                 <div class="card-content">
                                     <div class="card-body">
-                                        <form onSubmit={handleForm } class="form-horizontal form-simple">
+                                        <form onSubmit={handleForm } class="form-horizontal form-simple" noValidate>
+                                            <span class="text-danger">{err.error}</span>
                                             <fieldset class="form-group position-relative has-icon-left mb-0">
-                                                <input type="text" class="form-control" id="user-name" onChange={(e)=>{setUname(e.target.value)}} value={uname} placeholder="Your Username" required/>
+                                                <input type="text" class="form-control" id="user-name" onChange={(e)=>{setUname(e.target.value)}} value={uname} placeholder="Your Username" required data-validation-required-message="Please enter username."/>
                                                 <div class="form-control-position">
                                                     <i class="la la-user"></i>
                                                 </div>
+                                                <div className="help-block font-small-3" />
                                             </fieldset>
                                             <fieldset class="form-group position-relative has-icon-left">
-                                                <input type="password" class="form-control" id="user-password" onChange={(e)=>{setPass(e.target.value)}} value={pass} placeholder="Enter Password" required/>
+                                                <input type="password" class="form-control" id="user-password" onChange={(e)=>{setPass(e.target.value)}} value={pass} placeholder="Enter Password" required data-validation-required-message="Please enter password."/>
                                                 <div class="form-control-position">
                                                     <i class="la la-key"></i>
                                                 </div>
+                                                <div className="help-block font-small-3" />
                                             </fieldset>
                                             <div class="form-group row">
                                                 <div class="col-sm-6 col-12 text-center text-sm-left">
