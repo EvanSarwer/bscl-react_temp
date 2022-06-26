@@ -13,6 +13,7 @@ const Login=()=> {
             console.log(rsp.data);
             localStorage.setItem("_authToken",rsp.data.data.token);
             localStorage.setItem("_role",rsp.data.data.role);
+            localStorage.setItem("username",rsp.data.data.username);
             window.location.href="/";
 
         },(err)=>{
