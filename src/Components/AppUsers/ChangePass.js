@@ -129,7 +129,7 @@ const ChangePass=()=>{
                                                         <fieldset className="form-group position-relative has-icon-left">
                                                             <input type="password" name="password" id="password" className="form-control" onChange={(e) => { setConfirmPassword(e.target.value) }} placeholder="Confirm Password" tabIndex={3} required />
                                                             <div className="form-control-position">
-                                                                <i className="la la-key" />
+                                                            <i className="la la-key" />
                                                             </div>
                                                             <div className="help-block font-small-3" />
                                                             <span class="text-danger">{err_msg.password ? err_msg.password[0] : ''}</span>

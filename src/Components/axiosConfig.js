@@ -18,6 +18,10 @@ instance.interceptors.request.use(function (config) {
     console.log("intercepted");
     return config;
   }, function (error) {
+    if (error.response.status === 401) {
+      localStorage.clear();
+      window.location.href="/";
+     }
     // Do something with request error
     return Promise.reject(error);
   });
