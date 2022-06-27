@@ -46,10 +46,10 @@ const ChannelStatus = () => {
                         <div class="col-md-5">
                             <select class="custom-select d-block w-100" id="gender" required="" onChange={(e) => { setTime(e.target.value) }}>
                                 <option value="">Choose Time Frame</option>
-                                <option>Daily</option>
-                                <option>Weekly</option>
-                                <option>Monthly</option>
-                                <option>Yearly</option>
+                                <option value="Daily">Last 24 Hour</option>
+                                <option value="Weekly">Last 7 Days</option>
+                                <option value="Monthly">Last 30 Days</option>
+                                <option value="Yearly">Last 365 Days</option>
                             </select>
                         </div>
                         <div class="col-md-2">
