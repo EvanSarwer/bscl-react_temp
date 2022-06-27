@@ -205,10 +205,10 @@ const UserStatus = () => {
                             <div class="col-md-5">
                                 <select class="custom-select d-block w-100" onChange={(e) => { setTime(e.target.value) }}>
                                     <option value="">Select Time Frame</option>
-                                    <option value="Daily">Daily</option>
-                                    <option value="Weekly">Weekly</option>
-                                    <option value="Monthly">Monthly</option>
-                                    <option value="Yearly">Yearly</option>
+                                    <option value="Daily">Last 24 Hours</option>
+                                    <option value="Weekly">Last 7 Days</option>
+                                    <option value="Monthly">Last 30 Days</option>
+                                    <option value="Yearly">Last 365 Days</option>
                                 </select>
                             </div>
 

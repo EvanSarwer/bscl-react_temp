@@ -9,11 +9,19 @@ const AllHistoryTable=({id})=>{
     };
     const [channelalltime, setChannelalltime] = useState([]);
     const [erroralltime, setErroralltime] = useState("");
+    const [allTimeData, setAllTimeData] = useState([]);
+    let dArray = [];
 
     useEffect(()=>{
         axiosConfig.post("/user/useralltimeview", data).then(rsp => {
             setErroralltime(rsp.data.error);
             setChannelalltime(rsp.data.channels);
+            for (var i = 0; i < rsp.data.channels.length; i++) {
+                if (rsp.data.channels[i].totaltime > 0) {
+                    dArray.push(rsp.data.channels[i]);
+                }
+            }
+            setAllTimeData(dArray);
         }).catch(err => {
 
         });
@@ -22,7 +30,7 @@ const AllHistoryTable=({id})=>{
         <div class="col-xl-6  col-12">
             {(() => {
                 if (channelalltime) {
-                    return <Table title="All Time Channel Views" channels={channelalltime} error={erroralltime} />
+                    return <Table title="All Time Channel Views" channels={allTimeData} error={erroralltime} />
 
                 } else {
                     return <div class="card">
