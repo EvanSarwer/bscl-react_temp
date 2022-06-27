@@ -57,7 +57,8 @@ const ChangePass=()=>{
 
             }, (err) => {
                 if (err.response.status === 422) {
-                    //console.log(err.response.data.err);
+                    console.log(err.response.data.err);
+                    console.log(err);
                     //setErrMsg(err.response.data);
                     setmainErrMsg(err.response.data.err);
 

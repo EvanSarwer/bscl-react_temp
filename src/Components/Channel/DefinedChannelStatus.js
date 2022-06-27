@@ -2,11 +2,13 @@ import React from 'react';
 import { useState, useEffect } from "react";
 import axiosConfig from "../axiosConfig";
 
-import BarGraph from "../Graph/BarGraph";
+import BarGraph from "./Graph/BarGraph";
 import Select from 'react-select';
 
 
 const ChannelStatus = () => {
+    
+    const [update, setUpdate] = useState(0);
     const [id, setId] = useState("");
     const [year, setYear] = useState([]);
     const [month, setmonth] = useState([]);
@@ -29,7 +31,9 @@ const ChannelStatus = () => {
     }, [])
 
 
-
+    const updater = () => {
+        setUpdate(update+1);
+    }
     const weekend = () => {
         var checkboxes = document.querySelectorAll('input[name=day]')
 
@@ -37,6 +41,7 @@ const ChannelStatus = () => {
             checkboxes[i].checked = !checkboxes[i].checked;
         }
     }
+    
     const weekday = () => {
         var checkboxes = document.querySelectorAll('input[name=day]')
 
@@ -150,8 +155,12 @@ const ChannelStatus = () => {
                                             </div>
                                         </div>
                                         <div class="row">
-
-
+                                        <div class="col-md-6">
+                                    
+                                        </div><div class="col-md-6">
+                                        <button onClick={updater} class="btn btn-info">Get Data</button>
+                                    
+                                        </div>
                                         </div>
                                     </div>
 
@@ -166,10 +175,10 @@ const ChannelStatus = () => {
 
 
                         <div class="col-md-6">
-                            <BarGraph title="Reach(%)" text="Channel vs Reach(%)" url="channel/definedtrendreachp" color="#28D094" get={false} credentials={{ id:id,month: month, year: year, day: day, start: start, finish: finish }} />
+                            <BarGraph title="Reach(%)" text="Channel vs Reach(%)" url="channel/definedtrendreachp" color="#28D094" get={false} credentials={{ id:id,month: month, year: year, day: day, start: start, finish: finish }} update={update}/>
                         </div>
                         <div class="col-md-6">
-                            <BarGraph title="Reach(000)" text="Channel vs Reach(000)" url="channel/definedtrendreach0" color="yellow" get={false} credentials={{ id:id,month: month, year: year, day: day, start: start, finish: finish }} />
+                            <BarGraph title="Reach(000)" text="Channel vs Reach(000)" url="channel/definedtrendreach0" color="yellow" get={false} credentials={{ id:id,month: month, year: year, day: day, start: start, finish: finish }}  update={update}/>
                         </div>
 
 
@@ -179,10 +188,10 @@ const ChannelStatus = () => {
 
 
                         <div class="col-md-6">
-                            <BarGraph title="TVR(%)" text="Channel vs TVR(%)" url="channel/definedtrendtvrp"  color="#68D094" get={false} credentials={{id:id, month: month, year: year, day: day, start: start, finish: finish }} />
+                            <BarGraph title="TVR(%)" text="Channel vs TVR(%)" url="channel/definedtrendtvrp"  color="#68D094" get={false} credentials={{id:id, month: month, year: year, day: day, start: start, finish: finish }}  update={update}/>
                         </div>
                         <div class="col-md-6">
-                            <BarGraph title="TVR(000)" text="Channel vs TVR(000)" url="channel/definedtrendtvr0"  color="#8D0394" get={false} credentials={{ id:id,month: month, year: year, day: day, start: start, finish: finish }} />
+                            <BarGraph title="TVR(000)" text="Channel vs TVR(000)" url="channel/definedtrendtvr0"  color="#8D0394" get={false} credentials={{ id:id,month: month, year: year, day: day, start: start, finish: finish }}  update={update}/>
                         </div>
 
 

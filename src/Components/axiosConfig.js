@@ -18,13 +18,25 @@ instance.interceptors.request.use(function (config) {
     console.log("intercepted");
     return config;
   }, function (error) {
-    if (error.response.status === 401) {
-      localStorage.clear();
-      window.location.href="/";
-     }
+    
     // Do something with request error
     return Promise.reject(error);
   });
+instance.interceptors.response.use(function (response) {
+  console.log('request interceptor good');
+ return response;
+}, function(error) {
+
+  //console.log('request interceptor bad');
+
+  //console.log(error.response.status);
+ if (error.response.status === 401) {
+  //console.log("kkk");
+  localStorage.clear();
+      window.location.href="/";
+ }
+ return Promise.reject(error)
+});
 
 
 export default instance;

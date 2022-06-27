@@ -10,6 +10,8 @@ import PostLineGraph from "../Graph/PostLineGraph";
 
 
 const ChannelStatus = () => {
+    
+    const [update, setUpdate] = useState(0);
     const [time, setTime] = useState("Daily");
     const [id, setId] = useState("");
     const [channels, setchannels] = useState([]);
@@ -27,6 +29,9 @@ const ChannelStatus = () => {
 
     }, [])
     var credential = { start: "2021-01-01 00:00:00", finish: "2022-01-01 00:00:00" };
+    const updater = () => {
+        setUpdate(update+1);
+    }
     return (
         <div class="app-content content">
             <div class="content-overlay"></div>
@@ -52,8 +57,8 @@ const ChannelStatus = () => {
                                 <option value="Yearly">Last 365 Days</option>
                             </select>
                         </div>
-                        <div class="col-md-2">
-                            <button class="btn btn-danger">Download CSV</button>
+                        <div class="col-md-2"> 
+                        <button onClick={updater} class="btn btn-info">Get Data</button>
                         </div>
 
                     </div>
@@ -63,29 +68,28 @@ const ChannelStatus = () => {
 
                     <div class="row">
                         <div class="col-md-6">
-                            <PostLineGraph title="Reach (%)" text="Active Channels" url="trend/reach/percent" label="Reach (%)" color="blue" credentials={{"id":id,"time":time}} />
+                            <PostLineGraph title="Reach (%)" text="Active Channels" url="trend/reach/percent" label="Reach (%)" color="blue" credentials={{"id":id,"time":time}}  update={update} />
 
                         </div>
                         <div class="col-md-6">
-                            <PostLineGraph title="Reach (000)" text="Active Channels" url="trend/reach/zero" label="Reach (000)" color="red" credentials={{"id":id,"time":time}} />
+                            <PostLineGraph title="Reach (000)" text="Active Channels" url="trend/reach/zero" label="Reach (000)" color="red" credentials={{"id":id,"time":time}}  update={update} />
 
                         </div>
                         
                     </div>
                     <div class="row">
                         <div class="col-md-6">
-                            <PostLineGraph title="TVR (000)" text="Active Channels" url="trend/tvr/zero" label="TVR (000)" color="violet" credentials={{"id":id,"time":time}} />
+                            <PostLineGraph title="TVR (000)" text="Active Channels" url="trend/tvr/zero" label="TVR (000)" color="violet" credentials={{"id":id,"time":time}}  update={update} />
 
                         </div>
                         <div class="col-md-6">
-                            <PostLineGraph title="TVR (%)" text="Active Channels" url="trend/tvr/percent" label="TVR (%)" color="green" credentials={{"id":id,"time":time}} />
+                            <PostLineGraph title="TVR (%)" text="Active Channels" url="trend/tvr/percent" label="TVR (%)" color="green" credentials={{"id":id,"time":time}}  update={update} />
 
                         </div>
                         
                     </div>
                 </div>
             </div>
-            {id}
         </div>
 
 
