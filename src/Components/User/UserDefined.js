@@ -33,7 +33,9 @@ const UserDefined = () => {
         datasets: []
     });
     const [last24hrData, setLast24hrData] = useState([]);
-    let dArray = [];
+    let last24Array = [];
+    const [allTimeData, setAllTimeData] = useState([]);
+    let allTimeArray = [];
 
 
 
@@ -145,6 +147,12 @@ const UserDefined = () => {
         axiosConfig.post("/user/useralltimeview", data).then(rsp => {
             setErroralltime(rsp.data.error);
             setChannelalltime(rsp.data.channels);
+            for (var i = 0; i < rsp.data.channels.length; i++) {
+                if (rsp.data.channels[i].totaltime > 0) {
+                    allTimeArray.push(rsp.data.channels[i]);
+                }
+            }
+            setAllTimeData(allTimeArray);
         }).catch(err => {
 
         });
@@ -154,10 +162,10 @@ const UserDefined = () => {
             setChanneldaytime(rsp.data.channels);
             for (var i = 0; i < rsp.data.channels.length; i++) {
                 if (rsp.data.channels[i].totaltime > 0) {
-                    dArray.push(rsp.data.channels[i]);
+                    last24Array.push(rsp.data.channels[i]);
                 }
             }
-            setLast24hrData(dArray);
+            setLast24hrData(last24Array);
 
         }).catch(err => {
 
@@ -428,7 +436,7 @@ const UserDefined = () => {
                         <div class="col-xl-6  col-12">
                             {(() => {
                                 if (channelalltime) {
-                                    return <Table title="All Time Channel Views" channels={channelalltime} error={erroralltime} />
+                                    return <Table title="All Time Channel Views" channels={allTimeData} error={erroralltime} />
 
                                 } else {
                                     return <div class="card">
