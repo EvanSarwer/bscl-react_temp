@@ -13,14 +13,19 @@ const PostLineGraph = (props) => {
 
 
 
+    const [loading,setloading] = useState(false);
     const [graphData, setGraphData] = useState({
         labels: [],
         datasets: []
     });
     useEffect(() => {
+if(props.update>0){
 
+    setloading(false);
         axiosConfig.post("/" + props.url,props.credentials)
             .then(rsp => {
+                
+            setloading(true);
                 //debugger;
                 console.log(rsp.data);
 
@@ -38,7 +43,8 @@ const PostLineGraph = (props) => {
             }).catch(err => {
 
             })
-    }, [props.credentials]);
+        }
+    }, [props.update]);
 
     return (
         <div>
@@ -48,28 +54,50 @@ const PostLineGraph = (props) => {
 
                 </div>
                 <div class="card-content collapse show">
-                    <div class="card-body"></div>
-                    <Line
-                        data={graphData}
-                        options={{
-                            
-                            tension: 0.4,
-                            title: {
-                                display: true,
-                                text: props.text,
-                                fontSize: 10
-                            },
-                            scales: {
-                                y: {
-                                    beginAtZero: true
+                    {(() => {
+                                if(props.update==0){
+                                    return <div class="col align-self-center">
+
+                                        <h4 class="h6">Waiting for user input</h4>
+                                        </div>
+                                   
                                 }
-                            },
-                            legend: {
-                                display: true,
-                                position: 'right'
-                            }
-                        }}
-                    />
+                                else{
+                                    if (loading) {
+                                        return <Line
+                                        data={graphData}
+                                        options={{
+                                            
+                                            tension: 0.4,
+                                            title: {
+                                                display: true,
+                                                text: props.text,
+                                                fontSize: 10
+                                            },
+                                            scales: {
+                                                y: {
+                                                    beginAtZero: true
+                                                }
+                                            },
+                                            legend: {
+                                                display: true,
+                                                position: 'right'
+                                            },
+                                            plugins: {
+                                                legend: {
+                                                  display: false  //remove if want to show label
+                                                }
+                                              }
+                                        }}
+                                    />
+    
+    
+                                    } else {
+                                        return <img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/Loading_2.gif?20170503175831" class="rounded mx-auto d-block" alt="..."/>
+    
+                                    }
+                                }
+                            })()}
                 </div>
             </div>
 
