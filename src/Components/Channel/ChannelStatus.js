@@ -33,7 +33,7 @@ const ChannelStatus = () => {
         setUpdate(update+1);
     }
     return (
-        <div class="app-content content">
+        <div class="app-content content" style={{ backgroundColor: "azure", minHeight:"36em" }}>
             <div class="content-overlay"></div>
             <div class="content-wrapper" style={{ backgroundColor: "azure" }} >
                 <div class="content-header row">

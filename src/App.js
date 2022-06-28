@@ -1,5 +1,7 @@
+import GetMail from './Components/ForgetPassword/GetMail';
 import Admin from './Components/MainPages/Admin';
 import Login from './Components/MainPages/Login';
+import MainPage from './Components/MainPages/MainPage';
 import User from './Components/MainPages/User';
 
 
@@ -27,7 +29,7 @@ function App() {
     return (
       <div>
 
-        <Login />
+        <MainPage />
       </div>
     );
   }
@@ -35,7 +37,7 @@ function App() {
   else {
     return (
       <div>
-        <Login />
+        <MainPage />
 
       </div>
     );
