@@ -90,7 +90,7 @@ const ChangePass=()=>{
                                     
                                     </h6>
                                     <div className="card-title text-center">
-                                    <div class="h6">{mainerr_msg}</div>
+                                    
                                     </div>
                                     
                                 </div>
@@ -102,6 +102,7 @@ const ChangePass=()=>{
                                             
                                         <div className="row">
                                                     <div className="col-12 col-sm-12 col-md-12">
+                                                    <h6 class="text-center font-weight-bold text-danger">{mainerr_msg}</h6>
                                                         <fieldset className="form-group position-relative has-icon-left">
                                                             <input type="password" name="password" id="password" className="form-control" onChange={(e) => { setcurrentPassword(e.target.value) }} placeholder="Current Password" tabIndex={3} required />
                                                             <div className="form-control-position">
