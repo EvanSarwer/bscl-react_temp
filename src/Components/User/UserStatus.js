@@ -150,7 +150,7 @@ const UserStatus = () => {
             setChannelData(() => ({
                 labels: rsp.data.channels, datasets: [{
                     label: "Time Spent(min)", data: rsp.data.totaltime,
-                    backgroundColor: ["#50AF95", "#f3ba2f", "#2a71d0"],
+                    backgroundColor: ["#2a71d0"],
                     //borderColor: "black",
                     borderWidth: 1,
                     categoryPercentage: 0.9,
@@ -301,7 +301,7 @@ const UserStatus = () => {
                                     } else {
                                         return <div class="card">
                                             <div class="card-header">
-                                                <div class="row card-title"><div class="col h5 font-weight-bold">Time Spent</div><div class="col h5 card-title text-right">From {start} to {finish}</div></div>
+                                                <div class="row card-title"><div class="col h5 font-weight-bold">Time Spent (min)</div><div class="col h5 card-title text-right">From {start} to {finish}</div></div>
                                             </div>
                                             <div class="card-content collapse show ">
                                                 <div style={{ height: "35em" }}>
@@ -323,6 +323,10 @@ const UserStatus = () => {
                                                             legend: {
                                                                 display: true,
                                                                 position: 'right'
+                                                            }, plugins: {
+                                                                legend: {
+                                                                    display: false  //remove if want to show label 
+                                                                }
                                                             }
                                                         }}
                                                     />

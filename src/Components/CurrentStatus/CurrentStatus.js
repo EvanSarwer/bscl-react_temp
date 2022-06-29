@@ -1,4 +1,5 @@
 import CountComponent from "./CountComponent";
+import TopCount from "./TopCount";
 
 const CurrentStatus = () => {
     return (
@@ -13,7 +14,7 @@ const CurrentStatus = () => {
                 <CountComponent title="Active User" count="147" icon="icon-user-following success" color="success" percentage="74%" />
             </div>
             <div class="col-xl-2 col-lg-1 col-12">
-                <CountComponent title="Top Reach" count="ATN" icon="icon-pie-chart warning" color="warning" percentage="" />
+                <TopCount title="Top Reach" count="ATN" icon="icon-pie-chart warning" color="warning" percentage="" />
             </div>
             <div class="col-xl-2 col-lg-1 col-12">
                 <CountComponent title="Top TVR" count="BTV" icon="icon-pie-chart info" color="info" percentage="" />
@@ -22,7 +23,7 @@ const CurrentStatus = () => {
                 <CountComponent title="Top Share" count="NTV" icon="icon-pie-chart danger" color="danger" percentage="" />
             </div>
             <div class="col-xl-2 col-lg-1 col-12">
-                <CountComponent title="Top Program" count="Tom & Jerry" icon="icon-pie-chart warning" color="" percentage="" />
+                <CountComponent title="Top Program" count="N/A" icon="icon-pie-chart warning" color="" percentage="" />
             </div>
             {/* <div class="col-xl-2 col-lg-1 col-12">
                 <CountComponent title="" count="" icon="" color="" percentage=""/>

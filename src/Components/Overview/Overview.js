@@ -40,7 +40,7 @@ const Overview = () => {
             setChannelData(() => ({
                 labels: rsp.data.channels, datasets: [{
                     label: "Reach (000)", data: rsp.data.reach,
-                    backgroundColor: ["#50AF95", "#f3ba2f", "#2a71d0"],
+                    backgroundColor: ["#50AF95"],
                     //borderColor: "black",
                     borderWidth: 1,
                     categoryPercentage: 0.9,
@@ -120,7 +120,7 @@ const Overview = () => {
                     setChannelData(() => ({
                         labels: rsp.data.channels, datasets: [{
                             label: "Reach (000)", data: rsp.data.reach,
-                            backgroundColor: ["#50AF95", "#f3ba2f", "#2a71d0"],
+                            backgroundColor: ["#2a71d0"],
                             //borderColor: "black",
                             borderWidth: 1,
                             categoryPercentage: 0.9,
@@ -136,7 +136,7 @@ const Overview = () => {
                     setChannelData(() => ({
                         labels: rsp.data.channels, datasets: [{
                             label: "Reach (%)", data: rsp.data.reach,
-                            backgroundColor: ["#50AF95", "#f3ba2f", "#2a71d0"],
+                            backgroundColor: ["#f3ba2f"],
                             //borderColor: "black",
                             borderWidth: 1,
                             categoryPercentage: 0.9,
@@ -152,7 +152,7 @@ const Overview = () => {
                     setChannelData(() => ({
                         labels: rsp.data.channels, datasets: [{
                             label: "TVR (000)", data: rsp.data.tvrs,
-                            backgroundColor: ["#50AF95", "#f3ba2f", "#2a71d0"],
+                            backgroundColor: ["#50AF95"],
                             //borderColor: "black",
                             borderWidth: 1,
                             categoryPercentage: 0.9,
@@ -168,7 +168,7 @@ const Overview = () => {
                     setChannelData(() => ({
                         labels: rsp.data.channels, datasets: [{
                             label: "TVR (%)", data: rsp.data.tvrs,
-                            backgroundColor: ["#50AF95", "#f3ba2f", "#2a71d0"],
+                            backgroundColor: ["#2a71d0"],
                             //borderColor: "black",
                             borderWidth: 1,
                             categoryPercentage: 0.9,
@@ -185,7 +185,7 @@ const Overview = () => {
                     setChannelData(() => ({
                         labels: rsp.data.channels, datasets: [{
                             label: "TVR Share (%)", data: rsp.data.share,
-                            backgroundColor: ["#50AF95", "#f3ba2f", "#2a71d0"],
+                            backgroundColor: ["#f3ba2f"],
                             //borderColor: "black",
                             borderWidth: 1,
                             categoryPercentage: 0.9,
@@ -202,7 +202,7 @@ const Overview = () => {
                     setChannelData(() => ({
                         labels: rsp.data.channels, datasets: [{
                             label: "Time Spent (Uni)", data: rsp.data.totaltime,
-                            backgroundColor: ["#50AF95", "#f3ba2f", "#2a71d0"],
+                            backgroundColor: ["#50AF95"],
                             //borderColor: "black",
                             borderWidth: 1,
                             categoryPercentage: 0.9,
@@ -300,6 +300,10 @@ const Overview = () => {
                                             legend: {
                                                 display: true,
                                                 position: 'right'
+                                            }, plugins: {
+                                                legend: {
+                                                    display: false  //remove if want to show label 
+                                                }
                                             }
                                         }}
                                     />

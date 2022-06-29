@@ -93,7 +93,7 @@ const LiveChannels = () => {
             setChannelData(() => ({
                 labels: rsp.data.channels, datasets: [{
                     label: "Active User", data: rsp.data.user_count,
-                    backgroundColor: ["#50AF95", "#f3ba2f", "#2a71d0"],
+                    backgroundColor: ["#50AF95"],
                     //borderColor: "black",
                     borderWidth: 1,
                     categoryPercentage: 0.9,
@@ -209,6 +209,10 @@ const LiveChannels = () => {
                                             legend: {
                                                 display: true,
                                                 position: 'right'
+                                            }, plugins: {
+                                                legend: {
+                                                    display: false  //remove if want to show label 
+                                                }
                                             }
                                         }}
                                     />
