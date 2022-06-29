@@ -15,14 +15,19 @@ import { Chart as ChartJS } from 'chart.js/auto';
 const Overview = () => {
 
     var yesterday = new Date(new Date().getTime() - (24 * 60 * 60 * 1000)),
-    y_datetime = yesterday.getFullYear() + '-' + (yesterday.getMonth() + 1) + '-' + yesterday.getDate() + ' ' + yesterday.getHours() + ':' + yesterday.getMinutes() + ':' + yesterday.getSeconds();
+        y_datetime = yesterday.getFullYear() + '-' + (yesterday.getMonth() + 1) + '-' + yesterday.getDate() + ' ' + yesterday.getHours() + ':' + yesterday.getMinutes() + ':' + yesterday.getSeconds();
 
     var today = new Date(),
-    datetime = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate() + ' ' + today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+        datetime = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate() + ' ' + today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
 
     const [category, setCategory] = useState("Reach(000)");
     const [start, setStart] = useState(y_datetime);
     const [finish, setFinish] = useState(datetime);
+    const [userType, setUserType] = useState("");
+    const [region, setRegion] = useState("");
+    const [gender, setGender] = useState("");
+    const [economic, setEconomic] = useState("");
+    const [socio, setSocio] = useState("");
 
     const [channelData, setChannelData] = useState({
         labels: [],
@@ -63,7 +68,7 @@ const Overview = () => {
         console.log(csv);
         getCSV(csv);
     }
-    
+
     function exportToCsv(filename, rows) {
         var processRow = function (row) {
             var finalVal = '';
@@ -106,12 +111,19 @@ const Overview = () => {
         exportToCsv("Export.csv", scsv)
     }
     const GetData = () => {
-        
-    
-  
+
+
+
         var data = {
             start: start,
             finish: finish,
+            userType: userType,
+            region: region,
+            gender: gender,
+            economic: economic,
+            socio: socio,
+            age1: parseInt(document.querySelector("#small-slider > div > div:nth-child(2) > div > div.noUi-tooltip").innerHTML),
+            age2: parseInt(document.querySelector("#small-slider > div > div:nth-child(3) > div > div.noUi-tooltip").innerHTML)
         };
 
         if (start !== "" && finish !== "") {
@@ -217,8 +229,8 @@ const Overview = () => {
         }
 
 
-    
-}
+
+    }
 
 
 
@@ -245,31 +257,106 @@ const Overview = () => {
                                             <option value="Time Spent(Uni)">Time Spent (Uni)</option>
                                         </select>
                                     </div>
-
-
-                                    <fieldset class="form-group form-group-style col-md-3">
-                                        <label for="dateTime1">Start Time</label>
-                                        <input type="datetime-local" class="form-control" id="dateTime1" step="1" onChange={(e) => { setStart(e.target.value) }} />
-                                    </fieldset>
-
-
-                                    <fieldset class="form-group form-group-style col-md-3">
-                                        <label for="dateTime1">Finish Time</label>
-                                        <input type="datetime-local" class="form-control" id="dateTime1" step="1" onChange={(e) => { setFinish(e.target.value) }} />
-                                    </fieldset>
-
-
-                                    <div class="col-md-2 text-right">    
-                                    <button onClick={GetData} class="btn btn-info">Refresh</button>
-                                    
+                                    <div class="col-md-2">
+                                        <label>Type (STB/OTT)</label>
+                                        <select class="custom-select d-block w-100" onChange={(e) => { setUserType(e.target.value) }}>
+                                            <option value="">All</option>
+                                            <option value="STB">STB</option>
+                                            <option value="OTT">OTT</option>
+                                        </select>
                                     </div>
-                                    <div class="col-md-2 text-right">    
-                                    <button onClick={BasicchannelDownloadfunc} class="btn btn-danger">Download CSV</button>
-                                    
+
+                                    <div class="col-md-2">
+                                        <label>Region</label>
+                                        <select class="custom-select d-block w-100" onChange={(e) => { setRegion(e.target.value) }}>
+                                            <option value="">All Region</option>
+                                            <option value="Dhaka">Dhaka</option>
+                                            <option value="Tangail">Tangail</option>
+                                            <option value="Chittagong">Chittagong</option>
+                                            <option value="Rajshahi">Rajshahi</option>
+                                            <option value="Sylhet">Sylhet</option>
+                                            <option value="Mymensingh">Mymensingh</option>
+                                            <option value="Khulna">Khulna</option>
+                                            <option value="Rongpur">Rongpur</option>
+                                            <option value="Barishal">Barishal</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label>Gender</label>
+                                        <select class="custom-select d-block w-100" onChange={(e) => { setGender(e.target.value) }}>
+                                            <option value="">All Gender</option>
+                                            <option value="m">Male</option>
+                                            <option value="f">Female</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        <label>SEC</label>
+                                        <select class="custom-select d-block w-100" onChange={(e) => { setEconomic(e.target.value) }}>
+                                            <option value="">All SEC</option>
+                                            <option value="a1">Lower Class</option>
+                                            <option value="c1">Upper Middle Class</option>
+                                            <option value="d1">Lower Middle Class</option>
+                                            <option value="b1">Upper Class</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        <div class="price-range">
+                                            <div class="form-group">
+                                                <div class="slider-sm slider-success my-1" id="small-slider"></div>
+                                            </div>
+                                            <div class="price-slider">
+                                                <div class="price_slider_amount mb-2">
+                                                    <div class="range-amt"><strong>Age Range : </strong> 15
+                                                        - 100</div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
 
 
                                 </div>
+                                
+
+                                <div class="row" style={{paddingTop:'25px'}}>
+                                    <div class="col-md-2"></div>
+                                    
+                                    <div class="col-md-2">
+                                        <select class="custom-select d-block w-100" onChange={(e) => { setSocio(e.target.value) }}>
+                                            <option value="">Urban & Rural</option>
+                                            <option value="u">Urban</option>
+                                            <option value="r">Rural</option>
+                                        </select>
+                                    </div>
+
+                                    <fieldset class="form-group form-group-style col-md-2">
+                                        <label for="dateTime1">Start Time</label>
+                                        <input type="datetime-local" class="form-control" id="dateTime1" step="1" onChange={(e) => { setStart(e.target.value) }} />
+                                    </fieldset>
+
+                                    <fieldset class="form-group form-group-style col-md-2">
+                                        <label for="dateTime1">Finish Time</label>
+                                        <input type="datetime-local" class="form-control" id="dateTime1" step="1" onChange={(e) => { setFinish(e.target.value) }} />
+                                    </fieldset>
+                                    
+                                    <div class="col-md-2 ">
+                                        <button onClick={GetData} class="btn btn-info">Get Data</button>
+
+                                    </div>
+                                    <div class="col-md-2 ">
+                                        <button onClick={BasicchannelDownloadfunc} class="btn btn-danger">Download CSV</button>
+
+                                    </div>
+
+                                </div>
+
+
+
+
+
+
+
                             </div>
                         </div>
                     </div>
@@ -282,9 +369,9 @@ const Overview = () => {
                             <div class="card">
                                 <div class="card-header">
                                     <div class="row"><div class="col h2 card-title font-weight-bold">Channels {category}</div><div class="col h2 card-title text-right">From {start} to {finish} </div></div>
-                                    
+
                                 </div>
-                                <div class="card-body collapse show" style={{height:"35em"}}>
+                                <div class="card-body collapse show" style={{ height: "35em" }}>
 
 
                                     <Bar
