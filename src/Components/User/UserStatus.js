@@ -192,6 +192,21 @@ const UserStatus = () => {
 
     }, [user, time]);
 
+    var start_string = new Date(start).toLocaleString(undefined, {
+        day:    'numeric',
+        month:  'long',
+        year:   'numeric',
+        hour:   '2-digit',
+        minute: '2-digit',
+    });
+    var finish_string = new Date(finish).toLocaleString(undefined, {
+        day:    'numeric',
+        month:  'long',
+        year:   'numeric',
+        hour:   '2-digit',
+        minute: '2-digit',
+    });
+
 
     return (
         <div class="app-content content">
@@ -301,7 +316,8 @@ const UserStatus = () => {
                                     } else {
                                         return <div class="card">
                                             <div class="card-header">
-                                                <div class="row card-title"><div class="col h5 font-weight-bold">Time Spent (min)</div><div class="col h5 card-title text-right">From {start} to {finish}</div></div>
+                                                <div class="row"><div class="col-6 h2 card-title font-weight-bold">Time Spent (min)</div><div class="row col h2 card-title text-left">From [<p class="text-primary bold"> {start_string}</p>] to [<p class="text-primary bold">{finish_string}</p>] </div></div>
+
                                             </div>
                                             <div class="card-content collapse show ">
                                                 <div style={{ height: "35em" }}>
