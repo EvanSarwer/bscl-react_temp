@@ -37,7 +37,14 @@ const Overview = () => {
     useEffect(() => {
         var data = {
             start: start,
-            finish: finish
+            finish: finish,
+            userType: userType,
+            region: region,
+            gender: gender,
+            economic: economic,
+            socio: socio,
+            age1: parseInt(document.querySelector("#small-slider > div > div:nth-child(2) > div > div.noUi-tooltip").innerHTML),
+            age2: parseInt(document.querySelector("#small-slider > div > div:nth-child(3) > div > div.noUi-tooltip").innerHTML)
         };
 
         axiosConfig.post("/overview/reachusergraph", data).then(rsp => {
@@ -129,6 +136,7 @@ const Overview = () => {
         if (start !== "" && finish !== "") {
             if (category === "Reach(000)") {
                 axiosConfig.post("/overview/reachusergraph", data).then(rsp => {
+                    console.log(rsp.data);
                     setChannelData(() => ({
                         labels: rsp.data.channels, datasets: [{
                             label: "Reach (000)", data: rsp.data.reach,
@@ -231,6 +239,21 @@ const Overview = () => {
 
 
     }
+
+    var start_string = new Date(start).toLocaleString(undefined, {
+        day:    'numeric',
+        month:  'long',
+        year:   'numeric',
+        hour:   '2-digit',
+        minute: '2-digit',
+    });
+    var finish_string = new Date(finish).toLocaleString(undefined, {
+        day:    'numeric',
+        month:  'long',
+        year:   'numeric',
+        hour:   '2-digit',
+        minute: '2-digit',
+    });
 
 
 
@@ -368,7 +391,7 @@ const Overview = () => {
                             {/* <PostGraph title="Active Users" text="Active Channels" url="reach/percent" label="Active Users" color="blue" credentials={credential} /> */}
                             <div class="card">
                                 <div class="card-header">
-                                    <div class="row"><div class="col h2 card-title font-weight-bold">Channels {category}</div><div class="col h2 card-title text-right">From {start} to {finish} </div></div>
+                                    <div class="row"><div class="col-6 h2 card-title font-weight-bold">Channels {category}</div><div class="row col h2 card-title text-left">From [<p class="text-primary bold"> {start_string}</p>] to [<p class="text-primary bold">{finish_string}</p>] </div></div>
 
                                 </div>
                                 <div class="card-body collapse show" style={{ height: "35em" }}>

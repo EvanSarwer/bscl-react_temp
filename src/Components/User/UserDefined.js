@@ -207,6 +207,20 @@ const UserDefined = () => {
     }
 
 
+    var start_string = new Date(start).toLocaleString(undefined, {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+    });
+    var finish_string = new Date(finish).toLocaleString(undefined, {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+    });
 
 
     return (
@@ -323,7 +337,8 @@ const UserDefined = () => {
                                 } else {
                                     return <div class="card">
                                         <div class="card-header">
-                                            <div class="row card-title"><div class="col h5 font-weight-bold">Time Spent (min)</div><div class="col h5 card-title text-right">From {start} to {finish}</div></div>
+                                            <div class="row"><div class="col-6 h2 card-title font-weight-bold">Time Spent (min)</div><div class="row col h2 card-title text-left">From [<p class="text-primary bold"> {start_string}</p>] to [<p class="text-primary bold">{finish_string}</p>] </div></div>
+
                                         </div>
                                         <div class="card-content collapse show">
                                             <div>
@@ -448,7 +463,7 @@ const UserDefined = () => {
                                             <h4 class="card-title"><span>All Time Channel Views</span></h4>
                                         </div>
                                         <div class="card-body">
-                                        <h4 ><span class="danger">Please Select User To Show The Table</span></h4>
+                                            <h4 ><span class="danger">Please Select User To Show The Table</span></h4>
                                         </div>
                                     </div>
 
@@ -458,19 +473,19 @@ const UserDefined = () => {
                         <div class="col-xl-6 col-12">
                             {(() => {
                                 if (channeldaytime) {
-                                    if(last24hrData.length > 0){
+                                    if (last24hrData.length > 0) {
                                         return <Table title="Last 24 Hour Channel Views" channels={last24hrData} error={errordaytime} />
-                                    }else{
+                                    } else {
                                         return <div class="card">
-                                        <div class="card-header">
-                                            <h4 class="card-title"><span >Last 24 Hour Channel Views</span></h4>
+                                            <div class="card-header">
+                                                <h4 class="card-title"><span >Last 24 Hour Channel Views</span></h4>
+                                            </div>
+                                            <div class="card-body">
+                                                <h4 ><span class="danger">No Data Available For Last 24 hr</span></h4>
+                                            </div>
                                         </div>
-                                        <div class="card-body">
-                                        <h4 ><span class="danger">No Data Available For Last 24 hr</span></h4>
-                                        </div>
-                                    </div>
                                     }
-                                    
+
 
                                 } else {
                                     return <div class="card">
@@ -478,7 +493,7 @@ const UserDefined = () => {
                                             <h4 class="card-title"><span >Last 24 Hour Channel Views</span></h4>
                                         </div>
                                         <div class="card-body">
-                                        <h4 ><span class="danger">Please Select User To Show The Table</span></h4>
+                                            <h4 ><span class="danger">Please Select User To Show The Table</span></h4>
                                         </div>
                                     </div>
 

@@ -38,22 +38,22 @@ const Header = () => {
                                     <li class="col-md-5 px-2">
                                         <h6 class="font-weight-bold font-medium-2 ml-1">Admin Panel</h6>
                                         <ul class="row mt-2">
-                                            <li class="col-6 col-xl-4"><a class="text-center mb-2 mb-xl-3" href="../ecommerce-menu-template" target="_blank"><i class="la la-history font-large-1 mr-0"></i>
-                                                <p class="font-medium-2 mt-25 mb-0">Overview</p>
+                                            <li class="col-6 col-xl-4"><a class="text-center mb-2 mb-xl-3" href="/overview" target="_blank"><i class="la la-history font-large-1 mr-0"></i>
+                                                <p class="font-medium-2 mt-25 mb-0">Basic Reports</p>
                                             </a></li>
-                                            <li class="col-6 col-xl-4"><a class="text-center mb-2 mb-xl-3" href="../travel-menu-template" target="_blank"><i class="la la-user font-large-1 mr-0"></i>
-                                                <p class="font-medium-2 mt-25 mb-0">Users</p>
+                                            <li class="col-6 col-xl-4"><a class="text-center mb-2 mb-xl-3" href="/userdefined" target="_blank"><i class="la la-user font-large-1 mr-0"></i>
+                                                <p class="font-medium-2 mt-25 mb-0">User</p>
                                             </a></li>
-                                            <li class="col-6 col-xl-4"><a class="text-center mb-2 mb-xl-3 mt-75 mt-xl-0" href="../hospital-menu-template" target="_blank"><i class="la la-television font-large-1 mr-0"></i>
-                                                <p class="font-medium-2 mt-25 mb-0">Channels</p>
+                                            <li class="col-6 col-xl-4"><a class="text-center mb-2 mb-xl-3 mt-75 mt-xl-0" href="/definedchannelstatus" target="_blank"><i class="la la-television font-large-1 mr-0"></i>
+                                                <p class="font-medium-2 mt-25 mb-0">Trend Analysis</p>
                                             </a></li>
-                                            <li class="col-6 col-xl-4"><a class="text-center mb-2 mt-75 mt-xl-0" href="../crypto-menu-template" target="_blank"><i class="la la-tencent-weibo font-large-1 mr-0"></i>
+                                            <li class="col-6 col-xl-4"><a class="text-center mb-2 mt-75 mt-xl-0" href="/livechannels" target="_blank"><i class="la la-tencent-weibo font-large-1 mr-0"></i>
                                                 <p class="font-medium-2 mt-25 mb-50">Live Channels</p>
                                             </a></li>
-                                            <li class="col-6 col-xl-4"><a class="text-center mb-2 mt-75 mt-xl-0" href="../support-menu-template" target="_blank"><i class="la la-download font-large-1 mr-0"></i>
-                                                <p class="font-medium-2 mt-25 mb-50">Download Report</p>
+                                            <li class="col-6 col-xl-4"><a class="text-center mb-2 mt-75 mt-xl-0" href="/downloadreport" target="_blank"><i class="la la-download font-large-1 mr-0"></i>
+                                                <p class="font-medium-2 mt-25 mb-50">Report Generation</p>
                                             </a></li>
-                                            <li class="col-6 col-xl-4"><a class="text-center mb-2 mt-75 mt-xl-0" href="../bank-menu-template" target="_blank"><i class="la la-cogs font-large-1 mr-0"></i>
+                                            <li class="col-6 col-xl-4"><a class="text-center mb-2 mt-75 mt-xl-0" href="/devicemonitor" target="_blank"><i class="la la-cogs font-large-1 mr-0"></i>
                                                 <p class="font-medium-2 mt-25 mb-50">Device Monitor</p>
                                             </a></li>
                                         </ul>

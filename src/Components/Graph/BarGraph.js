@@ -77,6 +77,21 @@ const BarGraph = (props) => {
         }
     }, [props]);
 
+    var start_string = new Date(startrange).toLocaleString(undefined, {
+        day:    'numeric',
+        month:  'long',
+        year:   'numeric',
+        hour:   '2-digit',
+        minute: '2-digit',
+    });
+    var finish_string = new Date(finishrange).toLocaleString(undefined, {
+        day:    'numeric',
+        month:  'long',
+        year:   'numeric',
+        hour:   '2-digit',
+        minute: '2-digit',
+    });
+
     return (
         <div>
             <div class="card">
@@ -86,7 +101,7 @@ const BarGraph = (props) => {
                         <h4 class="card-title">{props.title}</h4>
                         {(() => {
                             if (props.timerange) {
-                                return <h4 class="h6">From {startrange} To {finishrange}</h4>
+                                return <h4 class="h6">From {start_string} To {finish_string}</h4>
 
 
                             } else {

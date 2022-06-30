@@ -18,6 +18,7 @@ const LiveChannels = () => {
     const [economic, setEconomic] = useState("");
     const [socio, setSocio] = useState("");
     const [age, setAge] = useState("");
+    const [userType, setUserType] = useState("");
     const [activeUserCSV, setActiveUserCSV] = useState({});
     const [channelData, setChannelData] = useState({
         labels: [],
@@ -81,6 +82,7 @@ const LiveChannels = () => {
     useEffect(() => {
         var data = {
             region: region,
+            userType: userType,
             gender: gender,
             economic: economic,
             socio: socio,
@@ -107,7 +109,7 @@ const LiveChannels = () => {
 
         });
 
-    }, [region, gender, economic, socio, age]);
+    }, [region, gender, economic, socio, userType, age]);
 
 
 
@@ -134,6 +136,13 @@ const LiveChannels = () => {
                                 <option value="Khulna">Khulna</option>
                                 <option value="Rongpur">Rongpur</option>
                                 <option value="Barishal">Barishal</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <select class="custom-select d-block w-100" onChange={(e) => { setUserType(e.target.value) }}>
+                                <option value="">All (STB/OTT)</option>
+                                <option value="STB">STB</option>
+                                <option value="OTT">OTT</option>
                             </select>
                         </div>
                         <div class="col-md-2">
@@ -177,9 +186,6 @@ const LiveChannels = () => {
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-2 text-right">
-                            <button onClick={LivechannelDownloadfunc} class="btn btn-danger">Download CSV</button>
-                        </div>
 
 
                     </div>
@@ -191,9 +197,10 @@ const LiveChannels = () => {
                             {/* <PostGraph title="Active Users" text="Active Channels" url="reach/percent" label="Active Users" color="blue" credentials={credential} /> */}
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title">Active User</h4>
+                                    <div class="row"><div class="col-11 h2 card-title font-weight-bold">Active User</div><div class="row col card-title align-items-right"><button onClick={LivechannelDownloadfunc} class="btn btn-sm btn-secondary">Download CSV</button></div></div>
+
                                 </div>
-                                <div class="card-content collapse show" style={{height: "40em"}}>
+                                <div class="card-content collapse show" style={{ height: "40em" }}>
 
 
                                     <Bar

@@ -2,7 +2,6 @@ const TopCount = (props) => {
 
     const cls = props.icon + " font-medium-2 float-right";
     const clrCount = props.color + " font-medium-2";
-    const clrProgress = "progress-bar bg-gradient-x-" + props.color;
 
     return (
         <div class="card pull-up">
