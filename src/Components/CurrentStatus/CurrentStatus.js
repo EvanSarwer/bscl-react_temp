@@ -11,6 +11,30 @@ const CurrentStatus = () => {
     const [topTVR,setTopTVR] =useState("");
 
     useEffect(() => {
+
+        axiosConfig.get("/dashboard/CurrentStatusUser").then(rsp => {
+            setTotalUser(rsp.data.total_user);
+            setActiveUser(rsp.data.active_user);
+            setActivePercent(rsp.data.active_percent);
+        }).catch(err => {
+
+        });
+
+        axiosConfig.get("/dashboard/CurrentStatusTopReach").then(rsp => {
+            console.log(rsp.data);
+            setTopReach(rsp.data.top_reach);
+        }).catch(err => {
+
+        });
+
+        axiosConfig.get("/dashboard/CurrentStatusTopTvr").then(rsp => {
+            console.log(rsp.data);
+            setTopTVR(rsp.data.top_tvr);
+        }).catch(err => {
+
+        });
+
+
         const interval = setInterval(() => {
             axiosConfig.get("/dashboard/CurrentStatusUser").then(rsp => {
                 setTotalUser(rsp.data.total_user);
