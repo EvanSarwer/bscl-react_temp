@@ -35,10 +35,10 @@ const Dashboard = () => {
 
                     {/* Dashboard Graph Start */}
                     <div class="row">
-                        <div class="col">
+                        <div class="col-md-6">
                             <BarGraph title="Daily Top Reach(000)" text="Channel vs Reach" url="reachuser/dashboard" color="red" get={true} timerange={true} />
                         </div>
-                        <div class="col">
+                        <div class="col-md-6">
                             <BarGraph title="Daily Top Reach(%)" text="Channel vs Reach" url="reach/percent/dashboard" color="#28D094" get={true} timerange={true} />
                         </div>
 
@@ -46,12 +46,12 @@ const Dashboard = () => {
 
                     <div class="row">
 
-                        <div class="col">
+                        <div class="col-md-6">
                             <BarGraph title="Daily Top TVR(000)" text="Channel vs TVR" url="tvrgraphzero/dashboard" color="cyan" get={true} timerange={true} />
                         </div>
 
 
-                        <div class="col">
+                        <div class="col-md-6">
                             <BarGraph title="Daily Top TVR(%)" text="Channel vs TVR" url="tvrgraph/dashboard" color="black" get={true} timerange={true} />
                         </div>
 
@@ -60,11 +60,11 @@ const Dashboard = () => {
                     </div>
 
                     <div class="row">
-                        <div class="col">
+                        <div class="col-md-6">
                             <BarGraph title="Daily Top Share" text="Channel vs TVR" url="tvrgraph/dashboard" color="yellow" get={true} timerange={true} />
                         </div>
 
-                        <div class="col">
+                        <div class="col-md-6">
                             <BarGraph title="Daily Top Time Spent(Universe)" text="Channel vs Reach" url="reach/percent/dashboard" color="blue" get={true} timerange={true} />
                         </div>
 
