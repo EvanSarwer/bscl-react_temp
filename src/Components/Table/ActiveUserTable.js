@@ -6,18 +6,22 @@ const ActiveUserTable = () => {
 
  
     const [ query, setQuery ] = useState("");
+    const [loading,setloading] = useState(false);
     const [activeUserList, setActiveUserList] = useState([]);
-
-    useEffect(() => {
-        const interval = setInterval(() => {
-            axiosConfig.get("/dashboard/activeuserlist").then(rsp => {
-                console.log(rsp.data);
+const loader=() => {
+    axiosConfig.get("/dashboard/activeuserlist").then(rsp => {
         
-                setActiveUserList(rsp.data);
-            }).catch(err => {
-    
-            })
-        }, 2000);
+    setloading(true);
+        console.log(rsp.data);
+
+        setActiveUserList(rsp.data);
+    }).catch(err => {
+
+    })
+}
+loader();
+    useEffect(() => {
+        const interval = setInterval(loader, 2000);
       
         return () => clearInterval(interval);
       }, []);
@@ -45,17 +49,21 @@ const ActiveUserTable = () => {
                             <input type="text" class="search form-control round border-primary mb-1 col float-right" placeholder="Search" onChange={e => setQuery(e.target.value)} />
                         </div>
                         <div class="table-responsive" style={{maxHeight:'290px',minHeight:'290px'}}>
-                            <table class="table nowrap table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th>User Name</th>
-                                        <th>Started watching</th>
-                                        <th>Duration</th>
-                                        <th>Channel</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                {Search(activeUserList).map((user) =>
+                            
+                                {(() => {
+
+if (loading) {
+    return <table class="table nowrap table-bordered">
+    <thead>
+        <tr>
+            <th>User Name</th>
+            <th>Started watching</th>
+            <th>Duration</th>
+            <th>Channel</th>
+        </tr>
+    </thead>
+    <tbody>
+    {Search(activeUserList).map((user) =>
                                                 <tr key={user.user_id}>
                                                     <td><a href={`/device/details/${user.user_id}`}>{user.user.user_name}</a></td>
                                                     <td style={{ whiteSpace: 'nowrap' }}>{user.started_watching_at}</td>
@@ -65,9 +73,16 @@ const ActiveUserTable = () => {
                                                     
                                                 </tr>
                                             )}
-                    
-                                </tbody>
+                                            </tbody>
                             </table>
+                                        } else {
+                                            return <img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/Loading_2.gif?20170503175831" class="rounded mx-auto d-block" alt="..." />
+                                        
+                                        }
+                                        
+                                        })()}
+                    
+                                
                         </div>
                     </div>
                 </div>

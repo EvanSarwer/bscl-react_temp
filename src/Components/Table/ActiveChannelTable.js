@@ -4,17 +4,22 @@ import axiosConfig from '../axiosConfig';
 const ActiveChannelTable = () => {
     const [channeldata, setChannelData] = useState([]);
     const [ query, setQuery ] = useState("");
+    const [loading,setloading] = useState(false);
     const [activeChannelList, setActiveChannelList] = useState([]);
+const loader=() => {
+    axiosConfig.get("/dashboard/activechannellist").then(rsp => {
+        
+    setloading(true);
+        console.log(rsp.data);
+        setActiveChannelList(rsp.data.activeChannels);
+    }).catch(err => {
 
+    })
+}
+loader();
     useEffect(() => {
-        const interval = setInterval(() => {
-            axiosConfig.get("/dashboard/activechannellist").then(rsp => {
-                console.log(rsp.data);
-                setActiveChannelList(rsp.data.activeChannels);
-            }).catch(err => {
-    
-            })
-        }, 2000);
+
+        const interval = setInterval(loader, 2000);
       
         return () => clearInterval(interval);
       }, []);
@@ -50,25 +55,37 @@ const ActiveChannelTable = () => {
                             </div>
                         </div>
                         <div class="table-responsive " style={{maxHeight:'290px',minHeight:'290px'}}>
-                            <table id="users-list-datatable" class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th>Channel Name</th>
-                                        <th>Active User</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                {Search(activeChannelList).map((channel) =>
-                                                <tr key={channel.channel_id}>
-                                                    <td><a><div style={{ whiteSpace: 'nowrap' }}><img class="img-fluid" alt="" style={{ maxWidth: "3rem" }} src={"../../channels/logos/" + channel.channel_logo} />{channel.channel_name}</div></a>
-                                                    </td>
-                                                    <td>{channel.user_count}</td>
-                                                </tr>
-                                            )}
+                                {(() => {
 
-                                </tbody>
+if (loading) {
+    return <table id="users-list-datatable" class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Channel Name</th>
+                <th>Active User</th>
+            </tr>
+        </thead>
+        <tbody>
+    {Search(activeChannelList).map((channel) =>
+        <tr key={channel.channel_id}>
+            <td><a><div style={{ whiteSpace: 'nowrap' }}><img class="img-fluid" alt="" style={{ maxWidth: "3rem" }} src={"../../channels/logos/" + channel.channel_logo} />{channel.channel_name}</div></a>
+            </td>
+            <td>{channel.user_count}</td>
+        </tr>
+    )}
+    </tbody>
                             </table>
-                        </div>
+                        
+
+} else {
+    return <img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/Loading_2.gif?20170503175831" class="rounded mx-auto d-block" alt="..." />
+
+}
+
+})()}
+
+</div>
+           
                     </div>
                 </div>
             </div>
