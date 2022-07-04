@@ -42,7 +42,7 @@ const Table = (props) => {
                             </div>
 
                                 <div class="table-responsive" style={{maxHeight:'400px',minHeight:'500px'}}>
-                                    <table class="table display nowrap table-striped table-bordered scroll-horizontal-vertical">
+                                    <table class="table display nowrap table-striped table-bordered ">
                                         <thead>
                                             <tr>
                                                 <th>Channel Name</th>
