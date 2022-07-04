@@ -63,12 +63,13 @@ const ViewLog = () => {
     }
     const Download = () => {
         //console.log(liveChannelData.labels[0]);
-        var csv = [["id", "channel_id","user_id","started_watching_at","finished_watching_at","duration_minute"]];
+        var csv = [["channel_name","started_watching_at","finished_watching_at","duration_minute"]];
         var ss = logs;
+        //console.log(logs);
         for (var i = 0; i < ss.length; i++) {
-            csv.push([ss[i].id, ss[i].channel_id, ss[i].user_id, ss[i].started_watching_at, ss[i].finished_watching_at, ss[i].duration_minute]);
+            csv.push([ss[i].channel_name, ss[i].started_watching_at, ss[i].finished_watching_at, ss[i].duration_minute]);
         }
-        console.log(csv);
+        //console.log(csv);
         getCSV(csv,user);
     }
 
@@ -94,6 +95,7 @@ const ViewLog = () => {
 
         axiosConfig.post("/user/logs", data).then(rsp => {
             setlogs(rsp.data.data);
+            console.log(logs);
         }).catch(err => {
 
         });
@@ -133,7 +135,7 @@ const ViewLog = () => {
                     <div class="row justify-content-md-center">
                     <div class="col-xl-12  col-12">
                             {(() => {
-                                if (user!="") {
+                                if (user!=""  || user=="0") {
                                     return <Table title="User Logs" logs={logs}  />
 
                                 } else {
@@ -158,7 +160,7 @@ const ViewLog = () => {
 
                 </div>
             </div>
-
+{user}
         </div>
 
     )
