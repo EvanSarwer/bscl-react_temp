@@ -65,7 +65,7 @@ const Dashboard = () => {
                         </div>
 
                         <div class="col-md-6">
-                            <BarGraph title="Daily Top Time Spent(Universe)" text="Channel vs Reach" url="tvrgraphzero/dashboard" color="blue" get={true} timerange={true} />
+                            <BarGraph title="Daily Top Time Spent(Universe)" text="Channel vs Reach" url="/dashboard/timespentuni" color="blue" get={true} timerange={true} />
                         </div>
 
                     </div>
