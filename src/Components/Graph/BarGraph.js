@@ -100,7 +100,7 @@ const BarGraph = (props) => {
                     <div class="card-header">
                         <h4 class="card-title">{props.title}</h4>
                         {(() => {
-                            if (props.timerange) {
+                            if (props.timerange && start_string!="Invalid Date") {
                                 return <h4 class="h6">From {start_string} To {finish_string}</h4>
 
 
