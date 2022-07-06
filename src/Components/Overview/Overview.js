@@ -13,11 +13,14 @@ import { Chart as ChartJS } from 'chart.js/auto';
 
 
 const Overview = () => {
+    function pad(n) {
+        return n<10 ? '0'+n : n
+    }
     var yesterday = new Date(new Date().getTime() - (24 * 60 * 60 * 1000)),
-        y_datetime = yesterday.getFullYear() + '-' +(yesterday.getMonth() + 1) + '-' + yesterday.getDate() + ' ' + yesterday.getHours() + ':' + yesterday.getMinutes() + ':' + yesterday.getSeconds();
+        y_datetime = yesterday.getFullYear() + '-' + pad((yesterday.getMonth() + 1)) + '-' + pad(yesterday.getDate()) + ' ' + yesterday.getHours() + ':' + yesterday.getMinutes() + ':' + yesterday.getSeconds();
 
     var today = new Date(),
-        datetime = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate() + ' ' + today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+        datetime = today.getFullYear() + '-' + pad((today.getMonth() + 1)) + '-' + pad(today.getDate()) + ' ' + today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
 
     const [category, setCategory] = useState("Reach(000)");
     const [start, setStart] = useState(y_datetime);
@@ -236,9 +239,6 @@ const Overview = () => {
 
 
     }
-
-    console.log(start);
-    console.log(finish);
 
     var start_string = new Date(start).toLocaleString(undefined, {
         day:    'numeric',
