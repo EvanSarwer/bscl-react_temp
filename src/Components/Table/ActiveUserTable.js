@@ -21,7 +21,7 @@ const loader=() => {
 }
 loader();
     useEffect(() => {
-        const interval = setInterval(loader, 2000);
+        const interval = setInterval(loader, 5000);
       
         return () => clearInterval(interval);
       }, []);
