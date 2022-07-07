@@ -3,7 +3,9 @@ import axios from 'axios';
 // Next we make an 'instance' of it
 const instance = axios.create({
 // .. where we make our configurations
-    baseURL: 'http://127.0.0.1:8000/api'
+    //baseURL: 'http://127.0.0.1:8000/api'
+    baseURL: 'http://api.bscl.gov.bd/api'
+
 });
 
 // Where you would set stuff like your 'Authorization' header, etc ...
