@@ -74,7 +74,30 @@ const TimelineChart = (props) => {
       legend: {
         position: 'top',
         horizontalAlign: 'left'
-      }
+      },
+      tooltip: {
+        enabled: true,
+        x: {
+            show: false,
+            format: 'HH:mm:ss',
+            formatter: undefined,
+        },
+        y: {
+          show: false,
+          format: 'HH:MM',
+          formatter: undefined,
+            
+        },
+        z: {
+            formatter: undefined,
+            title: 'Size: '
+        },
+        marker: {
+            show: true,
+        },
+        
+    }
+      
     },
   };
 

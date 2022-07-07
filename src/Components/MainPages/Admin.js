@@ -1,5 +1,5 @@
 
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route,Navigate} from "react-router-dom";
 import Header from '../Header/Header';
 import MainMenu from '../MainMenu/MainMenu';
 import Dashboard from '../Dashboard/Dashboard';
@@ -43,6 +43,11 @@ function Admin() {
         <Route exact path="/app/user/edit/:id" element={<EditAppUser />}></Route>
         <Route exact path="/app/user/changepass" element={<ChangePass />}></Route>
         <Route exact path="/device/details/:id" element={<DeviceInfo />}></Route>
+        {/* <Navigate to="/" /> */}
+        <Route
+        path="*"
+        element={<Navigate to="/" replace />}
+    />
         {/* <Route exact path="/map" element={<Map />}></Route> */}
       </Routes>
     </BrowserRouter>

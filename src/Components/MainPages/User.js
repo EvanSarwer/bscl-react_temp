@@ -1,5 +1,5 @@
 
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route ,Navigate} from "react-router-dom";
 import HeaderUser from '../Header/HeaderUser';
 import MainMenuUser from '../MainMenu/MainMenuUser';
 import DashboardUser from '../Dashboard/DashboardUser';
@@ -29,6 +29,10 @@ function User() {
         <Route exact path="/userdefined" element={<UserDefined />}></Route>
         <Route exact path="/downloadreport" element={<DownloadReport />}></Route>
         <Route exact path="/devicemonitor" element={<DeviceMonitor />}></Route>
+        <Route
+        path="*"
+        element={<Navigate to="/" replace />}
+        />
         {/* <Route exact path="/map" element={<Map />}></Route> */}
       </Routes>
     </BrowserRouter>

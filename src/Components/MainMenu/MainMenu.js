@@ -39,7 +39,7 @@ const MainMenu = () => {
         // <!-- BEGIN: Main Menu-->
 
         <div class="main-menu menu-fixed menu-light menu-accordion    menu-shadow " data-scroll-to-active="true">
-            <div class="main-menu-content">
+            <div class="main-menu-content" style={{"overflow-x":"hidden"}}>
                 <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
                     <li class=" nav-item"><a href="/"><i class="la la-home"></i><span class="menu-title" data-i18n="Dashboard">Dashboard</span><span class="badge badge badge-info badge-pill float-right mr-2"></span></a>
                     </li>
