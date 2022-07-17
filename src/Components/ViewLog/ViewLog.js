@@ -13,6 +13,7 @@ const ViewLog = () => {
 
     const [user, setUser] = useState("");
     const [userName, setUserName] = useState("");
+    const [loading,setloading] = useState(false);
     const [users, setUsers] = useState([]);
     const [logs, setlogs] = useState([]);
 
@@ -62,6 +63,7 @@ const ViewLog = () => {
 
     }
     const Download = () => {
+        if(loading){
         //console.log(liveChannelData.labels[0]);
         var csv = [["channel_name","started_watching_at","finished_watching_at","duration_minute"]];
         var ss = logs;
@@ -71,6 +73,7 @@ const ViewLog = () => {
         }
         //console.log(csv);
         getCSV(csv,user);
+    }
     }
 
     useEffect(() => {
@@ -85,6 +88,9 @@ const ViewLog = () => {
     }, [])
 
     useEffect(() => {
+        if(user!=""){
+        
+        setloading(false);
         var data = {
             user: user
         };
@@ -95,12 +101,15 @@ const ViewLog = () => {
 
         axiosConfig.post("/user/logs", data).then(rsp => {
             setlogs(rsp.data.data);
+            
+            setloading(true);
             console.log(logs);
+            console.log("logslogs");
         }).catch(err => {
 
         });
 
-
+    }
     }, [user]);
 
 
@@ -124,7 +133,20 @@ const ViewLog = () => {
                                 />
                             </div>
                             <div class="col-md-5">
-                            <button type="button" onClick={Download} class="btn btn-danger">Download CSV</button>
+
+                            {(() => {
+                                if (loading) {
+                                    return <button type="button" onClick={Download} class="btn btn-danger">Download CSV</button>
+
+                                }if (!loading && user=="") {
+                                    return 
+
+                                } else {
+                                    return <button type="button" onClick={Download} class="btn btn-danger">Loading Data</button>
+
+                                }
+                            })()}
+                        
                             </div>
                             
                         </div>
@@ -160,7 +182,7 @@ const ViewLog = () => {
 
                 </div>
             </div>
-{user}
+
         </div>
 
     )

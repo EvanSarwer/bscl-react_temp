@@ -17,7 +17,7 @@ const Login=()=> {
             window.location.href="/";
 
         },(err)=>{
-            if(err.response.status===401){
+            if(err.response.status===422){
                 console.log(err.response.data);
                 setErr(err.response.data);
                 
