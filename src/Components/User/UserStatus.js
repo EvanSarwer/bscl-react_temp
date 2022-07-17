@@ -193,17 +193,17 @@ const UserStatus = () => {
     }, [user, time]);
 
     var start_string = new Date(start).toLocaleString(undefined, {
-        day:    'numeric',
-        month:  'long',
-        year:   'numeric',
-        hour:   '2-digit',
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric',
+        hour: '2-digit',
         minute: '2-digit',
     });
     var finish_string = new Date(finish).toLocaleString(undefined, {
-        day:    'numeric',
-        month:  'long',
-        year:   'numeric',
-        hour:   '2-digit',
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric',
+        hour: '2-digit',
         minute: '2-digit',
     });
 
@@ -316,7 +316,7 @@ const UserStatus = () => {
                                     } else {
                                         return <div class="card">
                                             <div class="card-header">
-                                                <div class="row"><div class="col-6 h2 card-title font-weight-bold">Time Spent (min)</div><div class="row col h2 card-title text-left">From [<p class="text-primary bold"> {start_string}</p>] to [<p class="text-primary bold">{finish_string}</p>] </div></div>
+                                                <div class="row"><div class="col-6 h2 card-title font-weight-bold">Time Spent (minute)</div><div class="row col h2 card-title text-left">From [<p class="text-primary bold"> {start_string}</p>] to [<p class="text-primary bold">{finish_string}</p>] </div></div>
 
                                             </div>
                                             <div class="card-content collapse show ">
@@ -333,17 +333,25 @@ const UserStatus = () => {
                                                             },
                                                             scales: {
                                                                 y: {
-                                                                    beginAtZero: true
+                                                                    beginAtZero: true,
+                                                                    ticks: {
+                                                                        // Include a dollar sign in the ticks
+                                                                        callback: function (value, index, ticks) {
+                                                                            return value + ' min';
+                                                                        }
+                                                                    }
                                                                 }
                                                             },
                                                             legend: {
                                                                 display: true,
                                                                 position: 'right'
-                                                            }, plugins: {
+                                                            }, 
+                                                            plugins: {
                                                                 legend: {
                                                                     display: false  //remove if want to show label 
                                                                 }
                                                             }
+
                                                         }}
                                                     />
                                                 </div>
@@ -437,14 +445,14 @@ const UserStatus = () => {
                             {(() => {
                                 if (channelalltime) {
                                     return <Table title="All Time Channel Views" channels={allTimeData} error={erroralltime} />
-                                
+
                                 } else {
                                     return <div class="card">
                                         <div class="card-header">
                                             <h4 class="card-title"><span>All Time Channel Views</span></h4>
                                         </div>
                                         <div class="card-body">
-                                        <h4 ><span class="danger">Please Select User To Show The Table</span></h4>
+                                            <h4 ><span class="danger">Please Select User To Show The Table</span></h4>
                                         </div>
                                     </div>
 
@@ -454,19 +462,19 @@ const UserStatus = () => {
                         <div class="col-xl-6 col-12">
                             {(() => {
                                 if (channeldaytime) {
-                                    if(last24hrData.length > 0){
+                                    if (last24hrData.length > 0) {
                                         return <Table title="Last 24 Hour Channel Views" channels={last24hrData} error={errordaytime} />
-                                    }else{
+                                    } else {
                                         return <div class="card">
-                                        <div class="card-header">
-                                            <h4 class="card-title"><span >Last 24 Hour Channel Views</span></h4>
+                                            <div class="card-header">
+                                                <h4 class="card-title"><span >Last 24 Hour Channel Views</span></h4>
+                                            </div>
+                                            <div class="card-body">
+                                                <h4 ><span class="danger">No Data Available For Last 24 hr</span></h4>
+                                            </div>
                                         </div>
-                                        <div class="card-body">
-                                        <h4 ><span class="danger">No Data Available For Last 24 hr</span></h4>
-                                        </div>
-                                    </div>
                                     }
-                                    
+
 
                                 } else {
                                     return <div class="card">
@@ -474,7 +482,7 @@ const UserStatus = () => {
                                             <h4 class="card-title"><span >Last 24 Hour Channel Views</span></h4>
                                         </div>
                                         <div class="card-body">
-                                        <h4 ><span class="danger">Please Select User To Show The Table</span></h4>
+                                            <h4 ><span class="danger">Please Select User To Show The Table</span></h4>
                                         </div>
                                     </div>
 
