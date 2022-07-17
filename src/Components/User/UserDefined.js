@@ -337,7 +337,7 @@ const UserDefined = () => {
                                 } else {
                                     return <div class="card">
                                         <div class="card-header">
-                                            <div class="row"><div class="col-6 h2 card-title font-weight-bold">Time Spent (min)</div><div class="row col h2 card-title text-left">From [<p class="text-primary bold"> {start_string}</p>] to [<p class="text-primary bold">{finish_string}</p>] </div></div>
+                                            <div class="row"><div class="col-6 h2 card-title font-weight-bold">Time Spent (minute)</div><div class="row col h2 card-title text-left">From [<p class="text-primary bold"> {start_string}</p>] to [<p class="text-primary bold">{finish_string}</p>] </div></div>
 
                                         </div>
                                         <div class="card-content collapse show">
@@ -352,7 +352,13 @@ const UserDefined = () => {
                                                         },
                                                         scales: {
                                                             y: {
-                                                                beginAtZero: true
+                                                                beginAtZero: true,
+                                                                ticks: {
+                                                                    // Include a dollar sign in the ticks
+                                                                    callback: function (value, index, ticks) {
+                                                                        return value + ' min';
+                                                                    }
+                                                                }
                                                             }
                                                         },
                                                         legend: {

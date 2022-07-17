@@ -216,7 +216,7 @@ const Overview = () => {
 
                 });
             }
-            else if (category === "Time Spent(Uni)") {
+            else if (category === "Time Spent-Universe(minute)") {
                 axiosConfig.post("/overview/timespentgraph", data).then(rsp => {
                     console.log(rsp.data);
                     setChannelData(() => ({
@@ -277,7 +277,7 @@ const Overview = () => {
                                             <option value="TVR(000)">TVR (000)</option>
                                             <option value="TVR(%)">TVR (%)</option>
                                             <option value="TVR Share(%)">TVR Share (%)</option>
-                                            <option value="Time Spent(Uni)">Time Spent (Uni)</option>
+                                            <option value="Time Spent-Universe(minute)">Time Spent (Uni)</option>
                                         </select>
                                     </div>
                                     <div class="col-md-2">
