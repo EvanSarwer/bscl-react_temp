@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route ,Navigate} from "react-router-dom";
 import GetMail from "../ForgetPassword/GetMail";
 import PasswordChange from "../ForgetPassword/PasswordChange";
 import Login from "./Login";
@@ -13,6 +13,10 @@ function MainPage() {
           <Route exact path="/" element={<Login />}></Route>
           <Route exact path="/forget-Pass/email" element={<GetMail />}></Route>
           <Route exact path="/forget-pass/new-password/:token" element={<PasswordChange />}></Route>
+          <Route
+        path="*"
+        element={<Navigate to="/" replace />}
+    />
         </Routes>
       </BrowserRouter>
       </div>
