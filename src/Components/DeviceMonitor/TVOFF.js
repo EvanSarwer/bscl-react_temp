@@ -1,44 +1,75 @@
+import { useState, useEffect } from 'react';
+import axiosConfig from '../axiosConfig';
+
 const TVOFF = () => {
-    function get(){
-        console.log("jjjj");
+    const [channeldata, setChannelData] = useState([]);
+    const [ query, setQuery ] = useState("");
+    const [tvoffList, settvoffList] = useState([]);
+
+    const getData=()=>{
+        axiosConfig.get("/device/tvoff").then(rsp => {
+            console.log(rsp.data);
+            settvoffList(rsp.data.data);
+        }).catch(err => {
+
+        })
     }
+    useEffect(() => {
+        getData();
+        const interval = setInterval(() => {getData()}, 5000);
+      
+        return () => clearInterval(interval);
+      }, []);
+
+    // useEffect(() => {
+    //     setChannelData(props.data);
+
+    // }, [props.data])
+
+    const Search = (data) => {
+        return data.filter(
+            (item) =>
+                item.user_name.toLowerCase().includes(query.toLowerCase()) ||
+                item.id.toString().includes(query)
+        );
+    };
+
+
+
+
+
     return (
-        <div class="users-list-table">
-            <div class="card">
-                <div class="card-content">
+        
+            <div class="card" style={{maxHeight:'600px',minHeight:'600px'}}>
+                <div class="card-content" > 
                     <div class="card-body">
-                        <h4>TV off</h4>
-                        <input type="text" class="search form-control round border-primary mb-1" placeholder="Search"></input>
-                        <div class="table-responsive">
-                            <table id="users-list-datatable" class="table">
+                        <div class="row">
+                            <div class="col-md-6">
+                            <h4>TV Off</h4>
+                            </div>
+                            <div class="col-md-6">
+                            <input type="text" class="search form-control round border-primary mb-1" placeholder="Search" onChange={e => setQuery(e.target.value)}/>
+                            </div>
+                        </div>
+                        <div class="table-responsive "style={{maxHeight:'500px',minHeight:'290px'}}>
+                            <table id="users-list-datatable" class="table table-bordered">
                                 <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>Username</th>
+                                        <th>User Name</th>
                                         <th>Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>23</td>
-                                        <td>BSCL_Prototype_1</td>
+                                {Search(tvoffList).map((device) =>
+                                                <tr key={device.id}>
+                                                    
+                                                    <td>{device.id}</td>
+                                                    <td>{device.user_name}</td>
+                                                    
                                         <td><span style={{ height: "1em",  width: "1em",  backgroundColor: "orange",  borderRadius: "50%",  display: "inline-block"}}></span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>35</td>
-                                        <td>BSCL_ADMIN_8</td>
-                                        <td><span style={{ height: "1em",  width: "1em",  backgroundColor: "orange",  borderRadius: "50%",  display: "inline-block"}}></span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>18</td>
-                                        <td>BSCL_Prototype_4</td>
-                                        <td><span style={{ height: "1em",  width: "1em",  backgroundColor: "orange",  borderRadius: "50%",  display: "inline-block"}}></span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>21</td>
-                                        <td>BSCL_ADMIN_9</td>
-                                        <td><span style={{ height: "1em",  width: "1em",  backgroundColor: "orange",  borderRadius: "50%",  display: "inline-block"}}></span></td>
-                                    </tr>
+                                                </tr>
+                                            )}
 
                                 </tbody>
                             </table>
@@ -46,7 +77,7 @@ const TVOFF = () => {
                     </div>
                 </div>
             </div>
-        </div>
+    
     )
 }
 export default TVOFF;
