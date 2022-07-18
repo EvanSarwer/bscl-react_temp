@@ -48,7 +48,7 @@ const Table = (props) => {
                                                 <th>Channel Name</th>
                                                 <th>started_watching_at</th>
                                                 <th>finished_watching_at</th>
-                                                <th>Duration (min)</th>
+                                                <th>Duration (sec)</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -57,7 +57,7 @@ const Table = (props) => {
                                                     <td>{log.channel_name}</td>
                                                     <td>{log.started_watching_at}</td>
                                                     <td>{log.finished_watching_at}</td>
-                                                    <td>{log.duration_minute}</td>
+                                                    <td>{log.duration_sec}</td>
                                                 </tr>
                                             )}
                                         </tbody>
