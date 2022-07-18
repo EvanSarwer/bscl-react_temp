@@ -65,11 +65,11 @@ const ViewLog = () => {
     const Download = () => {
         if(loading){
         //console.log(liveChannelData.labels[0]);
-        var csv = [["channel_name","started_watching_at","finished_watching_at","duration_minute"]];
+        var csv = [["channel_name","started_watching_at","finished_watching_at","duration_sec"]];
         var ss = logs;
         //console.log(logs);
         for (var i = 0; i < ss.length; i++) {
-            csv.push([ss[i].channel_name, ss[i].started_watching_at, ss[i].finished_watching_at, ss[i].duration_minute]);
+            csv.push([ss[i].channel_name, ss[i].started_watching_at, ss[i].finished_watching_at, ss[i].duration_sec]);
         }
         //console.log(csv);
         getCSV(csv,user);
