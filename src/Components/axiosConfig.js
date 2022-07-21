@@ -26,7 +26,7 @@ instance.interceptors.request.use(function (config) {
   });
 instance.interceptors.response.use(function (response) {
   console.log('request interceptor good');
- return response;
+  return response;
 }, function(error) {
 
   //console.log('request interceptor bad');
