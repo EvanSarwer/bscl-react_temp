@@ -79,7 +79,7 @@ const TimelineChart = (props) => {
         enabled: true,
         x: {
             show: false,
-            format: 'HH:mm:ss',
+            format: 'dd MMM HH:mm:ss',
             formatter: undefined,
         },
         y: {

@@ -15,6 +15,7 @@ import TimelineChart from './TimelineChart';
 const UserStatus = () => {
 
     const [user, setUser] = useState("");
+    const [userInfo, setUserInfo] = useState({});
     const [userName, setUserName] = useState("");
     const [time, setTime] = useState("");
     const [start, setStart] = useState("");
@@ -142,7 +143,6 @@ const UserStatus = () => {
             user: user,
             time: time,
         };
-
         axiosConfig.post("/user/usertimespent", data).then(rsp => {
             setMsg(rsp.data.error);
             setStart(rsp.data.start);
@@ -160,6 +160,12 @@ const UserStatus = () => {
             setTimeSpentCSV(() => ({
                 labels: rsp.data.channels, values: rsp.data.totaltime
             }));
+        }).catch(err => {
+
+        });
+
+        axiosConfig.post("/user/deviceinfo", data).then(rsp => {
+            setUserInfo(rsp.data.device);
         }).catch(err => {
 
         });
@@ -192,6 +198,8 @@ const UserStatus = () => {
 
     }, [user, time]);
 
+
+
     var start_string = new Date(start).toLocaleString(undefined, {
         day: 'numeric',
         month: 'long',
@@ -207,6 +215,7 @@ const UserStatus = () => {
         minute: '2-digit',
     });
 
+    
 
     return (
         <div class="app-content content">
@@ -290,20 +299,42 @@ const UserStatus = () => {
                     </form>
                     <br />
 
+                    {(() => {
+                        if (user !== "") {
+
+                            if (userInfo) {
+                                return <table class="table table-bordered " style={{ backgroundColor: "#FFFF" }}>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Name</th>
+                                        <th>Location</th>
+                                        <th>Type</th>
+                                    </tr>
+                                    <tr>
+                                        <td>{userInfo.id}</td>
+                                        <td>{userInfo.user_name}</td>
+                                        <td>{userInfo.address}</td>
+                                        <td>{userInfo.type}</td>
+                                    </tr>
+                                </table>
+                            }
+
+
+
+
+                        }
+                    })()}
+
+                    <br />
+
 
                     <div class="row justify-content-md-center">
                         <div class="col">
 
 
                             {(() => {
-                                if (!user) {
-                                    return <div class="card">
-                                        <div class="card-header">
-                                            <h4 class="card-title">Time Spent</h4>
-                                            <h4><span class="danger">Please Select User & Time Frame</span></h4>
-                                        </div>
-                                    </div>
-                                } else {
+                                if (user !== "") {
+
                                     if (msg === "Error") {
                                         return <div class="card">
                                             <div class="card-header">
@@ -345,7 +376,7 @@ const UserStatus = () => {
                                                             legend: {
                                                                 display: true,
                                                                 position: 'right'
-                                                            }, 
+                                                            },
                                                             plugins: {
                                                                 legend: {
                                                                     display: false  //remove if want to show label 
@@ -361,6 +392,15 @@ const UserStatus = () => {
 
                                     }
 
+                                } else {
+
+                                    return <div class="card">
+                                        <div class="card-header">
+                                            <h4 class="card-title">Time Spent</h4>
+                                            <h4><span class="danger">Please Select User & Time Frame</span></h4>
+                                        </div>
+                                    </div>
+
                                 }
                             })()}
 
@@ -375,7 +415,7 @@ const UserStatus = () => {
                         <div class="col" >
 
                             {(() => {
-                                if (!user) {
+                                if (user === "") {
                                     return <div class="card">
                                         <div class="card-header">
                                             <h4 class="card-title">Watch History Of Last 24 Hours</h4>
@@ -410,7 +450,7 @@ const UserStatus = () => {
                         <div class="col" >
 
                             {(() => {
-                                if (!user) {
+                                if (user === "") {
                                     return <div class="card">
                                         <div class="card-header">
                                             <h4 class="card-title">Watch History Of Last 72 Hours</h4>

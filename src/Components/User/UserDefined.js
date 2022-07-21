@@ -17,6 +17,7 @@ import TimelineChart from './TimelineChart';
 const UserDefined = () => {
 
     const [user, setUser] = useState("");
+    const [userInfo, setUserInfo] = useState({});
     const [userName, setUserName] = useState("");
     const [start, setStart] = useState("");
     const [finish, setFinish] = useState("");
@@ -143,6 +144,12 @@ const UserDefined = () => {
         var data = {
             user: user
         };
+
+        axiosConfig.post("/user/deviceinfo", data).then(rsp => {
+            setUserInfo(rsp.data.device);
+        }).catch(err => {
+
+        });
 
         axiosConfig.post("/user/useralltimeview", data).then(rsp => {
             setErroralltime(rsp.data.error);
@@ -318,6 +325,33 @@ const UserDefined = () => {
                         </div>
 
                     </div>
+
+                    {(() => {
+                        if (user !== "") {
+
+                            if (userInfo) {
+                                return <table class="table table-bordered " style={{ backgroundColor: "#FFFF" }}>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Name</th>
+                                        <th>Location</th>
+                                        <th>Type</th>
+                                    </tr>
+                                    <tr>
+                                        <td>{userInfo.id}</td>
+                                        <td>{userInfo.user_name}</td>
+                                        <td>{userInfo.address}</td>
+                                        <td>{userInfo.type}</td>
+                                    </tr>
+                                </table>
+                            }
+
+
+
+
+                        }
+                    })()}
+
                     <br />
 
 
@@ -389,7 +423,7 @@ const UserDefined = () => {
                         <div class="col" >
 
                             {(() => {
-                                if (!user) {
+                                if (user==="") {
                                     return <div class="card">
                                         <div class="card-header">
                                             <h4 class="card-title">Watch History Of Last 24 Hours</h4>
@@ -425,7 +459,7 @@ const UserDefined = () => {
                         <div class="col" >
 
                             {(() => {
-                                if (!user) {
+                                if (user==="") {
                                     return <div class="card">
                                         <div class="card-header">
                                             <h4 class="card-title">Watch History Of Last 72 Hours</h4>
