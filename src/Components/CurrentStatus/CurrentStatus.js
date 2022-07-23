@@ -4,18 +4,27 @@ import { useState, useEffect } from "react";
 import axiosConfig from "../axiosConfig";
 
 const CurrentStatus = () => {
-    const [activeUser,setActiveUser] =useState("");
-    const [activePercet,setActivePercent] = useState("");
-    const [totalUser,setTotalUser] =useState("");
-    const [topReach,setTopReach] =useState("");
-    const [topTVR,setTopTVR] =useState("");
+    const [activeUser, setActiveUser] = useState("");
+    const [activePercet, setActivePercent] = useState("");
+    const [stbCountTotal, setSTBCountTotal] = useState("");
+    const [ottCountTotal, setOTTCountTotal] = useState("");
+    const [stbCountActive, setSTBCountActive] = useState("");
+    const [ottCountActive, setOTTCountActive] = useState("");
+    const [totalUser, setTotalUser] = useState("");
+    const [topReach, setTopReach] = useState("");
+    const [topTVR, setTopTVR] = useState("");
 
     useEffect(() => {
 
         axiosConfig.get("/dashboard/CurrentStatusUser").then(rsp => {
             setTotalUser(rsp.data.total_user);
+            setSTBCountTotal(rsp.data.stb_total);
+            setOTTCountTotal(rsp.data.ott_total);
             setActiveUser(rsp.data.active_user);
             setActivePercent(rsp.data.active_percent);
+            setSTBCountActive(rsp.data.stb_active);
+            setOTTCountActive(rsp.data.ott_active);
+
         }).catch(err => {
 
         });
@@ -38,31 +47,35 @@ const CurrentStatus = () => {
         const interval = setInterval(() => {
             axiosConfig.get("/dashboard/CurrentStatusUser").then(rsp => {
                 setTotalUser(rsp.data.total_user);
+                setSTBCountTotal(rsp.data.stb_total);
+                setOTTCountTotal(rsp.data.ott_total);
                 setActiveUser(rsp.data.active_user);
                 setActivePercent(rsp.data.active_percent);
+                setSTBCountActive(rsp.data.stb_active);
+                setOTTCountActive(rsp.data.ott_active);
             }).catch(err => {
-    
+
             });
 
             axiosConfig.get("/dashboard/CurrentStatusTopReach").then(rsp => {
                 console.log(rsp.data);
                 setTopReach(rsp.data.top_reach);
             }).catch(err => {
-    
+
             });
 
             axiosConfig.get("/dashboard/CurrentStatusTopTvr").then(rsp => {
                 console.log(rsp.data);
                 setTopTVR(rsp.data.top_tvr);
             }).catch(err => {
-    
+
             });
 
 
         }, 5000);
-      
+
         return () => clearInterval(interval);
-      }, []);
+    }, []);
 
 
     return (
@@ -70,10 +83,10 @@ const CurrentStatus = () => {
         <div class="row gx-1">
 
             <div class="col-xl-2 col-lg-1 col-12">
-                <CountComponent title="Total User" count={totalUser} icon="icon-users success" color="success" percentage="100%" />
+                <CountComponent title="Total User" count={totalUser} stb={stbCountTotal} ott={ottCountTotal} icon="icon-users success" color="success" percentage="100%" />
             </div>
             <div class="col-xl-2 col-lg-1 col-12">
-                <CountComponent title="Active User" count={activeUser} icon="icon-user-following success" color="success" percentage={activePercet} />
+                <CountComponent title="Active User" count={activeUser} stb={stbCountActive} ott={ottCountActive} icon="icon-user-following success" color="success" percentage={activePercet} />
             </div>
             <div class="col-xl-2 col-lg-1 col-12">
                 <TopCount title="Top Reach" count={topReach} icon="icon-pie-chart warning" color="warning" percentage="" />
@@ -87,7 +100,7 @@ const CurrentStatus = () => {
             <div class="col-xl-2 col-lg-1 col-12">
                 <TopCount title="Top Program" count="N/A" icon="icon-pie-chart warning" color="" percentage="" />
             </div>
-            
+
         </div>
 
 
