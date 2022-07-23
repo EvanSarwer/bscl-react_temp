@@ -15,9 +15,9 @@ const TopCount = (props) => {
                             <i class={cls}></i>
                         </div>
                     </div>
-                    <h3 class={clrCount}>{props.count}</h3>
+                    <p><h3 class={clrCount}>{props.count}</h3></p>
                     <div class="media-body text-left">
-                        <h6>{props.title}</h6>
+                        <h5>{props.title}</h5>
                     </div>
                 </div>
             </div>
