@@ -2,6 +2,7 @@
 import { BrowserRouter, Routes, Route,Navigate} from "react-router-dom";
 import Header from '../Header/Header';
 import MainMenu from '../MainMenu/MainMenu';
+import Report from '../Report/Report';
 import Dashboard from '../Dashboard/Dashboard';
 import LiveChannels from '../LiveChannels/LiveChannels';
 import ChannelStatus from '../Channel/ChannelStatus';
@@ -30,6 +31,7 @@ function Admin() {
       <Routes>
         <Route exact path="/" element={<Dashboard />}></Route>
         <Route exact path="/overview" element={<Overview />}></Route>
+        <Route exact path="/report" element={<Report />}></Route>
         <Route exact path="/livechannels" element={<LiveChannels />}></Route>
         <Route exact path="/channelstatus" element={<ChannelStatus />}></Route>
         <Route exact path="/definedchannelstatus" element={<DefinedChannelStatus />}></Route>
