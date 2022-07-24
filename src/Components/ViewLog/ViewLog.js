@@ -13,7 +13,7 @@ const ViewLog = () => {
 
     const [user, setUser] = useState("");
     const [userName, setUserName] = useState("");
-    const [loading,setloading] = useState(false);
+    const [loading, setloading] = useState(false);
     const [users, setUsers] = useState([]);
     const [logs, setlogs] = useState([]);
 
@@ -63,17 +63,17 @@ const ViewLog = () => {
 
     }
     const Download = () => {
-        if(loading){
-        //console.log(liveChannelData.labels[0]);
-        var csv = [["channel_name","started_watching_at","finished_watching_at","duration_sec"]];
-        var ss = logs;
-        //console.log(logs);
-        for (var i = 0; i < ss.length; i++) {
-            csv.push([ss[i].channel_name, ss[i].started_watching_at, ss[i].finished_watching_at, ss[i].duration_sec]);
+        if (loading) {
+            //console.log(liveChannelData.labels[0]);
+            var csv = [["channel_name", "started_watching_at", "finished_watching_at", "duration_sec"]];
+            var ss = logs;
+            //console.log(logs);
+            for (var i = 0; i < ss.length; i++) {
+                csv.push([ss[i].channel_name, ss[i].started_watching_at, ss[i].finished_watching_at, ss[i].duration_sec]);
+            }
+            //console.log(csv);
+            getCSV(csv, user);
         }
-        //console.log(csv);
-        getCSV(csv,user);
-    }
     }
 
     useEffect(() => {
@@ -88,35 +88,32 @@ const ViewLog = () => {
     }, [])
 
     useEffect(() => {
-        if(user!=""){
-        
-        setloading(false);
-        var data = {
-            user: user
-        };
+        if (user !== "") {
 
-        
+            setloading(false);
+            var data = {
+                user: user
+            };
 
-        
 
-        axiosConfig.post("/user/logs", data).then(rsp => {
-            setlogs(rsp.data.data);
-            
-            setloading(true);
-            console.log(logs);
-            console.log("logslogs");
-        }).catch(err => {
+            axiosConfig.post("/user/logs", data).then(rsp => {
+                setlogs(rsp.data.data);
 
-        });
+                setloading(true);
+                console.log(rsp.data.data);
+                console.log("logslogs");
+            }).catch(err => {
 
-    }
+            });
+
+        }
     }, [user]);
 
 
 
 
     return (
-        <div class="app-content content" style={{ backgroundColor: "azure", minHeight:"36em" }} >
+        <div class="app-content content" style={{ backgroundColor: "azure", minHeight: "36em" }} >
             <div class="content-overlay"></div>
             <div class="content-wrapper">
                 <div class="content-header row">
@@ -125,7 +122,7 @@ const ViewLog = () => {
                     <form  >
                         <div class="row">
 
-                        <div class="col-md-5">
+                            <div class="col-md-5">
                                 <Select
                                     placeholder="Select User"
                                     options={users.map(user => ({ label: user.user_name, value: user.id }))}
@@ -134,31 +131,31 @@ const ViewLog = () => {
                             </div>
                             <div class="col-md-5">
 
-                            {(() => {
-                                if (loading) {
-                                    return <button type="button" onClick={Download} class="btn btn-danger">Download CSV</button>
+                                {(() => {
+                                    if (loading) {
+                                        return <button type="button" onClick={Download} class="btn btn-danger">Download CSV</button>
 
-                                }if (!loading && user=="") {
-                                    return 
+                                    } if (!loading && user == "") {
+                                        return
 
-                                } else {
-                                    return <button type="button" onClick={Download} class="btn btn-danger">Loading Data</button>
+                                    } else {
+                                        return <button type="button" onClick={Download} class="btn btn-danger">Loading Data</button>
 
-                                }
-                            })()}
-                        
+                                    }
+                                })()}
+
                             </div>
-                            
+
                         </div>
                     </form>
                     <br />
 
 
                     <div class="row justify-content-md-center">
-                    <div class="col-xl-12  col-12">
+                        <div class="col-xl-12  col-12">
                             {(() => {
-                                if (user!=""  || user=="0") {
-                                    return <Table title="User Logs" logs={logs}  />
+                                if (user != "" || user == "0") {
+                                    return <Table title="User Logs" logs={logs} />
 
                                 } else {
                                     return <div class="card">
@@ -172,10 +169,10 @@ const ViewLog = () => {
                         </div>
                     </div>
 
-                    
+
                     <br />
 
-                    
+
 
                     <br />
 
