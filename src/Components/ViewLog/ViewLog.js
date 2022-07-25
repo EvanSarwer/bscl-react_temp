@@ -13,6 +13,10 @@ const ViewLog = () => {
 
     const [user, setUser] = useState("");
     const [userName, setUserName] = useState("");
+    const [userInfo, setUserInfo] = useState({});
+    const [error, setError] = useState("yes");
+    const [start, setStart] = useState("");
+    const [finish, setFinish] = useState("");
     const [loading, setloading] = useState(false);
     const [users, setUsers] = useState([]);
     const [logs, setlogs] = useState([]);
@@ -87,29 +91,38 @@ const ViewLog = () => {
 
     }, [])
 
-    useEffect(() => {
-        if (user !== "") {
+    const GetData = () => {
 
-            setloading(false);
-            var data = {
-                user: user
-            };
+        setloading(false);
+        var data = {
+            user: user,
+            start: start,
+            finish: finish
+        };
 
+        axiosConfig.post("/user/deviceinfo", data).then(rsp => {
+            setUserInfo(rsp.data.device);
+        }).catch(err => {
 
-            axiosConfig.post("/user/logs", data).then(rsp => {
-                setlogs(rsp.data.data);
-
-                setloading(true);
-                console.log(rsp.data.data);
-                console.log("logslogs");
-            }).catch(err => {
-
-            });
-
-        }
-    }, [user]);
+        });
 
 
+        axiosConfig.post("/user/logs", data).then(rsp => {
+            setlogs(rsp.data.data);
+            if( rsp.data.error === "Error"){
+                setError("yes");
+            }else{
+                setError("no");
+            }
+            setloading(true);
+            console.log(rsp.data.data);
+            console.log("logslogs");
+        }).catch(err => {
+
+        });
+
+
+    }
 
 
     return (
@@ -119,52 +132,122 @@ const ViewLog = () => {
                 <div class="content-header row">
                 </div>
                 <div class="content-body">
-                    <form  >
-                        <div class="row">
+                    <div class="card">
+                        <div class="card-body">
 
-                            <div class="col-md-5">
-                                <Select
-                                    placeholder="Select User"
-                                    options={users.map(user => ({ label: user.user_name, value: user.id }))}
-                                    onChange={opt => setUser(opt.value) & setUserName(opt.label)}
-                                />
-                            </div>
-                            <div class="col-md-5">
+                            <div class="row">
 
-                                {(() => {
-                                    if (loading) {
-                                        return <button type="button" onClick={Download} class="btn btn-danger">Download CSV</button>
+                                <div class="col-md-4">
+                                    <Select
+                                        placeholder="Select User"
+                                        options={users.map(user => ({ label: user.user_name, value: user.id }))}
+                                        onChange={opt => setUser(opt.value) & setUserName(opt.label)}
+                                    />
+                                </div>
 
-                                    } if (!loading && user == "") {
-                                        return
+                                <fieldset class="form-group form-group-style col-md-2">
+                                    <label for="dateTime1">Start Time</label>
+                                    <input type="datetime-local" class="form-control" id="dateTime1" step="1" onChange={(e) => { setStart(e.target.value) }} />
+                                </fieldset>
 
-                                    } else {
-                                        return <button type="button" onClick={Download} class="btn btn-danger">Loading Data</button>
+                                <fieldset class="form-group form-group-style col-md-2">
+                                    <label for="dateTime1">Finish Time</label>
+                                    <input type="datetime-local" class="form-control" id="dateTime1" step="1" onChange={(e) => { setFinish(e.target.value) }} />
+                                </fieldset>
 
-                                    }
-                                })()}
+                                <div class="col-md-2 ">
+                                    <button onClick={GetData} class="btn btn-info">Get Data</button>
+
+                                </div>
+
+                                <div class="col-md-2">
+
+                                    {(() => {
+                                        if(logs){
+                                            if(logs.length > 0){
+                                                if (loading) {
+                                                    return <button type="button" onClick={Download} class="btn btn-danger">Download CSV</button>
+        
+                                                } if (!loading && user == "") {
+                                                    return
+        
+                                                } else {
+                                                    return <button type="button" onClick={Download} class="btn btn-danger">Loading Data</button>
+        
+                                                }
+                                            }
+                                        }                                       
+                                        
+                                    })()}
+
+                                </div>
 
                             </div>
 
                         </div>
-                    </form>
+                    </div>
+
+                    {(() => {
+                        if (error === "no") {
+
+                            if (userInfo) {
+                                return <table class="table table-bordered" style={{ backgroundColor: "#FFFF" }}>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Name</th>
+                                        <th>Location</th>
+                                        <th>Type</th>
+                                    </tr>
+                                    <tr>
+                                        <td>{userInfo.id}</td>
+                                        <td>{userInfo.user_name}</td>
+                                        <td>{userInfo.address}</td>
+                                        <td>{userInfo.type}</td>
+                                    </tr>
+                                </table>
+                            }
+
+                        }
+                    })()}
+
                     <br />
 
 
                     <div class="row justify-content-md-center">
                         <div class="col-xl-12  col-12">
                             {(() => {
-                                if (user != "" || user == "0") {
-                                    return <Table title="User Logs" logs={logs} />
-
+                                if (logs) {
+                                    if (error === "no") {
+                                        if (logs.length > 0) {
+                                            return <Table title="User Logs" logs={logs} />
+                                        } else {
+                                            return <div class="card">
+                                                <div class="card-header">
+                                                    <h4 class="card-title"><span >User Logs</span></h4>
+                                                </div>
+                                                <div class="card-body">
+                                                    <h4 ><span class="danger">No Data Available For This Time Frame</span></h4>
+                                                </div>
+                                            </div>
+                                        }
+                                    } else {
+                                        return <div class="card">
+                                            <div class="card-header">
+                                                <h4 class="card-title"><span class="danger">Please Select User & Time Frame To Show The Table</span></h4>
+                                            </div>
+                                        </div>
+    
+                                    }
+                                    
                                 } else {
                                     return <div class="card">
                                         <div class="card-header">
-                                            <h4 class="card-title"><span class="danger">Please Select User To Show The Table</span></h4>
+                                            <h4 class="card-title"><span class="danger">Please Select User & Time Frame To Show The Table</span></h4>
                                         </div>
                                     </div>
 
                                 }
+
                             })()}
                         </div>
                     </div>
