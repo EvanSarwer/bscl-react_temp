@@ -12,7 +12,8 @@ const Table = (props) => {
     const Search = (data) => {
         return data.filter(
             (item) =>
-            item.channel_name.toString().includes(query)
+            item.channel_name.toLowerCase().includes(query.toLowerCase()) ||
+            item.log_id.toString().includes(query)
         );
     };
 
@@ -44,7 +45,7 @@ const Table = (props) => {
                                 <div class="table-responsive" style={{maxHeight:'400px',minHeight:'500px'}}>
                                     <table class="table display nowrap table-striped table-bordered ">
                                         <thead>
-                                            <tr>
+                                            <tr><th>Log Id</th>
                                                 <th>Channel Name</th>
                                                 <th>started_watching_at</th>
                                                 <th>finished_watching_at</th>
@@ -53,7 +54,8 @@ const Table = (props) => {
                                         </thead>
                                         <tbody>
                                             {Search(data).map((log) =>
-                                                <tr key={log.id}>
+                                                <tr key={log.log_id}>
+                                                    <td>{log.log_id}</td>
                                                     <td>{log.channel_name}</td>
                                                     <td>{log.started_watching_at}</td>
                                                     <td>{log.finished_watching_at}</td>
