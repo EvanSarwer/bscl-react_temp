@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import axiosConfig from '../axiosConfig';
+import Header from "../Header/Header";
 
 const ChangePass=()=>{
     const [user_name,setUsername] = useState("");
@@ -68,7 +69,7 @@ const ChangePass=()=>{
 
     }
     return (
-
+<div><Header title=""/>
         <div class="app-content content" style={{ backgroundColor: "azure" }}>
             <div class="content-overlay"></div>
             <div class="content-wrapper" >
@@ -166,6 +167,7 @@ const ChangePass=()=>{
                     <br />
                 </div>
             </div>
+        </div>
         </div>
 
 

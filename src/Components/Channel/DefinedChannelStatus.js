@@ -4,9 +4,11 @@ import axiosConfig from "../axiosConfig";
 
 import BarGraph from "./Graph/BarGraph";
 import Select from 'react-select';
+import Header from '../Header/Header';
 
 
 const ChannelStatus = () => {
+
     var cc;
     const [update, setUpdate] = useState(0);
     const [id, setId] = useState("");
@@ -75,6 +77,7 @@ const ChannelStatus = () => {
         }
     }
     return (
+        <div><Header title="Trend Analysis-Day Parts"/>
         <div class="app-content content">
             <div class="content-overlay"></div>
             <div class="content-wrapper" style={{ backgroundColor: "azure" }} >
@@ -211,7 +214,7 @@ const ChannelStatus = () => {
                 </div>
             </div>
         </div>
-
+</div>
 
 
 

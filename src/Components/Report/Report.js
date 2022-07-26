@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react"
 import * as xlsx from "xlsx";
+import Header from "../Header/Header";
 
 const Report = () => {
+
     var mill2date = (function() {
         var epoch = new Date(1899,11,30);
         var msPerDay = 8.64e7;
@@ -90,7 +92,7 @@ const Report = () => {
     
     
     return (
-        <div>
+        <div><Header title="Program Report"/>
             
         <div class="app-content content" style={{ backgroundColor: "azure", minHeight:"36em" }} >
             <div class="content-wrapper">

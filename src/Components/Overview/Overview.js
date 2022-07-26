@@ -10,9 +10,11 @@ import { useState, useEffect } from "react";
 import axiosConfig from "../axiosConfig";
 import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS } from 'chart.js/auto';
+import Header from '../Header/Header';
 
 
 const Overview = () => {
+
     function pad(n) {
         return n<10 ? '0'+n : n
     }
@@ -259,6 +261,9 @@ const Overview = () => {
 
 
     return (
+        <div>
+            <Header title="Basic Reports"/>
+        
         <div class="app-content content">
             <div class="content-overlay"></div>
             <div class="content-wrapper" style={{ backgroundColor: "azure" }} >
@@ -426,6 +431,7 @@ const Overview = () => {
                 </div>
 
             </div>
+        </div>
         </div>
 
     )

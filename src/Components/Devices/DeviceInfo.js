@@ -6,6 +6,7 @@ import TimeSpentGraph from "./TimeSpentGraph";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axiosConfig from '../axiosConfig';
+import Header from "../Header/Header";
 
 const DeviceInfo = () => {
     const { id } = useParams();
@@ -25,6 +26,7 @@ const DeviceInfo = () => {
 
 
     return (
+        <div><Header title="Audience Profile"/>
         <div class="app-content content">
             <div class="content-overlay"></div>
             <div class="content-wrapper" style={{ backgroundColor: "azure" }} >
@@ -61,6 +63,7 @@ const DeviceInfo = () => {
                     </div>
                 </div>
             </div>
+        </div>
         </div>
     )
 }

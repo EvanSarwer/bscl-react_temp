@@ -10,9 +10,11 @@ import { useState, useEffect } from "react";
 import axiosConfig from "../axiosConfig";
 import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS } from 'chart.js/auto';
+import Header from '../Header/Header';
 
 
 const LiveChannels = () => {
+
     const [region, setRegion] = useState("");
     const [gender, setGender] = useState("");
     const [economic, setEconomic] = useState("");
@@ -116,121 +118,124 @@ const LiveChannels = () => {
 
 
     return (
-        <div class="app-content content">
-            <div class="content-overlay"></div>
-            <div class="content-wrapper" style={{ backgroundColor: "azure" }} >
-                <div class="content-header row">
-                </div>
-                <div class="content-body">
+        <div><Header title="Live Channels" />
 
-                    <div class="row">
-                        <div class="col-md-2">
-                            <select class="custom-select d-block w-100" onChange={(e) => { setRegion(e.target.value) }}>
-                                <option value="">All Region</option>
-                                <option value="Dhaka">Dhaka</option>
-                                <option value="Tangail">Tangail</option>
-                                <option value="Chittagong">Chittagong</option>
-                                <option value="Rajshahi">Rajshahi</option>
-                                <option value="Sylhet">Sylhet</option>
-                                <option value="Mymensingh">Mymensingh</option>
-                                <option value="Khulna">Khulna</option>
-                                <option value="Rongpur">Rongpur</option>
-                                <option value="Barishal">Barishal</option>
-                            </select>
-                        </div>
-                        <div class="col-md-2">
-                            <select class="custom-select d-block w-100" onChange={(e) => { setUserType(e.target.value) }}>
-                                <option value="">All (STB/OTT)</option>
-                                <option value="STB">STB</option>
-                                <option value="OTT">OTT</option>
-                            </select>
-                        </div>
-                        <div class="col-md-2">
-                            <select class="custom-select d-block w-100" onChange={(e) => { setGender(e.target.value) }}>
-                                <option value="">All Gender</option>
-                                <option value="m">Male</option>
-                                <option value="f">Female</option>
-                            </select>
-                        </div>
-                        <div class="col-md-2">
+            <div class="app-content content">
+                <div class="content-overlay"></div>
+                <div class="content-wrapper" style={{ backgroundColor: "azure" }} >
+                    <div class="content-header row">
+                    </div>
+                    <div class="content-body">
 
-                            <select class="custom-select d-block w-100" onChange={(e) => { setEconomic(e.target.value) }}>
-                                <option value="">All SEC</option>
-                                <option value="a1">Lower Class</option>
-                                <option value="c1">Upper Middle Class</option>
-                                <option value="d1">Lower Middle Class</option>
-                                <option value="b1">Upper Class</option>
-                            </select>
-                        </div>
-                        <div class="col-md-2">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <select class="custom-select d-block w-100" onChange={(e) => { setRegion(e.target.value) }}>
+                                    <option value="">All Region</option>
+                                    <option value="Dhaka">Dhaka</option>
+                                    <option value="Tangail">Tangail</option>
+                                    <option value="Chittagong">Chittagong</option>
+                                    <option value="Rajshahi">Rajshahi</option>
+                                    <option value="Sylhet">Sylhet</option>
+                                    <option value="Mymensingh">Mymensingh</option>
+                                    <option value="Khulna">Khulna</option>
+                                    <option value="Rongpur">Rongpur</option>
+                                    <option value="Barishal">Barishal</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <select class="custom-select d-block w-100" onChange={(e) => { setUserType(e.target.value) }}>
+                                    <option value="">All (STB/OTT)</option>
+                                    <option value="STB">STB</option>
+                                    <option value="OTT">OTT</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <select class="custom-select d-block w-100" onChange={(e) => { setGender(e.target.value) }}>
+                                    <option value="">All Gender</option>
+                                    <option value="m">Male</option>
+                                    <option value="f">Female</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+
+                                <select class="custom-select d-block w-100" onChange={(e) => { setEconomic(e.target.value) }}>
+                                    <option value="">All SEC</option>
+                                    <option value="a1">Lower Class</option>
+                                    <option value="c1">Upper Middle Class</option>
+                                    <option value="d1">Lower Middle Class</option>
+                                    <option value="b1">Upper Class</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2">
 
 
-                            <select class="custom-select d-block w-100" onChange={(e) => { setSocio(e.target.value) }}>
-                                <option value="">Urban & Rural</option>
-                                <option value="u">Urban</option>
-                                <option value="r">Rural</option>
-                            </select>
-                        </div>
-                        <div class="col-md-2">
+                                <select class="custom-select d-block w-100" onChange={(e) => { setSocio(e.target.value) }}>
+                                    <option value="">Urban & Rural</option>
+                                    <option value="u">Urban</option>
+                                    <option value="r">Rural</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2">
 
-                            <div class="price-range">
-                                <div class="form-group">
-                                    <div class="slider-sm slider-success my-1" id="small-slider"></div>
-                                </div>
-                                <div class="price-slider">
-                                    <div class="price_slider_amount mb-2">
-                                        <div class="range-amt"><strong>Age Range : </strong> 15
-                                            - 100</div>
+                                <div class="price-range">
+                                    <div class="form-group">
+                                        <div class="slider-sm slider-success my-1" id="small-slider"></div>
                                     </div>
+                                    <div class="price-slider">
+                                        <div class="price_slider_amount mb-2">
+                                            <div class="range-amt"><strong>Age Range : </strong> 15
+                                                - 100</div>
+                                        </div>
 
+                                    </div>
                                 </div>
                             </div>
+
+
                         </div>
 
 
-                    </div>
+
+                        <div class="row justify-content-md-center">
+                            <div class="col">
+                                {/* <PostGraph title="Active Users" text="Active Channels" url="reach/percent" label="Active Users" color="blue" credentials={credential} /> */}
+                                <div class="card">
+                                    <div class="card-header">
+                                        <div class="row"><div class="col-11 h2 card-title font-weight-bold">Active User</div><div class="row col card-title align-items-right"><button onClick={LivechannelDownloadfunc} class="btn btn-sm btn-secondary">Download CSV</button></div></div>
+
+                                    </div>
+                                    <div class="card-content collapse show" style={{ height: "40em" }}>
 
 
-
-                    <div class="row justify-content-md-center">
-                        <div class="col">
-                            {/* <PostGraph title="Active Users" text="Active Channels" url="reach/percent" label="Active Users" color="blue" credentials={credential} /> */}
-                            <div class="card">
-                                <div class="card-header">
-                                    <div class="row"><div class="col-11 h2 card-title font-weight-bold">Active User</div><div class="row col card-title align-items-right"><button onClick={LivechannelDownloadfunc} class="btn btn-sm btn-secondary">Download CSV</button></div></div>
-
-                                </div>
-                                <div class="card-content collapse show" style={{ height: "40em" }}>
-
-
-                                    <Bar
-                                        data={channelData}
-                                        options={{
-                                            responsive: true,
-                                            maintainAspectRatio: false,
-                                            title: {
-                                                display: true,
-                                                text: "Channels",
-                                                fontSize: 20
-                                            },
-                                            legend: {
-                                                display: true,
-                                                position: 'right'
-                                            }, plugins: {
+                                        <Bar
+                                            data={channelData}
+                                            options={{
+                                                responsive: true,
+                                                maintainAspectRatio: false,
+                                                title: {
+                                                    display: true,
+                                                    text: "Channels",
+                                                    fontSize: 20
+                                                },
                                                 legend: {
-                                                    display: false  //remove if want to show label 
+                                                    display: true,
+                                                    position: 'right'
+                                                }, plugins: {
+                                                    legend: {
+                                                        display: false  //remove if want to show label 
+                                                    }
                                                 }
-                                            }
-                                        }}
-                                    />
+                                            }}
+                                        />
 
 
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
+                </div>
             </div>
         </div>
 

@@ -1,5 +1,5 @@
 import axiosConfig from '../axiosConfig';
-const Header = () => {
+const Header = (props) => {
     var logout=()=>{
         axiosConfig.get("/logout").then((rsp)=>{
             localStorage.clear();
@@ -87,6 +87,9 @@ const Header = () => {
                                     <ul class="search-list"></ul>
                                 </div>
                             </li>
+                        </ul>
+                        <ul class="nav navbar-nav mr-auto text-center">
+                            <span class="h4 font-weight-bold">{props.title}</span>
                         </ul>
                         <ul class="nav navbar-nav float-right">
                             

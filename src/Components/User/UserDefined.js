@@ -10,6 +10,7 @@ import Table from './Table';
 import 'chartjs-adapter-date-fns';
 import 'chartjs-adapter-moment';
 import TimelineChart from './TimelineChart';
+import Header from '../Header/Header';
 
 
 
@@ -231,6 +232,7 @@ const UserDefined = () => {
 
 
     return (
+        <div><Header title="Audience Profile-User Defined"/>
         <div class="app-content content">
             <div class="content-overlay"></div>
             <div class="content-wrapper" style={{ backgroundColor: "azure" }} >
@@ -545,6 +547,7 @@ const UserDefined = () => {
                 </div>
             </div>
 
+        </div>
         </div>
 
     )

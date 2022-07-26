@@ -7,6 +7,7 @@ import DemoGraph from "../Graph/DemoGraph";
 import Select from 'react-select';
 import GetLineGraph from "../Graph/GetLineGraph";
 import PostLineGraph from "../Graph/PostLineGraph";
+import Header from '../Header/Header';
 
 
 const ChannelStatus = () => {
@@ -33,6 +34,7 @@ const ChannelStatus = () => {
         setUpdate(update+1);
     }
     return (
+        <div><Header title="Trend Analysis-General"/>
         <div class="app-content content" style={{ backgroundColor: "azure", minHeight:"36em" }}>
             <div class="content-overlay"></div>
             <div class="content-wrapper" style={{ backgroundColor: "azure" }} >
@@ -91,7 +93,7 @@ const ChannelStatus = () => {
                 </div>
             </div>
         </div>
-
+</div>
 
 
 

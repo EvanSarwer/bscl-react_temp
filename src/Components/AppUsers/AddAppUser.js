@@ -1,8 +1,11 @@
+import Header from '../Header/Header';
 import AppUserForm from './AppUserForm'
 
-const AddAppUser=()=>{
+const AddAppUser = () => {
     return (
-        <AppUserForm mode="Create" />
+        <div><Header title="App User" />
+            <AppUserForm mode="Create" />
+        </div>
     )
 }
 export default AddAppUser;

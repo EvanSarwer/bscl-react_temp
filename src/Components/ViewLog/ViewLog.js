@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import axiosConfig from '../axiosConfig';
 import Select from 'react-select';
 import Table from './Table';
+import Header from '../Header/Header';
 
 
 
@@ -126,6 +127,7 @@ const ViewLog = () => {
 
 
     return (
+        <div><Header title="View Logs"/>
         <div class="app-content content" style={{ backgroundColor: "azure", minHeight: "36em" }} >
             <div class="content-overlay"></div>
             <div class="content-wrapper">
@@ -263,6 +265,7 @@ const ViewLog = () => {
                 </div>
             </div>
 
+        </div>
         </div>
 
     )

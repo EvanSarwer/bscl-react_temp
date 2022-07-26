@@ -3,10 +3,14 @@ import React from 'react';
 import CurrentlyWatching from "../DeviceMonitor/CurrentlyWatching";
 import TVOFF from "../DeviceMonitor/TVOFF";
 import DeviceOff from "../DeviceMonitor/DeviceOff";
+import Header from '../Header/Header';
 
 
 const DeviceMonitor = () => {
+
+
     return (
+        <div><Header title="Device Monitor"/>
         <div class="app-content content" style={{ backgroundColor: "azure", minHeight:"36em" }} >
             <div class="content-overlay"></div>
             <div class="content-wrapper">
@@ -34,6 +38,7 @@ const DeviceMonitor = () => {
                 </div>
             </div>
 
+        </div>
         </div>
 
 

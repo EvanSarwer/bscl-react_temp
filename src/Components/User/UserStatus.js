@@ -8,6 +8,7 @@ import DailyTimeSpentList from "./DailyTimeSpentList";
 import Select from 'react-select';
 import Table from './Table';
 import TimelineChart from './TimelineChart';
+import Header from '../Header/Header';
 
 
 
@@ -215,127 +216,186 @@ const UserStatus = () => {
         minute: '2-digit',
     });
 
-    
+
 
     return (
-        <div class="app-content content">
-            <div class="content-overlay"></div>
-            <div class="content-wrapper" style={{ backgroundColor: "azure" }} >
-                <div class="content-header row">
-                </div>
-                <div class="content-body">
-                    <form  >
-                        <div class="row">
+        <div><Header title="Audience Profile-General" />
+            <div class="app-content content">
+                <div class="content-overlay"></div>
+                <div class="content-wrapper" style={{ backgroundColor: "azure" }} >
+                    <div class="content-header row">
+                    </div>
+                    <div class="content-body">
+                        <form  >
+                            <div class="row">
 
-                            <div class="col-md-5">
-                                <Select
-                                    placeholder="Select User"
-                                    options={users.map(user => ({ label: user.user_name, value: user.id }))}
-                                    onChange={opt => setUser(opt.value) & setUserName(opt.label)}
-                                />
-                            </div>
-                            <div class="col-md-5">
-                                <select class="custom-select d-block w-100" onChange={(e) => { setTime(e.target.value) }}>
-                                    <option value="">Select Time Frame</option>
-                                    <option value="Daily">Last 24 Hours</option>
-                                    <option value="Weekly">Last 7 Days</option>
-                                    <option value="Monthly">Last 30 Days</option>
-                                    <option value="Yearly">Last 365 Days</option>
-                                </select>
-                            </div>
-
-                            <div class="col-md-2">
-                                <div class="dropdown">
-                                    <button class="btn btn-danger dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">Download
-                                        <span class="caret"></span></button>
-                                    <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-                                        {(() => {
-                                            if (msg === "Error") {
-                                                return null;
-                                            } else {
-                                                return <li role="presentation"><button onClick={TimeSpentTimeFrameDownloadfunc} class="btn btn-info btn-sm btn-block" role="menuitem" tabindex="-1" >Time Spent (Time Frame)</button></li>
-
-                                            }
-                                        })()}
-
-                                        {(() => {
-                                            if (channelalltime) {
-                                                return <div><li role="presentation"><button onClick={AlltimeDownloadfunc} class="btn btn-info btn-sm btn-block" role="menuitem" tabindex="-1" >Time Spent All Time</button></li></div>
-                                            } else {
-
-                                                return null;
-                                            }
-                                        })()}
-                                        {(() => {
-                                            if (last24hrData.length > 0) {
-                                                return <div><li role="presentation"><button onClick={OneDayDownloadfunc} class="btn btn-info btn-block btn-sm" role="menuitem" tabindex="-1" >Time Spent 24 hr</button></li></div>
-                                            } else {
-
-                                                return null;
-                                            }
-                                        })()}
-
-                                        {(() => {
-                                            if (msg === "Error") {
-                                                return null;
-
-                                            } else {
-                                                if (channelalltime) {
-                                                    return <li role="presentation"><button onClick={AllTogetherDownloadfunc} class="btn btn-info btn-sm btn-block" role="menuitem" tabindex="-1" >All In One</button></li>
-                                                } else {
-                                                    return null;
-                                                }
-
-                                            }
-                                        })()}
-
-                                        {/* <li role="presentation" class="divider"></li>
-                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Information</a></li> */}
-                                    </ul>
+                                <div class="col-md-5">
+                                    <Select
+                                        placeholder="Select User"
+                                        options={users.map(user => ({ label: user.user_name, value: user.id }))}
+                                        onChange={opt => setUser(opt.value) & setUserName(opt.label)}
+                                    />
+                                </div>
+                                <div class="col-md-5">
+                                    <select class="custom-select d-block w-100" onChange={(e) => { setTime(e.target.value) }}>
+                                        <option value="">Select Time Frame</option>
+                                        <option value="Daily">Last 24 Hours</option>
+                                        <option value="Weekly">Last 7 Days</option>
+                                        <option value="Monthly">Last 30 Days</option>
+                                        <option value="Yearly">Last 365 Days</option>
+                                    </select>
                                 </div>
 
+                                <div class="col-md-2">
+                                    <div class="dropdown">
+                                        <button class="btn btn-danger dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">Download
+                                            <span class="caret"></span></button>
+                                        <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                                            {(() => {
+                                                if (msg === "Error") {
+                                                    return null;
+                                                } else {
+                                                    return <li role="presentation"><button onClick={TimeSpentTimeFrameDownloadfunc} class="btn btn-info btn-sm btn-block" role="menuitem" tabindex="-1" >Time Spent (Time Frame)</button></li>
+
+                                                }
+                                            })()}
+
+                                            {(() => {
+                                                if (channelalltime) {
+                                                    return <div><li role="presentation"><button onClick={AlltimeDownloadfunc} class="btn btn-info btn-sm btn-block" role="menuitem" tabindex="-1" >Time Spent All Time</button></li></div>
+                                                } else {
+
+                                                    return null;
+                                                }
+                                            })()}
+                                            {(() => {
+                                                if (last24hrData.length > 0) {
+                                                    return <div><li role="presentation"><button onClick={OneDayDownloadfunc} class="btn btn-info btn-block btn-sm" role="menuitem" tabindex="-1" >Time Spent 24 hr</button></li></div>
+                                                } else {
+
+                                                    return null;
+                                                }
+                                            })()}
+
+                                            {(() => {
+                                                if (msg === "Error") {
+                                                    return null;
+
+                                                } else {
+                                                    if (channelalltime) {
+                                                        return <li role="presentation"><button onClick={AllTogetherDownloadfunc} class="btn btn-info btn-sm btn-block" role="menuitem" tabindex="-1" >All In One</button></li>
+                                                    } else {
+                                                        return null;
+                                                    }
+
+                                                }
+                                            })()}
+
+                                            {/* <li role="presentation" class="divider"></li>
+                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Information</a></li> */}
+                                        </ul>
+                                    </div>
+
+                                </div>
                             </div>
-                        </div>
-                    </form>
-                    <br />
+                        </form>
+                        <br />
 
-                    {(() => {
-                        if (user !== "") {
+                        {(() => {
+                            if (user !== "") {
 
-                            if (userInfo) {
-                                return <table class="table table-bordered " style={{ backgroundColor: "#FFFF" }}>
-                                    <tr>
-                                        <th>Id</th>
-                                        <th>Name</th>
-                                        <th>Location</th>
-                                        <th>Type</th>
-                                    </tr>
-                                    <tr>
-                                        <td>{userInfo.id}</td>
-                                        <td>{userInfo.user_name}</td>
-                                        <td>{userInfo.address}</td>
-                                        <td>{userInfo.type}</td>
-                                    </tr>
-                                </table>
+                                if (userInfo) {
+                                    return <table class="table table-bordered " style={{ backgroundColor: "#FFFF" }}>
+                                        <tr>
+                                            <th>Id</th>
+                                            <th>Name</th>
+                                            <th>Location</th>
+                                            <th>Type</th>
+                                        </tr>
+                                        <tr>
+                                            <td>{userInfo.id}</td>
+                                            <td>{userInfo.user_name}</td>
+                                            <td>{userInfo.address}</td>
+                                            <td>{userInfo.type}</td>
+                                        </tr>
+                                    </table>
+                                }
+
+
+
+
                             }
+                        })()}
+
+                        <br />
 
 
+                        <div class="row justify-content-md-center">
+                            <div class="col">
 
 
-                        }
-                    })()}
+                                {(() => {
+                                    if (user !== "") {
 
-                    <br />
+                                        if (msg === "Error") {
+                                            return <div class="card">
+                                                <div class="card-header">
+                                                    <h4 class="card-title">Time Spent</h4>
+                                                    <h4><span class="danger">Please Select User & Time Frame</span></h4>
+                                                </div>
+                                            </div>
 
 
-                    <div class="row justify-content-md-center">
-                        <div class="col">
+                                        } else {
+                                            return <div class="card">
+                                                <div class="card-header">
+                                                    <div class="row"><div class="col-6 h2 card-title font-weight-bold">Time Spent (minute)</div><div class="row col h2 card-title text-left">From [<p class="text-primary bold"> {start_string}</p>] to [<p class="text-primary bold">{finish_string}</p>] </div></div>
 
+                                                </div>
+                                                <div class="card-content collapse show ">
+                                                    <div style={{ height: "35em" }}>
+                                                        <Bar
+                                                            data={channelData}
+                                                            options={{
+                                                                responsive: true,
+                                                                maintainAspectRatio: false,
+                                                                title: {
+                                                                    display: true,
+                                                                    text: "Channels",
+                                                                    fontSize: 20
+                                                                },
+                                                                scales: {
+                                                                    y: {
+                                                                        beginAtZero: true,
+                                                                        ticks: {
+                                                                            // Include a dollar sign in the ticks
+                                                                            callback: function (value, index, ticks) {
+                                                                                return value + ' min';
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                },
+                                                                legend: {
+                                                                    display: true,
+                                                                    position: 'right'
+                                                                },
+                                                                plugins: {
+                                                                    legend: {
+                                                                        display: false  //remove if want to show label 
+                                                                    }
+                                                                }
 
-                            {(() => {
-                                if (user !== "") {
+                                                            }}
+                                                        />
+                                                    </div>
 
-                                    if (msg === "Error") {
+                                                </div>
+                                            </div>
+
+                                        }
+
+                                    } else {
+
                                         return <div class="card">
                                             <div class="card-header">
                                                 <h4 class="card-title">Time Spent</h4>
@@ -343,196 +403,139 @@ const UserStatus = () => {
                                             </div>
                                         </div>
 
+                                    }
+                                })()}
+
+
+                            </div>
+                        </div>
+
+
+                        <br />
+
+                        <div class="row justify-content-md-center">
+                            <div class="col" >
+
+                                {(() => {
+                                    if (user === "") {
+                                        return <div class="card">
+                                            <div class="card-header">
+                                                <h4 class="card-title">Watch History Of Last 24 Hours</h4>
+                                                <h4><span class="danger">Please Select User To See Last 24 Hour Data</span></h4>
+                                            </div>
+                                        </div>
+
 
                                     } else {
                                         return <div class="card">
                                             <div class="card-header">
-                                                <div class="row"><div class="col-6 h2 card-title font-weight-bold">Time Spent (minute)</div><div class="row col h2 card-title text-left">From [<p class="text-primary bold"> {start_string}</p>] to [<p class="text-primary bold">{finish_string}</p>] </div></div>
-
+                                                <h4 class="card-title">Watch History Of Last 24 Hours</h4>
                                             </div>
-                                            <div class="card-content collapse show ">
-                                                <div style={{ height: "35em" }}>
-                                                    <Bar
-                                                        data={channelData}
-                                                        options={{
-                                                            responsive: true,
-                                                            maintainAspectRatio: false,
-                                                            title: {
-                                                                display: true,
-                                                                text: "Channels",
-                                                                fontSize: 20
-                                                            },
-                                                            scales: {
-                                                                y: {
-                                                                    beginAtZero: true,
-                                                                    ticks: {
-                                                                        // Include a dollar sign in the ticks
-                                                                        callback: function (value, index, ticks) {
-                                                                            return value + ' min';
-                                                                        }
-                                                                    }
-                                                                }
-                                                            },
-                                                            legend: {
-                                                                display: true,
-                                                                position: 'right'
-                                                            },
-                                                            plugins: {
-                                                                legend: {
-                                                                    display: false  //remove if want to show label 
-                                                                }
-                                                            }
+                                            <div class="card-content collapse show">
 
-                                                        }}
-                                                    />
-                                                </div>
+                                                <TimelineChart class="w-100" user={user} url="/user/last24WatchingData" time="24" />
+
 
                                             </div>
                                         </div>
 
                                     }
+                                })()}
 
-                                } else {
-
-                                    return <div class="card">
-                                        <div class="card-header">
-                                            <h4 class="card-title">Time Spent</h4>
-                                            <h4><span class="danger">Please Select User & Time Frame</span></h4>
-                                        </div>
-                                    </div>
-
-                                }
-                            })()}
-
-
+                            </div>
                         </div>
-                    </div>
 
 
-                    <br />
+                        <br />
 
-                    <div class="row justify-content-md-center">
-                        <div class="col" >
+                        <div class="row justify-content-md-center">
+                            <div class="col" >
 
-                            {(() => {
-                                if (user === "") {
-                                    return <div class="card">
-                                        <div class="card-header">
-                                            <h4 class="card-title">Watch History Of Last 24 Hours</h4>
-                                            <h4><span class="danger">Please Select User To See Last 24 Hour Data</span></h4>
+                                {(() => {
+                                    if (user === "") {
+                                        return <div class="card">
+                                            <div class="card-header">
+                                                <h4 class="card-title">Watch History Of Last 72 Hours</h4>
+                                                <h4><span class="danger">Please Select User To See Last 72 Hour Data</span></h4>
+                                            </div>
                                         </div>
-                                    </div>
 
 
-                                } else {
-                                    return <div class="card">
-                                        <div class="card-header">
-                                            <h4 class="card-title">Watch History Of Last 24 Hours</h4>
+                                    } else {
+                                        return <div class="card">
+                                            <div class="card-header">
+                                                <h4 class="card-title">Watch History Of Last 72 Hours</h4>
+                                            </div>
+                                            <div class="card-content collapse show">
+
+                                                <TimelineChart class="w-100" user={user} url="/user/last72WatchingData" time="72" />
+
+
+                                            </div>
                                         </div>
-                                        <div class="card-content collapse show">
 
-                                            <TimelineChart class="w-100" user={user} url="/user/last24WatchingData" time="24" />
+                                    }
+                                })()}
 
-
-                                        </div>
-                                    </div>
-
-                                }
-                            })()}
-
+                            </div>
                         </div>
-                    </div>
 
+                        <br />
 
-                    <br />
+                        <div class="row match-height">
+                            <div class="col-xl-6  col-12">
+                                {(() => {
+                                    if (channelalltime) {
+                                        return <Table title="All Time Channel Views" channels={allTimeData} error={erroralltime} />
 
-                    <div class="row justify-content-md-center">
-                        <div class="col" >
-
-                            {(() => {
-                                if (user === "") {
-                                    return <div class="card">
-                                        <div class="card-header">
-                                            <h4 class="card-title">Watch History Of Last 72 Hours</h4>
-                                            <h4><span class="danger">Please Select User To See Last 72 Hour Data</span></h4>
+                                    } else {
+                                        return <div class="card">
+                                            <div class="card-header">
+                                                <h4 class="card-title"><span>All Time Channel Views</span></h4>
+                                            </div>
+                                            <div class="card-body">
+                                                <h4 ><span class="danger">Please Select User To Show The Table</span></h4>
+                                            </div>
                                         </div>
-                                    </div>
+
+                                    }
+                                })()}
+                            </div>
+                            <div class="col-xl-6 col-12">
+                                {(() => {
+                                    if (channeldaytime) {
+                                        if (last24hrData.length > 0) {
+                                            return <Table title="Last 24 Hour Channel Views" channels={last24hrData} error={errordaytime} />
+                                        } else {
+                                            return <div class="card">
+                                                <div class="card-header">
+                                                    <h4 class="card-title"><span >Last 24 Hour Channel Views</span></h4>
+                                                </div>
+                                                <div class="card-body">
+                                                    <h4 ><span class="danger">No Data Available For Last 24 hr</span></h4>
+                                                </div>
+                                            </div>
+                                        }
 
 
-                                } else {
-                                    return <div class="card">
-                                        <div class="card-header">
-                                            <h4 class="card-title">Watch History Of Last 72 Hours</h4>
-                                        </div>
-                                        <div class="card-content collapse show">
-
-                                            <TimelineChart class="w-100" user={user} url="/user/last72WatchingData" time="72" />
-
-
-                                        </div>
-                                    </div>
-
-                                }
-                            })()}
-
-                        </div>
-                    </div>
-
-                    <br />
-
-                    <div class="row match-height">
-                        <div class="col-xl-6  col-12">
-                            {(() => {
-                                if (channelalltime) {
-                                    return <Table title="All Time Channel Views" channels={allTimeData} error={erroralltime} />
-
-                                } else {
-                                    return <div class="card">
-                                        <div class="card-header">
-                                            <h4 class="card-title"><span>All Time Channel Views</span></h4>
-                                        </div>
-                                        <div class="card-body">
-                                            <h4 ><span class="danger">Please Select User To Show The Table</span></h4>
-                                        </div>
-                                    </div>
-
-                                }
-                            })()}
-                        </div>
-                        <div class="col-xl-6 col-12">
-                            {(() => {
-                                if (channeldaytime) {
-                                    if (last24hrData.length > 0) {
-                                        return <Table title="Last 24 Hour Channel Views" channels={last24hrData} error={errordaytime} />
                                     } else {
                                         return <div class="card">
                                             <div class="card-header">
                                                 <h4 class="card-title"><span >Last 24 Hour Channel Views</span></h4>
                                             </div>
                                             <div class="card-body">
-                                                <h4 ><span class="danger">No Data Available For Last 24 hr</span></h4>
+                                                <h4 ><span class="danger">Please Select User To Show The Table</span></h4>
                                             </div>
                                         </div>
+
                                     }
-
-
-                                } else {
-                                    return <div class="card">
-                                        <div class="card-header">
-                                            <h4 class="card-title"><span >Last 24 Hour Channel Views</span></h4>
-                                        </div>
-                                        <div class="card-body">
-                                            <h4 ><span class="danger">Please Select User To Show The Table</span></h4>
-                                        </div>
-                                    </div>
-
-                                }
-                            })()}
+                                })()}
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
+            </div>
         </div>
 
     )
