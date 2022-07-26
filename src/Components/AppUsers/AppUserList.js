@@ -1,6 +1,7 @@
 
 import { useState,useEffect } from "react";
 import axiosConfig from '../axiosConfig';
+import Header from "../Header/Header";
 
 
 
@@ -42,6 +43,7 @@ const AppUserList = () => {
 
 
     return (
+        <div><Header title="App Users"/>
         <div class="app-content content">
             <div class="content-overlay"></div>
             <div class="content-wrapper" style={{ backgroundColor: "azure" }} >
@@ -124,6 +126,7 @@ const AppUserList = () => {
                 </div>
             </div>
 
+        </div>
         </div>
     )
 

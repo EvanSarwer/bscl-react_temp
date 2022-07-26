@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axiosConfig from "../axiosConfig";
 import React from 'react';
 import Select from 'react-select';
+import Header from "../Header/Header";
 
 const DownloadReport = () => {
 
@@ -242,26 +243,13 @@ const DownloadReport = () => {
     }, [category, start, finish]);
 
 
-    //////////overview/////////////
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
 
 
     return (
+        <div><Header title="Report Generation"/>
         <div class="app-content content">
             <div class="content-overlay"></div>
             <div class="content-wrapper" style={{ backgroundColor: "azure" }} >
@@ -461,6 +449,7 @@ const DownloadReport = () => {
                 </div>
 
             </div>
+        </div>
         </div>
 
     )

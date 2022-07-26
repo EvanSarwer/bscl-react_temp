@@ -25,9 +25,10 @@ function Admin() {
 
   return (
     <div>
-    <Header />
-    <MainMenu />
+    
+    
     <BrowserRouter>
+    <MainMenu />
       <Routes>
         <Route exact path="/" element={<Dashboard />}></Route>
         <Route exact path="/overview" element={<Overview />}></Route>
