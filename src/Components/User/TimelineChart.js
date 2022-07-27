@@ -54,15 +54,30 @@ const TimelineChart = (props) => {
       plotOptions: {
         bar: {
           horizontal: true,
-          barHeight: '30%',
-          dataLabels: {
-            enabled:true,
-            position: 'top',
-          },          
+          barHeight: '50%',
+            dataLabels: {
+              position: 'top'
+            },
         },
       },
+      dataLabels: {
+        enabled: true,
+        textAnchor: 'start',
+        style: {
+          colors: ['#fff']
+        },
+        offsetX: 0,
+        formatter: function (val, opt) {
+          var diff = val[1]-val[0];
+          var minutes = Math.floor(diff / 60000);
+          var seconds = ((diff % 60000) / 1000).toFixed(0);
+          return minutes + " mins";
+          //return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
+          //return 1
+        }
+      },
       xaxis: {
-        type: 'datetime'
+        type: 'datetime',
       },
       stroke: {
         width: 1
