@@ -9,6 +9,7 @@ import Select from 'react-select';
 import Table from './Table';
 import TimelineChart from './TimelineChart';
 import Header from '../Header/Header';
+import MainMenu from '../MainMenu/MainMenu';
 
 
 
@@ -220,6 +221,7 @@ const UserStatus = () => {
 
     return (
         <div><Header title="Audience Profile-General" />
+            <MainMenu menu="audiencegeneral" />
             <div class="app-content content">
                 <div class="content-overlay"></div>
                 <div class="content-wrapper" style={{ backgroundColor: "azure" }} >

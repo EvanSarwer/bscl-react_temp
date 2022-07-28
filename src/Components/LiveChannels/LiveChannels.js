@@ -11,6 +11,7 @@ import axiosConfig from "../axiosConfig";
 import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS } from 'chart.js/auto';
 import Header from '../Header/Header';
+import MainMenu from '../MainMenu/MainMenu';
 
 
 const LiveChannels = () => {
@@ -119,6 +120,7 @@ const LiveChannels = () => {
 
     return (
         <div><Header title="Live Channels" />
+            <MainMenu menu="livechannels" />
 
             <div class="app-content content">
                 <div class="content-overlay"></div>
