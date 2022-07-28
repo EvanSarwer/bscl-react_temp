@@ -8,6 +8,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import axiosConfig from "../axiosConfig";
 import Header from '../Header/Header';
+import MainMenu from '../MainMenu/MainMenu';
 
 
 
@@ -16,6 +17,7 @@ const Dashboard = () => {
     return (
         <div>
             <Header title="Dashboard" />
+            <MainMenu menu="dashboard" />
 
             <div class="app-content content">
                 <div class="content-overlay"></div>
