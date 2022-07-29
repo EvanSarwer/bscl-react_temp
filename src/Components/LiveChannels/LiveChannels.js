@@ -6,11 +6,12 @@ import TvrGraph from "../Graph/TvrGraph";
 import ActiveChannelTable from "../Table/ActiveChannelTable";
 import ActiveUserTable from "../Table/ActiveUserTable";
 import Map from "../Map/Map";
-import { useState, useEffect } from "react";
+import { useState, useEffect } from "react"; 
 import axiosConfig from "../axiosConfig";
 import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS } from 'chart.js/auto';
 import Header from '../Header/Header';
+import MainMenu from '../MainMenu/MainMenu';
 
 import LiveMap from "./LiveMap";
 
