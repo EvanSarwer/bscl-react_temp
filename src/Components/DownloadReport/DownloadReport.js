@@ -3,6 +3,7 @@ import axiosConfig from "../axiosConfig";
 import React from 'react';
 import Select from 'react-select';
 import Header from "../Header/Header";
+import MainMenu from "../MainMenu/MainMenu";
 
 const DownloadReport = () => {
 
@@ -249,207 +250,208 @@ const DownloadReport = () => {
 
 
     return (
-        <div><Header title="Report Generation"/>
-        <div class="app-content content">
-            <div class="content-overlay"></div>
-            <div class="content-wrapper" style={{ backgroundColor: "azure" }} >
-                <div class="content-header row">
-                </div>
-                <div class="content-body">
-
-
-
-                    <div class="card">
-                        <div class="card-content">
-                            <div class="card-body">
-                                <h1>Download User(General) Report:</h1>
-
-                                <div class="row">
-
-                                    <div class="col-md-5">
-                                        <Select
-                                            placeholder="Select User"
-                                            options={users.map(user => ({ label: user.user_name, value: user.id }))}
-                                            onChange={opt => setUser(opt.value)}
-                                        />
-                                    </div>
-                                    <div class="col-md-5">
-                                        <select class="custom-select d-block w-100" onChange={(e) => { setTime(e.target.value) }}>
-                                            <option value="">Select Time Frame</option>
-                                            <option value="Daily">Daily</option>
-                                            <option value="Weekly">Weekly</option>
-                                            <option value="Monthly">Monthly</option>
-                                            <option value="Yearly">Yearly</option>
-                                        </select>
-                                    </div>
-
-                                    <div class="col-md-2">
-
-                                    <button onClick={userstatusDownloadfunc} class="btn btn-danger">Download CSV</button>
-                                    
-
-
-                                    </div>
-                                </div>
-
-                                <br />
-                                <br />
-
-                            </div>
-                        </div>
+        <div><Header title="Report Generation" />
+            <MainMenu menu="reportgeneration" />
+            <div class="app-content content">
+                <div class="content-overlay"></div>
+                <div class="content-wrapper" style={{ backgroundColor: "azure" }} >
+                    <div class="content-header row">
                     </div>
+                    <div class="content-body">
 
 
 
-                    <div class="card">
-                        <div class="card-content">
-                            <div class="card-body">
-                                <h1>Download Channel Trend Report:</h1>
+                        <div class="card">
+                            <div class="card-content">
+                                <div class="card-body">
+                                    <h1>Download User(General) Report:</h1>
+
+                                    <div class="row">
+
+                                        <div class="col-md-5">
+                                            <Select
+                                                placeholder="Select User"
+                                                options={users.map(user => ({ label: user.user_name, value: user.id }))}
+                                                onChange={opt => setUser(opt.value)}
+                                            />
+                                        </div>
+                                        <div class="col-md-5">
+                                            <select class="custom-select d-block w-100" onChange={(e) => { setTime(e.target.value) }}>
+                                                <option value="">Select Time Frame</option>
+                                                <option value="Daily">Daily</option>
+                                                <option value="Weekly">Weekly</option>
+                                                <option value="Monthly">Monthly</option>
+                                                <option value="Yearly">Yearly</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="col-md-2">
+
+                                            <button onClick={userstatusDownloadfunc} class="btn btn-danger">Download CSV</button>
 
 
 
-                                <br />
-                                <br />
-
-                            </div>
-                        </div>
-                    </div>
-
-
-
-
-                    <div class="card">
-                        <div class="card-content">
-                            <div class="card-body">
-                                <h1>Download Basic Report:</h1>
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <label>Graph Category</label>
-                                        <select class="custom-select d-block w-100" onChange={(e) => { setCategory(e.target.value) }}>
-                                            <option value="Reach(000)">Reach (000)</option>
-                                            <option value="Reach(%)">Reach (%)</option>
-                                            <option value="TVR(000)">TVR (000)</option>
-                                            <option value="TVR(%)">TVR (%)</option>
-                                            <option value="TVR Share(%)">TVR Share (%)</option>
-                                            <option value="Time Spent(Uni)">Time Spent (Uni)</option>
-                                        </select>
-                                    </div>
-
-
-                                    <fieldset class="form-group form-group-style col-md-3">
-                                        <label for="dateTime1">Start Time</label>
-                                        <input type="datetime-local" class="form-control" id="dateTime1" step="1" onChange={(e) => { setStart(e.target.value) }} />
-                                    </fieldset>
-
-
-                                    <fieldset class="form-group form-group-style col-md-3">
-                                        <label for="dateTime1">Finish Time</label>
-                                        <input type="datetime-local" class="form-control" id="dateTime1" step="1" onChange={(e) => { setFinish(e.target.value) }} />
-                                    </fieldset>
-
-
-                                    <div class="col-md-2 text-right">
-                                        <button onClick={BasicchannelDownloadfunc} class="btn btn-danger">Download CSV</button>
-                                    </div>
-
-
-                                </div>
-
-
-                                <br />
-                                <br />
-
-                            </div>
-                        </div>
-                    </div>
-
-
-
-
-
-
-                    <div class="card">
-                        <div class="card-content">
-                            <div class="card-body">
-                                <h1>Download Live Channel Report:</h1>
-
-
-                                <div class="row">
-                                    <div class="col-md-2">
-                                        <select class="custom-select d-block w-100" onChange={(e) => { setRegion(e.target.value) }}>
-                                            <option value="">Choose Region</option>
-                                            <option value="Dhaka">Dhaka</option>
-                                            <option value="Tangail">Tangail</option>
-                                            <option value="Chittagong">Chittagong</option>
-                                            <option value="Rajshahi">Rajshahi</option>
-                                            <option value="Sylhet">Sylhet</option>
-                                            <option value="Mymensingh">Mymensingh</option>
-                                            <option value="Khulna">Khulna</option>
-                                            <option value="Rongpur">Rongpur</option>
-                                            <option value="Barishal">Barishal</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <select class="custom-select d-block w-100" onChange={(e) => { setGender(e.target.value) }}>
-                                            <option value="">Choose Gender</option>
-                                            <option value="m">Male</option>
-                                            <option value="f">Female</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-2">
-
-                                        <select class="custom-select d-block w-100" onChange={(e) => { setEconomic(e.target.value) }}>
-                                            <option value="">Economic Status</option>
-                                            <option value="a1">Lower Class</option>
-                                            <option value="c1">Upper Middle Class</option>
-                                            <option value="d1">Lower Middle Class</option>
-                                            <option value="b1">Upper Class</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-2">
-
-
-                                        <select class="custom-select d-block w-100" onChange={(e) => { setSocio(e.target.value) }}>
-                                            <option value="">Socio Status</option>
-                                            <option value="u">Urban</option>
-                                            <option value="r">Rural</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-2">
-
-                                        <div class="price-range">
-                                            <div class="form-group">
-                                                <div class="slider-sm slider-success my-1" id="small-slider"></div>
-                                            </div>
-                                            <div class="price-slider">
-                                                <div class="price_slider_amount mb-2">
-                                                    <div class="range-amt"><strong>Age Range : </strong> 15
-                                                        - 100</div>
-                                                </div>
-
-                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-2 text-right">
-                                        <button onClick={LivechannelDownloadfunc} class="btn btn-danger">Download CSV</button>
+
+                                    <br />
+                                    <br />
+
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="card">
+                            <div class="card-content">
+                                <div class="card-body">
+                                    <h1>Download Channel Trend Report:</h1>
+
+
+
+                                    <br />
+                                    <br />
+
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+                        <div class="card">
+                            <div class="card-content">
+                                <div class="card-body">
+                                    <h1>Download Basic Report:</h1>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <label>Graph Category</label>
+                                            <select class="custom-select d-block w-100" onChange={(e) => { setCategory(e.target.value) }}>
+                                                <option value="Reach(000)">Reach (000)</option>
+                                                <option value="Reach(%)">Reach (%)</option>
+                                                <option value="TVR(000)">TVR (000)</option>
+                                                <option value="TVR(%)">TVR (%)</option>
+                                                <option value="TVR Share(%)">TVR Share (%)</option>
+                                                <option value="Time Spent(Uni)">Time Spent (Uni)</option>
+                                            </select>
+                                        </div>
+
+
+                                        <fieldset class="form-group form-group-style col-md-3">
+                                            <label for="dateTime1">Start Time</label>
+                                            <input type="datetime-local" class="form-control" id="dateTime1" step="1" onChange={(e) => { setStart(e.target.value) }} />
+                                        </fieldset>
+
+
+                                        <fieldset class="form-group form-group-style col-md-3">
+                                            <label for="dateTime1">Finish Time</label>
+                                            <input type="datetime-local" class="form-control" id="dateTime1" step="1" onChange={(e) => { setFinish(e.target.value) }} />
+                                        </fieldset>
+
+
+                                        <div class="col-md-2 text-right">
+                                            <button onClick={BasicchannelDownloadfunc} class="btn btn-danger">Download CSV</button>
+                                        </div>
+
+
                                     </div>
 
 
-                                </div>
-                                <br />
-                                <br />
+                                    <br />
+                                    <br />
 
+                                </div>
                             </div>
                         </div>
+
+
+
+
+
+
+                        <div class="card">
+                            <div class="card-content">
+                                <div class="card-body">
+                                    <h1>Download Live Channel Report:</h1>
+
+
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <select class="custom-select d-block w-100" onChange={(e) => { setRegion(e.target.value) }}>
+                                                <option value="">Choose Region</option>
+                                                <option value="Dhaka">Dhaka</option>
+                                                <option value="Tangail">Tangail</option>
+                                                <option value="Chittagong">Chittagong</option>
+                                                <option value="Rajshahi">Rajshahi</option>
+                                                <option value="Sylhet">Sylhet</option>
+                                                <option value="Mymensingh">Mymensingh</option>
+                                                <option value="Khulna">Khulna</option>
+                                                <option value="Rongpur">Rongpur</option>
+                                                <option value="Barishal">Barishal</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <select class="custom-select d-block w-100" onChange={(e) => { setGender(e.target.value) }}>
+                                                <option value="">Choose Gender</option>
+                                                <option value="m">Male</option>
+                                                <option value="f">Female</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-2">
+
+                                            <select class="custom-select d-block w-100" onChange={(e) => { setEconomic(e.target.value) }}>
+                                                <option value="">Economic Status</option>
+                                                <option value="a1">Lower Class</option>
+                                                <option value="c1">Upper Middle Class</option>
+                                                <option value="d1">Lower Middle Class</option>
+                                                <option value="b1">Upper Class</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-2">
+
+
+                                            <select class="custom-select d-block w-100" onChange={(e) => { setSocio(e.target.value) }}>
+                                                <option value="">Socio Status</option>
+                                                <option value="u">Urban</option>
+                                                <option value="r">Rural</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-2">
+
+                                            <div class="price-range">
+                                                <div class="form-group">
+                                                    <div class="slider-sm slider-success my-1" id="small-slider"></div>
+                                                </div>
+                                                <div class="price-slider">
+                                                    <div class="price_slider_amount mb-2">
+                                                        <div class="range-amt"><strong>Age Range : </strong> 15
+                                                            - 100</div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 text-right">
+                                            <button onClick={LivechannelDownloadfunc} class="btn btn-danger">Download CSV</button>
+                                        </div>
+
+
+                                    </div>
+                                    <br />
+                                    <br />
+
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
                     </div>
 
-
-
-
                 </div>
-
             </div>
-        </div>
         </div>
 
     )

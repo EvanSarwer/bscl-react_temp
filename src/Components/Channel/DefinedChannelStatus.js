@@ -5,6 +5,7 @@ import axiosConfig from "../axiosConfig";
 import BarGraph from "./Graph/BarGraph";
 import Select from 'react-select';
 import Header from '../Header/Header';
+import MainMenu from '../MainMenu/MainMenu';
 
 
 const ChannelStatus = () => {
@@ -79,9 +80,10 @@ const ChannelStatus = () => {
         }
     }
 
-    
+
     return (
         <div><Header title="Trend Analysis-Day Parts" />
+            <MainMenu menu="trenddaypart" />
             <div class="app-content content">
                 <div class="content-overlay"></div>
                 <div class="content-wrapper" style={{ backgroundColor: "azure" }} >
@@ -191,7 +193,7 @@ const ChannelStatus = () => {
                             <div class="col-md-6">
                                 <div class="content-body">
 
-                                    <div class="card"style={{ height:"7rem"}}>
+                                    <div class="card" style={{ height: "7rem" }}>
                                         <div class="card-content">
                                             <div class="card-body">
 
@@ -260,17 +262,17 @@ const ChannelStatus = () => {
                             <div class="col-md-6">
                                 <div class="content-body">
 
-                                    <div class="card"style={{ height:"7rem"}}>
+                                    <div class="card" style={{ height: "7rem" }}>
                                         <div class="card-content">
                                             <div class="card-body">
 
 
-                                                
-                                            <strong>Start Time: </strong>{start=="" ?'00:00:00':start}
+
+                                                <strong>Start Time: </strong>{start == "" ? '00:00:00' : start}
 
                                                 <br />
-                                                <strong>Finish Time: </strong>{finish=="" ? '23:59:59':finish}
-                                                
+                                                <strong>Finish Time: </strong>{finish == "" ? '23:59:59' : finish}
+
 
 
 
