@@ -5,6 +5,7 @@ import MainMenu from '../MainMenu/MainMenu';
 import Report from '../Report/Report';
 import Dashboard from '../Dashboard/Dashboard';
 import LiveChannels from '../LiveChannels/LiveChannels';
+import LiveMap from "../LiveChannels/LiveMap";
 import ChannelStatus from '../Channel/ChannelStatus';
 import DefinedChannelStatus from '../Channel/DefinedChannelStatus';
 import DeviceMonitor from '../DeviceMonitor/DeviceMonitor';
@@ -34,6 +35,7 @@ function Admin() {
         <Route exact path="/overview" element={<Overview />}></Route>
         <Route exact path="/report" element={<Report />}></Route>
         <Route exact path="/livechannels" element={<LiveChannels />}></Route>
+        <Route exact path="/map" element={<LiveMap />}></Route>
         <Route exact path="/channelstatus" element={<ChannelStatus />}></Route>
         <Route exact path="/definedchannelstatus" element={<DefinedChannelStatus />}></Route>
         <Route exact path="/userstatus" element={<UserStatus />}></Route>

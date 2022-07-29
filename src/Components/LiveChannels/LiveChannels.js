@@ -11,6 +11,7 @@ import axiosConfig from "../axiosConfig";
 import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS } from 'chart.js/auto';
 import Header from '../Header/Header';
+import LiveMap from "./LiveMap";
 
 
 const LiveChannels = () => {
@@ -22,6 +23,7 @@ const LiveChannels = () => {
     const [age, setAge] = useState("");
     const [userType, setUserType] = useState("");
     const [activeUserCSV, setActiveUserCSV] = useState({});
+    const [points, setpoints] = useState([]);
     const [channelData, setChannelData] = useState({
         labels: [],
         datasets: []
@@ -94,6 +96,7 @@ const LiveChannels = () => {
 
         axiosConfig.post("/livechannel/activechannellistgraph", data).then(rsp => {
             console.log(rsp.data);
+            setpoints(rsp.data.points);
             setChannelData(() => ({
                 labels: rsp.data.channels, datasets: [{
                     label: "Active User", data: rsp.data.user_count,
@@ -120,11 +123,10 @@ const LiveChannels = () => {
     return (
         <div><Header title="Live Channels" />
 
-            <div class="app-content content">
-                <div class="content-overlay"></div>
+            {/* <div class="app-content content"> */}
+            <div class=" content">
                 <div class="content-wrapper" style={{ backgroundColor: "azure" }} >
-                    <div class="content-header row">
-                    </div>
+                    
                     <div class="content-body">
 
                         <div class="row">
@@ -204,7 +206,7 @@ const LiveChannels = () => {
                                         <div class="row"><div class="col-11 h2 card-title font-weight-bold">Active User</div><div class="row col card-title align-items-right"><button onClick={LivechannelDownloadfunc} class="btn btn-sm btn-secondary">Download CSV</button></div></div>
 
                                     </div>
-                                    <div class="card-content collapse show" style={{ height: "40em" }}>
+                                    <div class="card-content collapse show" style={{ height: "30em" }}>
 
 
                                         <Bar
@@ -233,11 +235,31 @@ const LiveChannels = () => {
                                 </div>
                             </div>
                         </div>
+
+
+                        <div class="row justify-content-md-center">
+                            <div class="col">
+                                {/* <PostGraph title="Active Users" text="Active Channels" url="reach/percent" label="Active Users" color="blue" credentials={credential} /> */}
+                                <div class="card">
+                                    <div class="card-header">
+                                        <div class="row"><div class="col-11 h2 card-title font-weight-bold">Active User</div><div class="row col card-title align-items-right"><button onClick={LivechannelDownloadfunc} class="btn btn-sm btn-secondary">Download CSV</button></div></div>
+
+                                    </div>
+                                    <div class="card-content collapse show" style={{ height: "15em !important" }}>
+
+
+                                        <LiveMap points={points} />
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                 </div>
             </div>
-        </div>
+         </div>
 
     )
 }
