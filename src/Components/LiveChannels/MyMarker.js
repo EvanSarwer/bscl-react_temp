@@ -9,7 +9,7 @@ const MyMarker = ({ text, tooltip, $hover }) => {
   };
 
   return (
-    <div className={$hover ? "circle hover" : "circle"} onClick={handleClick}>
+    <div className={$hover ? "marker hover" : "marker"} onClick={handleClick}>
       <span className="circleText" title={tooltip}>
       {text}  
       </span>
