@@ -33,15 +33,15 @@ const Header = (props) => {
                     <div class="collapse navbar-collapse" id="navbar-mobile">
                         <ul class="nav navbar-nav mr-auto float-left">
                             <li class="nav-item d-none d-md-block"><a class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i class="ft-menu"></i></a></li>
-                            <li class="nav-item d-none d-lg-block"><a class="nav-link nav-link-expand" href="#"><i class="ficon ft-maximize"></i></a></li>
+                            {/* <li class="nav-item d-none d-lg-block"><a class="nav-link nav-link-expand" href="#"><i class="ficon ft-maximize"></i></a></li> */}
                             <li class="dropdown nav-item mega-dropdown d-none d-lg-block"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown">Menu</a>
                                 <ul class="mega-dropdown-menu dropdown-menu row p-1">
-                                    <li class="col-md-4 bg-mega p-2">
+                                    <li class="col-md bg-mega p-2">
                                         <h5 class="text-white mb-1 font-weight-bold">Bangladesh Satellite Company, Ltd</h5>
                                         <p class="text-white line-height-2">BSCL is a state owned company operating the Bangabandhu-1 satellite, named after the father of the nation, Bangabandhu Sheikh Mujibur Rahman.</p>
                                         <a href="http://www.bscl.gov.bd/" class="btn btn-outline-white" target="_blank">Learn More</a>
                                     </li>
-                                    <li class="col-md-5 px-2">
+                                    <li class="col-md px-2">
                                         <h6 class="font-weight-bold font-medium-2 ml-1">Admin Panel</h6>
                                         <ul class="row mt-2">
                                             <li class="col-6 col-xl-4"><a class="text-center mb-2 mb-xl-3" href="/overview" target="_blank"><i class="la la-history font-large-1 mr-0"></i>
@@ -64,36 +64,36 @@ const Header = (props) => {
                                             </a></li>
                                         </ul>
                                     </li>
-                                    <li class="col-md-3">
+                                    {/* <li class="col-md-3">
                                         <h6 class="font-weight-bold font-medium-2">Profile</h6>
                                         <ul class="row mt-1 mt-xl-2">
                                             <li class="col-12 col-xl-6 pl-0">
                                                 <ul class="mega-component-list">
                                                     <li class="mega-component-item"><a class="mb-1 mb-xl-2" href="component-alerts.html" target="_blank">FAQ</a></li>
                                                     <li class="mega-component-item"><a class="mb-1 mb-xl-2" href="component-callout.html" target="_blank">About Us</a></li>
-                                                    {/* <li class="mega-component-item"><a class="mb-1 mb-xl-2" href="component-buttons-basic.html" target="_blank">FAQ</a></li>
-                                                <li class="mega-component-item"><a class="mb-1 mb-xl-2" href="component-carousel.html" target="_blank">Contact Us</a></li> */}
+                                                    <li class="mega-component-item"><a class="mb-1 mb-xl-2" href="component-buttons-basic.html" target="_blank">FAQ</a></li>
+                                                <li class="mega-component-item"><a class="mb-1 mb-xl-2" href="component-carousel.html" target="_blank">Contact Us</a></li>
                                                 </ul>
                                             </li>
                                             <li class="col-12 col-xl-6 pl-0">
                                                 <ul class="mega-component-list">
                                                     <li class="mega-component-item"><a class="mb-1 mb-xl-2" href="component-dropdowns.html" target="_blank">Support</a></li>
                                                     <li class="mega-component-item"><a class="mb-1 mb-xl-2" href="component-list-group.html" target="_blank">Contact Us</a></li>
-                                                    {/* <li class="mega-component-item"><a class="mb-1 mb-xl-2" href="component-modals.html" target="_blank">Modals</a></li>
-                                                <li class="mega-component-item"><a class="mb-1 mb-xl-2" href="component-pagination.html" target="_blank">Pagination</a></li> */}
+                                                    <li class="mega-component-item"><a class="mb-1 mb-xl-2" href="component-modals.html" target="_blank">Modals</a></li>
+                                                <li class="mega-component-item"><a class="mb-1 mb-xl-2" href="component-pagination.html" target="_blank">Pagination</a></li>
                                                 </ul>
                                             </li>
                                         </ul>
-                                    </li>
+                                    </li> */}
                                 </ul>
                             </li>
-                            <li class="nav-item nav-search"><a class="nav-link nav-link-search" href="#"><i class="ficon ft-search"></i></a>
+                            {/* <li class="nav-item nav-search"><a class="nav-link nav-link-search" href="#"><i class="ficon ft-search"></i></a>
                                 <div class="search-input">
                                     <input class="input" type="text" placeholder="Explore Modern..." tabindex="0" data-search="template-list"></input>
                                     <div class="search-input-close"><i class="ft-x"></i></div>
                                     <ul class="search-list"></ul>
                                 </div>
-                            </li>
+                            </li> */}
                         </ul>
                         <ul class="nav navbar-nav mr-auto text-center">
                             <span class="h4 font-weight-bold">{props.title}</span>
