@@ -7,6 +7,7 @@ import Select from 'react-select';
 
 import MainMenu from '../MainMenu/MainMenu';
 var range;
+var wholejson;
 const ExcelReport = () => {
   const [badf, setbadf] = useState(false);
   const [reach0f, setreach0f] = useState(false);
@@ -102,10 +103,10 @@ console.log(data.id);
 
   const DownloadData = () => {
     //console.log(liveChannelData.labels[0]);
-    var csv = [["Reach(%)", "Reach(000)", "TVR(%)", "TVR(000)"]];
+    var csv = [["Program","Reach(%)", "Reach(000)", "TVR(%)", "TVR(000)"]];
 
     for (var i = 0; i < reach0.length; i++) {
-      csv.push([reachp[i], reach0[i], tvrp[i], tvr0[i]]);
+      csv.push([wholejson[i].Category,reachp[i], reach0[i], tvrp[i], tvr0[i]]);
     }
     console.log(csv);
     getCSV(csv);
@@ -229,9 +230,11 @@ console.log(data.id);
         for (var i = 0; i < json.length; i++) {
           //var obj = json[i];
           arr.push({ start: (mill2date(json[i].Date) + " " + (json[i].Time).substr(0, 8)), finish: timeadd((mill2date(json[i].Date) + " " + (json[i].Time).substr(0, 8)), (json[i].Duration).substr(0, 8)) });
+          
         }
         console.log(arr);
         range = arr;
+        wholejson=json;
         //GetData(arr);
         document.querySelector("#excelld").style.display = "block";
 
