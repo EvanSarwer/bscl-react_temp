@@ -212,7 +212,10 @@ console.log(data.id);
   }
   var timeadd = (dt, ts) => {
     var t = Date.parse(dt);
-    return format((t + t2ms(ts)), "Y-m-d H:i:s");
+    //console.log(format(t , "Y-m-d H:i:s"));
+    //console.log(format(t2ms(ts), "Y-m-d H:i:s"));
+    //console.log(format((t + t2ms(ts)), "Y-m-d H:i:s"));
+    return format((t + t2ms(ts)- t2ms("23:59:59")- t2ms("00:00:01")), "Y-m-d H:i:s");
   }
 
   const ReadUploadFile = (e) => {
@@ -229,6 +232,7 @@ console.log(data.id);
         var arr = [];
         for (var i = 0; i < json.length; i++) {
           //var obj = json[i];
+          //console.log((json[i].Duration).substr(0, 8));
           arr.push({ start: (mill2date(json[i].Date) + " " + (json[i].Time).substr(0, 8)), finish: timeadd((mill2date(json[i].Date) + " " + (json[i].Time).substr(0, 8)), (json[i].Duration).substr(0, 8)) });
           
         }
