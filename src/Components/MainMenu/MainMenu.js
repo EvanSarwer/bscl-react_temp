@@ -178,22 +178,36 @@ const MainMenu = (props) => {
                     })()}
 
                     {(() => {
-                        if (props.menu === "appusers") {
+                        if (props.menu === "deviceusers") {
                             return (
-                                <li class="active nav-item"><a href="/app/users"><i class="la la-users"></i><span class="menu-title" data-i18n="Templates">App users</span></a>
-                    </li>
+                                <li class="active nav-item"><a href="/device/users"><i class="la la-street-view"></i><span class="menu-title" data-i18n="Templates">Device Users</span></a>
+                                </li>
                             )
                         } else {
                             return (
-                                <li class=" nav-item"><a href="/app/users"><i class="la la-users"></i><span class="menu-title" data-i18n="Templates">App users</span></a>
-                    </li>
+                                <li class=" nav-item"><a href="/device/users"><i class="la la-street-view"></i><span class="menu-title" data-i18n="Templates">Device Users</span></a>
+                                </li>
+                            )
+                        }
+                    })()}
+
+                    {(() => {
+                        if (props.menu === "appusers") {
+                            return (
+                                <li class="active nav-item"><a href="/app/users"><i class="la la-users"></i><span class="menu-title" data-i18n="Templates">App Users</span></a>
+                                </li>
+                            )
+                        } else {
+                            return (
+                                <li class=" nav-item"><a href="/app/users"><i class="la la-users"></i><span class="menu-title" data-i18n="Templates">App Users</span></a>
+                                </li>
                             )
                         }
                     })()}
 
 
 
-                    
+
                 </ul>
             </div>
         </div>
