@@ -3,6 +3,7 @@ import { useState, useEffect } from "react"
 import * as xlsx from "xlsx";
 import Header from "../Header/Header";
 import axiosConfig from "../axiosConfig";
+import Select from 'react-select';
 
 import MainMenu from '../MainMenu/MainMenu';
 var range;
@@ -18,7 +19,22 @@ const ExcelReport = () => {
   const [tvr0, settvr0] = useState([]);
   const [tvrp, settvrp] = useState([]);
   const [ranges, setranges] = useState([]);
+  const [channels, setchannels] = useState([]);
+  
+  const [id, setId] = useState("");
+  useEffect(() => {
 
+    axiosConfig.get("/trend/channels").then(rsp => {
+        //console.log(rsp.data);
+        setchannels(rsp.data.channels);
+        console.log(channels);
+
+
+    }).catch(err => {
+
+    })
+
+}, [])
   const IncrementCount = () => {
     // Update state with incremented value
     setupdater(updater + 1);
@@ -30,9 +46,10 @@ const ExcelReport = () => {
     settvr0f(false);
     settvrpf(false);
     var data = {
+      id:id,
       ranges: range
     }
-
+console.log(data.id);
     console.log(updater);
     console.log(data.ranges);
 
@@ -232,7 +249,17 @@ const ExcelReport = () => {
 
       <div class="app-content content" style={{ backgroundColor: "azure", minHeight: "36em" }} >
         <div class="content-wrapper">
-          <h1>Upload excel</h1>
+          
+        <div class="row">
+                            <div class="col-md-5">
+                                <Select
+                                    placeholder="Select channel"
+                                    options={channels.map(channel => ({ label: channel.name, value: channel.id }))}
+                                    onChange={opt => setId(opt.value)}
+                                />
+                            </div>
+                            </div>
+                            <h1>Upload excel</h1>
           <form>
             <label htmlFor="upload">Upload File</label>
             <input
