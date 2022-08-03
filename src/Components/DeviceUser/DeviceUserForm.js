@@ -133,7 +133,7 @@ const DeviceUserForm = (props) => {
                                         <form className="form-horizontal" onSubmit={handleForm} noValidate>
                                             <table class="table table-borderless">
                                                 <tr>
-                                                    <td>User Name</td>
+                                                    <td class="form-label">User Name</td>
                                                     <td><fieldset className="form-group position-relative has-icon-left">
                                                         <input type="text" name="user_name" id="user_name" value={user_name} onChange={(e) => { setUsername(e.target.value) }} readOnly={props.mode == "Edit"} className="form-control" placeholder="Username" tabIndex={1} required data-validation-required-message="Please enter username." />
                                                         <div className="form-control-position">
@@ -144,15 +144,19 @@ const DeviceUserForm = (props) => {
                                                     </fieldset></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Address</td>
+                                                    <td class="form-label">Address</td>
                                                     <td><fieldset className="form-group position-relative has-icon-left">
-                                                        <textarea name="address" id="address" className="form-control" value={address} onChange={(e) => { setAddress(e.target.value) }} placeholder="Address" tabIndex={5} required data-validation-required-message="Please enter address." />
+                                                        <textarea name="address" id="address" className="form-control" value={address} onChange={(e) => { setAddress(e.target.value) }} placeholder="Address" tabIndex={2} required data-validation-required-message="Please enter address." />
                                                         <div className="form-control-position">
                                                             <i className="ft-map-pin" />
                                                         </div>
                                                         <div className="help-block font-small-3" />
                                                         <span class="text-danger">{err_msg.address ? err_msg.address[0] : ''}</span>
-                                                    </fieldset></td>
+                                                    </fieldset>
+                                                    <div class="row"><div class="col-sm-3 col-form-label">Lat:</div><div class="col-sm-9"><input type="text" name="lat" id="lat" value={latitude} onChange={(e) => { setLatitude(e.target.value) }} className="form-control" placeholder="Latitude" tabIndex={3} /></div></div>
+                                                    <div class="row"><div class="col-sm-3 col-form-label">Lng:</div><div class="col-sm-9"><input type="text" name="lng" id="lng" value={longitude} onChange={(e) => { setLongitude(e.target.value) }} className="form-control" placeholder="Longitude" tabIndex={4} /></div></div>
+                                                    
+                                                    </td>
                                                 </tr>
                                                 <tr>
                                                     <td>Age</td>
@@ -169,8 +173,8 @@ const DeviceUserForm = (props) => {
                                                 <tr>
                                                     <td>Gender</td>
                                                     <td><fieldset className="form-group position-relative">
-                                                        <input type="radio" name="gender" value="m" onChange={(e) => { setGender(e.target.value) }} checked={gender === "m"} />Male &nbsp;&nbsp;&nbsp;
-                                                        <input type="radio" name="gender" value="f" onChange={(e) => { setGender(e.target.value) }} checked={gender === "f"} />Female
+                                                        <input type="radio" name="gender" value="m" onChange={(e) => { setGender(e.target.value) }} checked={gender === "m"} />&nbsp;Male &nbsp;&nbsp;&nbsp;
+                                                        <input type="radio" name="gender" value="f" onChange={(e) => { setGender(e.target.value) }} checked={gender === "f"} />&nbsp;Female
                                                         <div className="help-block font-small-3" />
                                                         <span class="text-danger">{err_msg.gender ? err_msg.gender[0] : ''}</span>
                                                     </fieldset></td>
@@ -178,8 +182,8 @@ const DeviceUserForm = (props) => {
                                                 <tr>
                                                     <td>Type</td>
                                                     <td><fieldset className="form-group position-relative">
-                                                        <input type="radio" name="type" value="STB" onChange={(e) => { setType(e.target.value) }} checked={type === "STB"} />STB &nbsp;&nbsp;&nbsp;
-                                                        <input type="radio" name="type" value="OTT" onChange={(e) => { setType(e.target.value) }} checked={type === "OTT"} />OTT
+                                                        <input type="radio" name="type" value="STB" onChange={(e) => { setType(e.target.value) }} checked={type === "STB"} />&nbsp;STB &nbsp;&nbsp;&nbsp;
+                                                        <input type="radio" name="type" value="OTT" onChange={(e) => { setType(e.target.value) }} checked={type === "OTT"} />&nbsp;OTT
                                                         <div className="help-block font-small-3" />
                                                         <span class="text-danger">{err_msg.type ? err_msg.type[0] : ''}</span>
                                                     </fieldset></td>
