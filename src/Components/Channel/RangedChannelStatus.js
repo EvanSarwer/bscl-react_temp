@@ -1,11 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from "react";
 import axiosConfig from "../axiosConfig";
-import CurrentStatus from "../CurrentStatus/CurrentStatus";
-import Graph from "../Graph/Graph";
-import DemoGraph from "../Graph/DemoGraph";
 import Select from 'react-select';
-import GetLineGraph from "../Graph/GetLineGraph";
 import PostLineGraph from "../Graph/PostLineGraph";
 import Header from '../Header/Header';
 import MainMenu from '../MainMenu/MainMenu';
@@ -14,8 +10,8 @@ import MainMenu from '../MainMenu/MainMenu';
 const RangedChannelStatus = () => {
 
     const [update, setUpdate] = useState(0);
-    const [time, setTime] = useState("Daily");
-    const [id, setId] = useState("");
+    const [time, setTime] = useState("15");
+    const [id, setId] = useState("0");
     const [channels, setchannels] = useState([]);
     const [start, setstart] = useState("");
     const [finish, setfinish] = useState("");
@@ -32,9 +28,10 @@ const RangedChannelStatus = () => {
         })
 
     }, [])
-    var credential = { start: "2021-01-01 00:00:00", finish: "2022-01-01 00:00:00" };
     const updater = () => {
         setUpdate(update + 1);
+        var credentials={ "id": id, "range": time, "start":start,"finish":finish };
+        console.log(credentials);
     }
     return (
         <div><Header title="Trend Analysis-General" />
@@ -94,17 +91,17 @@ const RangedChannelStatus = () => {
 
 
                         <div class="row">
-                            <div class="col-md-6">
-                                <PostLineGraph title="Reach (%)" text="Active Channels" url="trend/reach/percent" label="Reach (%)" color="blue" credentials={{ "id": id, "time": time }} update={update} />
+                            <div class="col-md-12">
+                                <PostLineGraph title="Reach (%)" text="Active Channels" url="channel/rangedtrendreach0" label="Reach (%)" color="blue" credentials={{ "id": id, "range": time, "start":start,"finish":finish }} update={update} />
 
                             </div>
-                            <div class="col-md-6">
-                                <PostLineGraph title="Reach (000)" text="Active Channels" url="trend/reach/zero" label="Reach (000)" color="red" credentials={{ "id": id, "time": time }} update={update} />
+                            <div class="col-md-12">
+                                <PostLineGraph title="Reach (000)" text="Active Channels" url="channel/rangedtrendreach0" label="Reach (000)" color="red" credentials={{ "id": id, "range": time, "start":start,"finish":finish }} update={update} />
 
                             </div>
 
                         </div>
-                        <div class="row">
+                        {/* <div class="row">
                             <div class="col-md-6">
                                 <PostLineGraph title="TVR (000)" text="Active Channels" url="trend/tvr/zero" label="TVR (000)" color="violet" credentials={{ "id": id, "time": time }} update={update} />
 
@@ -114,7 +111,7 @@ const RangedChannelStatus = () => {
 
                             </div>
 
-                        </div>
+                        </div> */}
 
                     </div>
                 </div>
