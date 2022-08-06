@@ -34,8 +34,8 @@ const RangedChannelStatus = () => {
         console.log(credentials);
     }
     return (
-        <div><Header title="Trend Analysis-General" />
-            <MainMenu menu="trendgeneral" />
+        <div><Header title="Trend Analysis-Ranged" />
+            <MainMenu menu="trendranged" />
             <div class="app-content content" style={{ backgroundColor: "azure", minHeight: "36em" }}>
                 <div class="content-overlay"></div>
                 <div class="content-wrapper" style={{ backgroundColor: "azure" }} >
@@ -102,12 +102,12 @@ const RangedChannelStatus = () => {
 
                         </div>
                         {/* <div class="row">
-                            <div class="col-md-6">
-                                <PostLineGraph title="TVR (000)" text="Active Channels" url="trend/tvr/zero" label="TVR (000)" color="violet" credentials={{ "id": id, "time": time }} update={update} />
+                            <div class="col-md-12">
+                                <PostLineGraph title="TVR (000)" text="Active Channels" url="channel/rangedtrendtvr0" label="TVR (000)" color="violet" credentials={{ "id": id, "range": time, "start":start,"finish":finish }} update={update} />
 
                             </div>
-                            <div class="col-md-6">
-                                <PostLineGraph title="TVR (%)" text="Active Channels" url="trend/tvr/percent" label="TVR (%)" color="green" credentials={{ "id": id, "time": time }} update={update} />
+                            <div class="col-md-12">
+                                <PostLineGraph title="TVR (%)" text="Active Channels" url="channel/rangedtrendtvr0" label="TVR (%)" color="green" credentials={{ "id": id, "range": time, "start":start,"finish":finish }} update={update} />
 
                             </div>
 
