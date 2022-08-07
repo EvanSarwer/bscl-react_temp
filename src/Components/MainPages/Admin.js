@@ -24,6 +24,7 @@ import Footer from "../Footer/Footer";
 import DeviceUserList from "../DeviceUser/DeviceUserList";
 import AddDeviceUser from "../DeviceUser/AddDeviceUser";
 import EditDeviceUser from "../DeviceUser/EditDeviceUser";
+import EditProfile from "../AppUsers/EditProfile";
 
 
 
@@ -52,7 +53,7 @@ function Admin() {
         <Route exact path="/app/users" element={<AppUserList />}></Route>
         <Route exact path="/app/user/create" element={<AddAppUser />}></Route>
         <Route exact path="/app/user/edit/:id" element={<EditAppUser />}></Route>
-        {/* <Route exact path="/profile/edit" element={<EditProfile />}></Route> */}
+        <Route exact path="/profile/edit" element={<EditProfile />}></Route>
         <Route exact path="/app/user/changepass" element={<ChangePass />}></Route>
         <Route exact path="/device/details/:id" element={<DeviceInfo />}></Route>
         <Route exact path="/device/users" element={<DeviceUserList />}></Route>
