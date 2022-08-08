@@ -16,6 +16,9 @@ const DeviceUserForm = (props) => {
     const [socioStatus, setSocioStatus] = useState("");
     const [latitude, setLatitude] = useState("");
     const [longitude, setLongitude] = useState("");
+    const [getLatitude, setGetLatitude] = useState("");
+    const [getLongitude, setGetLongitude] = useState("");
+    const [isSubscribed, setIsSubscribed] = useState(false);
 
 
     useEffect(() => {
@@ -29,13 +32,51 @@ const DeviceUserForm = (props) => {
                 setGender(obj.gender);
                 setEconomicStatus(obj.economic_status);
                 setSocioStatus(obj.socio_status);
+                setGetLatitude(obj.lat);
+                setGetLongitude(obj.lng);
+                setLatitude(obj.lat);
+                setLongitude(obj.lng);
             }, (err) => {
                 if (err.response.status === 422) {
                     setErrMsg(err.response.data);
 
                 }
             });
+        }else{
+
+            navigator.geolocation.getCurrentPosition(function (position) {
+                //console.log(position);
+                //console.log("Latitude is :", position.coords.latitude);
+                //console.log("Longitude is :", position.coords.longitude);
+                setLatitude(position.coords.latitude);
+                setLongitude(position.coords.longitude);
+    
+            }, function (error) {
+                console.error("Error Code = " + error.code + " - " + error.message);
+            }
+            );
+
         }
+
+
+
+        navigator.permissions
+            .query({ name: "geolocation" })
+            .then(function (result) {
+                if (result.state === "granted") {
+                    console.log(result.state);
+                    //If granted then you can directly call your function here
+                } else if (result.state === "prompt") {
+                    console.log(result.state);
+                } else if (result.state === "denied") {
+                    //If denied then you have to show instructions to enable location
+                    console.log(result.state);
+                    alert("Enable Location to Get Your Current Position");
+                }
+                result.onchange = function () {
+                    console.log(result.state);
+                };
+            });
 
 
         // if ("geolocation" in navigator) {
@@ -44,13 +85,7 @@ const DeviceUserForm = (props) => {
         //     console.log("Not Available");
         // }
 
-        navigator.geolocation.getCurrentPosition(function (position) {
-            //console.log("Latitude is :", position.coords.latitude);
-            //console.log("Longitude is :", position.coords.longitude);
-            setLatitude(position.coords.latitude);
-            setLongitude(position.coords.longitude);
-
-        });
+        
 
 
 
@@ -74,7 +109,7 @@ const DeviceUserForm = (props) => {
     const handleForm = (e) => {
         e.preventDefault();
         if (props.mode == "Edit") {
-            const obj = { user_name: user_name,lat: latitude, lng: longitude, address: address, type: type, age: age, gender: gender, economic_status: economicStatus, socio_status: socioStatus };
+            const obj = { user_name: user_name, lat: latitude, lng: longitude, address: address, type: type, age: age, gender: gender, economic_status: economicStatus, socio_status: socioStatus };
             axiosConfig.post("/deviceuser/edit", obj).then((rsp) => {
 
                 alert(rsp.data.message);
@@ -103,6 +138,31 @@ const DeviceUserForm = (props) => {
         }
 
     }
+
+
+    const handleChange = event => {
+        if (event.target.checked) {
+            //console.log('✅ Checkbox is checked');
+            navigator.geolocation.getCurrentPosition(function (position) {
+                //console.log(position);
+                //console.log("Latitude is :", position.coords.latitude);
+                //console.log("Longitude is :", position.coords.longitude);
+                setLatitude(position.coords.latitude);
+                setLongitude(position.coords.longitude);
+
+            }, function (error) {
+                console.error("Error Code = " + error.code + " - " + error.message);
+            }
+            );
+        } else {
+            //console.log('⛔️ Checkbox is NOT checked');
+            setLatitude(getLatitude);
+            setLongitude(getLongitude);
+
+        }
+        setIsSubscribed(current => !current);
+
+    };
 
 
 
@@ -144,7 +204,13 @@ const DeviceUserForm = (props) => {
                                                     </fieldset></td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="form-label">Address</td>
+                                                    <td class="form-label">Address <br /><br /><br /><br /><br /> {(() => {
+                                                        if (props.mode == "Edit") {
+                                                            return <div><input type="checkbox" id="location" onChange={handleChange} value={isSubscribed} name="location" />
+                                                                <label class="form-label" for="vehicle1">&nbsp; Update Location</label></div>
+
+                                                        }
+                                                    })()}</td>
                                                     <td><fieldset className="form-group position-relative has-icon-left">
                                                         <textarea name="address" id="address" className="form-control" value={address} onChange={(e) => { setAddress(e.target.value) }} placeholder="Address" tabIndex={2} required data-validation-required-message="Please enter address." />
                                                         <div className="form-control-position">
@@ -153,9 +219,18 @@ const DeviceUserForm = (props) => {
                                                         <div className="help-block font-small-3" />
                                                         <span class="text-danger">{err_msg.address ? err_msg.address[0] : ''}</span>
                                                     </fieldset>
-                                                    <div class="row"><div class="col-sm-3 col-form-label">Lat:</div><div class="col-sm-9"><input type="text" name="lat" id="lat" value={latitude} onChange={(e) => { setLatitude(e.target.value) }} className="form-control" placeholder="Latitude" tabIndex={3} /></div></div>
-                                                    <div class="row"><div class="col-sm-3 col-form-label">Lng:</div><div class="col-sm-9"><input type="text" name="lng" id="lng" value={longitude} onChange={(e) => { setLongitude(e.target.value) }} className="form-control" placeholder="Longitude" tabIndex={4} /></div></div>
-                                                    
+                                                        {(() => {
+                                                            if (props.mode == "Edit") {
+                                                                return <div><div class="row"><div class="col-sm-3 col-form-label">Lat:</div><div class="col-sm-9"><input type="text" name="lat" id="lat" value={latitude} onChange={(e) => { setLatitude(e.target.value) }} className="form-control" placeholder="Latitude" tabIndex={3} /></div></div>
+                                                                    <div class="row"><div class="col-sm-3 col-form-label">Lng:</div><div class="col-sm-9"><input type="text" name="lng" id="lng" value={longitude} onChange={(e) => { setLongitude(e.target.value) }} className="form-control" placeholder="Longitude" tabIndex={4} /></div></div></div>
+
+                                                            } else {
+                                                                return <div><div class="row"><div class="col-sm-3 col-form-label">Lat:</div><div class="col-sm-9"><input type="text" name="lat" id="lat" value={latitude} onChange={(e) => { setLatitude(e.target.value) }} className="form-control" placeholder="Latitude" tabIndex={3} /></div></div>
+                                                                    <div class="row"><div class="col-sm-3 col-form-label">Lng:</div><div class="col-sm-9"><input type="text" name="lng" id="lng" value={longitude} onChange={(e) => { setLongitude(e.target.value) }} className="form-control" placeholder="Longitude" tabIndex={4} /></div></div></div>
+                                                            }
+                                                        })()}
+
+
                                                     </td>
                                                 </tr>
                                                 <tr>
