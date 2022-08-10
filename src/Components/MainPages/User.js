@@ -11,24 +11,30 @@ import DownloadReport from '../DownloadReport/DownloadReport';
 import UserStatus from '../User/UserStatus';
 import UserDefined from '../User/UserDefined';
 import Overview from '../Overview/Overview';
+import LiveChannelsUser from "../LiveChannels/LiveChannelsUser";
+import OverviewUser from "../Overview/OverviewUser";
+import DownloadReportUser from "../DownloadReport/DownloadReportUser";
+import RangedChannelStatusUser from "../Channel/RangedChannelStatusUser";
+import DefinedChannelStatusUser from "../Channel/DefinedChannelStatusUser";
+import ChannelStatusUser from "../Channel/ChannelStatusUser";
 
 function User() {
 
   return (
     <div>
+    
+    
+    <BrowserRouter>
     <HeaderUser />
     <MainMenuUser />
-    <BrowserRouter>
       <Routes>
         <Route exact path="/" element={<DashboardUser />}></Route>
-        <Route exact path="/overview" element={<Overview />}></Route>
-        <Route exact path="/livechannels" element={<LiveChannels />}></Route>
-        <Route exact path="/channelstatus" element={<ChannelStatus />}></Route>
-        <Route exact path="/definedchannelstatus" element={<DefinedChannelStatus />}></Route>
-        <Route exact path="/userstatus" element={<UserStatus />}></Route>
-        <Route exact path="/userdefined" element={<UserDefined />}></Route>
-        <Route exact path="/downloadreport" element={<DownloadReport />}></Route>
-        <Route exact path="/devicemonitor" element={<DeviceMonitor />}></Route>
+        <Route exact path="/overview" element={<OverviewUser />}></Route>
+        <Route exact path="/livechannels" element={<LiveChannelsUser />}></Route>
+        <Route exact path="/channelstatus" element={<ChannelStatusUser />}></Route>
+        <Route exact path="/definedchannelstatus" element={<DefinedChannelStatusUser />}></Route>
+        <Route exact path="/rangedchannelstatus" element={<RangedChannelStatusUser />}></Route>
+        <Route exact path="/downloadreport" element={<DownloadReportUser />}></Route>
         <Route
         path="*"
         element={<Navigate to="/" replace />}
