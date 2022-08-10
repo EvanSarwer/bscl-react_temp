@@ -17,6 +17,7 @@ import DownloadReportUser from "../DownloadReport/DownloadReportUser";
 import RangedChannelStatusUser from "../Channel/RangedChannelStatusUser";
 import DefinedChannelStatusUser from "../Channel/DefinedChannelStatusUser";
 import ChannelStatusUser from "../Channel/ChannelStatusUser";
+import ChangePassUser from "../AppUsers/ChangePassUser";
 
 function User() {
 
@@ -29,6 +30,7 @@ function User() {
     <MainMenuUser />
       <Routes>
         <Route exact path="/" element={<DashboardUser />}></Route>
+        <Route exact path="/app/user/changepass" element={<ChangePassUser />}></Route>
         <Route exact path="/overview" element={<OverviewUser />}></Route>
         <Route exact path="/livechannels" element={<LiveChannelsUser />}></Route>
         <Route exact path="/channelstatus" element={<ChannelStatusUser />}></Route>

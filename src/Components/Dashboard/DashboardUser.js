@@ -32,12 +32,12 @@ const DashboardUser = () => {
 
                         {/* Dashboard Table Start */}
                         <div class="row" style={{ minHeight: '390px' }}>
-                            <div class="col-xl-12 col-12">
+                            {/* <div class="col-xl-12 col-12">
                                 <ActiveUserTable />
-                            </div>
-                            {/* <div class="col-xl-4 col-12">
-                                <ActiveChannelTable />
                             </div> */}
+                            <div class="col-xl-12 col-12">
+                                <ActiveChannelTable />
+                            </div>
                         </div>
 
 

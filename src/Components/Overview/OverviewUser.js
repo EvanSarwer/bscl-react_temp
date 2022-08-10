@@ -12,8 +12,8 @@ import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS } from 'chart.js/auto';
 import Header from '../Header/Header';
 import MainMenu from '../MainMenu/MainMenu';
-import MainMenuUser from '../MainMenu/MainMenuUser';
 import HeaderUser from '../Header/HeaderUser';
+import MainMenuUser from '../MainMenu/MainMenuUser';
 
 
 const OverviewUser = () => {
@@ -22,19 +22,20 @@ const OverviewUser = () => {
         return n < 10 ? '0' + n : n
     }
     var yesterday = new Date(new Date().getTime() - (24 * 60 * 60 * 1000)),
-        y_datetime = yesterday.getFullYear() + '-' + pad((yesterday.getMonth() + 1)) + '-' + pad(yesterday.getDate()) + ' ' + yesterday.getHours() + ':' + yesterday.getMinutes() + ':' + yesterday.getSeconds();
+        y_datetime = yesterday.getFullYear() + '-' + pad((yesterday.getMonth() + 1)) + '-' + pad(yesterday.getDate()) + ' 00:00:00';
 
-    var today = new Date(),
-        datetime = today.getFullYear() + '-' + pad((today.getMonth() + 1)) + '-' + pad(today.getDate()) + ' ' + today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+    // var today = new Date(),
+    //     datetime = today.getFullYear() + '-' + pad((today.getMonth() + 1)) + '-' + pad(today.getDate()) + ' ' + today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
 
     const [category, setCategory] = useState("Reach(000)");
-    const [start, setStart] = useState(y_datetime);
-    const [finish, setFinish] = useState(datetime);
+    const [start, setStart] = useState("");
+    const [finish, setFinish] = useState("");
     const [userType, setUserType] = useState("");
     const [region, setRegion] = useState("");
     const [gender, setGender] = useState("");
     const [economic, setEconomic] = useState("");
     const [socio, setSocio] = useState("");
+    const [err, setErr] = useState("error");
 
     const [channelData, setChannelData] = useState({
         labels: [],
@@ -42,35 +43,10 @@ const OverviewUser = () => {
     });
 
     useEffect(() => {
-        var data = {
-            start: start,
-            finish: finish,
-            userType: userType,
-            region: region,
-            gender: gender,
-            economic: economic,
-            socio: socio,
-            age1: parseInt(document.querySelector("#small-slider > div > div:nth-child(2) > div > div.noUi-tooltip").innerHTML),
-            age2: parseInt(document.querySelector("#small-slider > div > div:nth-child(3) > div > div.noUi-tooltip").innerHTML)
-        };
-
-        axiosConfig.post("/overview/reachusergraph", data).then(rsp => {
-            console.log(rsp.data);
-            setChannelData(() => ({
-                labels: rsp.data.channels, datasets: [{
-                    label: "Reach (000)", data: rsp.data.reach,
-                    backgroundColor: ["#50AF95"],
-                    //borderColor: "black",
-                    borderWidth: 1,
-                    categoryPercentage: 0.9,
-                    barPercentage: 1
-                }]
-            }));
-        }).catch(err => {
-
-        });
 
     }, [])
+
+
     const BasicchannelDownloadfunc = () => {
         //console.log(liveChannelData.labels[0]);
         var csv = [["Channel", "Value"]];
@@ -138,7 +114,9 @@ const OverviewUser = () => {
             age2: parseInt(document.querySelector("#small-slider > div > div:nth-child(3) > div > div.noUi-tooltip").innerHTML)
         };
 
-        if (start !== "" && finish !== "") {
+        if (start !== "" && finish !== "" && (new Date(start).getTime() < new Date(y_datetime).getTime()) && (new Date(finish).getTime() < new Date(y_datetime).getTime())) {
+            setErr("");
+
             if (category === "Reach(000)") {
                 axiosConfig.post("/overview/reachusergraph", data).then(rsp => {
                     console.log(rsp.data);
@@ -239,31 +217,33 @@ const OverviewUser = () => {
                 });
             }
 
+        } else {
+            setErr("error");
         }
 
 
 
     }
 
-    var start_string = new Date(start).toLocaleString(undefined, {
-        day: 'numeric',
-        month: 'long',
-        year: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit',
-    });
-    var finish_string = new Date(finish).toLocaleString(undefined, {
-        day: 'numeric',
-        month: 'long',
-        year: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit',
-    });
+    // var start_string = new Date(start).toLocaleString(undefined, {
+    //     day: 'numeric',
+    //     month: 'long',
+    //     year: 'numeric',
+    //     hour: '2-digit',
+    //     minute: '2-digit',
+    // });
+    
 
-    console.log(start);
-    console.log(finish);
+    const modify_date =(date)=>{
 
-
+        return new Date(date).toLocaleString(undefined, {
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+        });
+    }
 
 
     return (
@@ -378,18 +358,19 @@ const OverviewUser = () => {
                                             <button onClick={GetData} class="btn btn-info">Get Data</button>
 
                                         </div>
-                                        <div class="col-md-2 ">
-                                            <button onClick={BasicchannelDownloadfunc} class="btn btn-danger">Download CSV</button>
 
-                                        </div>
+                                        {(() => {
+                                            if (err === "") {
+                                                return (
+                                                    <div class="col-md-2 ">
+                                                        <button onClick={BasicchannelDownloadfunc} class="btn btn-danger">Download CSV</button>
+
+                                                    </div>
+                                                )
+                                            }
+                                        })()}
 
                                     </div>
-
-
-
-
-
-
 
                                 </div>
                             </div>
@@ -400,38 +381,60 @@ const OverviewUser = () => {
                         <div class="row justify-content-md-center">
                             <div class="col">
                                 {/* <PostGraph title="Active Users" text="Active Channels" url="reach/percent" label="Active Users" color="blue" credentials={credential} /> */}
-                                <div class="card">
-                                    <div class="card-header">
-                                        <div class="row"><div class="col-6 h2 card-title font-weight-bold">Channels {category}</div><div class="row col h2 card-title text-left">From [<p class="text-primary bold"> {start_string}</p>] to [<p class="text-primary bold">{finish_string}</p>] </div></div>
-
-                                    </div>
-                                    <div class="card-body collapse show" style={{ height: "35em" }}>
 
 
-                                        <Bar
-                                            data={channelData}
-                                            options={{
-                                                responsive: true,
-                                                maintainAspectRatio: false,
-                                                title: {
-                                                    display: true,
-                                                    text: "Channels",
-                                                    fontSize: 1
-                                                },
-                                                legend: {
-                                                    display: true,
-                                                    position: 'right'
-                                                }, plugins: {
-                                                    legend: {
-                                                        display: false  //remove if want to show label 
-                                                    }
-                                                }
-                                            }}
-                                        />
+                                {(() => {
+                                    if (err === "error") {
+                                        return (
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <div class="h2 card-title text-warning font-weight-bold">Please enter a valid date before <span class="text-primary bold"> {modify_date(y_datetime)}</span></div>
+
+                                                </div>
+                                                <div class="card-body collapse show">
 
 
-                                    </div>
-                                </div>
+                                                </div>
+                                            </div>
+                                        )
+                                    } else {
+                                        return (
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <div class="row"><div class="col-6 h2 card-title font-weight-bold">Channels {category}</div><div class="row col h2 card-title text-left">From [<p class="text-primary bold"> {modify_date(start)}</p>] to [<p class="text-primary bold">{modify_date(finish)}</p>] </div></div>
+
+                                                </div>
+                                                <div class="card-body collapse show" style={{ height: "35em" }}>
+
+                                                    <Bar
+                                                        data={channelData}
+                                                        options={{
+                                                            responsive: true,
+                                                            maintainAspectRatio: false,
+                                                            title: {
+                                                                display: true,
+                                                                text: "Channels",
+                                                                fontSize: 1
+                                                            },
+                                                            legend: {
+                                                                display: true,
+                                                                position: 'right'
+                                                            }, plugins: {
+                                                                legend: {
+                                                                    display: false  //remove if want to show label 
+                                                                }
+                                                            }
+                                                        }}
+                                                    />
+
+
+                                                </div>
+                                            </div>
+                                        )
+                                    }
+                                })()}
+
+
                             </div>
                         </div>
                     </div>
