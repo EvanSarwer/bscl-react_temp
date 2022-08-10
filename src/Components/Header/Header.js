@@ -3,7 +3,7 @@ const Header = (props) => {
     var logout=()=>{
         axiosConfig.get("/logout").then((rsp)=>{
             localStorage.clear();
-            window.open("http://localhost:3000/","_self");
+            window.open("/","_self");
         },(err)=>{
 
         });

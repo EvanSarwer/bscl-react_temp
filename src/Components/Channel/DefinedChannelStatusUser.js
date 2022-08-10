@@ -6,9 +6,11 @@ import BarGraph from "./Graph/BarGraph";
 import Select from 'react-select';
 import Header from '../Header/Header';
 import MainMenu from '../MainMenu/MainMenu';
+import HeaderUser from '../Header/HeaderUser';
+import MainMenuUser from '../MainMenu/MainMenuUser';
 
 
-const DefinedChannelStatus = () => {
+const DefinedChannelStatusUser = () => {
 
     var cc;
     const [update, setUpdate] = useState(0);
@@ -82,8 +84,8 @@ const DefinedChannelStatus = () => {
 
 
     return (
-        <div><Header title="Trend Analysis-Day Parts" />
-            <MainMenu menu="trenddaypart" />
+        <div><HeaderUser title="Trend Analysis-Day Parts" />
+            <MainMenuUser menu="trenddaypart" />
             <div class="app-content content">
                 <div class="content-overlay"></div>
                 <div class="content-wrapper" style={{ backgroundColor: "azure" }} >
@@ -321,4 +323,4 @@ const DefinedChannelStatus = () => {
 
     )
 }
-export default DefinedChannelStatus;
+export default DefinedChannelStatusUser;
