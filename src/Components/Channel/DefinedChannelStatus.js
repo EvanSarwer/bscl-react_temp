@@ -143,13 +143,13 @@ const DefinedChannelStatus = () => {
                                         </div>
                                         <div class="col-md-2">
                                             <div class="h4 font-weight-bold">Select Day</div>
-                                            <input type="checkbox" name="day" value="6" onChange={function (event) { checkbox('day'); }} /><span class="h6">Sunday</span><br />
-                                            <input type="checkbox" name="day" value="0" onChange={function (event) { checkbox('day'); }} /><span class="h6">Monday</span><br />
-                                            <input type="checkbox" name="day" value="1" onChange={function (event) { checkbox('day'); }} /><span class="h6">Tuesday</span><br />
-                                            <input type="checkbox" name="day" value="2" onChange={function (event) { checkbox('day'); }} /><span class="h6">Wednesday</span><br />
-                                            <input type="checkbox" name="day" value="3" onChange={function (event) { checkbox('day'); }} /><span class="h6">Thursday</span><br />
-                                            <input type="checkbox" name="day" value="4" onChange={function (event) { checkbox('day'); }} /><span class="h6">Friday</span><br />
-                                            <input type="checkbox" name="day" value="5" onChange={function (event) { checkbox('day'); }} /><span class="h6">Saturday</span><br />
+                                            <input type="checkbox" name="day" value="0" onChange={function (event) { checkbox('day'); }} /><span class="h6">Sunday</span><br />
+                                            <input type="checkbox" name="day" value="1" onChange={function (event) { checkbox('day'); }} /><span class="h6">Monday</span><br />
+                                            <input type="checkbox" name="day" value="2" onChange={function (event) { checkbox('day'); }} /><span class="h6">Tuesday</span><br />
+                                            <input type="checkbox" name="day" value="3" onChange={function (event) { checkbox('day'); }} /><span class="h6">Wednesday</span><br />
+                                            <input type="checkbox" name="day" value="4" onChange={function (event) { checkbox('day'); }} /><span class="h6">Thursday</span><br />
+                                            <input type="checkbox" name="day" value="5" onChange={function (event) { checkbox('day'); }} /><span class="h6">Friday</span><br />
+                                            <input type="checkbox" name="day" value="6" onChange={function (event) { checkbox('day'); }} /><span class="h6">Saturday</span><br />
                                         </div>
                                         <div class="col-md-2">
                                             <br></br><br /><br></br><br />
