@@ -116,48 +116,48 @@ const DownloadReportUser = () => {
 
     //////////user status////////////
 
-    const userstatusDownloadfunc = () => {
-        //console.log(liveChannelData.labels[0]);
-        var csv = [["Channel", "Value"]];
-        var sampleLive = userstatuschannelData;
-        for (var i = 0; i < sampleLive.labels.length; i++) {
-            csv.push([sampleLive.labels[i], sampleLive.values[i]]);
-        }
-        console.log(csv);
-        getCSV(csv);
-    }
+    // const userstatusDownloadfunc = () => {
+    //     //console.log(liveChannelData.labels[0]);
+    //     var csv = [["Channel", "Value"]];
+    //     var sampleLive = userstatuschannelData;
+    //     for (var i = 0; i < sampleLive.labels.length; i++) {
+    //         csv.push([sampleLive.labels[i], sampleLive.values[i]]);
+    //     }
+    //     console.log(csv);
+    //     getCSV(csv);
+    // }
 
-    useEffect(() => {
+    // useEffect(() => {
 
-        axiosConfig.get("/getuserlist").then(rsp => {
-            console.log(rsp.data.users);
-            setUsers(rsp.data.users);
+    //     axiosConfig.get("/getuserlist").then(rsp => {
+    //         console.log(rsp.data.users);
+    //         setUsers(rsp.data.users);
 
-        }).catch(err => {
+    //     }).catch(err => {
 
-        })
+    //     })
 
-    }, [])
+    // }, [])
 
-    useEffect(() => {
-        var data = {
-            user: user,
-            time: time,
-        };
+    // useEffect(() => {
+    //     var data = {
+    //         user: user,
+    //         time: time,
+    //     };
 
-        axiosConfig.post("/user/usertimespent", data).then(rsp => {
-            console.log(rsp.data);
-            setuserstatusChannelData(() => ({
-                labels: rsp.data.channels, values: rsp.data.totaltime
-            }));
-            //console.log(userstatuschannelData);
-        }).catch(err => {
+    //     axiosConfig.post("/user/usertimespent", data).then(rsp => {
+    //         console.log(rsp.data);
+    //         setuserstatusChannelData(() => ({
+    //             labels: rsp.data.channels, values: rsp.data.totaltime
+    //         }));
+    //         //console.log(userstatuschannelData);
+    //     }).catch(err => {
 
-        });
+    //     });
 
 
 
-    }, [user, time]);
+    // }, [user, time]);
 
 
 
@@ -263,7 +263,7 @@ const DownloadReportUser = () => {
 
 
 
-                        <div class="card">
+                        {/* <div class="card">
                             <div class="card-content">
                                 <div class="card-body">
                                     <h1>Download User(General) Report:</h1>
@@ -301,11 +301,11 @@ const DownloadReportUser = () => {
 
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
 
 
 
-                        <div class="card">
+                        {/* <div class="card">
                             <div class="card-content">
                                 <div class="card-body">
                                     <h1>Download Channel Trend Report:</h1>
@@ -317,7 +317,7 @@ const DownloadReportUser = () => {
 
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
 
 
 

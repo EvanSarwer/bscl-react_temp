@@ -21,7 +21,8 @@ const OverviewUser = () => {
     function pad(n) {
         return n < 10 ? '0' + n : n
     }
-    var yesterday = new Date(new Date().getTime() - (24 * 60 * 60 * 1000)),
+    //var yesterday = new Date(new Date().getTime() - (24 * 60 * 60 * 1000)),
+    var yesterday = new Date(),
         y_datetime = yesterday.getFullYear() + '-' + pad((yesterday.getMonth() + 1)) + '-' + pad(yesterday.getDate()) + ' 00:00:00';
 
     // var today = new Date(),
