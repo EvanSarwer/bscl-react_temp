@@ -221,12 +221,12 @@ const MainMenu = (props) => {
                     {(() => {
                         if (props.menu === "excelreport") {
                             return (
-                                <li class="active nav-item"><a href="/excelreport"><i class="la la-download"></i><span class="menu-title" data-i18n="Templates">Excel Report</span></a>
+                                <li class="active nav-item"><a href="/excelreport"><i class="la la-download"></i><span class="menu-title" data-i18n="Templates">Ad TRP</span></a>
                                 </li>
                             )
                         } else {
                             return (
-                                <li class=" nav-item"><a href="/excelreport"><i class="la la-download"></i><span class="menu-title" data-i18n="Templates">Excel Report</span></a>
+                                <li class=" nav-item"><a href="/excelreport"><i class="la la-download"></i><span class="menu-title" data-i18n="Templates">Ad TRP</span></a>
                                 </li>
                             )
                         }

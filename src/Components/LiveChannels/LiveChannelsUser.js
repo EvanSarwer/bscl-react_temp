@@ -243,9 +243,9 @@ const LiveChannelsUser = () => {
                         </div>
 
 
-                        <div class="row justify-content-md-center">
+                        {/* <div class="row justify-content-md-center">
                             <div class="col">
-                                {/* <PostGraph title="Active Users" text="Active Channels" url="reach/percent" label="Active Users" color="blue" credentials={credential} /> */}
+                                
                                 <div class="card">
                                     <div class="card-header">
                                         <div class="row"><div class="col-11 h2 card-title font-weight-bold">Active User</div><div class="row col card-title align-items-right"><button onClick={LivechannelDownloadfunc} class="btn btn-sm btn-secondary">Download CSV</button></div></div>
@@ -260,7 +260,10 @@ const LiveChannelsUser = () => {
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
+
+
+
                     </div>
 
                 </div>

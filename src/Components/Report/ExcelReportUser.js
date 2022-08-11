@@ -4,11 +4,14 @@ import * as xlsx from "xlsx";
 import Header from "../Header/Header";
 import axiosConfig from "../axiosConfig";
 import Select from 'react-select';
-
 import MainMenu from '../MainMenu/MainMenu';
+import MainMenuUser from '../MainMenu/MainMenuUser';
+import HeaderUser from '../Header/HeaderUser';
+
+
 var range;
 var wholejson;
-const ExcelReport = () => {
+const ExcelReportUser = () => {
   const [badf, setbadf] = useState(false);
   const [reach0f, setreach0f] = useState(false);
   const [reachpf, setreachpf] = useState(false);
@@ -251,8 +254,8 @@ console.log(data.id);
 
 
   return (
-    <div><Header title="Ad TRP" />
-      <MainMenu menu="excelreport" />
+    <div><HeaderUser title="Ad TRP" />
+      <MainMenuUser menu="excelreport" />
 
       <div class="app-content content" style={{ backgroundColor: "azure", minHeight: "36em" }} >
         <div class="content-wrapper">
@@ -315,4 +318,4 @@ console.log(data.id);
   )
 
 }
-export default ExcelReport;
+export default ExcelReportUser;
