@@ -34,8 +34,8 @@ const DayRangedChannelStatus = () => {
         console.log(credentials);
     }
     return (
-        <div><Header title="Trend Analysis-Ranged" />
-            <MainMenu menu="trendranged" />
+        <div><Header title="Trend Analysis Day-Ranged" />
+            <MainMenu menu="daytrendranged" />
             <div class="app-content content" style={{ backgroundColor: "azure", minHeight: "36em" }}>
                 <div class="content-overlay"></div>
                 <div class="content-wrapper" style={{ backgroundColor: "azure" }} >

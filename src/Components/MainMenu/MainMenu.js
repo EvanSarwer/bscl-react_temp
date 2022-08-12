@@ -140,6 +140,20 @@ const MainMenu = (props) => {
                                         )
                                     }
                                 })()}
+                                
+{(() => {
+                                    if (props.menu === "daytrendranged") {
+                                        return (
+                                            <li class="active"><a class="menu-item" href="/dayrangedchannelstatus"><i></i><span data-i18n="Crypto">Day-Ranged</span></a>
+                                            </li>
+                                        )
+                                    } else {
+                                        return (
+                                            <li><a class="menu-item" href="/dayrangedchannelstatus"><i></i><span data-i18n="Crypto">Day-Ranged</span></a>
+                                            </li>
+                                        )
+                                    }
+                                })()}
 
                                 {(() => {
                                     if (props.menu === "trenddaypart") {
