@@ -293,17 +293,17 @@ const DefinedChannelStatusUser = () => {
                             </div>
 
                         </div>
-                        {/* <div class="row">
-                            <div class="col-md-12">
-                                <PostLineGraph title="TVR (000)" text="Active Channels" url="channel/rangedtrendtvr0" label="TVR (000)" color="violet" credentials={{ "id": id, "range": time, "start":start,"finish":finish }} update={update} />
+                        <div class="row">
+                        <div class="col-md-12">
+                                <PostLineGraph title="TVR (000)" text="Active Channels" url="trend/dayrangedtvr0" label="TVR (000)" color="violet" credentials={{ "id": id, "range": time, "start":start,"finish":finish }} update={update} />
 
                             </div>
                             <div class="col-md-12">
-                                <PostLineGraph title="TVR (%)" text="Active Channels" url="channel/rangedtrendtvr0" label="TVR (%)" color="green" credentials={{ "id": id, "range": time, "start":start,"finish":finish }} update={update} />
+                                <PostLineGraph title="TVR (%)" text="Active Channels" url="trend/dayrangedtvrp" label="TVR (%)" color="green" credentials={{ "id": id, "range": time, "start":start,"finish":finish }} update={update} />
 
                             </div>
 
-                        </div> */}
+                        </div>
 
                     </div>
                 </div>
