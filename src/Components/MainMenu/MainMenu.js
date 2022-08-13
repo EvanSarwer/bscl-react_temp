@@ -127,7 +127,7 @@ const MainMenu = (props) => {
                                     }
                                 })()}
 
-                                {(() => {
+                                {/* {(() => {
                                     if (props.menu === "trendranged") {
                                         return (
                                             <li class="active"><a class="menu-item" href="/rangedchannelstatus"><i></i><span data-i18n="Crypto">Ranged</span></a>
@@ -139,7 +139,7 @@ const MainMenu = (props) => {
                                             </li>
                                         )
                                     }
-                                })()}
+                                })()} */}
 
                                 {(() => {
                                     if (props.menu === "daytrendranged") {

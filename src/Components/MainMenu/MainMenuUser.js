@@ -61,7 +61,7 @@ const MainMenuUser = (props) => {
                         <div>
                             <ul class="menu-content">
 
-                                {(() => {
+                            {(() => {
                                     if (props.menu === "trendgeneral") {
                                         return (
                                             <li class="active"><a class="menu-item" href="/channelstatus"><i></i><span data-i18n="Crypto">General</span></a>
@@ -75,7 +75,7 @@ const MainMenuUser = (props) => {
                                     }
                                 })()}
 
-                                {(() => {
+                                {/* {(() => {
                                     if (props.menu === "trendranged") {
                                         return (
                                             <li class="active"><a class="menu-item" href="/rangedchannelstatus"><i></i><span data-i18n="Crypto">Ranged</span></a>
@@ -87,8 +87,7 @@ const MainMenuUser = (props) => {
                                             </li>
                                         )
                                     }
-                                })()}
-
+                                })()} */}
 
                                 {(() => {
                                     if (props.menu === "daytrendranged") {
@@ -103,8 +102,6 @@ const MainMenuUser = (props) => {
                                         )
                                     }
                                 })()}
-
-
 
                                 {(() => {
                                     if (props.menu === "trenddaypart") {
