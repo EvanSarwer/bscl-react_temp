@@ -91,7 +91,7 @@ const DayRangedChannelStatus = () => {
 
 
     useEffect(() => {
-
+if(update>0){
         var data = {
             id: id, month: month, year: year, day: day, start: start, finish: finish
         };
@@ -126,7 +126,7 @@ const DayRangedChannelStatus = () => {
 
         });
 
-
+    }
 
     }, [update]);
 

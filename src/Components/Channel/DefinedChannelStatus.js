@@ -80,7 +80,7 @@ const DefinedChannelStatus = () => {
 
 
     useEffect(() => {
-
+        if(update>0){
         var data = {
             id: id, range: time, start: start, finish: finish
         };
@@ -101,7 +101,7 @@ const DefinedChannelStatus = () => {
 
         });
 
-
+    }
 
     }, [update]);
 
