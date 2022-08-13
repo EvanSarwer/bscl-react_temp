@@ -233,9 +233,9 @@ const OverviewUser = () => {
     //     hour: '2-digit',
     //     minute: '2-digit',
     // });
-    
 
-    const modify_date =(date)=>{
+
+    const modify_date = (date) => {
 
         return new Date(date).toLocaleString(undefined, {
             day: 'numeric',
@@ -309,10 +309,11 @@ const OverviewUser = () => {
                                             <label>SEC</label>
                                             <select class="custom-select d-block w-100" onChange={(e) => { setEconomic(e.target.value) }}>
                                                 <option value="">All SEC</option>
-                                                <option value="a1">Lower Class</option>
-                                                <option value="c1">Upper Middle Class</option>
-                                                <option value="d1">Lower Middle Class</option>
                                                 <option value="b1">Upper Class</option>
+                                                <option value="c1">Upper Middle Class</option>
+                                                <option value="e1">Middle Class</option>
+                                                <option value="d1">Lower Middle Class</option>
+                                                <option value="a1">Lower Class</option>
                                             </select>
                                         </div>
 

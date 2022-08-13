@@ -6,7 +6,7 @@ import TvrGraph from "../Graph/TvrGraph";
 import ActiveChannelTable from "../Table/ActiveChannelTable";
 import ActiveUserTable from "../Table/ActiveUserTable";
 import Map from "../Map/Map";
-import { useState, useEffect } from "react"; 
+import { useState, useEffect } from "react";
 import axiosConfig from "../axiosConfig";
 import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS } from 'chart.js/auto';
@@ -132,7 +132,7 @@ const LiveChannelsUser = () => {
             {/* <div class="app-content content"> */}
             <div class=" content">
                 <div class="content-wrapper" style={{ backgroundColor: "azure" }} >
-                    
+
                     <div class="content-body">
 
                         <div class="row">
@@ -168,10 +168,11 @@ const LiveChannelsUser = () => {
 
                                 <select class="custom-select d-block w-100" onChange={(e) => { setEconomic(e.target.value) }}>
                                     <option value="">All SEC</option>
-                                    <option value="a1">Lower Class</option>
-                                    <option value="c1">Upper Middle Class</option>
-                                    <option value="d1">Lower Middle Class</option>
                                     <option value="b1">Upper Class</option>
+                                    <option value="c1">Upper Middle Class</option>
+                                    <option value="e1">Middle Class</option>
+                                    <option value="d1">Lower Middle Class</option>
+                                    <option value="a1">Lower Class</option>
                                 </select>
                             </div>
                             <div class="col-md-2">
@@ -268,7 +269,7 @@ const LiveChannelsUser = () => {
 
                 </div>
             </div>
-         </div>
+        </div>
 
     )
 }

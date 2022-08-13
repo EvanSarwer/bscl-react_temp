@@ -278,10 +278,12 @@ const DeviceUserForm = (props) => {
                                                     <td><fieldset className="form-group position-relative">
                                                         <select class="custom-select d-block w-100" value={economicStatus} onChange={(e) => { setEconomicStatus(e.target.value) }}>
                                                             <option value="">Select</option>
-                                                            <option value="a1">Lower Class</option>
-                                                            <option value="c1">Upper Middle Class</option>
-                                                            <option value="d1">Lower Middle Class</option>
                                                             <option value="b1">Upper Class</option>
+                                                            <option value="c1">Upper Middle Class</option>
+                                                            <option value="e1">Middle Class</option>
+                                                            <option value="d1">Lower Middle Class</option>
+                                                            <option value="a1">Lower Class</option>
+                                                            
                                                         </select>
                                                         <div className="help-block font-small-3" />
                                                         <span class="text-danger">{err_msg.economic_status ? err_msg.economic_status[0] : ''}</span>

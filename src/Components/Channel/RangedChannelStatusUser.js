@@ -5,8 +5,8 @@ import Select from 'react-select';
 import PostLineGraph from "../Graph/PostLineGraph";
 import Header from '../Header/Header';
 import MainMenu from '../MainMenu/MainMenu';
-import HeaderUser from '../Header/HeaderUser';
 import MainMenuUser from '../MainMenu/MainMenuUser';
+import HeaderUser from '../Header/HeaderUser';
 
 
 const RangedChannelStatusUser = () => {
@@ -32,7 +32,7 @@ const RangedChannelStatusUser = () => {
     }, [])
     const updater = () => {
         setUpdate(update + 1);
-        var credentials={ "id": id, "range": time, "start":start,"finish":finish };
+        var credentials = { "id": id, "range": time, "start": start, "finish": finish };
         console.log(credentials);
     }
     return (
@@ -64,27 +64,104 @@ const RangedChannelStatusUser = () => {
                                         </div>
 
 
-                                    
-                                    <div class="col-md-5">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                            <fieldset class="form-group form-group-style">
-                                            <label for="dateTime1">Start Time</label>
-                                            <input type="datetime-local" class="form-control" id="dateTime1" step="1" onChange={(e) => { setstart(e.target.value) }} />
-                                        </fieldset>
+
+                                        <div class="col-md-5">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <fieldset class="form-group form-group-style">
+                                                        <label for="dateTime1">Start Time</label>
+                                                        <input type="datetime-local" class="form-control" id="dateTime1" step="1" onChange={(e) => { setstart(e.target.value) }} />
+                                                    </fieldset>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <fieldset class="form-group form-group-style">
+                                                        <label for="dateTime1">Finish Time</label>
+                                                        <input type="datetime-local" class="form-control" id="dateTime1" step="1" onChange={(e) => { setfinish(e.target.value) }} />
+                                                    </fieldset>
+                                                </div>
                                             </div>
-                                            <div class="col-md-6">
-                                            <fieldset class="form-group form-group-style">
-                                            <label for="dateTime1">Finish Time</label>
-                                            <input type="datetime-local" class="form-control" id="dateTime1" step="1" onChange={(e) => { setfinish(e.target.value) }} />
-                                        </fieldset>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <button onClick={updater} class="btn btn-info">Get Data</button>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="row">
+
+                                        <div class="col-md-2">
+                                            <label>Type (STB/OTT)</label>
+                                            <select class="custom-select d-block w-100" onChange={(e) => { }}>
+                                                <option value="">All</option>
+                                                <option value="STB">STB</option>
+                                                <option value="OTT">OTT</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="col-md-2">
+                                            <label>Region</label>
+                                            <select class="custom-select d-block w-100" onChange={(e) => { }}>
+                                                <option value="">All Region</option>
+                                                <option value="Dhaka">Dhaka</option>
+                                                <option value="Tangail">Tangail</option>
+                                                <option value="Chittagong">Chittagong</option>
+                                                <option value="Rajshahi">Rajshahi</option>
+                                                <option value="Sylhet">Sylhet</option>
+                                                <option value="Mymensingh">Mymensingh</option>
+                                                <option value="Khulna">Khulna</option>
+                                                <option value="Rongpur">Rongpur</option>
+                                                <option value="Barishal">Barishal</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label>Gender</label>
+                                            <select class="custom-select d-block w-100" onChange={(e) => { }}>
+                                                <option value="">All Gender</option>
+                                                <option value="m">Male</option>
+                                                <option value="f">Female</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="col-md-2">
+                                            <label>SEC</label>
+                                            <select class="custom-select d-block w-100" onChange={(e) => { }}>
+                                                <option value="">All SEC</option>
+                                                <option value="a1">Lower Class</option>
+                                                <option value="c1">Upper Middle Class</option>
+                                                <option value="d1">Lower Middle Class</option>
+                                                <option value="b1">Upper Class</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="col-md-2">
+                                            <label>Urban/Rural</label>
+                                            <select class="custom-select d-block w-100" onChange={(e) => { }}>
+                                                <option value="">Urban & Rural</option>
+                                                <option value="u">Urban</option>
+                                                <option value="r">Rural</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="col-md-2">
+                                            <div class="price-range">
+                                                <div class="form-group">
+                                                    <div class="slider-sm slider-success my-1" id="small-slider"></div>
+                                                </div>
+                                                <div class="price-slider">
+                                                    <div class="price_slider_amount mb-2">
+                                                        <div class="range-amt"><strong>Age Range : </strong> 15
+                                                            - 100</div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-1">
-                                        <button onClick={updater} class="btn btn-info">Get Data</button>
-                                    </div>
-                                </div>
+
+
+
+
+
+
                                 </div>
                             </div>
                         </div>
@@ -94,11 +171,11 @@ const RangedChannelStatusUser = () => {
 
                         <div class="row">
                             <div class="col-md-12">
-                                <PostLineGraph title="Reach (%)" text="Active Channels" url="channel/rangedtrendreach0" label="Reach (%)" color="blue" credentials={{ "id": id, "range": time, "start":start,"finish":finish }} update={update} />
+                                <PostLineGraph title="Reach (%)" text="Active Channels" url="channel/rangedtrendreach0" label="Reach (%)" color="blue" credentials={{ "id": id, "range": time, "start": start, "finish": finish }} update={update} />
 
                             </div>
                             <div class="col-md-12">
-                                <PostLineGraph title="Reach (000)" text="Active Channels" url="channel/rangedtrendreach0" label="Reach (000)" color="red" credentials={{ "id": id, "range": time, "start":start,"finish":finish }} update={update} />
+                                <PostLineGraph title="Reach (000)" text="Active Channels" url="channel/rangedtrendreach0" label="Reach (000)" color="red" credentials={{ "id": id, "range": time, "start": start, "finish": finish }} update={update} />
 
                             </div>
 
