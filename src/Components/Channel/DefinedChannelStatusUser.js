@@ -145,13 +145,13 @@ const DefinedChannelStatusUser = () => {
                                         </div>
                                         <div class="col-md-2">
                                             <div class="h4 font-weight-bold">Select Day</div>
-                                            <input type="checkbox" name="day" value="6" onChange={function (event) { checkbox('day'); }} /><span class="h6">Sunday</span><br />
-                                            <input type="checkbox" name="day" value="0" onChange={function (event) { checkbox('day'); }} /><span class="h6">Monday</span><br />
-                                            <input type="checkbox" name="day" value="1" onChange={function (event) { checkbox('day'); }} /><span class="h6">Tuesday</span><br />
-                                            <input type="checkbox" name="day" value="2" onChange={function (event) { checkbox('day'); }} /><span class="h6">Wednesday</span><br />
-                                            <input type="checkbox" name="day" value="3" onChange={function (event) { checkbox('day'); }} /><span class="h6">Thursday</span><br />
-                                            <input type="checkbox" name="day" value="4" onChange={function (event) { checkbox('day'); }} /><span class="h6">Friday</span><br />
-                                            <input type="checkbox" name="day" value="5" onChange={function (event) { checkbox('day'); }} /><span class="h6">Saturday</span><br />
+                                            <input type="checkbox" name="day" value="0" onChange={function (event) { checkbox('day'); }} /><span class="h6">Sunday</span><br />
+                                            <input type="checkbox" name="day" value="1" onChange={function (event) { checkbox('day'); }} /><span class="h6">Monday</span><br />
+                                            <input type="checkbox" name="day" value="2" onChange={function (event) { checkbox('day'); }} /><span class="h6">Tuesday</span><br />
+                                            <input type="checkbox" name="day" value="3" onChange={function (event) { checkbox('day'); }} /><span class="h6">Wednesday</span><br />
+                                            <input type="checkbox" name="day" value="4" onChange={function (event) { checkbox('day'); }} /><span class="h6">Thursday</span><br />
+                                            <input type="checkbox" name="day" value="5" onChange={function (event) { checkbox('day'); }} /><span class="h6">Friday</span><br />
+                                            <input type="checkbox" name="day" value="6" onChange={function (event) { checkbox('day'); }} /><span class="h6">Saturday</span><br />
                                         </div>
                                         <div class="col-md-2">
                                             <br></br><br /><br></br><br />
@@ -186,6 +186,85 @@ const DefinedChannelStatusUser = () => {
 
 
                                     </div>
+
+                                    <br />
+
+
+                                    <div class="row">
+
+                                        <div class="col-md-2">
+                                            <label>Type (STB/OTT)</label>
+                                            <select class="custom-select d-block w-100" onChange={(e) => { }}>
+                                                <option value="">All</option>
+                                                <option value="STB">STB</option>
+                                                <option value="OTT">OTT</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="col-md-2">
+                                            <label>Region</label>
+                                            <select class="custom-select d-block w-100" onChange={(e) => { }}>
+                                                <option value="">All Region</option>
+                                                <option value="Dhaka">Dhaka</option>
+                                                <option value="Tangail">Tangail</option>
+                                                <option value="Chittagong">Chittagong</option>
+                                                <option value="Rajshahi">Rajshahi</option>
+                                                <option value="Sylhet">Sylhet</option>
+                                                <option value="Mymensingh">Mymensingh</option>
+                                                <option value="Khulna">Khulna</option>
+                                                <option value="Rongpur">Rongpur</option>
+                                                <option value="Barishal">Barishal</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label>Gender</label>
+                                            <select class="custom-select d-block w-100" onChange={(e) => { }}>
+                                                <option value="">All Gender</option>
+                                                <option value="m">Male</option>
+                                                <option value="f">Female</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="col-md-2">
+                                            <label>SEC</label>
+                                            <select class="custom-select d-block w-100" onChange={(e) => { }}>
+                                                <option value="">All SEC</option>
+                                                <option value="a1">Lower Class</option>
+                                                <option value="c1">Upper Middle Class</option>
+                                                <option value="d1">Lower Middle Class</option>
+                                                <option value="b1">Upper Class</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="col-md-2">
+                                            <label>Urban/Rural</label>
+                                            <select class="custom-select d-block w-100" onChange={(e) => { }}>
+                                                <option value="">Urban & Rural</option>
+                                                <option value="u">Urban</option>
+                                                <option value="r">Rural</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="col-md-2">
+                                            <div class="price-range">
+                                                <div class="form-group">
+                                                    <div class="slider-sm slider-success my-1" id="small-slider"></div>
+                                                </div>
+                                                <div class="price-slider">
+                                                    <div class="price_slider_amount mb-2">
+                                                        <div class="range-amt"><strong>Age Range : </strong> 15
+                                                            - 100</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+
+
+
                                 </div>
                             </div>
                         </div>
