@@ -20,6 +20,7 @@ import ChannelStatusUser from "../Channel/ChannelStatusUser";
 import ChangePassUser from "../AppUsers/ChangePassUser";
 import ExcelReportUser from "../Report/ExcelReportUser";
 import DayRangedChannelStatusUser from "../Channel/DayRangedChannelStatusUser";
+import Footer from "../Footer/Footer";
 
 function User() {
 
@@ -47,6 +48,7 @@ function User() {
         />
         {/* <Route exact path="/map" element={<Map />}></Route> */}
       </Routes>
+    <Footer/>
     </BrowserRouter>
     </div>
     );
