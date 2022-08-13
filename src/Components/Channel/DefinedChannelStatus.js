@@ -19,6 +19,8 @@ const DefinedChannelStatus = () => {
 
     const [reachZeroCSV, setReachZeroCSV] = useState({});
     const [reachPercentCSV, setReachPercentCSV] = useState([]);
+    const [tvrZeroCSV, setTvrZeroCSV] = useState([]);
+    const [tvrPercentCSV, setTvrPercentCSV] = useState([]);
 
 
 
@@ -66,12 +68,14 @@ const DefinedChannelStatus = () => {
 
     const Downloadfunc = () => {
         //console.log(liveChannelData.labels[0]);
-        var csv = [["Time-Frame", "Reach(000)", "Reach(%)"]];
+        var csv = [["Time-Frame", "Reach(000)", "Reach(%)","TVR(000)", "TVR(%)"]];
         var sampleLive = reachZeroCSV;
         var sampleLive1 = reachPercentCSV;
+        var sampleLive2 = tvrZeroCSV;
+        var sampleLive3 = tvrPercentCSV;
 
         for (var i = 0; i < sampleLive.labels.length; i++) {
-            csv.push([sampleLive.labels[i], sampleLive.values[i], sampleLive1[i]]);
+            csv.push([sampleLive.labels[i], sampleLive.values[i], sampleLive1[i], sampleLive2[i], sampleLive3[i]]);
         }
         console.log(csv);
         getCSV(csv);
@@ -97,6 +101,20 @@ const DefinedChannelStatus = () => {
         axiosConfig.post("/trend/dayrangedreachp", data).then(rsp => {
 
             setReachPercentCSV(rsp.data.values);
+        }).catch(err => {
+
+        });
+
+        axiosConfig.post("/trend/dayrangedtvr0", data).then(rsp => {
+
+            setTvrZeroCSV(rsp.data.values);
+        }).catch(err => {
+
+        });
+
+        axiosConfig.post("/trend/dayrangedtvrp", data).then(rsp => {
+
+            setTvrPercentCSV(rsp.data.values);
         }).catch(err => {
 
         });
