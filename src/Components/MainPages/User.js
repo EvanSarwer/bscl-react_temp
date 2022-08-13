@@ -19,6 +19,7 @@ import DefinedChannelStatusUser from "../Channel/DefinedChannelStatusUser";
 import ChannelStatusUser from "../Channel/ChannelStatusUser";
 import ChangePassUser from "../AppUsers/ChangePassUser";
 import ExcelReportUser from "../Report/ExcelReportUser";
+import DayRangedChannelStatusUser from "../Channel/DayRangedChannelStatusUser";
 
 function User() {
 
@@ -36,6 +37,7 @@ function User() {
         <Route exact path="/livechannels" element={<LiveChannelsUser />}></Route>
         <Route exact path="/channelstatus" element={<ChannelStatusUser />}></Route>
         <Route exact path="/definedchannelstatus" element={<DefinedChannelStatusUser />}></Route>
+        <Route exact path="/dayrangedChannelstatus" element={<DayRangedChannelStatusUser />}></Route>
         <Route exact path="/rangedchannelstatus" element={<RangedChannelStatusUser />}></Route>
         <Route exact path="/downloadreport" element={<DownloadReportUser />}></Route>
         <Route exact path="/excelreport" element={<ExcelReportUser />}></Route>

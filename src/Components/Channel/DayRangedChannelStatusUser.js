@@ -5,9 +5,11 @@ import Select from 'react-select';
 import PostLineGraph from "../Graph/PostLineGraph";
 import Header from '../Header/Header';
 import MainMenu from '../MainMenu/MainMenu';
+import HeaderUser from '../Header/HeaderUser';
+import MainMenuUser from '../MainMenu/MainMenuUser';
 
 
-const DayRangedChannelStatus = () => {
+const DayRangedChannelStatusUser = () => {
 
     const [update, setUpdate] = useState(0);
     const [time, setTime] = useState("15");
@@ -34,8 +36,8 @@ const DayRangedChannelStatus = () => {
         console.log(credentials);
     }
     return (
-        <div><Header title="Trend Analysis Day-Ranged" />
-            <MainMenu menu="daytrendranged" />
+        <div><HeaderUser title="Trend Analysis Day-Ranged" />
+            <MainMenuUser menu="daytrendranged" />
             <div class="app-content content" style={{ backgroundColor: "azure", minHeight: "36em" }}>
                 <div class="content-overlay"></div>
                 <div class="content-wrapper" style={{ backgroundColor: "azure" }} >
@@ -196,4 +198,4 @@ const DayRangedChannelStatus = () => {
 
     )
 }
-export default DayRangedChannelStatus;
+export default DayRangedChannelStatusUser;
