@@ -84,7 +84,7 @@ const ChannelStatus = () => {
                                             </select>
                                         </div>
 
-                                        <div class="col-md-2">
+                                        {/* <div class="col-md-2">
                                             <label>Region</label>
                                             <select class="custom-select d-block w-100" onChange={(e) => { }}>
                                                 <option value="">All Region</option>
@@ -140,7 +140,7 @@ const ChannelStatus = () => {
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> */}
                                     </div>
                                     
                                 </div>
