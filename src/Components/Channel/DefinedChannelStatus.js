@@ -81,53 +81,62 @@ const DefinedChannelStatus = () => {
         getCSV(csv);
     }
 
-
-
-    useEffect(() => {
-        if(update>0){
-        var data = {
-            id: id, range: time, start: start, finish: finish
-        };
-
-        axiosConfig.post("/trend/dayrangedreach0", data).then(rsp => {
-
-            setReachZeroCSV(() => ({
-                labels: rsp.data.label, values: rsp.data.values
-            }));
-        }).catch(err => {
-
-        });
-
-        axiosConfig.post("/trend/dayrangedreachp", data).then(rsp => {
-
-            setReachPercentCSV(rsp.data.values);
-        }).catch(err => {
-
-        });
-
-        axiosConfig.post("/trend/dayrangedtvr0", data).then(rsp => {
-
-            setTvrZeroCSV(rsp.data.values);
-        }).catch(err => {
-
-        });
-
-        axiosConfig.post("/trend/dayrangedtvrp", data).then(rsp => {
-
-            setTvrPercentCSV(rsp.data.values);
-        }).catch(err => {
-
-        });
-
+    const getReach0=(p)=>{
+        setReachZeroCSV(p);
+        console.log(p);
+    }
+    const getReachp=(p)=>{
+        setReachPercentCSV(p.values);
+        console.log(p);
+    }
+    const getTvr0=(p)=>{
+        setTvrZeroCSV(p.values);
+        console.log(p);
+    }
+    const getTvrp=(p)=>{
+        setTvrPercentCSV(p.values);
+        console.log(p);
     }
 
-    }, [update]);
+    // useEffect(() => {
+    //     if(update>0){
+    //     var data = {
+    //         id: id, range: time, start: start, finish: finish
+    //     };
 
+    //     axiosConfig.post("/trend/dayrangedreach0", data).then(rsp => {
 
+    //         setReachZeroCSV(() => ({
+    //             labels: rsp.data.label, values: rsp.data.values
+    //         }));
+    //     }).catch(err => {
 
+    //     });
 
+    //     axiosConfig.post("/trend/dayrangedreachp", data).then(rsp => {
 
+    //         setReachPercentCSV(rsp.data.values);
+    //     }).catch(err => {
 
+    //     });
+
+    //     axiosConfig.post("/trend/dayrangedtvr0", data).then(rsp => {
+
+    //         setTvrZeroCSV(rsp.data.values);
+    //     }).catch(err => {
+
+    //     });
+
+    //     axiosConfig.post("/trend/dayrangedtvrp", data).then(rsp => {
+
+    //         setTvrPercentCSV(rsp.data.values);
+    //     }).catch(err => {
+
+    //     });
+
+    // }
+
+    // }, [update]);
 
 
     useEffect(() => {
@@ -143,10 +152,9 @@ const DefinedChannelStatus = () => {
         })
 
     }, [])
+    
     const updater = () => {
         setUpdate(update + 1);
-        var credentials = { "id": id, "range": time, "start": start, "finish": finish };
-        console.log(credentials);
     }
     return (
         <div><Header title="Trend Analysis-Day Parts" />
@@ -300,22 +308,22 @@ const DefinedChannelStatus = () => {
 
                         <div class="row">
                             <div class="col-md-12">
-                                <PostLineGraph title="Reach (%)" text="Active Channels" url="trend/dayrangedreachp" label="Reach (%)" color="blue" credentials={{ "id": id, "range": time, "start": start, "finish": finish }} update={update} />
+                                <PostLineGraph title="Reach (%)" text="Active Channels" url="trend/dayrangedreachp" label="Reach (%)" color="blue" credentials={{ "id": id, "range": time, "start": start, "finish": finish }} parentPass={getReachp} update={update} />
 
                             </div>
                             <div class="col-md-12">
-                                <PostLineGraph title="Reach (000)" text="Active Channels" url="trend/dayrangedreach0" label="Reach (000)" color="red" credentials={{ "id": id, "range": time, "start": start, "finish": finish }} update={update} />
+                                <PostLineGraph title="Reach (000)" text="Active Channels" url="trend/dayrangedreach0" label="Reach (000)" color="red" credentials={{ "id": id, "range": time, "start": start, "finish": finish }} parentPass={getReach0} update={update} />
 
                             </div>
 
                         </div>
                         <div class="row">
                         <div class="col-md-12">
-                                <PostLineGraph title="TVR (000)" text="Active Channels" url="trend/dayrangedtvr0" label="TVR (000)" color="violet" credentials={{ "id": id, "range": time, "start":start,"finish":finish }} update={update} />
+                                <PostLineGraph title="TVR (000)" text="Active Channels" url="trend/dayrangedtvr0" label="TVR (000)" color="violet" credentials={{ "id": id, "range": time, "start":start,"finish":finish }} parentPass={getTvr0} update={update} />
 
                             </div>
                             <div class="col-md-12">
-                                <PostLineGraph title="TVR (%)" text="Active Channels" url="trend/dayrangedtvrp" label="TVR (%)" color="green" credentials={{ "id": id, "range": time, "start":start,"finish":finish }} update={update} />
+                                <PostLineGraph title="TVR (%)" text="Active Channels" url="trend/dayrangedtvrp" label="TVR (%)" color="green" credentials={{ "id": id, "range": time, "start":start,"finish":finish }} parentPass={getTvrp} update={update} />
 
                             </div>
 
