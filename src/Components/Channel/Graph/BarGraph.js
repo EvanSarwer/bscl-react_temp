@@ -88,7 +88,11 @@ const BarGraph = (props) => {
             setloading(false);
             axiosConfig.get(props.url)
                 .then(rsp => {
-
+ //if(props.parentPass!=null){
+    props.parentPass({
+        labels: rsp.data.label, values: rsp.data.value
+    });
+ //}
                     setloading(true);
                     //debugger;
                     //console.log(rsp.data.label);
@@ -117,7 +121,9 @@ const BarGraph = (props) => {
             setloading(false);
             axiosConfig.post("/" + props.url, props.credentials)
                 .then(rsp => {
-
+                    props.parentPass({
+                        labels: rsp.data.label, values: rsp.data.value
+                    });
                     setloading(true);
                     //debugger;
                     //console.log(rsp.data.label);
