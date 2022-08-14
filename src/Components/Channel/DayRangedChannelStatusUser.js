@@ -91,47 +91,22 @@ const DayRangedChannelStatusUser = () => {
     }
 
 
-
-    useEffect(() => {
-        if(update>0){
-        var data = {
-            id: id, month: month, year: year, day: day, start: start, finish: finish
-        };
-
-        axiosConfig.post("/channel/definedtrendreach0", data).then(rsp => {
-
-            setReachZeroCSV(() => ({
-                labels: rsp.data.label, values: rsp.data.value
-            }));
-        }).catch(err => {
-
-        });
-
-        axiosConfig.post("/channel/definedtrendreachp", data).then(rsp => {
-
-            setReachPercentCSV(rsp.data.value);
-        }).catch(err => {
-
-        });
-
-        axiosConfig.post("/channel/definedtrendtvr0", data).then(rsp => {
-
-            setTvrZeroCSV(rsp.data.value);
-        }).catch(err => {
-
-        });
-
-        axiosConfig.post("/channel/definedtrendtvrp", data).then(rsp => {
-
-            setTvrPercentCSV(rsp.data.value);
-        }).catch(err => {
-
-        });
-
-
+    const getReach0 = (p) => {
+        setReachZeroCSV(p);
+        console.log(p);
     }
-    }, [update]);
-
+    const getReachp = (p) => {
+        setReachPercentCSV(p.values);
+        console.log(p);
+    }
+    const getTvr0 = (p) => {
+        setTvrZeroCSV(p.values);
+        console.log(p);
+    }
+    const getTvrp = (p) => {
+        setTvrPercentCSV(p.values);
+        console.log(p);
+    }
 
 
 
@@ -209,7 +184,7 @@ const DayRangedChannelStatusUser = () => {
 
     return (
         <div><HeaderUser title="Trend Analysis Day-Ranged" />
-        <MainMenuUser menu="daytrendranged" />
+            <MainMenuUser menu="daytrendranged" />
             <div class="app-content content">
                 <div class="content-overlay"></div>
                 <div class="content-wrapper" style={{ backgroundColor: "azure" }} >
@@ -515,10 +490,10 @@ const DayRangedChannelStatusUser = () => {
 
 
                             <div class="col-md-6">
-                                <BarGraph title="Reach(%)" text="Channel vs Reach(%)" url="channel/definedtrendreachp" color="#28D094" get={false} credentials={{ id: id, month: month, year: year, day: day, start: start, finish: finish }} update={update} />
+                                <BarGraph title="Reach(%)" text="Channel vs Reach(%)" url="channel/definedtrendreachp" color="#28D094" get={false} credentials={{ id: id, month: month, year: year, day: day, start: start, finish: finish }} parentPass={getReachp} update={update} />
                             </div>
                             <div class="col-md-6">
-                                <BarGraph title="Reach(000)" text="Channel vs Reach(000)" url="channel/definedtrendreach0" color="yellow" get={false} credentials={{ id: id, month: month, year: year, day: day, start: start, finish: finish }} update={update} />
+                                <BarGraph title="Reach(000)" text="Channel vs Reach(000)" url="channel/definedtrendreach0" color="yellow" get={false} credentials={{ id: id, month: month, year: year, day: day, start: start, finish: finish }} parentPass={getReach0} update={update} />
                             </div>
 
 
@@ -528,10 +503,10 @@ const DayRangedChannelStatusUser = () => {
 
 
                             <div class="col-md-6">
-                                <BarGraph title="TVR(%)" text="Channel vs TVR(%)" url="channel/definedtrendtvrp" color="#68D094" get={false} credentials={{ id: id, month: month, year: year, day: day, start: start, finish: finish }} update={update} />
+                                <BarGraph title="TVR(%)" text="Channel vs TVR(%)" url="channel/definedtrendtvrp" color="#68D094" get={false} credentials={{ id: id, month: month, year: year, day: day, start: start, finish: finish }} parentPass={getTvrp} update={update} />
                             </div>
                             <div class="col-md-6">
-                                <BarGraph title="TVR(000)" text="Channel vs TVR(000)" url="channel/definedtrendtvr0" color="#8D0394" get={false} credentials={{ id: id, month: month, year: year, day: day, start: start, finish: finish }} update={update} />
+                                <BarGraph title="TVR(000)" text="Channel vs TVR(000)" url="channel/definedtrendtvr0" color="#8D0394" get={false} credentials={{ id: id, month: month, year: year, day: day, start: start, finish: finish }} parentPass={getTvr0} update={update} />
                             </div>
 
 
