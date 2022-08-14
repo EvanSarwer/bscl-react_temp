@@ -381,7 +381,7 @@ const DownloadReportUser = () => {
                                     <div class="row">
                                         <div class="col-md-2">
                                             <select class="custom-select d-block w-100" onChange={(e) => { setRegion(e.target.value) }}>
-                                                <option value="">Choose Region</option>
+                                                <option value="">All Region</option>
                                                 <option value="Dhaka">Dhaka</option>
                                                 <option value="Tangail">Tangail</option>
                                                 <option value="Chittagong">Chittagong</option>
@@ -395,7 +395,7 @@ const DownloadReportUser = () => {
                                         </div>
                                         <div class="col-md-2">
                                             <select class="custom-select d-block w-100" onChange={(e) => { setGender(e.target.value) }}>
-                                                <option value="">Choose Gender</option>
+                                                <option value="">All Gender</option>
                                                 <option value="m">Male</option>
                                                 <option value="f">Female</option>
                                             </select>
@@ -403,7 +403,7 @@ const DownloadReportUser = () => {
                                         <div class="col-md-2">
 
                                             <select class="custom-select d-block w-100" onChange={(e) => { setEconomic(e.target.value) }}>
-                                                <option value="">Economic Status</option>
+                                                <option value="">All SEC</option>
                                                 <option value="b1">Upper Class</option>
                                                 <option value="c1">Upper Middle Class</option>
                                                 <option value="e1">Middle Class</option>
@@ -415,7 +415,7 @@ const DownloadReportUser = () => {
 
 
                                             <select class="custom-select d-block w-100" onChange={(e) => { setSocio(e.target.value) }}>
-                                                <option value="">Socio Status</option>
+                                                <option value="">Urban & Rural</option>
                                                 <option value="u">Urban</option>
                                                 <option value="r">Rural</option>
                                             </select>
