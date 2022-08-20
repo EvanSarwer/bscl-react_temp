@@ -10,15 +10,19 @@ import MainMenu from "../MainMenu/MainMenu";
 const DeviceUserList = () => {
 
     const [deviceUsers, setDeviceUsers] = useState([]);
+    const [deselect, setDselect] = useState("");
+    const [userId, setUserId] = useState("");
+    const [isSubscribed, setIsSubscribed] = useState(false);
     const [query, setQuery] = useState("");
     useEffect(() => {
         axiosConfig.get("/deviceuser/list").then((rsp) => {
             setDeviceUsers(rsp.data);
+            console.log(rsp.data);
         }, (err) => { });
 
 
     }, []);
-    
+
     const deleteUser = (user_name) => {
 
         const obj = { user_name: user_name };
@@ -34,6 +38,36 @@ const DeviceUserList = () => {
                 item.user_name.toLowerCase().includes(query.toLowerCase())
         );
     };
+
+    const handleChange = (event, user_id) => {
+
+        if (event.target.checked) {
+            //console.log('✅ Checkbox is checked');
+            const obj = { user_id: user_id, deselect: 'deselect' };
+            axiosConfig.post("/deviceuser/deselect", obj).then((rsp) => {
+                window.location.reload(false);
+            }, (err) => {
+            });
+
+
+        } else {
+            //console.log('⛔️ Checkbox is NOT checked');
+            const obj = { user_id: user_id, deselect: '' };
+            axiosConfig.post("/deviceuser/deselect", obj).then((rsp) => {
+                window.location.reload(false);
+            }, (err) => {
+            });
+
+
+
+        }
+        setIsSubscribed(current => !current);
+
+        console.log(event.target.checked);
+        console.log(user_id);
+
+    };
+
 
 
     return (
@@ -78,6 +112,7 @@ const DeviceUserList = () => {
                                                                         <th>Economic Status</th>
                                                                         <th>Socio Status</th>
                                                                         <th>Status</th>
+                                                                        <th>Operation</th>
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
@@ -94,6 +129,10 @@ const DeviceUserList = () => {
                                                                                 <a class="btn btn-secondary" href={`/device/user/edit/${user.user_name}`}>Edit</a>
                                                                                 <button class="offset-1 btn btn-danger" onClick={() => { if (window.confirm('Delete the item?')) { deleteUser(user.user_name) }; }} >Delete</button>
                                                                             </td>
+                                                                            <td><div><input type="checkbox" id="deselect" onChange={ (event) =>{ if (window.confirm('Want to run This Deselection operation?')) {handleChange(event, user.id)}else {window.location.reload(false)} }} value={isSubscribed} checked={user.deselect === "deselect"} name="deselect" />
+                                                                                <label class="form-label" >&nbsp; Deselect</label></div>
+                                                                            </td>
+
 
                                                                         </tr>
                                                                     )}
