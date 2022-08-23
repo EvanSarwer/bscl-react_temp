@@ -71,8 +71,8 @@ const DeviceUserList = () => {
 
 
     return (
-        <div><Header title="Device Users" />
-            <MainMenu menu="deviceusers" />
+        <div><Header title="Devices" />
+            <MainMenu menu="device" />
             <div class="app-content content">
                 <div class="content-overlay"></div>
                 <div class="content-wrapper" style={{ backgroundColor: "azure" }} >
@@ -93,7 +93,7 @@ const DeviceUserList = () => {
                                                     <div class="card-body card-dashboard">
 
                                                         <div class="row">
-                                                            <div class="col-md-7"><div class="h3 font-weight-bold">User List</div></div>
+                                                            <div class="col-md-7"><div class="h3 font-weight-bold">Device List</div></div>
                                                             <div class="col-md-5"><input type="text" class="search form-control round border-primary mb-1" placeholder="Search" onChange={e => setQuery(e.target.value)} />
                                                             </div>
 
@@ -107,8 +107,6 @@ const DeviceUserList = () => {
                                                                         <th>Username</th>
                                                                         <th>Address</th>
                                                                         <th>Type</th>
-                                                                        <th>Gender</th>
-                                                                        <th>Age</th>
                                                                         <th>Economic Status</th>
                                                                         <th>Socio Status</th>
                                                                         <th>Status</th>
@@ -121,8 +119,8 @@ const DeviceUserList = () => {
                                                                             <td><a href={`/device/details/${user.id}`}>{user.user_name}</a></td>
                                                                             <td>{user.address}</td>
                                                                             <td>{user.type}</td>
-                                                                            <td>{user.gender}</td>
-                                                                            <td>{user.age}</td>
+                                                                            {/* <td>{user.gender}</td>
+                                                                            <td>{user.age}</td> */}
                                                                             <td>{user.economic_status}</td>
                                                                             <td>{user.socio_status}</td>
                                                                             <td style={{ whiteSpace: 'nowrap' }}>
