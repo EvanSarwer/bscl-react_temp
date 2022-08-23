@@ -42,7 +42,7 @@ const DeviceUserForm = (props) => {
 
                 }
             });
-        }else{
+        } else {
 
             navigator.geolocation.getCurrentPosition(function (position) {
                 //console.log(position);
@@ -50,7 +50,7 @@ const DeviceUserForm = (props) => {
                 //console.log("Longitude is :", position.coords.longitude);
                 setLatitude(position.coords.latitude);
                 setLongitude(position.coords.longitude);
-    
+
             }, function (error) {
                 console.error("Error Code = " + error.code + " - " + error.message);
             }
@@ -85,7 +85,7 @@ const DeviceUserForm = (props) => {
             console.log("Not Available");
         }
 
-        
+
 
 
 
@@ -190,7 +190,12 @@ const DeviceUserForm = (props) => {
                                 </div>
                                 <div className="card-content" >
                                     <div className="card-body">
+                                        <div class="row justify-content-center">
+                                            <button class="btn btn-danger">1</button> &nbsp; <button class="btn btn-danger">2</button> &nbsp; <button class="btn btn-danger">3</button> &nbsp; <button class="btn btn-danger">4</button> &nbsp; <button class="btn btn-danger">5</button> &nbsp; <button class="btn btn-danger">6</button> &nbsp; <button class="btn btn-danger">7</button> &nbsp;<button class="btn btn-danger">8</button>
+                                        </div>
+                                        <p></p>
                                         <form className="form-horizontal" onSubmit={handleForm} noValidate>
+
                                             <table class="table table-borderless">
                                                 <tr>
                                                     <td class="form-label">User Name</td>
@@ -233,7 +238,8 @@ const DeviceUserForm = (props) => {
 
                                                     </td>
                                                 </tr>
-                                                <tr>
+
+                                                {/* <tr>
                                                     <td>Age</td>
                                                     <td><fieldset className="form-group position-relative has-icon-left">
                                                         <input type="text" name="age" id="age" className="form-control" value={age} onChange={(e) => { setAge(e.target.value) }} placeholder="Age" tabIndex={6} required data-validation-required-message="Please enter age." />
@@ -253,7 +259,8 @@ const DeviceUserForm = (props) => {
                                                         <div className="help-block font-small-3" />
                                                         <span class="text-danger">{err_msg.gender ? err_msg.gender[0] : ''}</span>
                                                     </fieldset></td>
-                                                </tr>
+                                                </tr> */}
+
                                                 <tr>
                                                     <td>Type</td>
                                                     <td><fieldset className="form-group position-relative">
@@ -283,7 +290,7 @@ const DeviceUserForm = (props) => {
                                                             <option value="e1">Middle Class</option>
                                                             <option value="d1">Lower Middle Class</option>
                                                             <option value="a1">Lower Class</option>
-                                                            
+
                                                         </select>
                                                         <div className="help-block font-small-3" />
                                                         <span class="text-danger">{err_msg.economic_status ? err_msg.economic_status[0] : ''}</span>
