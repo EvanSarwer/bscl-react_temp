@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import axiosConfig from '../axiosConfig';
+import UserListTable from "./UserListTable";
 
-const DeviceUserForm = (props) => {
-    const [user_name, setUsername] = useState("");
+const DeviceForm = (props) => {
+    const [deviceID, setDeviceID] = useState("");
+    const [deviceName, setDeviceName] = useState("");
     const [email, setEmail] = useState("");
     const [address, setAddress] = useState("");
     const [phone, setPhone] = useState("");
@@ -19,17 +21,22 @@ const DeviceUserForm = (props) => {
     const [getLatitude, setGetLatitude] = useState("");
     const [getLongitude, setGetLongitude] = useState("");
     const [isSubscribed, setIsSubscribed] = useState(false);
+    const [deviceUsers, setDeviceUsers] = useState([]);
 
 
     useEffect(() => {
         if (props.mode == "Edit") {
-            axiosConfig.get("/deviceuser/get/" + props.id).then((rsp) => {
-                var obj = rsp.data;
-                setUsername(obj.user_name);
+            axiosConfig.get("/device/get/" + props.id).then((rsp) => {
+                var obj = rsp.data.device;
+                setDeviceUsers(rsp.data.deviceUser);
+                console.log(rsp.data.deviceUser);
+
+                setDeviceID(obj.id);
+                setDeviceName(obj.device_name);
                 setAddress(obj.address);
-                setAge(obj.age);
+                //setAge(obj.age);
                 setType(obj.type);
-                setGender(obj.gender);
+                //setGender(obj.gender);
                 setEconomicStatus(obj.economic_status);
                 setSocioStatus(obj.socio_status);
                 setGetLatitude(obj.lat);
@@ -54,6 +61,7 @@ const DeviceUserForm = (props) => {
             }, function (error) {
                 console.error("Error Code = " + error.code + " - " + error.message);
             }
+
             );
 
         }
@@ -97,7 +105,7 @@ const DeviceUserForm = (props) => {
 
     const refresh = () => {
         setErrMsg({});
-        setUsername("");
+        setDeviceName("");
         setType("");
         setAge("");
         setAddress("");
@@ -109,8 +117,8 @@ const DeviceUserForm = (props) => {
     const handleForm = (e) => {
         e.preventDefault();
         if (props.mode == "Edit") {
-            const obj = { user_name: user_name, lat: latitude, lng: longitude, address: address, type: type, age: age, gender: gender, economic_status: economicStatus, socio_status: socioStatus };
-            axiosConfig.post("/deviceuser/edit", obj).then((rsp) => {
+            const obj = { id: deviceID, device_name: deviceName, lat: latitude, lng: longitude, address: address, type: type, economic_status: economicStatus, socio_status: socioStatus };
+            axiosConfig.post("/device/edit", obj).then((rsp) => {
 
                 alert(rsp.data.message);
                 window.location.href = "/device/users";
@@ -124,8 +132,8 @@ const DeviceUserForm = (props) => {
         }
 
         else {
-            const obj = { user_name: user_name, lat: latitude, lng: longitude, address: address, type: type, age: age, gender: gender, economic_status: economicStatus, socio_status: socioStatus };
-            axiosConfig.post("/deviceuser/create", obj).then((rsp) => {
+            const obj = { device_name: deviceName, lat: latitude, lng: longitude, address: address, type: type, economic_status: economicStatus, socio_status: socioStatus };
+            axiosConfig.post("/device/create", obj).then((rsp) => {
                 alert(rsp.data.message);
                 window.location.href = "/device/users";
 
@@ -185,7 +193,7 @@ const DeviceUserForm = (props) => {
                                     <div className="card-title text-center">
                                         <img style={{ width: '13%', height: '0%' }} src="/app-assets/images/logo/app-user.png" alt="user logo" />
                                     </div>
-                                    <h6 className="card-subtitle line-on-side text-muted text-center font-medium-5 pt-2"><span>{props.mode} Device User</span>
+                                    <h6 className="card-subtitle line-on-side text-muted text-center font-medium-5 pt-2"><span>{props.mode} Device</span>
                                     </h6>
                                 </div>
                                 <div className="card-content" >
@@ -198,14 +206,14 @@ const DeviceUserForm = (props) => {
 
                                             <table class="table table-borderless">
                                                 <tr>
-                                                    <td class="form-label">User Name</td>
+                                                    <td class="form-label">Device Name</td>
                                                     <td><fieldset className="form-group position-relative has-icon-left">
-                                                        <input type="text" name="user_name" id="user_name" value={user_name} onChange={(e) => { setUsername(e.target.value) }} readOnly={props.mode == "Edit"} className="form-control" placeholder="Username" tabIndex={1} required data-validation-required-message="Please enter username." />
+                                                        <input type="text" name="device_id" id="device_id" value={deviceName} onChange={(e) => { setDeviceName(e.target.value) }} readOnly={props.mode == "Edit"} className="form-control" placeholder="Device name" tabIndex={1} required data-validation-required-message="Please enter device name." />
                                                         <div className="form-control-position">
                                                             <i className="la la-user" />
                                                         </div>
                                                         <div className="help-block font-small-3" />
-                                                        <span class="text-danger">{err_msg.user_name ? err_msg.user_name[0] : ''}</span>
+                                                        <span class="text-danger">{err_msg.device_name ? err_msg.device_name[0] : ''}</span>
                                                     </fieldset></td>
                                                 </tr>
                                                 <tr>
@@ -376,9 +384,44 @@ const DeviceUserForm = (props) => {
                                 </div>
                             </div>
 
+
+
+
+
+
+
+
+
+
                         </div>
+
+
                     </div>
                     <br />
+                    <br />
+
+                    {(() => {
+                        if (props.mode == "Edit") {
+                            if (deviceUsers.length > 0) {
+                                return <UserListTable deviceUsers={deviceUsers} />
+                            } else {
+                                return <div class="card">
+
+                                    <div class="card-content collapse show">
+                                        <div class="card-body card-dashboard">
+
+                                            <div class="row">
+                                                <div class="col-md-7"><div class="h3 font-weight-bold">Device User List</div></div>
+
+                                            </div>
+                                            <h4>No User Added In This Device</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    })()}
+
                     <br />
                     <br />
                     <br />
@@ -391,4 +434,4 @@ const DeviceUserForm = (props) => {
 
     )
 }
-export default DeviceUserForm;
+export default DeviceForm;

@@ -208,12 +208,12 @@ const MainMenu = (props) => {
                     {(() => {
                         if (props.menu === "device") {
                             return (
-                                <li class="active nav-item"><a href="/device/users"><i class="la la-street-view"></i><span class="menu-title" data-i18n="Templates">Devices</span></a>
+                                <li class="active nav-item"><a href="/device"><i class="la la-street-view"></i><span class="menu-title" data-i18n="Templates">Devices</span></a>
                                 </li>
                             )
                         } else {
                             return (
-                                <li class=" nav-item"><a href="/device/users"><i class="la la-street-view"></i><span class="menu-title" data-i18n="Templates">Devices</span></a>
+                                <li class=" nav-item"><a href="/device"><i class="la la-street-view"></i><span class="menu-title" data-i18n="Templates">Devices</span></a>
                                 </li>
                             )
                         }
