@@ -7,26 +7,26 @@ import MainMenu from "../MainMenu/MainMenu";
 
 
 
-const DeviceUserList = () => {
+const DeviceList = () => {
 
-    const [deviceUsers, setDeviceUsers] = useState([]);
+    const [devices, setDevices] = useState([]);
     const [deselect, setDselect] = useState("");
     const [userId, setUserId] = useState("");
     const [isSubscribed, setIsSubscribed] = useState(false);
     const [query, setQuery] = useState("");
     useEffect(() => {
-        axiosConfig.get("/deviceuser/list").then((rsp) => {
-            setDeviceUsers(rsp.data);
+        axiosConfig.get("/device/list").then((rsp) => {
+            setDevices(rsp.data);
             console.log(rsp.data);
         }, (err) => { });
 
 
     }, []);
 
-    const deleteUser = (user_name) => {
+    const deleteDevice = (id) => {
 
-        const obj = { user_name: user_name };
-        axiosConfig.post("/deviceuser/delete", obj).then((rsp) => {
+        const obj = { id: id };
+        axiosConfig.post("/device/delete", obj).then((rsp) => {
             window.location.reload(false);
         }, (err) => {
         });
@@ -35,7 +35,7 @@ const DeviceUserList = () => {
     const Search = (data) => {
         return data.filter(
             (item) =>
-                item.user_name.toLowerCase().includes(query.toLowerCase())
+                item.device_name.toLowerCase().includes(query.toLowerCase())
         );
     };
 
@@ -98,13 +98,13 @@ const DeviceUserList = () => {
                                                             </div>
 
                                                         </div>
-                                                        <a class="btn btn-primary" href="/device/user/create">Create New</a>
+                                                        <a class="btn btn-primary" href="/device/create">Create New</a>
 
                                                         <div class="table-responsive" style={{ maxHeight: '400px', minHeight: '500px' }}>
                                                             <table class="table display nowrap table-striped table-bordered">
                                                                 <thead>
                                                                     <tr>
-                                                                        <th>Username</th>
+                                                                        <th>Device name</th>
                                                                         <th>Address</th>
                                                                         <th>Type</th>
                                                                         <th>Economic Status</th>
@@ -114,20 +114,20 @@ const DeviceUserList = () => {
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
-                                                                    {Search(deviceUsers).map((user) =>
-                                                                        <tr key={user.id}>
-                                                                            <td><a href={`/device/details/${user.id}`}>{user.user_name}</a></td>
-                                                                            <td>{user.address}</td>
-                                                                            <td>{user.type}</td>
+                                                                    {Search(devices).map((device) =>
+                                                                        <tr key={device.id}>
+                                                                            <td><a href="">{device.device_name}</a></td>
+                                                                            <td>{device.address}</td>
+                                                                            <td>{device.type}</td>
                                                                             {/* <td>{user.gender}</td>
                                                                             <td>{user.age}</td> */}
-                                                                            <td>{user.economic_status}</td>
-                                                                            <td>{user.socio_status}</td>
+                                                                            <td>{device.economic_status}</td>
+                                                                            <td>{device.socio_status}</td>
                                                                             <td style={{ whiteSpace: 'nowrap' }}>
-                                                                                <a class="btn btn-secondary" href={`/device/user/edit/${user.user_name}`}>Edit</a>
-                                                                                <button class="offset-1 btn btn-danger" onClick={() => { if (window.confirm('Delete the item?')) { deleteUser(user.user_name) }; }} >Delete</button>
+                                                                                <a class="btn btn-secondary" href={`/device/edit/${device.id}`}>Edit</a>
+                                                                                <button class="offset-1 btn btn-danger" onClick={() => { if (window.confirm('Delete the item?')) { deleteDevice(device.id) }; }} >Delete</button>
                                                                             </td>
-                                                                            <td><div><input type="checkbox" id="deselect" onChange={ (event) =>{ if (window.confirm('Want to run This Deselection operation?')) {handleChange(event, user.id)}else {window.location.reload(false)} }} value={isSubscribed} checked={user.deselect === "deselect"} name="deselect" />
+                                                                            <td><div><input type="checkbox" id="deselect" onChange={ (event) =>{ if (window.confirm('Want to run This Deselection operation?')) {handleChange(event, device.id)}else {window.location.reload(false)} }} value={isSubscribed} checked={device.deselect === "deselect"} name="deselect" />
                                                                                 <label class="form-label" >&nbsp; Deselect</label></div>
                                                                             </td>
 
@@ -168,4 +168,4 @@ const DeviceUserList = () => {
     )
 
 }
-export default DeviceUserList;
+export default DeviceList;
