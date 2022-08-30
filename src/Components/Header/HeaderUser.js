@@ -1,8 +1,14 @@
 import axiosConfig from '../axiosConfig';
+import Cookies from 'universal-cookie';
 const HeaderUser = (props) => {
+    
+    const cookies = new Cookies();
     var logout=()=>{
         axiosConfig.get("/logout").then((rsp)=>{
-            localStorage.clear();
+            //localStorage.clear();
+            cookies.remove('_authToken');
+            cookies.remove('_role');
+            cookies.remove('username');
             window.open("/","_self");
         },(err)=>{
 
@@ -101,7 +107,7 @@ const HeaderUser = (props) => {
                         <ul class="nav navbar-nav float-right">
                             
                             
-                            <li class="dropdown dropdown-user nav-item"><a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown"><span class="mr-1 user-name text-bold-700">{localStorage.getItem("username")}</span><span class="avatar avatar-online"><img src="/app-assets/images/portrait/small/avater-bd.png" alt="avatar" /><i></i></span></a>
+                            <li class="dropdown dropdown-user nav-item"><a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown"><span class="mr-1 user-name text-bold-700">{cookies.get('username')}</span><span class="avatar avatar-online"><img src="/app-assets/images/portrait/small/avater-bd.png" alt="avatar" /><i></i></span></a>
                                 <div class="dropdown-menu dropdown-menu-right">
                                     <a class="dropdown-item" href="user-profile.html"><i class="ft-user"></i> Edit Profile</a>
                                 <a class="dropdown-item" href="/app/user/changepass"><i className="la la-key" /> Change Password</a>

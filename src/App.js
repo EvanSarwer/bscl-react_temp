@@ -3,11 +3,12 @@ import Admin from './Components/MainPages/Admin';
 import Login from './Components/MainPages/Login';
 import MainPage from './Components/MainPages/MainPage';
 import User from './Components/MainPages/User';
+import Cookies from 'universal-cookie';
 
 
 function App() {
-
-  if (localStorage.getItem("_authToken") != null && localStorage.getItem("_role") == "admin") {
+  const cookies = new Cookies();
+  if (cookies.get('_authToken') != null && cookies.get('_role') == "admin") {
     return (
       <div>
 
@@ -16,7 +17,7 @@ function App() {
     );
   }
 
-  else if (localStorage.getItem("_authToken") != null && localStorage.getItem("_role") == "general") {
+  else if (cookies.get('_authToken') != null && cookies.get('_role')== "general") {
     return (
       <div>
 
@@ -25,7 +26,7 @@ function App() {
     );
   }
 
-  else if (localStorage.getItem("_authToken") == null) {
+  else if (cookies.get('_authToken') == null) {
     return (
       <div>
 
