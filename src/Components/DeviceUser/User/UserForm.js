@@ -1,11 +1,9 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import axiosConfig from '../axiosConfig';
-import UserListTable from "./UserListTable";
+import axiosConfig from '../../axiosConfig';
 
-const DeviceForm = (props) => {
-    const [deviceID, setDeviceID] = useState("");
-    const [deviceName, setDeviceName] = useState("");
+const UserForm = (props) => {
+    const [user_name, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [address, setAddress] = useState("");
     const [phone, setPhone] = useState("");
@@ -21,22 +19,17 @@ const DeviceForm = (props) => {
     const [getLatitude, setGetLatitude] = useState("");
     const [getLongitude, setGetLongitude] = useState("");
     const [isSubscribed, setIsSubscribed] = useState(false);
-    const [deviceUsers, setDeviceUsers] = useState([]);
 
 
     useEffect(() => {
         if (props.mode == "Edit") {
-            axiosConfig.get("/device/get/" + props.id).then((rsp) => {
-                var obj = rsp.data.device;
-                setDeviceUsers(rsp.data.deviceUser);
-                console.log(rsp.data.deviceUser);
-
-                setDeviceID(obj.id);
-                setDeviceName(obj.device_name);
+            axiosConfig.get("/deviceuser/get/" + props.id).then((rsp) => {
+                var obj = rsp.data;
+                setUsername(obj.user_name);
                 setAddress(obj.address);
-                //setAge(obj.age);
+                setAge(obj.age);
                 setType(obj.type);
-                //setGender(obj.gender);
+                setGender(obj.gender);
                 setEconomicStatus(obj.economic_status);
                 setSocioStatus(obj.socio_status);
                 setGetLatitude(obj.lat);
@@ -49,7 +42,7 @@ const DeviceForm = (props) => {
 
                 }
             });
-        } else {
+        }else{
 
             navigator.geolocation.getCurrentPosition(function (position) {
                 //console.log(position);
@@ -57,11 +50,10 @@ const DeviceForm = (props) => {
                 //console.log("Longitude is :", position.coords.longitude);
                 setLatitude(position.coords.latitude);
                 setLongitude(position.coords.longitude);
-
+    
             }, function (error) {
                 console.error("Error Code = " + error.code + " - " + error.message);
             }
-
             );
 
         }
@@ -93,7 +85,7 @@ const DeviceForm = (props) => {
             console.log("Not Available");
         }
 
-
+        
 
 
 
@@ -105,7 +97,7 @@ const DeviceForm = (props) => {
 
     const refresh = () => {
         setErrMsg({});
-        setDeviceName("");
+        setUsername("");
         setType("");
         setAge("");
         setAddress("");
@@ -117,8 +109,8 @@ const DeviceForm = (props) => {
     const handleForm = (e) => {
         e.preventDefault();
         if (props.mode == "Edit") {
-            const obj = { id: deviceID, device_name: deviceName, lat: latitude, lng: longitude, address: address, type: type, economic_status: economicStatus, socio_status: socioStatus };
-            axiosConfig.post("/device/edit", obj).then((rsp) => {
+            const obj = { user_name: user_name, lat: latitude, lng: longitude, address: address, type: type, age: age, gender: gender, economic_status: economicStatus, socio_status: socioStatus };
+            axiosConfig.post("/deviceuser/edit", obj).then((rsp) => {
 
                 alert(rsp.data.message);
                 window.location.href = "/device/users";
@@ -132,8 +124,8 @@ const DeviceForm = (props) => {
         }
 
         else {
-            const obj = { device_name: deviceName, lat: latitude, lng: longitude, address: address, type: type, economic_status: economicStatus, socio_status: socioStatus };
-            axiosConfig.post("/device/create", obj).then((rsp) => {
+            const obj = { user_name: user_name, lat: latitude, lng: longitude, address: address, type: type, age: age, gender: gender, economic_status: economicStatus, socio_status: socioStatus };
+            axiosConfig.post("/deviceuser/create", obj).then((rsp) => {
                 alert(rsp.data.message);
                 window.location.href = "/device/users";
 
@@ -174,27 +166,6 @@ const DeviceForm = (props) => {
 
 
 
-    const addUser = (device_id, user_index) => {
-
-        // const obj = { id: id };
-        // axiosConfig.post("/device/delete", obj).then((rsp) => {
-        //     window.location.reload(false);
-        // }, (err) => {
-        // });
-    };
-
-
-    const numbers = [0, 1, 2, 3, 4, 5, 6, 7];
-    let allTimeArray = [];
-    for (var i = 0; i < 8; i++) {
-        allTimeArray[i] = deviceUsers.find(user => {
-            return user.user_index === i;
-        });
-    }
-
-
-
-
     return (
 
         <div class="app-content content" style={{ backgroundColor: "azure" }}>
@@ -214,40 +185,22 @@ const DeviceForm = (props) => {
                                     <div className="card-title text-center">
                                         <img style={{ width: '13%', height: '0%' }} src="/app-assets/images/logo/app-user.png" alt="user logo" />
                                     </div>
-                                    <h6 className="card-subtitle line-on-side text-muted text-center font-medium-5 pt-2"><span>{props.mode} Device</span>
+                                    <h6 className="card-subtitle line-on-side text-muted text-center font-medium-5 pt-2"><span>{props.mode} Device User</span>
                                     </h6>
                                 </div>
                                 <div className="card-content" >
                                     <div className="card-body">
-                                        <div class="row justify-content-center">
-
-                                            {(() => {
-                                                if (props.mode == "Edit") {
-
-                                                    return numbers.map((index) =>
-                                                        <><button key={index} class={(allTimeArray[index]) ? "btn btn-success" : "btn btn-danger"} onClick={() => { if (allTimeArray[index]) { alert("Already has User in this index") } else { window.location.href = "/device/user/create/" + deviceID + "/" + index; } }}>{index + 1}</button> &nbsp; &nbsp;</>
-                                                    )
-                                                }
-
-                                            })()}
-
-
-
-                                            {/* <button class="btn btn-danger">1</button> &nbsp; <button class="btn btn-danger">2</button> &nbsp; <button class="btn btn-danger">3</button> &nbsp; <button class="btn btn-danger">4</button> &nbsp; <button class="btn btn-danger">5</button> &nbsp; <button class="btn btn-danger">6</button> &nbsp; <button class="btn btn-danger">7</button> &nbsp;<button class="btn btn-danger">8</button> */}
-                                        </div>
-                                        <p></p>
                                         <form className="form-horizontal" onSubmit={handleForm} noValidate>
-
                                             <table class="table table-borderless">
                                                 <tr>
-                                                    <td class="form-label">Device Name</td>
+                                                    <td class="form-label">User Name</td>
                                                     <td><fieldset className="form-group position-relative has-icon-left">
-                                                        <input type="text" name="device_id" id="device_id" value={deviceName} onChange={(e) => { setDeviceName(e.target.value) }} readOnly={props.mode == "Edit"} className="form-control" placeholder="Device name" tabIndex={1} required data-validation-required-message="Please enter device name." />
+                                                        <input type="text" name="user_name" id="user_name" value={user_name} onChange={(e) => { setUsername(e.target.value) }} readOnly={props.mode == "Edit"} className="form-control" placeholder="Username" tabIndex={1} required data-validation-required-message="Please enter username." />
                                                         <div className="form-control-position">
                                                             <i className="la la-user" />
                                                         </div>
                                                         <div className="help-block font-small-3" />
-                                                        <span class="text-danger">{err_msg.device_name ? err_msg.device_name[0] : ''}</span>
+                                                        <span class="text-danger">{err_msg.user_name ? err_msg.user_name[0] : ''}</span>
                                                     </fieldset></td>
                                                 </tr>
                                                 <tr>
@@ -280,8 +233,7 @@ const DeviceForm = (props) => {
 
                                                     </td>
                                                 </tr>
-
-                                                {/* <tr>
+                                                <tr>
                                                     <td>Age</td>
                                                     <td><fieldset className="form-group position-relative has-icon-left">
                                                         <input type="text" name="age" id="age" className="form-control" value={age} onChange={(e) => { setAge(e.target.value) }} placeholder="Age" tabIndex={6} required data-validation-required-message="Please enter age." />
@@ -301,8 +253,7 @@ const DeviceForm = (props) => {
                                                         <div className="help-block font-small-3" />
                                                         <span class="text-danger">{err_msg.gender ? err_msg.gender[0] : ''}</span>
                                                     </fieldset></td>
-                                                </tr> */}
-
+                                                </tr>
                                                 <tr>
                                                     <td>Type</td>
                                                     <td><fieldset className="form-group position-relative">
@@ -332,7 +283,7 @@ const DeviceForm = (props) => {
                                                             <option value="e1">Middle Class</option>
                                                             <option value="d1">Lower Middle Class</option>
                                                             <option value="a1">Lower Class</option>
-
+                                                            
                                                         </select>
                                                         <div className="help-block font-small-3" />
                                                         <span class="text-danger">{err_msg.economic_status ? err_msg.economic_status[0] : ''}</span>
@@ -387,7 +338,6 @@ const DeviceForm = (props) => {
                                                         <span class="text-danger">{err_msg.address ? err_msg.address[0] : ''}</span>
                                                     </fieldset>
                                                 </div>
-
                                                 <div className="col-12 col-sm-6 col-md-6">
                                                     <fieldset className="form-group position-relative has-icon-left">
                                                         <input type="text" name="phone" id="phone" className="form-control" value={phone} onChange={(e) => { setPhone(e.target.value) }} placeholder="Phone" tabIndex={6} required data-validation-required-message="Please enter phone number." />
@@ -418,44 +368,9 @@ const DeviceForm = (props) => {
                                 </div>
                             </div>
 
-
-
-
-
-
-
-
-
-
                         </div>
-
-
                     </div>
                     <br />
-                    <br />
-
-                    {(() => {
-                        if (props.mode == "Edit") {
-                            if (deviceUsers.length > 0) {
-                                return <UserListTable deviceUsers={deviceUsers} />
-                            } else {
-                                return <div class="card">
-
-                                    <div class="card-content collapse show">
-                                        <div class="card-body card-dashboard">
-
-                                            <div class="row">
-                                                <div class="col-md-7"><div class="h3 font-weight-bold">Device User List</div></div>
-
-                                            </div>
-                                            <h4>No User Added In This Device</h4>
-                                        </div>
-                                    </div>
-                                </div>
-                            }
-                        }
-                    })()}
-
                     <br />
                     <br />
                     <br />
@@ -468,4 +383,4 @@ const DeviceForm = (props) => {
 
     )
 }
-export default DeviceForm;
+export default UserForm;
