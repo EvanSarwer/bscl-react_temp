@@ -39,12 +39,12 @@ const DeviceList = () => {
         );
     };
 
-    const handleChange = (event, user_id) => {
+    const handleChange = (event, device_id) => {
 
         if (event.target.checked) {
             //console.log('✅ Checkbox is checked');
-            const obj = { user_id: user_id, deselect: 'deselect' };
-            axiosConfig.post("/deviceuser/deselect", obj).then((rsp) => {
+            const obj = { device_id: device_id, deselect: 'deselect' };
+            axiosConfig.post("/device/deselect", obj).then((rsp) => {
                 window.location.reload(false);
             }, (err) => {
             });
@@ -52,8 +52,8 @@ const DeviceList = () => {
 
         } else {
             //console.log('⛔️ Checkbox is NOT checked');
-            const obj = { user_id: user_id, deselect: '' };
-            axiosConfig.post("/deviceuser/deselect", obj).then((rsp) => {
+            const obj = { device_id: device_id, deselect: '' };
+            axiosConfig.post("/device/deselect", obj).then((rsp) => {
                 window.location.reload(false);
             }, (err) => {
             });
@@ -64,7 +64,6 @@ const DeviceList = () => {
         setIsSubscribed(current => !current);
 
         console.log(event.target.checked);
-        console.log(user_id);
 
     };
 

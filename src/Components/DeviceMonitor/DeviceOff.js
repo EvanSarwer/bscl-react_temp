@@ -29,7 +29,7 @@ const DeviceOff = () => {
     const Search = (data) => {
         return data.filter(
             (item) =>
-                item.user_name.toLowerCase().includes(query.toLowerCase()) ||
+                item.device_name.toLowerCase().includes(query.toLowerCase()) ||
                 item.id.toString().includes(query)
         );
     };
@@ -56,7 +56,7 @@ const DeviceOff = () => {
                                 <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>User Name</th>
+                                        <th>Device Name</th>
                                         <th>Status</th>
                                     </tr>
                                 </thead>
@@ -65,7 +65,7 @@ const DeviceOff = () => {
                                                 <tr key={device.id}>
                                                     
                                                     <td>{device.id}</td>
-                                                    <td>{device.user_name}</td>
+                                                    <td>{device.device_name}</td>
                                                     <td><span style={{ height: "1em",  width: "1em",  backgroundColor: "red",  borderRadius: "50%",  display: "inline-block"}}></span></td>            
                                         </tr>
                                             )}
