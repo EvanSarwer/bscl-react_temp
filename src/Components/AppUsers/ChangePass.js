@@ -2,8 +2,11 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import axiosConfig from '../axiosConfig';
 import Header from "../Header/Header";
+import Cookies from 'universal-cookie';
+
 
 const ChangePass=()=>{
+    const cookies = new Cookies();
     const [user_name,setUsername] = useState("");
     const [currentpassword,setcurrentPassword] = useState("");
     const [newpassword,setnewPassword] = useState("");
@@ -47,7 +50,7 @@ const ChangePass=()=>{
         e.preventDefault();
         
 
-            const obj = {user_name:(localStorage.getItem("username")),currentpassword:currentpassword,newpassword:newpassword,confirmpass:confirmpass};
+            const obj = {user_name:(cookies.get('username')),currentpassword:currentpassword,newpassword:newpassword,confirmpass:confirmpass};
             axiosConfig.post("/appuser/changepass",obj).then((rsp)=>{
                 console.log(rsp.data);
                 console.log(obj);
@@ -126,7 +129,7 @@ const ChangePass=()=>{
                                                         </fieldset>
                                                     </div>
                                                     </div>
-                                                    
+                                                    {cookies.get('cc')}
                                                 <div className="row">
                                                     <div className="col-12 col-sm-12 col-md-12">
                                                         <fieldset className="form-group position-relative has-icon-left">

@@ -1,5 +1,7 @@
 import axios from 'axios';
+import Cookies from 'universal-cookie';
 
+const cookies = new Cookies();
 // Next we make an 'instance' of it
 const instance = axios.create({
 // .. where we make our configurations
@@ -14,8 +16,9 @@ const instance = axios.create({
 // Also add/ configure interceptors && all the other cool stuff
 
 instance.interceptors.request.use(function (config) {
+  //const cookies = new Cookies();
     // Do something before request is sent
-    config.headers.common['Authorization'] =  localStorage.getItem("_authToken");
+    config.headers.common['Authorization'] =cookies.get('_authToken');//  localStorage.getItem("_authToken");
     //this.$Progress.start(); 
     console.log("intercepted");
     return config;
@@ -25,6 +28,7 @@ instance.interceptors.request.use(function (config) {
     return Promise.reject(error);
   });
 instance.interceptors.response.use(function (response) {
+  //const cookies = new Cookies();
   console.log('request interceptor good');
   return response;
 }, function(error) {
@@ -34,7 +38,10 @@ instance.interceptors.response.use(function (response) {
   //console.log(error.response.status);
  if (error.response.status === 401) {
   //console.log("kkk");
-  localStorage.clear();
+  //localStorage.clear();
+  cookies.remove('_authToken');
+            cookies.remove('_role');
+            cookies.remove('username');
       window.location.href="/";
  }
  return Promise.reject(error)

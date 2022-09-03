@@ -1,6 +1,9 @@
 import {useState,useEffect} from 'react';
 import axiosConfig from '../axiosConfig';
+import Cookies from 'universal-cookie';
+
 const Login=()=> {
+    const cookies = new Cookies();
     const [uname,setUname] = useState("");
     const [pass,setPass] = useState("");
     const [err,setErr] = useState({});
@@ -11,9 +14,13 @@ const Login=()=> {
         const obj = {username:uname,password:pass};
         axiosConfig.post("/auth/sign-in",obj).then((rsp)=>{
             console.log(rsp.data);
-            localStorage.setItem("_authToken",rsp.data.data.token);
-            localStorage.setItem("_role",rsp.data.data.role);
-            localStorage.setItem("username",rsp.data.data.username);
+            //localStorage.setItem("_authToken",rsp.data.data.token);
+            cookies.set('_authToken', rsp.data.data.token);
+            //localStorage.setItem("_role",rsp.data.data.role);
+            cookies.set('_role', rsp.data.data.role);
+            //localStorage.setItem("username",rsp.data.data.username);
+            cookies.set('username', rsp.data.data.username);
+            
             window.location.href="/";
 
         },(err)=>{

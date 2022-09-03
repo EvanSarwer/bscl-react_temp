@@ -1,8 +1,14 @@
 import axiosConfig from '../axiosConfig';
+
+import Cookies from 'universal-cookie';
 const Header = (props) => {
+    const cookies = new Cookies();
     var logout=()=>{
         axiosConfig.get("/logout").then((rsp)=>{
-            localStorage.clear();
+            //localStorage.clear();
+            cookies.remove('_authToken');
+            cookies.remove('_role');
+            cookies.remove('username');
             window.open("/","_self");
         },(err)=>{
 
