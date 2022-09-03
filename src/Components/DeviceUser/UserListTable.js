@@ -94,10 +94,8 @@ const UserListTable = (props) => {
                                 <tr>
                                     <th>User Index</th>
                                     <th>User name</th>
-                                    <th>Address</th>
-                                    <th>Type</th>
-                                    <th>Economic Status</th>
-                                    <th>Socio Status</th>
+                                    <th>Gender</th>
+                                    <th>Age</th>
                                     <th>Status</th>
                                     {/* <th>Operation</th> */}
                                 </tr>
@@ -107,12 +105,10 @@ const UserListTable = (props) => {
                                     <tr key={user.user_index}>
                                         <td>{user.user_index + 1}</td>
                                         <td><a href={`/device/details/${user.id}`}>{user.user_name}</a></td>
-                                        <td>{user.address}</td>
-                                        <td>{user.type}</td>
-                                        {/* <td>{user.gender}</td>
-                                                                            <td>{user.age}</td> */}
-                                        <td>{user.economic_status}</td>
-                                        <td>{user.socio_status}</td>
+                                        <td>{user.gender}</td>
+                                        <td>{user.age}</td>
+                                        {/* <td>{user.economic_status}</td>
+                                        <td>{user.socio_status}</td> */}
                                         <td style={{ whiteSpace: 'nowrap' }}>
                                             <a class="btn btn-secondary" href={`/device/user/edit/${user.id}`}>Edit</a>
                                             <button class="offset-1 btn btn-danger" >Delete</button>
