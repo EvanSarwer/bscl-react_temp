@@ -16,6 +16,7 @@ import UserStatus from '../User/UserStatus';
 import UserDefined from '../User/UserDefined';
 import Overview from '../Overview/Overview';
 import ViewLog from '../ViewLog/ViewLog';
+import ViewLog2 from '../ViewLog/ViewLog2';
 import AppUserList from "../AppUsers/AppUserList";
 import AddAppUser from "../AppUsers/AddAppUser";
 import EditAppUser from "../AppUsers/EditAppUser";
@@ -54,6 +55,7 @@ function Admin() {
         <Route exact path="/downloadreport" element={<DownloadReport />}></Route>
         <Route exact path="/devicemonitor" element={<DeviceMonitor />}></Route>
         <Route exact path="/logs" element={<ViewLog />}></Route>
+        <Route exact path="/testlogs" element={<ViewLog2 />}></Route>
         <Route exact path="/app/users" element={<AppUserList />}></Route>
         <Route exact path="/app/user/create" element={<AddAppUser />}></Route>
         <Route exact path="/app/user/edit/:id" element={<EditAppUser />}></Route>
