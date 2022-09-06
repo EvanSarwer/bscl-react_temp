@@ -191,7 +191,7 @@ const MainMenu = (props) => {
                         }
                     })()}
 
-                    {(() => {
+{(() => {
                         if (props.menu === "devicemonitor") {
                             return (
                                 <li class="active nav-item"><a href="/devicemonitor"><i class="la la-cogs"></i><span class="menu-title" data-i18n="Templates">Device Monitor</span></a>
@@ -204,6 +204,8 @@ const MainMenu = (props) => {
                             )
                         }
                     })()}
+                    
+                    
 
                     {(() => {
                         if (props.menu === "device") {
@@ -245,7 +247,19 @@ const MainMenu = (props) => {
                             )
                         }
                     })()}
-
+{(() => {
+                        if (props.menu === "adtrp") {
+                            return (
+                                <li class="active nav-item"><a href="/adtrp"><i class="la la-download"></i><span class="menu-title" data-i18n="Templates">Ad Trp v2</span></a>
+                                </li>
+                            )
+                        } else {
+                            return (
+                                <li class=" nav-item"><a href="/adtrp"><i class="la la-download"></i><span class="menu-title" data-i18n="Templates">Ad Trp v2</span></a>
+                                </li>
+                            )
+                        }
+                    })()}
 
 
 
