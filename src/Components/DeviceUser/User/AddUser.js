@@ -1,7 +1,7 @@
-import UserForm from './UserForm';
 import { useParams } from "react-router-dom";
-import Header from '../../Header/Header';
-import MainMenu from '../../MainMenu/MainMenu';
+import Header from "../../Header/Header";
+import MainMenu from "../../MainMenu/MainMenu";
+import UserForm from "./UserForm";
 
 const AddUser = () => {
     const { device_id, user_index } = useParams();
