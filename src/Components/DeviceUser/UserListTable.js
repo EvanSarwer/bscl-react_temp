@@ -23,10 +23,13 @@ const UserListTable = (props) => {
 
     // }, []);
 
-    const deleteDevice = (id) => {
+    
+    
+
+    const deleteUser = (id) => {
 
         const obj = { id: id };
-        axiosConfig.post("/device/delete", obj).then((rsp) => {
+        axiosConfig.post("/deviceuser/delete", obj).then((rsp) => {
             window.location.reload(false);
         }, (err) => {
         });
@@ -111,7 +114,7 @@ const UserListTable = (props) => {
                                         <td>{user.socio_status}</td> */}
                                         <td style={{ whiteSpace: 'nowrap' }}>
                                             <a class="btn btn-secondary" href={`/device/user/edit/${user.id}`}>Edit</a>
-                                            <button class="offset-1 btn btn-danger" >Delete</button>
+                                            <button class="offset-1 btn btn-danger" onClick={() => { if (window.confirm('Delete the item?')) { deleteUser(user.id) }; }}>Delete</button>
                                         </td>
                                         {/* <td><div><input type="checkbox" id="deselect" onChange={(event) => { if (window.confirm('Want to run This Deselection operation?')) { handleChange(event, device.id) } else { window.location.reload(false) } }} value={isSubscribed} checked={device.deselect === "deselect"} name="deselect" />
                                             <label class="form-label" >&nbsp; Deselect</label></div>

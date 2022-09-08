@@ -121,7 +121,7 @@ const DeviceForm = (props) => {
             axiosConfig.post("/device/edit", obj).then((rsp) => {
 
                 alert(rsp.data.message);
-                window.location.href = "/device/users";
+                window.location.href = "/device";
 
             }, (err) => {
                 if (err.response.status === 422) {
@@ -135,7 +135,7 @@ const DeviceForm = (props) => {
             const obj = { device_name: deviceName, lat: latitude, lng: longitude, address: address, type: type, economic_status: economicStatus, socio_status: socioStatus };
             axiosConfig.post("/device/create", obj).then((rsp) => {
                 alert(rsp.data.message);
-                window.location.href = "/device/users";
+                window.location.href = "/device";
 
             }, (err) => {
                 if (err.response.status === 422) {
@@ -172,16 +172,6 @@ const DeviceForm = (props) => {
 
     };
 
-
-
-    const addUser = (device_id, user_index) => {
-
-        // const obj = { id: id };
-        // axiosConfig.post("/device/delete", obj).then((rsp) => {
-        //     window.location.reload(false);
-        // }, (err) => {
-        // });
-    };
 
 
     const numbers = [0, 1, 2, 3, 4, 5, 6, 7];
@@ -225,7 +215,7 @@ const DeviceForm = (props) => {
                                                 if (props.mode == "Edit") {
 
                                                     return numbers.map((index) =>
-                                                        <><button key={index} class={(allTimeArray[index]) ? "btn btn-success" : "btn btn-danger"} onClick={() => { if (allTimeArray[index]) { alert("Already has User in this index") } else { window.location.href = "/device/user/create/" + deviceID + "/" + index; } }}>{index + 1}</button> &nbsp; &nbsp;</>
+                                                        <><button key={index} class={(allTimeArray[index]) ? "btn btn-danger" : "btn btn-success" } onClick={() => { if (allTimeArray[index]) { alert("Already has User in this index") } else { window.location.href = "/device/user/create/" + deviceID + "/" + index; } }}>{index + 1}</button> &nbsp; &nbsp;</>
                                                     )
                                                 }
 
