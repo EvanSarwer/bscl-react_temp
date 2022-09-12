@@ -53,6 +53,7 @@ const UserForm = (props) => {
 
         else {
             const obj = { user_name: user_name, dob: dob, gender: gender , device_id: props.device_id, user_index: props.user_index};
+            console.log(obj);
             axiosConfig.post("/deviceuser/create", obj).then((rsp) => {
                 alert(rsp.data.message);
                 window.location.href = `/device/edit/${props.device_id}`;

@@ -113,7 +113,7 @@ const UserListTable = (props) => {
                                         {/* <td>{user.economic_status}</td>
                                         <td>{user.socio_status}</td> */}
                                         <td style={{ whiteSpace: 'nowrap' }}>
-                                            <a class="btn btn-secondary" href={`/device/user/edit/${user.id}`}>Edit</a>
+                                            <a class="btn btn-secondary" href={`/device/user/edit/${user.id}/${props.from}`}>Edit</a>
                                             <button class="offset-1 btn btn-danger" onClick={() => { if (window.confirm('Delete the item?')) { deleteUser(user.id) }; }}>Delete</button>
                                         </td>
                                         {/* <td><div><input type="checkbox" id="deselect" onChange={(event) => { if (window.confirm('Want to run This Deselection operation?')) { handleChange(event, device.id) } else { window.location.reload(false) } }} value={isSubscribed} checked={device.deselect === "deselect"} name="deselect" />

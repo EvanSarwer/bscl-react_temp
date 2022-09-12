@@ -5,11 +5,11 @@ import UserForm from "./UserForm";
 
 
 const EditUser = () => {
-    const { id } = useParams();
+    const { id, from } = useParams();
     return (
         <div><Header title="Device User" />
             <MainMenu menu="device" />
-            <UserForm mode="Edit" id={id} />
+            <UserForm mode="Edit" id={id} from={from} />
         </div>
     )
 }
