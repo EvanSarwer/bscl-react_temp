@@ -4,11 +4,11 @@ import MainMenu from "../../MainMenu/MainMenu";
 import UserForm from "./UserForm";
 
 const AddUser = () => {
-    const { device_id, user_index } = useParams();
+    const { device_id, user_index, from } = useParams();
     return (
         <div><Header title="Device User" />
             <MainMenu menu="device" />
-            <UserForm mode="Create" device_id={device_id} user_index={user_index} />
+            <UserForm mode="Create" device_id={device_id} user_index={user_index} from={from}/>
         </div>
     )
 }

@@ -68,8 +68,8 @@ function Admin() {
         <Route exact path="/device/create" element={<AddDevice />}></Route>
         <Route exact path="/device/edit/:id" element={<EditDevice />}></Route>
 
-        <Route exact path="/device/user/create/:device_id/:user_index" element={<AddUser />}></Route>
-        <Route exact path="/device/user/edit/:id" element={<EditUser />}></Route>
+        <Route exact path="/device/user/create/:device_id/:user_index/:from" element={<AddUser />}></Route>
+        <Route exact path="/device/user/edit/:id/:from" element={<EditUser />}></Route>
 
         {/* <Navigate to="/" /> */}
         <Route
