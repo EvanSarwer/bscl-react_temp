@@ -54,7 +54,7 @@ const OverviewUser = () => {
         var sampleLive = channelData;
         console.log(sampleLive);
         for (var i = 0; i < sampleLive.labels.length; i++) {
-            csv.push([sampleLive.labels[i], sampleLive.datasets[0].data[i]]);
+            csv.push([sampleLive.label_ids[i], sampleLive.datasets[0].data[i]]);
         }
         console.log(csv);
         getCSV(csv);
@@ -122,7 +122,8 @@ const OverviewUser = () => {
                 axiosConfig.post("/overview/reachusergraph", data).then(rsp => {
                     console.log(rsp.data);
                     setChannelData(() => ({
-                        labels: rsp.data.channels, datasets: [{
+                        labels: rsp.data.channels,
+                        label_ids: rsp.data.channel_ids, datasets: [{
                             label: "Reach (000)", data: rsp.data.reach,
                             backgroundColor: ["#2a71d0"],
                             //borderColor: "black",
@@ -137,8 +138,10 @@ const OverviewUser = () => {
             }
             else if (category === "Reach(%)") {
                 axiosConfig.post("/overview/reachpercentgraph", data).then(rsp => {
+                    console.log(rsp.data);
                     setChannelData(() => ({
-                        labels: rsp.data.channels, datasets: [{
+                        labels: rsp.data.channels,
+                        label_ids: rsp.data.channel_ids, datasets: [{
                             label: "Reach (%)", data: rsp.data.reach,
                             backgroundColor: ["#f3ba2f"],
                             //borderColor: "black",
@@ -153,8 +156,10 @@ const OverviewUser = () => {
             }
             else if (category === "TVR(000)") {
                 axiosConfig.post("/overview/tvrgraphallchannelzero", data).then(rsp => {
+                    console.log(rsp.data);
                     setChannelData(() => ({
-                        labels: rsp.data.channels, datasets: [{
+                        labels: rsp.data.channels,
+                        label_ids: rsp.data.channel_ids, datasets: [{
                             label: "TVR (000)", data: rsp.data.tvrs,
                             backgroundColor: ["#50AF95"],
                             //borderColor: "black",
@@ -169,8 +174,10 @@ const OverviewUser = () => {
             }
             else if (category === "TVR(%)") {
                 axiosConfig.post("/overview/tvrgraphallchannelpercent", data).then(rsp => {
+                    console.log(rsp.data);
                     setChannelData(() => ({
-                        labels: rsp.data.channels, datasets: [{
+                        labels: rsp.data.channels,
+                        label_ids: rsp.data.channel_ids, datasets: [{
                             label: "TVR (%)", data: rsp.data.tvrs,
                             backgroundColor: ["#2a71d0"],
                             //borderColor: "black",
@@ -187,7 +194,8 @@ const OverviewUser = () => {
                 axiosConfig.post("/overview/tvrsharegraph", data).then(rsp => {
                     console.log(rsp.data);
                     setChannelData(() => ({
-                        labels: rsp.data.channels, datasets: [{
+                        labels: rsp.data.channels,
+                        label_ids: rsp.data.channel_ids, datasets: [{
                             label: "TVR Share (%)", data: rsp.data.share,
                             backgroundColor: ["#f3ba2f"],
                             //borderColor: "black",
@@ -204,7 +212,8 @@ const OverviewUser = () => {
                 axiosConfig.post("/overview/timespentgraph", data).then(rsp => {
                     console.log(rsp.data);
                     setChannelData(() => ({
-                        labels: rsp.data.channels, datasets: [{
+                        labels: rsp.data.channels,
+                        label_ids: rsp.data.channel_ids, datasets: [{
                             label: "Time Spent (Uni)", data: rsp.data.totaltime,
                             backgroundColor: ["#50AF95"],
                             //borderColor: "black",
