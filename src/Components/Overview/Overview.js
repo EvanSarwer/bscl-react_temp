@@ -289,9 +289,9 @@ const Overview = () => {
                                         <div class="col-md-2">
                                             <label>Type (STB/OTT)</label>
                                             <select class="custom-select d-block w-100" onChange={(e) => { setUserType(e.target.value) }}>
-                                                <option value="">All</option>
                                                 <option value="STB">STB</option>
                                                 <option value="OTT">OTT</option>
+                                                <option value="">All</option>
                                             </select>
                                         </div>
 
