@@ -215,7 +215,7 @@ const DeviceForm = (props) => {
                                                 if (props.mode == "Edit") {
 
                                                     return numbers.map((index) =>
-                                                        <><button key={index} class={(allTimeArray[index]) ? "btn btn-danger" : "btn btn-success" } onClick={() => { if (allTimeArray[index]) { alert("Already has User in this index") } else { window.location.href = "/device/user/create/" + deviceID + "/" + index; } }}>{index + 1}</button> &nbsp; &nbsp;</>
+                                                        <><button key={index} class={(allTimeArray[index]) ? "btn btn-danger" : "btn btn-success"} onClick={() => { if (allTimeArray[index]) { alert("Already has User in this index") } else { window.location.href = "/device/user/create/" + deviceID + "/" + index; } }}>{index + 1}</button> &nbsp; &nbsp;</>
                                                     )
                                                 }
 
@@ -259,19 +259,28 @@ const DeviceForm = (props) => {
                                                         {(() => {
                                                             if (props.mode == "Edit") {
                                                                 return <div><div class="row"><div class="col-sm-3 col-form-label">Lat:</div><div class="col-sm-9"><input type="text" name="lat" id="lat" value={latitude} onChange={(e) => { setLatitude(e.target.value) }} className="form-control" placeholder="Latitude" tabIndex={3} /></div></div>
-                                                                    <div class="row"><div class="col-sm-3 col-form-label">Lng:</div><div class="col-sm-9"><input type="text" name="lng" id="lng" value={longitude} onChange={(e) => { setLongitude(e.target.value) }} className="form-control" placeholder="Longitude" tabIndex={4} /></div></div></div>
+                                                                    <div className="help-block font-small-3" />
+                                                                    <span class="text-danger">{err_msg.lat ? err_msg.lat[0] : ''}</span>
+
+                                                                    <div class="row"><div class="col-sm-3 col-form-label">Lng:</div><div class="col-sm-9"><input type="text" name="lng" id="lng" value={longitude} onChange={(e) => { setLongitude(e.target.value) }} className="form-control" placeholder="Longitude" tabIndex={4} /></div></div>
+                                                                    <div className="help-block font-small-3" />
+                                                                    <span class="text-danger">{err_msg.lng ? err_msg.lng[0] : ''}</span></div>
 
                                                             } else {
                                                                 return <div><div class="row"><div class="col-sm-3 col-form-label">Lat:</div><div class="col-sm-9"><input type="text" name="lat" id="lat" value={latitude} onChange={(e) => { setLatitude(e.target.value) }} className="form-control" placeholder="Latitude" tabIndex={3} /></div></div>
-                                                                    <div class="row"><div class="col-sm-3 col-form-label">Lng:</div><div class="col-sm-9"><input type="text" name="lng" id="lng" value={longitude} onChange={(e) => { setLongitude(e.target.value) }} className="form-control" placeholder="Longitude" tabIndex={4} /></div></div></div>
+                                                                    <div className="help-block font-small-3" />
+                                                                    <span class="text-danger">{err_msg.lat ? err_msg.lat[0] : ''}</span>
+                                                                    <div class="row"><div class="col-sm-3 col-form-label">Lng:</div><div class="col-sm-9"><input type="text" name="lng" id="lng" value={longitude} onChange={(e) => { setLongitude(e.target.value) }} className="form-control" placeholder="Longitude" tabIndex={4} /></div></div>
+                                                                    <div className="help-block font-small-3" />
+                                                                    <span class="text-danger">{err_msg.lng ? err_msg.lng[0] : ''}</span></div>
                                                             }
                                                         })()}
 
 
-                                                    </td>
-                                                </tr>
+                                                </td>
+                                            </tr>
 
-                                                {/* <tr>
+                                            {/* <tr>
                                                     <td>Age</td>
                                                     <td><fieldset className="form-group position-relative has-icon-left">
                                                         <input type="text" name="age" id="age" className="form-control" value={age} onChange={(e) => { setAge(e.target.value) }} placeholder="Age" tabIndex={6} required data-validation-required-message="Please enter age." />
@@ -293,46 +302,46 @@ const DeviceForm = (props) => {
                                                     </fieldset></td>
                                                 </tr> */}
 
-                                                <tr>
-                                                    <td>Type</td>
-                                                    <td><fieldset className="form-group position-relative">
-                                                        <input type="radio" name="type" value="STB" onChange={(e) => { setType(e.target.value) }} checked={type === "STB"} />&nbsp;STB &nbsp;&nbsp;&nbsp;
-                                                        <input type="radio" name="type" value="OTT" onChange={(e) => { setType(e.target.value) }} checked={type === "OTT"} />&nbsp;OTT
-                                                        <div className="help-block font-small-3" />
-                                                        <span class="text-danger">{err_msg.type ? err_msg.type[0] : ''}</span>
-                                                    </fieldset></td>
-                                                </tr>
+                                            <tr>
+                                                <td>Type</td>
+                                                <td><fieldset className="form-group position-relative">
+                                                    <input type="radio" name="type" value="STB" onChange={(e) => { setType(e.target.value) }} checked={type === "STB"} />&nbsp;STB &nbsp;&nbsp;&nbsp;
+                                                    <input type="radio" name="type" value="OTT" onChange={(e) => { setType(e.target.value) }} checked={type === "OTT"} />&nbsp;OTT
+                                                    <div className="help-block font-small-3" />
+                                                    <span class="text-danger">{err_msg.type ? err_msg.type[0] : ''}</span>
+                                                </fieldset></td>
+                                            </tr>
 
-                                                <tr>
-                                                    <td>Socio Status</td>
-                                                    <td><fieldset className="form-group position-relative">
-                                                        <input type="radio" name="sociostatus" value="u" onChange={(e) => { setSocioStatus(e.target.value) }} checked={socioStatus === "u"} />Urban &nbsp;&nbsp;&nbsp;
-                                                        <input type="radio" name="sociostatus" value="r" onChange={(e) => { setSocioStatus(e.target.value) }} checked={socioStatus === "r"} />Rural<br />
-                                                        <div className="help-block font-small-3" />
-                                                        <span class="text-danger">{err_msg.socio_status ? err_msg.socio_status[0] : ''}</span>
-                                                    </fieldset></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Economic Status</td>
-                                                    <td><fieldset className="form-group position-relative">
-                                                        <select class="custom-select d-block w-100" value={economicStatus} onChange={(e) => { setEconomicStatus(e.target.value) }}>
-                                                            <option value="">Select</option>
-                                                            <option value="b1">Upper Class</option>
-                                                            <option value="c1">Upper Middle Class</option>
-                                                            <option value="e1">Middle Class</option>
-                                                            <option value="d1">Lower Middle Class</option>
-                                                            <option value="a1">Lower Class</option>
+                                            <tr>
+                                                <td>Socio Status</td>
+                                                <td><fieldset className="form-group position-relative">
+                                                    <input type="radio" name="sociostatus" value="u" onChange={(e) => { setSocioStatus(e.target.value) }} checked={socioStatus === "u"} />Urban &nbsp;&nbsp;&nbsp;
+                                                    <input type="radio" name="sociostatus" value="r" onChange={(e) => { setSocioStatus(e.target.value) }} checked={socioStatus === "r"} />Rural<br />
+                                                    <div className="help-block font-small-3" />
+                                                    <span class="text-danger">{err_msg.socio_status ? err_msg.socio_status[0] : ''}</span>
+                                                </fieldset></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Economic Status</td>
+                                                <td><fieldset className="form-group position-relative">
+                                                    <select class="custom-select d-block w-100" value={economicStatus} onChange={(e) => { setEconomicStatus(e.target.value) }}>
+                                                        <option value="">Select</option>
+                                                        <option value="b1">Upper Class</option>
+                                                        <option value="c1">Upper Middle Class</option>
+                                                        <option value="e1">Middle Class</option>
+                                                        <option value="d1">Lower Middle Class</option>
+                                                        <option value="a1">Lower Class</option>
 
-                                                        </select>
-                                                        <div className="help-block font-small-3" />
-                                                        <span class="text-danger">{err_msg.economic_status ? err_msg.economic_status[0] : ''}</span>
-                                                    </fieldset></td>
-                                                </tr>
+                                                    </select>
+                                                    <div className="help-block font-small-3" />
+                                                    <span class="text-danger">{err_msg.economic_status ? err_msg.economic_status[0] : ''}</span>
+                                                </fieldset></td>
+                                            </tr>
 
-                                            </table>
+                                        </table>
 
 
-                                            {/* <fieldset className="form-group position-relative has-icon-left">
+                                        {/* <fieldset className="form-group position-relative has-icon-left">
                                                 <input type="email" name="email" id="email" className="form-control" value={email} onChange={(e) => { setEmail(e.target.value) }} placeholder="Email Address" tabIndex={2} required data-validation-required-message="Please enter email address." />
                                                 <div className="form-control-position">
                                                     <i className="la la-envelope" />
@@ -341,7 +350,7 @@ const DeviceForm = (props) => {
                                                 <span class="text-danger">{err_msg.email ? err_msg.email[0] : ''}</span>
                                             </fieldset> */}
 
-                                            {/* {props.mode == "Create" &&
+                                        {/* {props.mode == "Create" &&
                                                 <div className="row">
                                                     <div className="col-12 col-sm-6 col-md-6">
                                                         <fieldset className="form-group position-relative has-icon-left">
@@ -366,7 +375,7 @@ const DeviceForm = (props) => {
                                                 </div>
                                             } */}
 
-                                            {/* <div className="row">
+                                        {/* <div className="row">
                                                 <div className="col-12 col-sm-6 col-md-6">
                                                     <fieldset className="form-group position-relative has-icon-left">
                                                         <textarea name="address" id="address" className="form-control" value={address} onChange={(e) => { setAddress(e.target.value) }} placeholder="Address" tabIndex={5} required data-validation-required-message="Please enter address." />
@@ -390,70 +399,70 @@ const DeviceForm = (props) => {
                                                 </div>
                                             </div> */}
 
-                                            <div class="pl-0">
-                                                {(() => {
-                                                    if (props.mode == "Edit") {
-                                                        return <button type="submit" className="btn btn-info btn-block"><i className="la la-user" />
-                                                            Update Device User</button>
-                                                    } else {
-                                                        return <button type="submit" className="btn btn-info btn-block"><i className="la la-user" />
-                                                            Add Device User</button>
-                                                    }
-                                                })()}
+                                        <div class="pl-0">
+                                            {(() => {
+                                                if (props.mode == "Edit") {
+                                                    return <button type="submit" className="btn btn-info btn-block"><i className="la la-user" />
+                                                        Update Device User</button>
+                                                } else {
+                                                    return <button type="submit" className="btn btn-info btn-block"><i className="la la-user" />
+                                                        Add Device User</button>
+                                                }
+                                            })()}
 
-                                            </div>
+                                        </div>
 
-                                        </form>
-                                    </div>
+                                    </form>
                                 </div>
                             </div>
-
-
-
-
-
-
-
-
-
-
                         </div>
 
 
+
+
+
+
+
+
+
+
                     </div>
-                    <br />
-                    <br />
 
-                    {(() => {
-                        if (props.mode == "Edit") {
-                            if (deviceUsers.length > 0) {
-                                return <UserListTable deviceUsers={deviceUsers} />
-                            } else {
-                                return <div class="card">
 
-                                    <div class="card-content collapse show">
-                                        <div class="card-body card-dashboard">
+                </div>
+                <br />
+                <br />
 
-                                            <div class="row">
-                                                <div class="col-md-7"><div class="h3 font-weight-bold">Device User List</div></div>
+                {(() => {
+                    if (props.mode == "Edit") {
+                        if (deviceUsers.length > 0) {
+                            return <UserListTable deviceUsers={deviceUsers} />
+                        } else {
+                            return <div class="card">
 
-                                            </div>
-                                            <h4>No User Added In This Device</h4>
+                                <div class="card-content collapse show">
+                                    <div class="card-body card-dashboard">
+
+                                        <div class="row">
+                                            <div class="col-md-7"><div class="h3 font-weight-bold">Device User List</div></div>
+
                                         </div>
+                                        <h4>No User Added In This Device</h4>
                                     </div>
                                 </div>
-                            }
+                            </div>
                         }
-                    })()}
+                    }
+                })()}
 
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                </div>
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
             </div>
         </div>
+        </div >
 
 
     )

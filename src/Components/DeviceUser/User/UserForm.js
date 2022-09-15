@@ -7,7 +7,7 @@ const UserForm = (props) => {
     const [gender, setGender] = useState("");
     const [deviceID, setDeviceID] = useState("");
     const [dob, setDob] = useState("");
-
+    console.log(props.from);
 
 
     useEffect(() => {
@@ -41,7 +41,12 @@ const UserForm = (props) => {
             axiosConfig.post("/deviceuser/edit", obj).then((rsp) => {
 
                 alert(rsp.data.message);
-                window.location.href = `/device/edit/${deviceID}`;
+                if(props.from == "DeviceDetails"){
+                    window.location.href = `/device/details/${deviceID}`;
+                }else{
+                    window.location.href = `/device/edit/${deviceID}`;
+                }
+                
 
             }, (err) => {
                 if (err.response.status === 422) {
@@ -56,7 +61,12 @@ const UserForm = (props) => {
             console.log(obj);
             axiosConfig.post("/deviceuser/create", obj).then((rsp) => {
                 alert(rsp.data.message);
-                window.location.href = `/device/edit/${props.device_id}`;
+                if(props.from == "DeviceDetails"){
+                    window.location.href = `/device/details/${props.device_id}`;
+                }else{
+                    window.location.href = `/device/edit/${props.device_id}`;
+                }
+                
 
             }, (err) => {
                 if (err.response.status === 422) {

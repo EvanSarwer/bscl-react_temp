@@ -6,6 +6,7 @@ import UserForm from "./UserForm";
 
 const EditUser = () => {
     const { id, from } = useParams();
+    console.log(from);
     return (
         <div><Header title="Device User" />
             <MainMenu menu="device" />

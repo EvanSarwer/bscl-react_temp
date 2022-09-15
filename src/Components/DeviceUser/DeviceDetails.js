@@ -1,9 +1,13 @@
 import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 import axiosConfig from '../axiosConfig';
 import UserListTable from "./UserListTable";
+import Header from "../Header/Header";
+import MainMenu from "../MainMenu/MainMenu";
 
 const DeviceDetails = (props) => {
+    const { id } = useParams();
     const [deviceID, setDeviceID] = useState("");
     const [deviceName, setDeviceName] = useState("");
     const [email, setEmail] = useState("");
@@ -25,7 +29,7 @@ const DeviceDetails = (props) => {
 
 
     useEffect(() => {
-        axiosConfig.get("/device/get/" + props.id).then((rsp) => {
+        axiosConfig.get("/device/get/" + id).then((rsp) => {
             var obj = rsp.data.device;
             setDeviceUsers(rsp.data.deviceUser);
             console.log(rsp.data.deviceUser);
@@ -70,110 +74,120 @@ const DeviceDetails = (props) => {
 
 
     return (
+        <div><Header title="Device Users Details" />
+            <MainMenu menu="device" />
 
-        <div class="app-content content" style={{ backgroundColor: "azure" }}>
-            <div class="content-overlay"></div>
-            <div class="content-wrapper" >
-                <div class="content-header row">
-                </div>
-                <div class="content-body">
+            <div class="app-content content" style={{ backgroundColor: "azure" }}>
+                <div class="content-overlay"></div>
+                <div class="content-wrapper" >
+                    <div class="content-header row">
+                    </div>
+                    <div class="content-body">
 
-                    <div class="row">
-                        <div class="col-3"></div>
-                        <div class="col-6 box-shadow-2 p-0">
+                        <div class="row">
+                            <div class="col-3"></div>
+                            <div class="col-6 box-shadow-2 p-0">
 
 
-                            <div class="card border-grey border-lighten-3 m-0" >
-                                <div className="card-header border-0 pb-0">
-                                    <div className="card-title text-center">
-                                        <img style={{ width: '13%', height: '0%' }} src="/app-assets/images/logo/app-user.png" alt="user logo" />
+                                <div class="card border-grey border-lighten-3 m-0" >
+                                    <div className="card-header border-0 pb-0">
+                                        <div className="card-title text-center">
+                                            <img style={{ width: '13%', height: '0%' }} src="/app-assets/images/logo/app-user.png" alt="user logo" />
+                                        </div>
+                                        <h6 className="card-subtitle line-on-side text-muted text-center font-medium-5 pt-2"><span>Add Device User</span>
+                                        </h6>
                                     </div>
-                                    <h6 className="card-subtitle line-on-side text-muted text-center font-medium-5 pt-2"><span>Add Device User</span>
-                                    </h6>
-                                </div>
-                                <div className="card-content" >
-                                    <div className="card-body">
-                                        <div class="row justify-content-center">
+                                    <div className="card-content" >
+                                        <div className="card-body">
+                                            <div class="row justify-content-center">
 
-                                            {
+                                                {
 
-                                                numbers.map((index) =>
-                                                    <><button key={index} class={(allTimeArray[index]) ? "btn btn-danger" : "btn btn-success"} onClick={() => { if (allTimeArray[index]) { alert("Already has User in this index") } else { window.location.href = "/device/user/create/" + deviceID + "/" + index; } }}>{index + 1}</button> &nbsp; &nbsp;</>
-                                                )
-                                            }
+                                                    numbers.map((index) =>
+                                                        <><button key={index} class={(allTimeArray[index]) ? "btn btn-danger" : "btn btn-success"} onClick={() => { if (allTimeArray[index]) { alert("Already has User in this index") } else { window.location.href = "/device/user/create/" + deviceID + "/" + index + "/DeviceDetails"; } }}>{index + 1}</button> &nbsp; &nbsp;</>
+                                                    )
+                                                }
+
+                                            </div>
+                                            <p></p>
+
+                                            <table class="table table-borderless">
+                                                <tr>
+                                                    <td class="form-label">Device ID</td>
+                                                    <td><fieldset className="form-group position-relative has-icon-left">
+                                                        <input type="text" name="device_id" id="device_id" value={deviceID} readOnly className="form-control" placeholder="Device ID" tabIndex={1} />
+                                                        <div className="form-control-position">
+                                                            <i className="la la-user" />
+                                                        </div>
+                                                    </fieldset></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="form-label">Device Name</td>
+                                                    <td><fieldset className="form-group position-relative has-icon-left">
+                                                        <input type="text" name="device_name" id="device_name" value={deviceName} readOnly className="form-control" placeholder="Device name" tabIndex={2} />
+                                                        <div className="form-control-position">
+                                                            <i className="la la-user" />
+                                                        </div>
+                                                    </fieldset></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="form-label">Address </td>
+                                                    <td><fieldset className="form-group position-relative has-icon-left">
+                                                        <textarea name="address" id="address" className="form-control" value={address} readOnly placeholder="Address" tabIndex={3} />
+                                                        <div className="form-control-position">
+                                                            <i className="ft-map-pin" />
+                                                        </div>
+
+                                                    </fieldset>
+                                                        <div><div class="row"><div class="col-sm-3 col-form-label">Lat:</div><div class="col-sm-9"><input type="text" name="lat" id="lat" value={latitude} readOnly className="form-control" placeholder="Latitude" tabIndex={4} /></div></div>
+                                                            <div class="row"><div class="col-sm-3 col-form-label">Lng:</div><div class="col-sm-9"><input type="text" name="lng" id="lng" value={longitude} readOnly className="form-control" placeholder="Longitude" tabIndex={5} /></div></div></div>
+
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>Type</td>
+                                                    <td><fieldset className="form-group position-relative">
+                                                        <input type="text" name="type" id="type" value={type} readOnly className="form-control" placeholder="Type" tabIndex={6} />
+                                                    </fieldset></td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>Socio Status</td>
+                                                    <td><fieldset className="form-group position-relative">
+                                                        <input type="text" name="sociostatus" id="sociostatus" value={(socioStatus == "u") ? "Urban" : (socioStatus == "r") ?"Rural": null} readOnly className="form-control" placeholder="Socio Status" tabIndex={7} />
+
+                                                    </fieldset></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Economic Status</td>
+                                                    <td><fieldset className="form-group position-relative">
+                                                        <input type="text" name="economicStatus" id="economicStatus" value={(economicStatus == "a1") ? "Lower Class" : (economicStatus == "b1") ? "Upper Class" : (economicStatus == "e1") ? "Middle Class" : (economicStatus == "c1") ? "Upper Middle Class" : (economicStatus == "d1") ? "Lower Middle Class": null} readOnly className="form-control" placeholder="Economic Status" tabIndex={8} />
+
+                                                    </fieldset></td>
+                                                </tr>
+
+                                            </table>
+
+
+                                            <div class="pl-0">
+                                                <a className="btn btn-info btn-block" href="/device"><i className="la la-user" />Go to Device List</a>
+
+
+                                            </div>
 
                                         </div>
-                                        <p></p>
-
-                                        <table class="table table-borderless">
-                                            <tr>
-                                                <td class="form-label">Device Name</td>
-                                                <td><fieldset className="form-group position-relative has-icon-left">
-                                                    <input type="text" name="device_id" id="device_id" value={deviceName} readOnly className="form-control" placeholder="Device name" tabIndex={1} />
-                                                    <div className="form-control-position">
-                                                        <i className="la la-user" />
-                                                    </div>
-                                                </fieldset></td>
-                                            </tr>
-                                            <tr>
-                                                <td class="form-label">Address </td>
-                                                <td><fieldset className="form-group position-relative has-icon-left">
-                                                    <textarea name="address" id="address" className="form-control" value={address} readOnly placeholder="Address" tabIndex={2} />
-                                                    <div className="form-control-position">
-                                                        <i className="ft-map-pin" />
-                                                    </div>
-
-                                                </fieldset>
-                                                    <div><div class="row"><div class="col-sm-3 col-form-label">Lat:</div><div class="col-sm-9"><input type="text" name="lat" id="lat" value={latitude} readOnly className="form-control" placeholder="Latitude" tabIndex={3} /></div></div>
-                                                        <div class="row"><div class="col-sm-3 col-form-label">Lng:</div><div class="col-sm-9"><input type="text" name="lng" id="lng" value={longitude} readOnly className="form-control" placeholder="Longitude" tabIndex={4} /></div></div></div>
-
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>Type</td>
-                                                <td><fieldset className="form-group position-relative">
-                                                    <input type="text" name="type" id="type" value={type} readOnly className="form-control" placeholder="Type" tabIndex={4} />
-                                                </fieldset></td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>Socio Status</td>
-                                                <td><fieldset className="form-group position-relative">
-                                                    <input type="text" name="sociostatus" id="sociostatus" value={socioStatus} readOnly className="form-control" placeholder="Socio Status" tabIndex={4} />
-
-                                                </fieldset></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Economic Status</td>
-                                                <td><fieldset className="form-group position-relative">
-                                                    <input type="text" name="economicStatus" id="economicStatus" value={economicStatus} readOnly className="form-control" placeholder="Economic Status" tabIndex={4} />
-
-                                                </fieldset></td>
-                                            </tr>
-
-                                        </table>
-
-
-                                        <div class="pl-0">
-                                            <button type="submit" onClick={handleForm} className="btn btn-info btn-block"><i className="la la-user" />Add Device User</button>
-
-
-                                        </div>
-
                                     </div>
                                 </div>
+
                             </div>
 
+
                         </div>
+                        <br />
+                        <br />
 
-
-                    </div>
-                    <br />
-                    <br />
-
-                    {(() => {
-                        if (props.mode == "Edit") {
+                        {(() => {
                             if (deviceUsers.length > 0) {
                                 return <UserListTable deviceUsers={deviceUsers} from="DeviceDetails" />
                             } else {
@@ -191,14 +205,15 @@ const DeviceDetails = (props) => {
                                     </div>
                                 </div>
                             }
-                        }
-                    })()}
 
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
+                        })()}
+
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                    </div>
                 </div>
             </div>
         </div>
