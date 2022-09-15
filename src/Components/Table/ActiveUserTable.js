@@ -58,7 +58,7 @@ const ActiveUserTable = () => {
                                 <tbody>
                                 {Search(activeUserList).map((user) =>
                                                 <tr key={user.user_id}>
-                                                    <td><a href={`/device/details/${user.user_id}`}>{user.user.user_name}</a></td>
+                                                    <td><a href={`/device/user/details/${user.user_id}`}>{user.user.user_name}</a></td>
                                                     <td style={{ whiteSpace: 'nowrap' }}>{user.started_watching_at}</td>
                                                     <td style={{ whiteSpace: 'nowrap' }}>{user.duration}</td>
                                                     <td><a href=""><div style={{ whiteSpace: 'nowrap' }}><img class="img-fluid" alt="" style={{ maxWidth: "3rem" }} src={"../../channels/logos/" + user.channel.logo} />{user.channel.channel_name}</div></a>

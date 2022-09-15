@@ -30,6 +30,7 @@ import AddDevice from "../DeviceUser/AddDevice";
 import EditDevice from "../DeviceUser/EditDevice";
 import AddUser from "../DeviceUser/User/AddUser";
 import EditUser from "../DeviceUser/User/EditUser";
+import DeviceDetails from "../DeviceUser/DeviceDetails";
 
 
 
@@ -63,13 +64,14 @@ function Admin() {
         <Route exact path="/app/user/edit/:id" element={<EditAppUser />}></Route>
         <Route exact path="/profile/edit" element={<EditProfile />}></Route>
         <Route exact path="/app/user/changepass" element={<ChangePass />}></Route>
-        <Route exact path="/device/details/:id" element={<DeviceInfo />}></Route>
+        <Route exact path="/device/user/details/:id" element={<DeviceInfo />}></Route>
         <Route exact path="/device" element={<DeviceList />}></Route>
         <Route exact path="/device/create" element={<AddDevice />}></Route>
         <Route exact path="/device/edit/:id" element={<EditDevice />}></Route>
 
         <Route exact path="/device/user/create/:device_id/:user_index/:from" element={<AddUser />}></Route>
         <Route exact path="/device/user/edit/:id/:from" element={<EditUser />}></Route>
+        <Route exact path="/device/details/:id" element={<DeviceDetails />}></Route>
 
         {/* <Navigate to="/" /> */}
         <Route

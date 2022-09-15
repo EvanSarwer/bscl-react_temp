@@ -23,8 +23,8 @@ const UserListTable = (props) => {
 
     // }, []);
 
-    
-    
+
+
 
     const deleteUser = (id) => {
 
@@ -107,18 +107,19 @@ const UserListTable = (props) => {
                                 {Search(props.deviceUsers).map((user) =>
                                     <tr key={user.user_index}>
                                         <td>{user.user_index + 1}</td>
-                                        <td><a href={`/device/details/${user.id}`}>{user.user_name}</a></td>
+                                        <td><a href={`/device/user/details/${user.id}`}>{user.user_name}</a></td>
                                         <td>{user.gender}</td>
                                         <td>{user.age}</td>
-                                        {/* <td>{user.economic_status}</td>
-                                        <td>{user.socio_status}</td> */}
                                         <td style={{ whiteSpace: 'nowrap' }}>
                                             <a class="btn btn-secondary" href={`/device/user/edit/${user.id}/${props.from}`}>Edit</a>
-                                            <button class="offset-1 btn btn-danger" onClick={() => { if (window.confirm('Delete the item?')) { deleteUser(user.id) }; }}>Delete</button>
+                                            {(() => {
+                                                if (props.from == "DeviceDetails") {
+                                                    return null;
+                                                }else{
+                                                    return <button class="offset-1 btn btn-danger" onClick={() => { if (window.confirm('Delete the item?')) { deleteUser(user.id) }; }}>Delete</button>
+                                                }
+                                            })()}
                                         </td>
-                                        {/* <td><div><input type="checkbox" id="deselect" onChange={(event) => { if (window.confirm('Want to run This Deselection operation?')) { handleChange(event, device.id) } else { window.location.reload(false) } }} value={isSubscribed} checked={device.deselect === "deselect"} name="deselect" />
-                                            <label class="form-label" >&nbsp; Deselect</label></div>
-                                        </td> */}
 
 
                                     </tr>

@@ -115,7 +115,7 @@ const DeviceList = () => {
                                                                 <tbody>
                                                                     {Search(devices).map((device) =>
                                                                         <tr key={device.id}>
-                                                                            <td><a href="">{device.device_name}</a></td>
+                                                                            <td><a href={`/device/details/${device.id}`}>{device.device_name}</a></td>
                                                                             <td>{device.address}</td>
                                                                             <td>{device.type}</td>
                                                                             {/* <td>{user.gender}</td>

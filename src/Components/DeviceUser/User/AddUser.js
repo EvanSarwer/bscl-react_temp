@@ -5,6 +5,7 @@ import UserForm from "./UserForm";
 
 const AddUser = () => {
     const { device_id, user_index, from } = useParams();
+    console.log(from);
     return (
         <div><Header title="Device User" />
             <MainMenu menu="device" />
