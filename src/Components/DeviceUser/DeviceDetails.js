@@ -74,7 +74,7 @@ const DeviceDetails = (props) => {
 
 
     return (
-        <div><Header title="Device Users Details" />
+        <div><Header title="Device Details" />
             <MainMenu menu="device" />
 
             <div class="app-content content" style={{ backgroundColor: "azure" }}>
