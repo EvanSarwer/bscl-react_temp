@@ -212,15 +212,34 @@ const AdTrp = () => {
         const workbook = xlsx.read(data, { type: "array" });
         const sheetName = workbook.SheetNames[0];
         const worksheet = workbook.Sheets[sheetName];
-        const json = xlsx.utils.sheet_to_json(worksheet);//,{raw: false}
+        const json = xlsx.utils.sheet_to_json(worksheet,{raw: false});//,{raw: false}
         console.log(json);
         var arr = [];
+        var cmm = [];
+        var vmm = [];
+
         for (var i = 0; i < json.length; i++) {
+          cmm.push(json[i].Commercial);
           //var obj = json[i];
           //console.log((json[i].Duration).substr(0, 8));
-          arr.push({ channel:json[i].Channel,start: (mill2date(json[i].Date) + " " + (json[i].Time).substr(0, 8)), finish: timeadd((mill2date(json[i].Date) + " " + (json[i].Time).substr(0, 8)), (json[i].Duration).substr(0, 8)) });
+          arr.push({commercial:json[i].Commercial, channel:json[i].Channel,start:(json[i].Date+ " " + (json[i].Time).substr(0, 8)), duration: json[i].Duration });
 
         }
+        cmm = [...new Set(cmm)];
+
+        console.log(cmm);
+        for (var i = 0; i < cmm.length; i++) {
+          var obj={commercial:cmm[i],ranges:[]}
+          //var obj = json[i];
+          //console.log((json[i].Duration).substr(0, 8));
+          for (var j = 0; j < arr.length; j++) {
+            if(arr[j].commercial==cmm[i]){
+          obj.ranges.push({channel:arr[j].channel, start:arr[j].start,duration: arr[j].duration});
+          }
+        }
+        vmm.push(obj);
+        }
+        console.log(JSON.stringify(vmm));
         console.log(arr);
         range = arr;
         wholejson = json;
