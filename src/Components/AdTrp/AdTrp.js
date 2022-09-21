@@ -8,6 +8,7 @@ import Select from 'react-select';
 import MainMenu from '../MainMenu/MainMenu';
 var range;
 var wholejson;
+var comm;
 const AdTrp = () => {
   const [badf, setbadf] = useState(false);
   const [reach0f, setreach0f] = useState(false);
@@ -33,14 +34,82 @@ const AdTrp = () => {
       settvr0f(false);
       settvrpf(false);
       var data = {
-        ranges: range
+        allrange: JSON.parse(`
+        [
+          {
+             "commercial":"CM-LUX-CORE-PINK-REVISED-APRIL-22-20sec",
+             "ranges":[
+                {
+                   "channel":"Shomoy TV",
+                   "start":"9/21/22 12:57:53",
+                   "duration":"300"
+                },
+                {
+                   "channel":"Shomoy TV",
+                   "start":"9/21/22 13:57:53",
+                   "duration":"300"
+                },
+                {
+                   "channel":"Shomoy TV",
+                   "start":"9/21/22 14:57:53",
+                   "duration":"300"
+                }
+             ]
+          },
+          {
+             "commercial":"CM-SINGER-EID-UL-ADHA-2022-30sec",
+             "ranges":[
+                {
+                   "channel":"Shomoy TV",
+                   "start":"4/23/22 14:25:13",
+                   "duration":"20"
+                },
+                {
+                   "channel":"Shomoy TV",
+                   "start":"5/26/21 14:25:13",
+                   "duration":"300"
+                }
+             ]
+          },
+          {
+             "commercial":"CM-TEER-SUGAR-RESULT-15sec",
+             "ranges":[
+                {
+                   "channel":"Shomoy TV",
+                   "start":"4/22/22 14:25:43",
+                   "duration":"40"
+                },
+                {
+                   "channel":"Shomoy TV",
+                   "start":"5/24/22 15:25:43",
+                   "duration":"200"
+                }
+             ]
+          },
+          {
+             "commercial":"CM-SINGER-REFRIGERATOR-CATEGORY-2022-30sec",
+             "ranges":[
+                {
+                   "channel":"Shomoy TV",
+                   "start":"4/21/22 15:25:58",
+                   "duration":"15"
+                },
+                {
+                   "channel":"Shomoy TV",
+                   "start":"5/25/22 14:25:58",
+                   "duration":"100"
+                }
+             ]
+          }
+       ]
+        `)
       }
       console.log(data.id);
       console.log(updater);
       console.log(data.ranges);
 
 
-      axiosConfig.post("/adtrp/reach0", data).then(rsp => {
+      axiosConfig.post("/adtrpv3/reach0", data).then(rsp => {
         setreach0f(true);
         setreach0(rsp.data.value);
         console.log(reach0);
@@ -50,7 +119,7 @@ const AdTrp = () => {
         setbadf(false);
       });
 
-      axiosConfig.post("/adtrp/reachp", data).then(rsp => {
+      axiosConfig.post("/adtrpv3/reachp", data).then(rsp => {
         setreachpf(true);
         setreachp(rsp.data.value);
         console.log(reachp);
@@ -61,37 +130,37 @@ const AdTrp = () => {
         setbadf(true);
       });
 
-      axiosConfig.post("/adtrp/tvr0", data).then(rsp => {
-        settvr0f(true);
-        settvr0(rsp.data.value);
-        console.log(tvr0);
-        console.log("done");
-        setbadf(false);
-      }).catch(err => {
+      // axiosConfig.post("/adtrp/tvr0", data).then(rsp => {
+      //   settvr0f(true);
+      //   settvr0(rsp.data.value);
+      //   console.log(tvr0);
+      //   console.log("done");
+      //   setbadf(false);
+      // }).catch(err => {
 
-        setbadf(true);
-      });
+      //   setbadf(true);
+      // });
 
-      axiosConfig.post("/adtrp/tvrp", data).then(rsp => {
-        settvrpf(true);
-        settvrp(rsp.data.value);
-        console.log(tvrp);
-        console.log("done");
-        setbadf(false);
-      }).catch(err => {
+      // axiosConfig.post("/adtrp/tvrp", data).then(rsp => {
+      //   settvrpf(true);
+      //   settvrp(rsp.data.value);
+      //   console.log(tvrp);
+      //   console.log("done");
+      //   setbadf(false);
+      // }).catch(err => {
 
-        setbadf(true);
-      });
+      //   setbadf(true);
+      // });
 
     }
   }, [updater]);
 
   const DownloadData = () => {
     //console.log(liveChannelData.labels[0]);
-    var csv = [["Channel","Program", "Reach(%)", "Reach(000)", "TVR(%)", "TVR(000)"]];
+    var csv = [["Commercial", "Reach(%)", "Reach(000)"]];
 
     for (var i = 0; i < reach0.length; i++) {
-      csv.push([wholejson[i].Channel,wholejson[i].Category, reachp[i], reach0[i], tvrp[i], tvr0[i]]);
+      csv.push([range[i].commercial, reachp[i], reach0[i]]);
     }
     console.log(csv);
     getCSV(csv);
@@ -138,71 +207,7 @@ const AdTrp = () => {
     exportToCsv("Export.csv", scsv)
   }
 
-  var mill2date = (function () {
-    var epoch = new Date(1899, 11, 30);
-    var msPerDay = 8.64e7;
-
-    return function (n) {
-      // Deal with -ve values
-      var dec = n - Math.floor(n);
-
-      if (n < 0 && dec) {
-        n = Math.floor(n) - dec;
-      }
-      var d = new Date(n * msPerDay + +epoch);
-      var mm = d.getMonth() + 1;
-      if (mm < 10) {
-        mm = '0' + mm;
-      }
-      var dd = d.getDate();
-      if (dd < 10) {
-        dd = '0' + dd;
-      }
-      var yy = d.getFullYear();
-      return yy + '-' + mm + '-' + dd;
-    }
-  }());
-
-  var t2ms = (hms) => {
-    var a = hms.split(':');
-    var seconds = (+a[0]) * 60 * 60 + (+a[1]) * 60 + (+a[2]);
-
-    return seconds * 1000;
-  }
-  function toDate(date) {
-    if (date === void 0) {
-      return new Date(0);
-    }
-    if (isDate(date)) {
-      return date;
-    } else {
-      return new Date(parseFloat(date.toString()));
-    }
-  }
-
-  function isDate(date) {
-    return (date instanceof Date);
-  }
-
-  function format(date, format) {
-    var d = toDate(date);
-    return format
-      .replace(/Y/gm, d.getFullYear().toString())
-      .replace(/m/gm, ('0' + (d.getMonth() + 1)).substr(-2))
-      .replace(/d/gm, ('0' + (d.getDate() + 1)).substr(-2))
-      .replace(/H/gm, ('0' + (d.getHours() + 0)).substr(-2))
-      .replace(/i/gm, ('0' + (d.getMinutes() + 0)).substr(-2))
-      .replace(/s/gm, ('0' + (d.getSeconds() + 0)).substr(-2))
-      .replace(/v/gm, ('0000' + (d.getMilliseconds() % 1000)).substr(-3));
-  }
-  var timeadd = (dt, ts) => {
-    var t = Date.parse(dt);
-    //console.log(format(t , "Y-m-d H:i:s"));
-    //console.log(format(t2ms(ts), "Y-m-d H:i:s"));
-    //console.log(format((t + t2ms(ts)), "Y-m-d H:i:s"));
-    return format((t + t2ms(ts) - t2ms("23:59:59") - t2ms("00:00:01")), "Y-m-d H:i:s");
-  }
-
+  
   const ReadUploadFile = (e) => {
     e.preventDefault();
     if (e.target.files) {
@@ -212,17 +217,37 @@ const AdTrp = () => {
         const workbook = xlsx.read(data, { type: "array" });
         const sheetName = workbook.SheetNames[0];
         const worksheet = workbook.Sheets[sheetName];
-        const json = xlsx.utils.sheet_to_json(worksheet);//,{raw: false}
+        const json = xlsx.utils.sheet_to_json(worksheet,{raw: false});//,{raw: false}
         console.log(json);
         var arr = [];
+        var cmm = [];
+        var vmm = [];
+
         for (var i = 0; i < json.length; i++) {
+          cmm.push(json[i].Commercial);
           //var obj = json[i];
           //console.log((json[i].Duration).substr(0, 8));
-          arr.push({ channel:json[i].Channel,start: (mill2date(json[i].Date) + " " + (json[i].Time).substr(0, 8)), finish: timeadd((mill2date(json[i].Date) + " " + (json[i].Time).substr(0, 8)), (json[i].Duration).substr(0, 8)) });
+          arr.push({commercial:json[i].Commercial, channel:json[i].Channel,start:(json[i].Date+ " " + (json[i].Time).substr(0, 8)), duration: json[i].Duration });
 
         }
+        cmm = [...new Set(cmm)];
+
+        console.log(cmm);
+        for (var i = 0; i < cmm.length; i++) {
+          var obj={commercial:cmm[i],ranges:[]}
+          //var obj = json[i];
+          //console.log((json[i].Duration).substr(0, 8));
+          for (var j = 0; j < arr.length; j++) {
+            if(arr[j].commercial==cmm[i]){
+          obj.ranges.push({channel:arr[j].channel, start:arr[j].start,duration: arr[j].duration});
+          }
+        }
+        vmm.push(obj);
+        }
+        console.log(JSON.stringify(vmm));
+        console.log(vmm);
         console.log(arr);
-        range = arr;
+        range = vmm;
         wholejson = json;
         //GetData(arr);
         document.querySelector("#excelld").style.display = "block";
@@ -264,7 +289,7 @@ const AdTrp = () => {
             </div>
             <br />
             {(() => {
-              if (reach0f && reachpf && tvr0f && tvrpf && !badf) {
+              if (reach0f && reachpf && !badf) {// tvr0f && tvrpf &&
                 return <button onClick={DownloadData} class="btn btn-danger">Download CSV</button>
 
 
