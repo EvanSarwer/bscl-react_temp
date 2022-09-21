@@ -215,7 +215,7 @@ const DeviceForm = (props) => {
                                                 if (props.mode == "Edit") {
 
                                                     return numbers.map((index) =>
-                                                        <><button key={index} class={(allTimeArray[index]) ? "btn btn-danger" : "btn btn-success"} onClick={() => { if (allTimeArray[index]) { alert("Already has User in this index") } else { window.location.href = "/device/user/create/" + deviceID + "/" + index; } }}>{index + 1}</button> &nbsp; &nbsp;</>
+                                                        <><button key={index} class={(allTimeArray[index]) ? "btn btn-danger" : "btn btn-success"} onClick={() => { if (allTimeArray[index]) { alert("Already has User in this index") } else { window.location.href = "/device/user/create/" + deviceID + "/" + index + "/user"; } }}>{index + 1}</button> &nbsp; &nbsp;</>
                                                     )
                                                 }
 
