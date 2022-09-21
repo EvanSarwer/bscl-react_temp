@@ -9,21 +9,21 @@ const Header = (props) => {
     const [notifyNumber, setNotifyNumber] = useState("");
 
 
-    const getData=()=>{
+    const getData = () => {
         axiosConfig.get("/dashboard/notification").then(rsp => {
             console.log(rsp.data);
-            setNotifyNumber(rsp.notifyNumber)
-            setNotifyData(rsp.data);
+            setNotifyNumber(rsp.data.notifyNumber)
+            setNotifyData(rsp.data.data);
         }).catch(err => {
 
         });
     }
     useEffect(() => {
         getData();
-        const interval = setInterval(() => { getData() },5000);
-      
+        const interval = setInterval(() => { getData() }, 5000);
+
         return () => clearInterval(interval);
-      }, []);
+    }, []);
 
 
 
@@ -145,21 +145,51 @@ const Header = (props) => {
                             </li> */}
 
 
-                            {/* <li class="dropdown dropdown-notification nav-item"><a class="nav-link nav-link-label" href="#" data-toggle="dropdown"><i class="ficon ft-bell"></i><span class="badge badge-pill badge-danger badge-up badge-glow">5</span></a>
+                            {/* <li class="dropdown dropdown-notification nav-item"><a class="nav-link nav-link-label" href="#" data-toggle="dropdown"><i class="ficon ft-bell"></i><span class="badge badge-pill badge-danger badge-up badge-glow">{notifyNumber}</span></a>
                                 <ul class="dropdown-menu dropdown-menu-media dropdown-menu-right">
                                     <li class="dropdown-menu-header">
                                         <h6 class="dropdown-header m-0"><span class="grey darken-2">Notifications</span></h6><span class="notification-tag badge badge-danger float-right m-0">-</span>
                                     </li>
-                                    <li class="scrollable-container media-list w-100" style={{overflowY:"overlay"}}><a href="javascript:void(0)">
-                                        <div class="media">
-                                            <div class="media-left align-self-center"><i class="ft-plus-square icon-bg-circle bg-cyan mr-0"></i></div>
-                                            <div class="media-body">
-                                                <h6 class="media-heading">You have new order!</h6>
-                                                <p class="notification-text font-small-3 text-muted">Lorem ipsum dolor sit amet, consectetuer elit.</p><small>
-                                                    <time class="media-meta text-muted" datetime="2015-06-11T18:29:20+08:00">30 minutes ago</time></small>
+                                    <li class="scrollable-container media-list w-100" style={{ overflowY: "overlay" }}>
+
+                                        {notifyData.map((notify) => {
+                                            if(notify.flag === 1){
+                                                return <a href="javascript:void(0)">
+                                                    <div class="media">
+                                                        <div class="media-left align-self-center"><i class="ft-plus-square icon-bg-circle bg-cyan mr-0"></i></div>
+                                                        <div class="media-body">
+                                                            <h6 class="media-heading">Device Connection!</h6>
+                                                            <p class="notification-text font-small-3 text-muted"><span class="text-warning ">{notify.device_name}</span> has not made any requests yet.</p><small>
+                                                                <time class="media-meta text-muted" datetime="2015-06-11T18:29:20+08:00">{notify.duration}</time></small>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            }else{
+                                                return <a href="javascript:void(0)">
+                                                <div class="media">
+                                                    <div class="media-left align-self-center"><i class="ft-download-cloud icon-bg-circle bg-red bg-darken-1 mr-0"></i></div>
+                                                    <div class="media-body">
+                                                        <h6 class="media-heading red darken-1">Device Offline</h6>
+                                                        <p class="notification-text font-small-3 text-muted"><span class="text-warning ">{notify.device_name}</span> has been offline for more than 3 days.</p><small>
+                                                            <time class="media-meta text-muted" datetime="2015-06-11T18:29:20+08:00">{notify.duration}</time></small>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            }
+                                        })}
+
+
+                                        <a href="javascript:void(0)">
+                                            <div class="media">
+                                                <div class="media-left align-self-center"><i class="ft-plus-square icon-bg-circle bg-cyan mr-0"></i></div>
+                                                <div class="media-body">
+                                                    <h6 class="media-heading">You have new order!</h6>
+                                                    <p class="notification-text font-small-3 text-muted">Lorem ipsum dolor sit amet, consectetuer elit.</p><small>
+                                                        <time class="media-meta text-muted" datetime="2015-06-11T18:29:20+08:00">30 minutes ago</time></small>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </a><a href="javascript:void(0)">
+                                        </a>
+                                        <a href="javascript:void(0)">
                                             <div class="media">
                                                 <div class="media-left align-self-center"><i class="ft-download-cloud icon-bg-circle bg-red bg-darken-1 mr-0"></i></div>
                                                 <div class="media-body">
@@ -168,7 +198,8 @@ const Header = (props) => {
                                                         <time class="media-meta text-muted" datetime="2015-06-11T18:29:20+08:00">Five hour ago</time></small>
                                                 </div>
                                             </div>
-                                        </a><a href="javascript:void(0)">
+                                        </a>
+                                        <a href="javascript:void(0)">
                                             <div class="media">
                                                 <div class="media-left align-self-center"><i class="ft-alert-triangle icon-bg-circle bg-yellow bg-darken-3 mr-0"></i></div>
                                                 <div class="media-body">
@@ -177,7 +208,8 @@ const Header = (props) => {
                                                         <time class="media-meta text-muted" datetime="2015-06-11T18:29:20+08:00">Today</time></small>
                                                 </div>
                                             </div>
-                                        </a><a href="javascript:void(0)">
+                                        </a>
+                                        <a href="javascript:void(0)">
                                             <div class="media">
                                                 <div class="media-left align-self-center"><i class="ft-check-circle icon-bg-circle bg-cyan mr-0"></i></div>
                                                 <div class="media-body">
@@ -185,7 +217,8 @@ const Header = (props) => {
                                                         <time class="media-meta text-muted" datetime="2015-06-11T18:29:20+08:00">Last week</time></small>
                                                 </div>
                                             </div>
-                                        </a><a href="javascript:void(0)">
+                                        </a>
+                                        <a href="javascript:void(0)">
                                             <div class="media">
                                                 <div class="media-left align-self-center"><i class="ft-file icon-bg-circle bg-teal mr-0"></i></div>
                                                 <div class="media-body">
@@ -193,7 +226,8 @@ const Header = (props) => {
                                                         <time class="media-meta text-muted" datetime="2015-06-11T18:29:20+08:00">Last month</time></small>
                                                 </div>
                                             </div>
-                                        </a></li>
+                                        </a>
+                                    </li>
 
 
                                     <li class="dropdown-menu-footer"><a class="dropdown-item text-muted text-center" href="javascript:void(0)">Read all notifications</a></li>
@@ -247,11 +281,6 @@ const Header = (props) => {
                                     <li class="dropdown-menu-footer"><a class="dropdown-item text-muted text-center" href="javascript:void(0)">Read all messages</a></li>
                                 </ul>
                             </li> */}
-
-
-
-
-
 
 
                             <li class="dropdown dropdown-user nav-item"><a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown"><span class="mr-1 user-name text-bold-700">{cookies.get('username')}</span><span class="avatar avatar-online"><img src="/app-assets/images/portrait/small/avater-bd.png" alt="avatar" /><i></i></span></a>
