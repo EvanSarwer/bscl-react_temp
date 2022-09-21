@@ -17,8 +17,8 @@ const DeviceInfo = () => {
         var data = {
             user: id
         };
-        axiosConfig.post("/user/deviceinfo", data).then(rsp => {
-            setUserInfo(rsp.data.device);
+        axiosConfig.post("/user/userinfo", data).then(rsp => {
+            setUserInfo(rsp.data.user);
         }).catch(err => {
 
         });
@@ -39,16 +39,16 @@ const DeviceInfo = () => {
                             if (userInfo) {
                                 return <table class="table table-bordered " style={{ backgroundColor: "#FFFF" }}>
                                     <tr>
-                                        <th>Id</th>
-                                        <th>Name</th>
-                                        <th>Location</th>
-                                        <th>Type</th>
+                                        <th>User Id</th>
+                                        <th>User Name</th>
+                                        <th>Device</th>
+                                        <th>Gender</th>
                                     </tr>
                                     <tr>
                                         <td>{userInfo.id}</td>
                                         <td>{userInfo.user_name}</td>
-                                        <td>{userInfo.address}</td>
-                                        <td>{userInfo.type}</td>
+                                        <td>{userInfo.device_name} ( {userInfo.device_id} )</td>
+                                        <td>{userInfo.gender}</td>
                                     </tr>
                                 </table>
                             }
