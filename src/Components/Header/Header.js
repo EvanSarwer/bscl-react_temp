@@ -164,13 +164,24 @@ const Header = (props) => {
                                                         </div>
                                                     </div>
                                                 </a>
-                                            }else{
+                                            }else if(notify.flag === 2){
                                                 return <a href="javascript:void(0)">
                                                 <div class="media">
                                                     <div class="media-left align-self-center"><i class="ft-download-cloud icon-bg-circle bg-red bg-darken-1 mr-0"></i></div>
                                                     <div class="media-body">
                                                         <h6 class="media-heading red darken-1">Device Offline</h6>
                                                         <p class="notification-text font-small-3 text-muted"><span class="text-warning ">{notify.device_name}</span> has been offline for more than 3 days.</p><small>
+                                                            <time class="media-meta text-muted" datetime="2015-06-11T18:29:20+08:00">{notify.duration}</time></small>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            }else if(notify.flag === 3){
+                                                return <a href="javascript:void(0)">
+                                                <div class="media">
+                                                    <div class="media-left align-self-center"><i class="ft-alert-triangle icon-bg-circle bg-yellow bg-darken-3 mr-0"></i></div>
+                                                    <div class="media-body">
+                                                        <h6 class="media-heading yellow darken-3">Warning Temperature</h6>
+                                                        <p class="notification-text font-small-3 text-muted"><span class="text-warning ">{notify.device_name}</span> Temperature is Now {notify.temp} </p><small>
                                                             <time class="media-meta text-muted" datetime="2015-06-11T18:29:20+08:00">{notify.duration}</time></small>
                                                     </div>
                                                 </div>
