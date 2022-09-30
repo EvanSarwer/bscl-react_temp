@@ -81,6 +81,7 @@ const Login=()=> {
                                         <p class="float-xl-left text-center m-0"><a href="/forget-Pass/email" class="card-link">Recover
                                                 password</a></p>
                                         <p class="float-xl-right text-center m-0">New to BSCL User? <a href="/" class="card-link">Suggesstion</a></p>
+                                        <p class="float-xl-right text-center m-0">Deployer <a href="/deployer/form" class="card-link">Rgistration Form</a></p>
                                     </div>
                                 </div>
                             </div>
