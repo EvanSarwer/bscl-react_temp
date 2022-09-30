@@ -17,7 +17,7 @@ const DayRangedChannelStatus = () => {
     const [month, setmonth] = useState([]);
     const [months, setmonths] = useState(['Jan ', 'Feb ', 'Mar ', 'Apr ', 'May ', 'Jun ', 'July ', 'Aug ', 'Sep ', 'Oct ', 'Nov ', 'Dec']);
     const [day, setday] = useState([]);
-    const [days, setdays] = useState(['Mon ', 'Tue ', 'Wed ', 'Thu ', 'Fri ', 'Sat', 'Sun ']);
+    const [days, setdays] = useState([ 'Sun ','Mon ', 'Tue ', 'Wed ', 'Thu ', 'Fri ', 'Sat']);
     const [start, setstart] = useState("");
     const [finish, setfinish] = useState("");
     const [channels, setchannels] = useState([]);
@@ -184,19 +184,23 @@ const DayRangedChannelStatus = () => {
         setUpdate(update + 1);
     }
     const weekend = () => {
-        var checkboxes = document.querySelectorAll('input[name=day]')
+        var checkboxes = document.querySelectorAll('input[name=day]');
+        var val=document.querySelector("#root > div > div > div:nth-child(2) > div.app-content.content > div.content-wrapper > div.content-body > div.card > div > div > div:nth-child(2) > div:nth-child(4) > input[type=checkbox]:nth-child(7)").checked;
 
         for (var i = 5; i < 7; i++) {
-            checkboxes[i].checked = !checkboxes[i].checked;
+            checkboxes[i].checked = val;
         }
+        checkbox('day');
+
     }
 
     const weekday = () => {
         var checkboxes = document.querySelectorAll('input[name=day]')
-
+        var val=document.querySelector("#root > div > div > div:nth-child(2) > div.app-content.content > div.content-wrapper > div.content-body > div.card > div > div > div:nth-child(2) > div:nth-child(4) > input[type=checkbox]:nth-child(5)").checked;
         for (var i = 0; i < 5; i++) {
-            checkboxes[i].checked = !checkboxes[i].checked;
+            checkboxes[i].checked = val;
         }
+        checkbox('day');
     }
     const checkbox = (val) => {
         var array = [];
@@ -292,8 +296,8 @@ const DayRangedChannelStatus = () => {
                                         </div>
                                         <div class="col-md-2">
                                             <br></br><br /><br></br><br />
-                                            <input type="checkbox" name="day" value="4" onChange={weekday} />Weekdays<br />
-                                            <input type="checkbox" name="day" value="5" onChange={weekend} />Weekends<br />
+                                            <input type="checkbox" name="week" value="1" onChange={weekday} />Weekdays<br />
+                                            <input type="checkbox" name="week" value="2" onChange={weekend} />Weekends<br />
                                         </div>
                                         <div class="col-md-3">
                                             <div class="h4 font-weight-bold">Select Time</div>
