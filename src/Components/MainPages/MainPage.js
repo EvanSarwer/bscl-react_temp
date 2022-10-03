@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route ,Navigate} from "react-router-dom";
 import AddDeployer from "../Deployer/AddDeployer";
+import DeployerCheck from "../Deployer/DeployerCheck";
 import GetMail from "../ForgetPassword/GetMail";
 import PasswordChange from "../ForgetPassword/PasswordChange";
 import Login from "./Login";
@@ -12,6 +13,7 @@ function MainPage() {
       <BrowserRouter>
         <Routes>
           <Route exact path="/" element={<Login />}></Route>
+          <Route exact path="/deployer/validation" element={<DeployerCheck />}></Route>
           <Route exact path="/deployer/form" element={<AddDeployer />}></Route>
           <Route exact path="/forget-Pass/email" element={<GetMail />}></Route>
           <Route exact path="/forget-pass/new-password/:token" element={<PasswordChange />}></Route>

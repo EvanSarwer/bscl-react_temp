@@ -19,8 +19,8 @@ const DeployerForm = (props) => {
     const [stateName, setStateName] = useState("");
     const [districtName, setDistrictName] = useState("");
     const [divisionName, setDivisionName] = useState("");
-    const [password,setPassword] = useState("");
-    const [c_password,setCPassword] = useState("");
+    const [password, setPassword] = useState("");
+    const [c_password, setCPassword] = useState("");
     const [email, setEmail] = useState("");
 
 
@@ -113,7 +113,7 @@ const DeployerForm = (props) => {
         }
 
         else {
-            const obj = { name: name, organization_name: organizationName, designation: designation,email:email,password:password,c_password:c_password, number: number, alt_number: altNumber, doj: doj, dob: dob, nid: nid, employee_id: employeeID, description: description, house_name: houseName, house_number: houseNumber, road_number: roadNumber, state_name: stateName, district_name: districtName, division_name: divisionName };
+            const obj = { user_name: name, organization_name: organizationName, designation: designation, email: email, password: password, c_password: c_password, number: number, alt_number: altNumber, doj: doj, dob: dob, nid: nid, employee_id: employeeID, description: description, house_name: houseName, house_number: houseNumber, road_number: roadNumber, state_name: stateName, district_name: districtName, division_name: divisionName };
 
             if (checkbox1 == "true" && checkbox2 == "true") {
                 axiosConfig.post("/deployer/create", obj).then((rsp) => {
@@ -177,7 +177,7 @@ const DeployerForm = (props) => {
                                                             <i className="la la-user" />
                                                         </div>
                                                         <div className="help-block font-small-3" />
-                                                        <span class="text-danger">{err_msg.name ? err_msg.name[0] : ''}</span>
+                                                        <span class="text-danger">{err_msg.user_name ? err_msg.user_name[0] : ''}</span>
                                                     </fieldset>
                                                 </td>
                                             </tr>
@@ -215,7 +215,7 @@ const DeployerForm = (props) => {
                                                 <td><h5>Email:</h5></td>
                                                 <td style={{ width: '70%' }} colspan={3}>
                                                     <fieldset className="form-group position-relative has-icon-left">
-                                                        <input type="email" name="email" id="email" className="form-control" value={email} onChange={(e) => { setEmail(e.target.value) }} placeholder="Email Address" tabIndex={2} required data-validation-required-message="Please enter email address." />
+                                                        <input type="email" name="email" id="email" className="form-control" value={email} onChange={(e) => { setEmail(e.target.value) }} placeholder="Email Address" tabIndex={4} required data-validation-required-message="Please enter email address." />
                                                         <div className="form-control-position">
                                                             <i className="la la-envelope" />
                                                         </div>
@@ -230,7 +230,7 @@ const DeployerForm = (props) => {
                                                     <td><h5>Password:</h5></td>
                                                     <td style={{ width: '70%' }} colspan={3}>
                                                         <fieldset className="form-group position-relative has-icon-left">
-                                                            <input type="password" name="password" id="password" className="form-control" value={password} onChange={(e) => { setPassword(e.target.value) }} placeholder="Password" tabIndex={3} required />
+                                                            <input type="password" name="password" id="password" className="form-control" value={password} onChange={(e) => { setPassword(e.target.value) }} placeholder="Password" tabIndex={5} required />
                                                             <div className="form-control-position">
                                                                 <i className="la la-key" />
                                                             </div>
@@ -245,7 +245,7 @@ const DeployerForm = (props) => {
                                                     <td><h5>Confirm Password:</h5></td>
                                                     <td style={{ width: '70%' }} colspan={3}>
                                                         <fieldset className="form-group position-relative has-icon-left">
-                                                            <input type="password" name="c_password" id="c_password" className="form-control" value={c_password} onChange={(e) => { setCPassword(e.target.value) }} placeholder="Confirm Password" tabIndex={4} data-validation-matches-match="password" data-validation-matches-message="Password & Confirm Password must be the same." />
+                                                            <input type="password" name="c_password" id="c_password" className="form-control" value={c_password} onChange={(e) => { setCPassword(e.target.value) }} placeholder="Confirm Password" tabIndex={6} data-validation-matches-match="password" data-validation-matches-message="Password & Confirm Password must be the same." />
                                                             <div className="form-control-position">
                                                                 <i className="la la-key" />
                                                             </div>
@@ -262,7 +262,7 @@ const DeployerForm = (props) => {
                                                 <td><h5>Mobile Number:</h5></td>
                                                 <td colspan={3}>
                                                     <fieldset className="form-group position-relative has-icon-left">
-                                                        <input type="text" name="number" id="number" className="form-control" value={number} onChange={(e) => { setNumber(e.target.value) }} placeholder="Mobile Number" tabIndex={4} required data-validation-required-message="Please enter your mobile number." />
+                                                        <input type="text" name="number" id="number" className="form-control" value={number} onChange={(e) => { setNumber(e.target.value) }} placeholder="Mobile Number" tabIndex={7} required data-validation-required-message="Please enter your mobile number." />
                                                         <div className="form-control-position">
                                                             <i className="la ft-phone" />
                                                         </div>
@@ -275,7 +275,7 @@ const DeployerForm = (props) => {
                                                 <td><h5>Alternative Number:</h5></td>
                                                 <td colspan={3}>
                                                     <fieldset className="form-group position-relative has-icon-left">
-                                                        <input type="text" name="altNumber" id="altNumber" className="form-control" value={altNumber} onChange={(e) => { setAltNumber(e.target.value) }} placeholder="Alternative Number" tabIndex={5} />
+                                                        <input type="text" name="altNumber" id="altNumber" className="form-control" value={altNumber} onChange={(e) => { setAltNumber(e.target.value) }} placeholder="Alternative Number" tabIndex={8} />
                                                         <div className="form-control-position">
                                                             <i className="la ft-phone" />
                                                         </div>
@@ -288,7 +288,7 @@ const DeployerForm = (props) => {
                                                 <td><h5>Date of Join:</h5></td>
                                                 <td colspan={3}>
                                                     <fieldset className="form-group position-relative has-icon-left">
-                                                        <input type="date" name="doj" id="doj" className="form-control" value={doj} onChange={(e) => { setDOJ(e.target.value) }} placeholder="Date Of Join" tabIndex={6} required data-validation-required-message="Please enter date of Join." />
+                                                        <input type="date" name="doj" id="doj" className="form-control" value={doj} onChange={(e) => { setDOJ(e.target.value) }} placeholder="Date Of Join" tabIndex={9} required data-validation-required-message="Please enter date of Join." />
                                                         <div className="form-control-position">
                                                             <i className="la la-calendar" />
                                                         </div>
@@ -301,7 +301,7 @@ const DeployerForm = (props) => {
                                                 <td><h5>Date of Birth:</h5></td>
                                                 <td colspan={3}>
                                                     <fieldset className="form-group position-relative has-icon-left">
-                                                        <input type="date" name="dob" id="dob" className="form-control" value={dob} onChange={(e) => { setDOB(e.target.value) }} placeholder="Date Of Birth" tabIndex={7} required data-validation-required-message="Please enter date of birth." />
+                                                        <input type="date" name="dob" id="dob" className="form-control" value={dob} onChange={(e) => { setDOB(e.target.value) }} placeholder="Date Of Birth" tabIndex={10} required data-validation-required-message="Please enter date of birth." />
                                                         <div className="form-control-position">
                                                             <i className="la la-calendar" />
                                                         </div>
@@ -315,7 +315,7 @@ const DeployerForm = (props) => {
                                                 <td><h5>NID:</h5></td>
                                                 <td colspan={3}>
                                                     <fieldset className="form-group position-relative has-icon-left">
-                                                        <input type="text" name="nid" id="nid" className="form-control" value={nid} onChange={(e) => { setNID(e.target.value) }} placeholder="NID" tabIndex={8} required data-validation-required-message="Please enter your NID." />
+                                                        <input type="text" name="nid" id="nid" className="form-control" value={nid} onChange={(e) => { setNID(e.target.value) }} placeholder="NID" tabIndex={11} required data-validation-required-message="Please enter your NID." />
                                                         <div className="form-control-position">
                                                             <i className="la la-credit-card" />
                                                         </div>
@@ -328,7 +328,7 @@ const DeployerForm = (props) => {
                                                 <td><h5>Employee ID:</h5></td>
                                                 <td colspan={3}>
                                                     <fieldset className="form-group position-relative has-icon-left">
-                                                        <input type="text" name="employeeID" id="employeeID" className="form-control" value={employeeID} onChange={(e) => { setEmployeeID(e.target.value) }} placeholder="Employee ID" tabIndex={9} required data-validation-required-message="Please enter your Employee ID." />
+                                                        <input type="text" name="employeeID" id="employeeID" className="form-control" value={employeeID} onChange={(e) => { setEmployeeID(e.target.value) }} placeholder="Employee ID" tabIndex={12} required data-validation-required-message="Please enter your Employee ID." />
                                                         <div className="form-control-position">
                                                             <i className="la ft-minus-square" />
                                                         </div>
@@ -341,7 +341,7 @@ const DeployerForm = (props) => {
                                                 <td><h5>Description:</h5></td>
                                                 <td colspan={3}>
                                                     <fieldset className="form-group position-relative has-icon-left">
-                                                        <input type="text" name="description" id="description" className="form-control" value={description} onChange={(e) => { setDescription(e.target.value) }} placeholder="Description" tabIndex={10} />
+                                                        <input type="text" name="description" id="description" className="form-control" value={description} onChange={(e) => { setDescription(e.target.value) }} placeholder="Description" tabIndex={13} />
                                                         <div className="form-control-position">
                                                             <i className="la la-commenting" />
                                                         </div>
@@ -367,7 +367,7 @@ const DeployerForm = (props) => {
                                                 <td><h5>House Name:</h5></td>
                                                 <td colspan={3}>
                                                     <fieldset className="form-group position-relative has-icon-left">
-                                                        <input type="text" name="houseName" id="houseName" className="form-control" value={houseName} onChange={(e) => { setHouseName(e.target.value) }} placeholder="House Name" tabIndex={11} required data-validation-required-message="Please enter house name." />
+                                                        <input type="text" name="houseName" id="houseName" className="form-control" value={houseName} onChange={(e) => { setHouseName(e.target.value) }} placeholder="House Name" tabIndex={14} required data-validation-required-message="Please enter house name." />
                                                         <div className="form-control-position">
                                                             <i className="la icon-home" />
                                                         </div>
@@ -383,7 +383,7 @@ const DeployerForm = (props) => {
                                                 <td><h5>House Number:</h5></td>
                                                 <td>
                                                     <fieldset className="form-group position-relative has-icon-left">
-                                                        <input type="text" name="houseNumber" id="houseNumber" className="form-control" value={houseNumber} onChange={(e) => { setHouseNumber(e.target.value) }} placeholder="House Number" tabIndex={12} required data-validation-required-message="Please enter house number." />
+                                                        <input type="text" name="houseNumber" id="houseNumber" className="form-control" value={houseNumber} onChange={(e) => { setHouseNumber(e.target.value) }} placeholder="House Number" tabIndex={15} required data-validation-required-message="Please enter house number." />
                                                         <div className="form-control-position">
                                                             <i className="la la-map-signs" />
                                                         </div>
@@ -395,7 +395,7 @@ const DeployerForm = (props) => {
                                                 <td><h5>Road Number:</h5></td>
                                                 <td>
                                                     <fieldset className="form-group position-relative has-icon-left">
-                                                        <input type="text" name="roadNumber" id="roadNumber" className="form-control" value={roadNumber} onChange={(e) => { setRoadNumber(e.target.value) }} placeholder="Road Number" tabIndex={13} required data-validation-required-message="Please enter road number." />
+                                                        <input type="text" name="roadNumber" id="roadNumber" className="form-control" value={roadNumber} onChange={(e) => { setRoadNumber(e.target.value) }} placeholder="Road Number" tabIndex={16} required data-validation-required-message="Please enter road number." />
                                                         <div className="form-control-position">
                                                             <i className="la la-road" />
                                                         </div>
@@ -415,7 +415,7 @@ const DeployerForm = (props) => {
                                                 <td><h6>Area Name/ Village Name/ State Name:</h6></td>
                                                 <td colspan={3}>
                                                     <fieldset className="form-group position-relative has-icon-left">
-                                                        <input type="text" name="stateName" id="stateName" className="form-control" value={stateName} onChange={(e) => { setStateName(e.target.value) }} placeholder="State Name" tabIndex={14} required data-validation-required-message="Please enter state name." />
+                                                        <input type="text" name="stateName" id="stateName" className="form-control" value={stateName} onChange={(e) => { setStateName(e.target.value) }} placeholder="State Name" tabIndex={17} required data-validation-required-message="Please enter state name." />
                                                         <div className="form-control-position">
                                                             <i className="la la-flag-o" />
                                                         </div>
@@ -428,7 +428,7 @@ const DeployerForm = (props) => {
                                                 <td><h5>District Name:</h5></td>
                                                 <td colspan={3}>
                                                     <fieldset className="form-group position-relative has-icon-left">
-                                                        <input type="text" name="districtName" id="districtName" className="form-control" value={districtName} onChange={(e) => { setDistrictName(e.target.value) }} placeholder="District Name" tabIndex={15} required data-validation-required-message="Please enter district name." />
+                                                        <input type="text" name="districtName" id="districtName" className="form-control" value={districtName} onChange={(e) => { setDistrictName(e.target.value) }} placeholder="District Name" tabIndex={18} required data-validation-required-message="Please enter district name." />
                                                         <div className="form-control-position">
                                                             <i className="la la-map-marker" />
                                                         </div>
@@ -441,7 +441,7 @@ const DeployerForm = (props) => {
                                                 <td><h5>Division Name:</h5></td>
                                                 <td colspan={3}>
                                                     <fieldset className="form-group position-relative has-icon-left">
-                                                        <input type="text" name="divisionName" id="divisionName" className="form-control" value={divisionName} onChange={(e) => { setDivisionName(e.target.value) }} placeholder="Division Name" tabIndex={16} required data-validation-required-message="Please enter division name." />
+                                                        <input type="text" name="divisionName" id="divisionName" className="form-control" value={divisionName} onChange={(e) => { setDivisionName(e.target.value) }} placeholder="Division Name" tabIndex={19} required data-validation-required-message="Please enter division name." />
                                                         <div className="form-control-position">
                                                             <i className="la la-map-marker" />
                                                         </div>
@@ -452,10 +452,10 @@ const DeployerForm = (props) => {
                                             </tr>
                                             <tr>
                                                 <td colspan={4}>
-                                                    <div><input type="checkbox" id="checkbox1" name="checkbox1" onChange={(event) => { handleChange(event, "checkbox1") }} value={isSubscribed} checked={checkbox1 === "true"} tabIndex={17} required data-validation-required-message="Make sure all given informations are correct & must check the box." />
+                                                    <div><input type="checkbox" id="checkbox1" name="checkbox1" onChange={(event) => { handleChange(event, "checkbox1") }} value={isSubscribed} checked={checkbox1 === "true"} tabIndex={20} required data-validation-required-message="Make sure all given informations are correct & must check the box." />
                                                         <label class="form-label" >&nbsp; I hereby declare that the information provided is true and currect.</label></div>
                                                     <span class="text-danger">{checkbox1error}</span>
-                                                    <div><input type="checkbox" id="checkbox2" name="checkbox2" onChange={(event) => { handleChange(event, "checkbox2") }} value={isSubscribed} checked={checkbox2 === "true"} tabIndex={18} required data-validation-required-message="You have to follow all Tearms & Conditions of BSCL and must check this box." />
+                                                    <div><input type="checkbox" id="checkbox2" name="checkbox2" onChange={(event) => { handleChange(event, "checkbox2") }} value={isSubscribed} checked={checkbox2 === "true"} tabIndex={21} required data-validation-required-message="You have to follow all Tearms & Conditions of BSCL and must check this box." />
                                                         <label class="form-label" >&nbsp; Yes, I have read and agree / agreed with the tearms and conditions of BSCL.</label></div>
                                                     <span class="text-danger">{checkbox2error}</span>
                                                 </td>

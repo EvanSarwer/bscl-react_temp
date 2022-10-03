@@ -94,7 +94,7 @@ const DeviceDetails = (props) => {
                                         <div className="card-title text-center">
                                             <img style={{ width: '13%', height: '0%' }} src="/app-assets/images/logo/app-user.png" alt="user logo" />
                                         </div>
-                                        <h6 className="card-subtitle line-on-side text-muted text-center font-medium-5 pt-2"><span>Add Device User</span>
+                                        <h6 className="card-subtitle line-on-side text-muted text-center font-medium-2 pt-2"><span>Add Household Profiles/Members & Device Info</span>
                                         </h6>
                                     </div>
                                     <div className="card-content" >
@@ -171,7 +171,7 @@ const DeviceDetails = (props) => {
 
 
                                             <div class="pl-0">
-                                                <a className="btn btn-info btn-block" href="/device"><i className="la la-user" />Go to Device List</a>
+                                                <a className="btn btn-info btn-block" href="/device"><i className="la la-user" />Add member/profile done or Go to Device List</a>
 
 
                                             </div>
