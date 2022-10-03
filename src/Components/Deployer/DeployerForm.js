@@ -19,9 +19,11 @@ const DeployerForm = (props) => {
     const [stateName, setStateName] = useState("");
     const [districtName, setDistrictName] = useState("");
     const [divisionName, setDivisionName] = useState("");
-
-
+    const [password,setPassword] = useState("");
+    const [c_password,setCPassword] = useState("");
     const [email, setEmail] = useState("");
+
+
     const [address, setAddress] = useState("");
     const [phone, setPhone] = useState("");
 
@@ -59,24 +61,24 @@ const DeployerForm = (props) => {
 
         if (event.target.checked) {
             //console.log('✅ Checkbox is checked');
-            if(checkboxid == "checkbox1"){
+            if (checkboxid == "checkbox1") {
                 setCheckbox1("true");
                 setCheckbox1Error("")
-            }else{
+            } else {
                 setCheckbox2("true");
                 setCheckbox2Error("")
             }
-            
+
 
 
         } else {
             //console.log('⛔️ Checkbox is NOT checked');
-            if(checkboxid == "checkbox1"){
+            if (checkboxid == "checkbox1") {
                 setCheckbox1("false");
-            }else{
+            } else {
                 setCheckbox2("false");
             }
-            
+
         }
         setIsSubscribed(current => !current);
 
@@ -111,32 +113,32 @@ const DeployerForm = (props) => {
         }
 
         else {
-            const obj = { name: name, organization_name: organizationName, designation: designation, number: number, alt_number: altNumber, doj: doj, dob: dob, nid: nid, employee_id: employeeID, description: description, house_name: houseName, house_number: houseNumber, road_number: roadNumber, state_name: stateName, district_name: districtName, division_name: divisionName };
+            const obj = { name: name, organization_name: organizationName, designation: designation,email:email,password:password,c_password:c_password, number: number, alt_number: altNumber, doj: doj, dob: dob, nid: nid, employee_id: employeeID, description: description, house_name: houseName, house_number: houseNumber, road_number: roadNumber, state_name: stateName, district_name: districtName, division_name: divisionName };
 
-            if(checkbox1 == "true" && checkbox2 == "true"){
+            if (checkbox1 == "true" && checkbox2 == "true") {
                 axiosConfig.post("/deployer/create", obj).then((rsp) => {
                     alert(rsp.data.message);
                     window.location.href = "/";
-    
+
                 }, (err) => {
                     if (err.response.status === 422) {
                         setErrMsg(err.response.data);
                         setCheckbox1("false");
                         setCheckbox2("false");
-    
+
                     }
                 });
-            }else{
-                alert("Make sure all informations are correct and follow all Tearms & Conditions of BSCL &  please check the boxes."); 
-                if(checkbox1 == "false"){
+            } else {
+                alert("Make sure all informations are correct and follow all Tearms & Conditions of BSCL &  please check the boxes.");
+                if (checkbox1 == "false") {
                     setCheckbox1Error("Make sure all given informations are correct & must check the box");
                 }
-                if(checkbox2 == "false"){
+                if (checkbox2 == "false") {
                     setCheckbox2Error("You have to follow all Tearms & Conditions of BSCL and must check this box");
                 }
             }
 
-            
+
         }
 
     }
@@ -167,10 +169,10 @@ const DeployerForm = (props) => {
 
                                         <table >
                                             <tr>
-                                                <td><h5>Installer Name:</h5></td>
+                                                <td><h5>Installer User Name:</h5></td>
                                                 <td style={{ width: '70%' }} colspan={3}>
                                                     <fieldset className="form-group position-relative has-icon-left">
-                                                        <input type="text" name="name" id="name" value={name} onChange={(e) => { setName(e.target.value) }} readOnly={props.mode == "Edit"} className="form-control" placeholder="Name" tabIndex={1} required data-validation-required-message="Please enter your name." />
+                                                        <input type="text" name="name" id="name" value={name} onChange={(e) => { setName(e.target.value) }} readOnly={props.mode == "Edit"} className="form-control" placeholder="Username" tabIndex={1} required data-validation-required-message="Please enter your name." />
                                                         <div className="form-control-position">
                                                             <i className="la la-user" />
                                                         </div>
@@ -179,6 +181,8 @@ const DeployerForm = (props) => {
                                                     </fieldset>
                                                 </td>
                                             </tr>
+
+
                                             <tr>
                                                 <td><h5>Organization Name:</h5></td>
                                                 <td colspan={3}>
@@ -205,6 +209,55 @@ const DeployerForm = (props) => {
                                                     </fieldset>
                                                 </td>
                                             </tr>
+
+
+                                            <tr>
+                                                <td><h5>Email:</h5></td>
+                                                <td style={{ width: '70%' }} colspan={3}>
+                                                    <fieldset className="form-group position-relative has-icon-left">
+                                                        <input type="email" name="email" id="email" className="form-control" value={email} onChange={(e) => { setEmail(e.target.value) }} placeholder="Email Address" tabIndex={2} required data-validation-required-message="Please enter email address." />
+                                                        <div className="form-control-position">
+                                                            <i className="la la-envelope" />
+                                                        </div>
+                                                        <div className="help-block font-small-3" />
+                                                        <span class="text-danger">{err_msg.email ? err_msg.email[0] : ''}</span>
+                                                    </fieldset>
+                                                </td>
+                                            </tr>
+
+                                            {props.mode == "Create" &&
+                                                <tr>
+                                                    <td><h5>Password:</h5></td>
+                                                    <td style={{ width: '70%' }} colspan={3}>
+                                                        <fieldset className="form-group position-relative has-icon-left">
+                                                            <input type="password" name="password" id="password" className="form-control" value={password} onChange={(e) => { setPassword(e.target.value) }} placeholder="Password" tabIndex={3} required />
+                                                            <div className="form-control-position">
+                                                                <i className="la la-key" />
+                                                            </div>
+                                                            <div className="help-block font-small-3" />
+                                                            <span class="text-danger">{err_msg.password ? err_msg.password[0] : ''}</span>
+                                                        </fieldset>
+                                                    </td>
+                                                </tr>
+                                            }
+                                            {props.mode == "Create" &&
+                                                <tr>
+                                                    <td><h5>Confirm Password:</h5></td>
+                                                    <td style={{ width: '70%' }} colspan={3}>
+                                                        <fieldset className="form-group position-relative has-icon-left">
+                                                            <input type="password" name="c_password" id="c_password" className="form-control" value={c_password} onChange={(e) => { setCPassword(e.target.value) }} placeholder="Confirm Password" tabIndex={4} data-validation-matches-match="password" data-validation-matches-message="Password & Confirm Password must be the same." />
+                                                            <div className="form-control-position">
+                                                                <i className="la la-key" />
+                                                            </div>
+                                                            <div className="help-block font-small-3" />
+                                                            <span class="text-danger">{err_msg.c_password ? err_msg.c_password[0] : ''}</span>
+                                                        </fieldset>
+                                                    </td>
+                                                </tr>
+                                            }
+
+
+
                                             <tr>
                                                 <td><h5>Mobile Number:</h5></td>
                                                 <td colspan={3}>
@@ -222,7 +275,7 @@ const DeployerForm = (props) => {
                                                 <td><h5>Alternative Number:</h5></td>
                                                 <td colspan={3}>
                                                     <fieldset className="form-group position-relative has-icon-left">
-                                                        <input type="text" name="altNumber" id="altNumber" className="form-control" value={altNumber} onChange={(e) => { setAltNumber(e.target.value) }} placeholder="Alternative Number" tabIndex={5} required data-validation-required-message="Please enter alernative Number." />
+                                                        <input type="text" name="altNumber" id="altNumber" className="form-control" value={altNumber} onChange={(e) => { setAltNumber(e.target.value) }} placeholder="Alternative Number" tabIndex={5} />
                                                         <div className="form-control-position">
                                                             <i className="la ft-phone" />
                                                         </div>
@@ -288,7 +341,7 @@ const DeployerForm = (props) => {
                                                 <td><h5>Description:</h5></td>
                                                 <td colspan={3}>
                                                     <fieldset className="form-group position-relative has-icon-left">
-                                                        <input type="text" name="description" id="description" className="form-control" value={description} onChange={(e) => { setDescription(e.target.value) }} placeholder="Description" tabIndex={10} required data-validation-required-message="Please enter description." />
+                                                        <input type="text" name="description" id="description" className="form-control" value={description} onChange={(e) => { setDescription(e.target.value) }} placeholder="Description" tabIndex={10} />
                                                         <div className="form-control-position">
                                                             <i className="la la-commenting" />
                                                         </div>
@@ -399,10 +452,10 @@ const DeployerForm = (props) => {
                                             </tr>
                                             <tr>
                                                 <td colspan={4}>
-                                                    <div><input type="checkbox" id="checkbox1" name="checkbox1" onChange={ (event) =>{handleChange(event,"checkbox1")}} value={isSubscribed} checked={checkbox1 === "true"} tabIndex={17} required data-validation-required-message="Make sure all given informations are correct & must check the box." />
+                                                    <div><input type="checkbox" id="checkbox1" name="checkbox1" onChange={(event) => { handleChange(event, "checkbox1") }} value={isSubscribed} checked={checkbox1 === "true"} tabIndex={17} required data-validation-required-message="Make sure all given informations are correct & must check the box." />
                                                         <label class="form-label" >&nbsp; I hereby declare that the information provided is true and currect.</label></div>
                                                     <span class="text-danger">{checkbox1error}</span>
-                                                    <div><input type="checkbox" id="checkbox2" name="checkbox2" onChange={ (event) =>{handleChange(event,"checkbox2")}} value={isSubscribed} checked={checkbox2 === "true"} tabIndex={18} required data-validation-required-message="You have to follow all Tearms & Conditions of BSCL and must check this box." />
+                                                    <div><input type="checkbox" id="checkbox2" name="checkbox2" onChange={(event) => { handleChange(event, "checkbox2") }} value={isSubscribed} checked={checkbox2 === "true"} tabIndex={18} required data-validation-required-message="You have to follow all Tearms & Conditions of BSCL and must check this box." />
                                                         <label class="form-label" >&nbsp; Yes, I have read and agree / agreed with the tearms and conditions of BSCL.</label></div>
                                                     <span class="text-danger">{checkbox2error}</span>
                                                 </td>
