@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import axiosConfig from '../../axiosConfig';
+import axiosConfig from '../../../axiosConfig';
 import { set } from "date-fns";
 
 const UserForm = (props) => {

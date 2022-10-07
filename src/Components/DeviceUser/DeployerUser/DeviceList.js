@@ -1,8 +1,8 @@
 
 import { useState, useEffect } from "react";
-import axiosConfig from '../axiosConfig';
-import Header from "../Header/Header";
-import MainMenu from "../MainMenu/MainMenu";
+import MainMenuDeployer from "../../MainMenu/MainMenuDeployer";
+import axiosConfig from '../../axiosConfig';
+import Header from "../../Header/Header";
 
 
 
@@ -71,7 +71,7 @@ const DeviceList = () => {
 
     return (
         <div><Header title="Devices" />
-            <MainMenu menu="device" />
+            <MainMenuDeployer menu="device" />
             <div class="app-content content">
                 <div class="content-overlay"></div>
                 <div class="content-wrapper" style={{ backgroundColor: "azure" }} >
@@ -108,8 +108,6 @@ const DeviceList = () => {
                                                                         <th>Type</th>
                                                                         <th>Monthly Income</th>
                                                                         <th>Socio Status</th>
-                                                                        <th>Status</th>
-                                                                        <th>Operation</th>
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
@@ -122,13 +120,7 @@ const DeviceList = () => {
                                                                             <td>{user.age}</td> */}
                                                                             <td>{device.economic_status}</td>
                                                                             <td>{device.socio_status}</td>
-                                                                            <td style={{ whiteSpace: 'nowrap' }}>
-                                                                                <a class="btn btn-secondary" href={`/device/edit/${device.id}`}>Edit</a>
-                                                                                <button class="offset-1 btn btn-danger" onClick={() => { if (window.confirm('Delete the item?')) { deleteDevice(device.id) }; }} >Delete</button>
-                                                                            </td>
-                                                                            <td><div><input type="checkbox" id="deselect" onChange={ (event) =>{ if (window.confirm('Want to run This Deselection operation?')) {handleChange(event, device.id)}else {window.location.reload(false)} }} value={isSubscribed} checked={device.deselect === "deselect"} name="deselect" />
-                                                                                <label class="form-label" >&nbsp; Deselect</label></div>
-                                                                            </td>
+                                                                            
 
 
                                                                         </tr>

@@ -25,12 +25,12 @@ import ChangePass from "../AppUsers/ChangePass";
 import DeviceInfo from "../Devices/DeviceInfo";
 import Footer from "../Footer/Footer";
 import EditProfile from "../AppUsers/EditProfile";
-import DeviceList from "../DeviceUser/DeviceList";
-import AddDevice from "../DeviceUser/AddDevice";
-import EditDevice from "../DeviceUser/EditDevice";
-import AddUser from "../DeviceUser/User/AddUser";
-import EditUser from "../DeviceUser/User/EditUser";
-import DeviceDetails from "../DeviceUser/DeviceDetails";
+import DeviceList from "../DeviceUser/DeployerUser/DeviceList";
+import AddDevice from "../DeviceUser/DeployerUser/AddDevice";
+import EditDevice from "../DeviceUser/DeployerUser/EditDevice";
+import AddUser from "../DeviceUser/DeployerUser/User/AddUser";
+import EditUser from "../DeviceUser/DeployerUser/User/EditUser";
+import DeviceDetails from "../DeviceUser/DeployerUser/DeviceDetails";
 
 
 
@@ -43,7 +43,7 @@ function Deployer() {
     <BrowserRouter>
     <MainMenu />
       <Routes>
-        <Route exact path="/device" element={<DeviceList />}></Route>
+        <Route exact path="/" element={<DeviceList />}></Route>
         <Route exact path="/device/create" element={<AddDevice />}></Route>
         <Route exact path="/device/details/:id" element={<DeviceDetails />}></Route>
 
