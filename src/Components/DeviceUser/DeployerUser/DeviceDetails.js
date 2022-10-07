@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import axiosConfig from '../axiosConfig';
+import axiosConfig from '../../axiosConfig';
 import UserListTable from "./UserListTable";
-import Header from "../Header/Header";
-import MainMenu from "../MainMenu/MainMenu";
+import Header from "../../Header/Header";
+import MainMenuDeployer from "../../MainMenu/MainMenuDeployer";
 
 const DeviceDetails = (props) => {
     const { id } = useParams();
@@ -81,7 +81,7 @@ const DeviceDetails = (props) => {
 
     return (
         <div><Header title="Device Details" />
-            <MainMenu menu="device" />
+            <MainMenuDeployer menu="device" />
 
             <div class="app-content content" style={{ backgroundColor: "azure" }}>
                 <div class="content-overlay"></div>
@@ -91,8 +91,8 @@ const DeviceDetails = (props) => {
                     <div class="content-body">
 
                         <div class="row">
-                            <div class="col-3"></div>
-                            <div class="col-6 box-shadow-2 p-0">
+                            <div class="col-2"></div>
+                            <div class="col-7 box-shadow-2 p-0">
 
 
                                 <div class="card border-grey border-lighten-3 m-0" >
@@ -204,7 +204,7 @@ const DeviceDetails = (props) => {
 
 
                                             <div class="pl-0">
-                                                <a className="btn btn-info btn-block" href="/device"><i className="la la-user" />Add member/profile done or Go to Device List</a>
+                                                <a className="btn btn-info btn-block" href="/"><i className="la la-user" />Add member/profile done or Go to Device List</a>
 
 
                                             </div>

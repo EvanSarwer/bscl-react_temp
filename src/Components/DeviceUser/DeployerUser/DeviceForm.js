@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import axiosConfig from '../axiosConfig';
+import axiosConfig from '../../axiosConfig';
 import UserListTable from "./UserListTable";
 import Cookies from 'universal-cookie';
 

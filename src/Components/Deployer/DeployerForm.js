@@ -151,8 +151,8 @@ const DeployerForm = (props) => {
             <div class="content-body">
 
                 <div class="row">
-                    <div class="col-3"></div>
-                    <div class="col-6 box-shadow-2 p-0">
+                    <div class="col-2"></div>
+                    <div class="col-9 box-shadow-2 p-0">
 
 
                         <div class="card border-grey border-lighten-3 m-0" >
@@ -167,7 +167,7 @@ const DeployerForm = (props) => {
                                 <div className="card-body">
                                     <form className="form-horizontal" onSubmit={handleForm} noValidate>
 
-                                        <table >
+                                        <table style={{ width: '100%' }}>
                                             <tr>
                                                 <td><h5>Installer User Name:</h5></td>
                                                 <td style={{ width: '70%' }} colspan={3}>
