@@ -31,6 +31,7 @@ import EditDevice from "../DeviceUser/DeployerUser/EditDevice";
 import AddUser from "../DeviceUser/DeployerUser/User/AddUser";
 import EditUser from "../DeviceUser/DeployerUser/User/EditUser";
 import DeviceDetails from "../DeviceUser/DeployerUser/DeviceDetails";
+import MainMenuDeployer from "../MainMenu/MainMenuDeployer";
 
 
 
@@ -41,13 +42,13 @@ function Deployer() {
     
     
     <BrowserRouter>
-    <MainMenu />
+    <MainMenuDeployer />
       <Routes>
         <Route exact path="/" element={<DeviceList />}></Route>
         <Route exact path="/device/create" element={<AddDevice />}></Route>
         <Route exact path="/device/details/:id" element={<DeviceDetails />}></Route>
 
-
+        <Route exact path="/app/user/changepass" element={<ChangePass />}></Route>
 
         <Route exact path="/device/edit/:id" element={<EditDevice />}></Route>
 
