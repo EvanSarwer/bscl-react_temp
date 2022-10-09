@@ -14,7 +14,7 @@ function MainPage() {
         <Routes>
           <Route exact path="/" element={<Login />}></Route>
           <Route exact path="/deployer/validation" element={<DeployerCheck />}></Route>
-          <Route exact path="/deployer/form" element={<AddDeployer />}></Route>
+          <Route exact path="/deployer/form/:token" element={<AddDeployer />}></Route>
           <Route exact path="/forget-Pass/email" element={<GetMail />}></Route>
           <Route exact path="/forget-pass/new-password/:token" element={<PasswordChange />}></Route>
           <Route
