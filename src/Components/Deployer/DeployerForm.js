@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import axiosConfig from '../axiosConfig';
+import { useParams } from "react-router-dom";
 
 const DeployerForm = (props) => {
+    const { token } = useParams();
     const [name, setName] = useState("");
     const [organizationName, setOrganizationName] = useState("");
     const [designation, setDesignation] = useState("");
@@ -27,7 +29,25 @@ const DeployerForm = (props) => {
     const [address, setAddress] = useState("");
     const [phone, setPhone] = useState("");
 
+
+    console.log(token);
+    debugger;
+
     useEffect(() => {
+
+        const data = { token: token };
+        axiosConfig.post("/auth/deployerreg", data).then((rsp) => {
+            var obj = rsp.data;
+        }, (err) => {
+            if (err.response.status === 401) {
+                alert(err.response.data.err);
+            }
+        });
+
+
+
+
+
         if (props.mode == "Edit") {
             axiosConfig.get("/appuser/get/" + props.id).then((rsp) => {
                 var obj = rsp.data;

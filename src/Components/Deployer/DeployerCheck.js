@@ -3,6 +3,7 @@ import axiosConfig from '../axiosConfig';
 
 const DeployerCheck = () => {
     const [value,setValue] = useState("");
+    const [token,setToken] = useState("");
     const [err,setErr] = useState({});
 
     const handleForm=(e)=>{
@@ -11,7 +12,9 @@ const DeployerCheck = () => {
         const obj = {code:value};
         axiosConfig.post("/auth/deployerCheck",obj).then((rsp)=>{
             console.log(rsp.data);
-            window.location.href = "/deployer/form";
+            setToken(rsp.data.token);
+            console.log(rsp.data.token);
+            window.location.href = `/deployer/form/${rsp.data.token}`;
 
         },(err)=>{
             if(err.response.status===401){
