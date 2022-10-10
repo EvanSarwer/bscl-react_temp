@@ -8,8 +8,6 @@ const DeviceForm = (props) => {
     const cookies = new Cookies();
     const [deviceID, setDeviceID] = useState("");
     const [deviceName, setDeviceName] = useState("");
-    const [address, setAddress] = useState("");
-    const [type, setType] = useState("");
     const [economicStatus, setEconomicStatus] = useState("");
     const [socioStatus, setSocioStatus] = useState("");
     const [latitude, setLatitude] = useState("");
@@ -39,6 +37,7 @@ const DeviceForm = (props) => {
     const [zipCode, setZipCode] = useState("");
     const [districtName, setDistrictName] = useState("");
     const [householdCondition, setHouseholdCondition] = useState("");
+    const [installerName, setInstallerName] = useState("");
     const [serveyDate, setServeyDate] = useState("");
     const [installationDate, setInstallationDate] = useState("");
     const [description, setDescription] = useState("");
@@ -61,17 +60,45 @@ const DeviceForm = (props) => {
         if (props.mode == "Edit") {
             axiosConfig.get("/device/get/" + props.id).then((rsp) => {
                 var obj = rsp.data.device;
+                console.log(rsp.data.device);
                 setDeviceUsers(rsp.data.deviceUser);
-                console.log(rsp.data.deviceUser);
-
                 setDeviceID(obj.id);
                 setDeviceName(obj.device_name);
-                setAddress(obj.address);
-                //setAge(obj.age);
-                setType(obj.type);
-                //setGender(obj.gender);
                 setEconomicStatus(obj.economic_status);
                 setSocioStatus(obj.socio_status);
+                setContactPerson(obj.contact_person);
+                setContactEmail(obj.contact_email);
+                setContactNumber(obj.contact_number);
+                setAltContactNumber(obj.alt_number);
+                setMobileFinancialService(obj.payment_type);
+                setMobileFinancialNumber(obj.payment_number);
+                setOtherFinancialService(obj.other_payment_type);
+                setOtherFinancialNumber(obj.other_payment_number);
+                setHouseName(obj.house_name);
+                setHouseNumber(obj.house_number);
+                setRoadNumber(obj.road_number);
+                setStateName(obj.state_name);
+                setWardNo(obj.ward_no);
+                setZoneThana(obj.zone_thana);
+                setCityCorporation(obj.city_corporation);
+                setCityName(obj.city_Name);
+                setZipCode(obj.zip_code);
+                setDistrictName(obj.district);
+                setHouseholdCondition(obj.household_condition);
+                setDescription(obj.description);
+                setTvType(obj.tv_type);
+                setTvBrand(obj.tv_brand);
+                setTvPlacement(obj.tv_placement);
+                setGsmSignalStrength(obj.gsm_signal_strength);
+                setWifi(obj.wifi);
+                setWifiSignalStrength(obj.wifi_signal_strength);
+                setStbProviderName(obj.stb_provider_name);
+                setStbSubscriptionType(obj.stb_subscription_type);
+                setStbSubscriptionCharge(obj.stb_subscription_charge);
+                setInstallerName(obj.installer_name);
+                setServeyDate(obj.survey_date);
+                setInstallationDate(obj.installation_date);
+
                 setGetLatitude(obj.lat);
                 setGetLongitude(obj.lng);
                 setLatitude(obj.lat);
@@ -79,7 +106,6 @@ const DeviceForm = (props) => {
             }, (err) => {
                 if (err.response.status === 422) {
                     setErrMsg(err.response.data);
-
                 }
             });
         } else {
@@ -141,7 +167,11 @@ const DeviceForm = (props) => {
     const handleForm = (e) => {
         e.preventDefault();
         if (props.mode == "Edit") {
-            const obj = { id: deviceID, device_name: deviceName, lat: latitude, lng: longitude, address: address, type: type, economic_status: economicStatus, socio_status: socioStatus };
+            const obj = {
+                id: deviceID, device_name: deviceName, lat: latitude, lng: longitude, economic_status: economicStatus, socio_status: socioStatus, installer_name: cookies.get('username'), contact_person: contactPerson, contact_email: contactEmail, contact_number: contactNumber, alt_number: altContactNumber, payment_type: mobileFinancialService, payment_number: mobileFinancialNumber, other_payment_type: otherFinancialService, other_payment_number: otherFinancialNumber,
+                house_name: houseName, house_number: houseNumber, road_number: roadNumber, state_name: stateName, ward_no: wardNo, zone_thana: zoneThana, city_corporation: cityCorporation, city_Name: cityName, zip_code: zipCode, district: districtName, household_condition: householdCondition, description: description, tv_type: tvType, tv_brand: tvBrand, tv_placement: tvPlacement, gsm_signal_strength: gsmSignalStrength, wifi: wifi, wifi_signal_strength: wifiSignalStrength, 
+                stb_provider_name: stbProviderName, stb_subscription_type: stbSubscriptionType, stb_subscription_charge: stbSubscriptionCharge
+            };
             axiosConfig.post("/device/edit", obj).then((rsp) => {
 
                 alert(rsp.data.message);
@@ -488,7 +518,7 @@ const DeviceForm = (props) => {
                                                 {(() => {
                                                     if (socioStatus == "u") {
                                                         return <><tr>
-                                                            <td><h5>city Corporation:</h5></td>
+                                                            <td><h5>City Corporation:</h5></td>
                                                             <td colspan={3}>
                                                                 <fieldset className="form-group position-relative has-icon-left">
                                                                     <input type="text" name="city_corporation" id="city_corporation" className="form-control" value={cityCorporation} onChange={(e) => { setCityCorporation(e.target.value) }} placeholder="City Corporation" tabIndex={14} required data-validation-required-message="Please enter city corporation." />
@@ -614,8 +644,8 @@ const DeviceForm = (props) => {
                                                             <td>Urban Panel:</td>
                                                             <td colspan={3}><fieldset className="form-group position-relative">
                                                                 <input type="radio" name="household_condition" value="Flat in apartment" onChange={(e) => { setHouseholdCondition(e.target.value) }} checked={householdCondition === "Flat in apartment"} />&nbsp;Flat in apartment <br />
-                                                                <input type="radio" name="household_condition" value="Non-Flat apartment where there is no security guard and parking / Rented flat" onChange={(e) => { setHouseholdCondition(e.target.value) }} checked={householdCondition === "Non-Flat apartment where there is no security guard and parking / Rented flat"} />&nbsp;Non-Flat apartment where there is no security guard and parking / Rented flat <br />
-                                                                <input type="radio" name="household_condition" value="Slum" onChange={(e) => { setHouseholdCondition(e.target.value) }} checked={householdCondition === "Slum"} />&nbsp;Slum
+                                                                <input type="radio" name="household_condition" value="Rented flat / Non-Flat apartment where there is no security guard and parking" onChange={(e) => { setHouseholdCondition(e.target.value) }} checked={householdCondition === "Rented flat / Non-Flat apartment where there is no security guard and parking"} />&nbsp;Rented flat / Non-Flat apartment where there is no security guard and parking <br />
+                                                                <input type="radio" name="household_condition" value="Lower tier house" onChange={(e) => { setHouseholdCondition(e.target.value) }} checked={householdCondition === "Lower tier house"} />&nbsp;Lower tier house
                                                                 <div className="help-block font-small-3" />
                                                                 <span class="text-danger">{err_msg.household_condition ? err_msg.household_condition[0] : ''}</span>
                                                             </fieldset>
@@ -646,7 +676,7 @@ const DeviceForm = (props) => {
 
 
                                                 <tr>
-                                                    <td>Monthly Income</td>
+                                                    <td>Household Monthly Income Range:</td>
                                                     <td colspan={3}><fieldset className="form-group position-relative">
                                                         <select class="custom-select d-block w-100" value={economicStatus} onChange={(e) => { setEconomicStatus(e.target.value) }}>
                                                             <option value="">Select</option>
