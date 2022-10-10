@@ -24,14 +24,6 @@ const UserListTable = (props) => {
 
 
 
-    const deleteUser = (id) => {
-
-        const obj = { id: id };
-        axiosConfig.post("/deviceuser/delete", obj).then((rsp) => {
-            window.location.reload(false);
-        }, (err) => {
-        });
-    };
 
     const Search = (data) => {
         return data.filter(
@@ -110,13 +102,6 @@ const UserListTable = (props) => {
                                         <td>{user.age}</td>
                                         <td style={{ whiteSpace: 'nowrap' }}>
                                             <a class="btn btn-secondary" href={`/device/user/edit/${user.id}/${props.from}`}>Edit</a>
-                                            {(() => {
-                                                if (props.from == "DeviceDetails") {
-                                                    return null;
-                                                }else{
-                                                    return <button class="offset-1 btn btn-danger" onClick={() => { if (window.confirm('Delete the item?')) { deleteUser(user.id) }; }}>Delete</button>
-                                                }
-                                            })()}
                                         </td>
 
 

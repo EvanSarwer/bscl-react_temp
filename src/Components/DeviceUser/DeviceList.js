@@ -35,7 +35,8 @@ const DeviceList = () => {
     const Search = (data) => {
         return data.filter(
             (item) =>
-                item.device_name.toLowerCase().includes(query.toLowerCase())
+                item.device_name.toLowerCase().includes(query.toLowerCase()) ||
+                item.id.toString().includes(query)
         );
     };
 
@@ -103,7 +104,8 @@ const DeviceList = () => {
                                                             <table class="table display nowrap table-striped table-bordered">
                                                                 <thead>
                                                                     <tr>
-                                                                        <th>Device name</th>
+                                                                        <th>Device ID</th>
+                                                                        <th>Device Name</th>
                                                                         <th>Address</th>
                                                                         <th>Type</th>
                                                                         <th>Monthly Income</th>
@@ -115,6 +117,7 @@ const DeviceList = () => {
                                                                 <tbody>
                                                                     {Search(devices).map((device) =>
                                                                         <tr key={device.id}>
+                                                                            <td>{device.id}</td>
                                                                             <td><a href={`/device/details/${device.id}`}>{device.device_name}</a></td>
                                                                             <td>{device.district}</td>
                                                                             <td>{device.type}</td>
