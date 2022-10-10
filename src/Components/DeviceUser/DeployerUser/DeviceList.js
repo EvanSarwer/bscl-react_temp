@@ -23,19 +23,11 @@ const DeviceList = () => {
 
     }, []);
 
-    const deleteDevice = (id) => {
-
-        const obj = { id: id };
-        axiosConfig.post("/device/delete", obj).then((rsp) => {
-            window.location.reload(false);
-        }, (err) => {
-        });
-    };
-
     const Search = (data) => {
         return data.filter(
             (item) =>
-                item.device_name.toLowerCase().includes(query.toLowerCase())
+                item.device_name.toLowerCase().includes(query.toLowerCase()) ||
+                item.id.toString().includes(query)
         );
     };
 
@@ -97,22 +89,25 @@ const DeviceList = () => {
                                                             </div>
 
                                                         </div>
-                                                        <a class="btn btn-primary" href="/device/create">Create New</a>
+                                                        {/* <a class="btn btn-primary" href="/device/create">Create New</a> */}
 
                                                         <div class="table-responsive" style={{ maxHeight: '400px', minHeight: '500px' }}>
                                                             <table class="table display nowrap table-striped table-bordered">
                                                                 <thead>
                                                                     <tr>
-                                                                        <th>Device name</th>
+                                                                        <th>Device ID</th>
+                                                                        <th>Device Name</th>
                                                                         <th>Address</th>
                                                                         <th>Type</th>
                                                                         <th>Monthly Income</th>
                                                                         <th>Socio Status</th>
+                                                                        <th>Status</th>
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
                                                                     {Search(devices).map((device) =>
                                                                         <tr key={device.id}>
+                                                                            <td>{device.id}</td>
                                                                             <td><a href={`/device/details/${device.id}`}>{device.device_name}</a></td>
                                                                             <td>{device.district}</td>
                                                                             <td>{device.type}</td>
@@ -120,6 +115,9 @@ const DeviceList = () => {
                                                                             <td>{user.age}</td> */}
                                                                             <td>{device.economic_status}</td>
                                                                             <td>{device.socio_status}</td>
+                                                                            <td style={{ whiteSpace: 'nowrap' }}>
+                                                                                <a class="btn btn-secondary" href={`/device/edit/${device.id}`}>Edit</a>
+                                                                            </td>
                                                                             
 
 
