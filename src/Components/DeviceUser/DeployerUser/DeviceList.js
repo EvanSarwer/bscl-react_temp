@@ -108,7 +108,8 @@ const DeviceList = () => {
                                                                     {Search(devices).map((device) =>
                                                                         <tr key={device.id}>
                                                                             <td>{device.id}</td>
-                                                                            <td><a href={`/device/details/${device.id}`}>{device.device_name}</a></td>
+                                                                            {/* <td><a href={`/device/details/${device.id}`}>{device.device_name}</a></td> */}
+                                                                            <td>{device.device_name}</td>
                                                                             <td>{device.district}</td>
                                                                             <td>{device.type}</td>
                                                                             {/* <td>{user.gender}</td>
