@@ -9,7 +9,7 @@ import MainMenu from '../MainMenu/MainMenu';
 var range;
 var wholejson;
 var comm;
-const AdTrp = () => {
+const AdTrpv2 = () => {
   const [badf, setbadf] = useState(false);
   const [reach0f, setreach0f] = useState(false);
   const [reachpf, setreachpf] = useState(false);
@@ -261,8 +261,8 @@ const AdTrp = () => {
 
 
   return (
-    <div><Header title="Ad TRP" />
-      <MainMenu menu="adtrp" />
+    <div><Header title="Ad TRP v2" />
+      <MainMenu menu="adtrpv2" />
 
       <div class="app-content content" style={{ backgroundColor: "azure", minHeight: "36em" }} >
         <div class="content-wrapper">
@@ -317,4 +317,4 @@ const AdTrp = () => {
   )
 
 }
-export default AdTrp;
+export default AdTrpv2;

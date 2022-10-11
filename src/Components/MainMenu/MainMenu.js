@@ -191,7 +191,7 @@ const MainMenu = (props) => {
                         }
                     })()}
 
-{(() => {
+                    {(() => {
                         if (props.menu === "devicemonitor") {
                             return (
                                 <li class="active nav-item"><a href="/devicemonitor"><i class="la la-cogs"></i><span class="menu-title" data-i18n="Templates">Device Monitor</span></a>
@@ -204,8 +204,8 @@ const MainMenu = (props) => {
                             )
                         }
                     })()}
-                    
-                    
+
+
 
                     {(() => {
                         if (props.menu === "device") {
@@ -247,15 +247,28 @@ const MainMenu = (props) => {
                             )
                         }
                     })()}
-{(() => {
-                        if (props.menu === "adtrp") {
+                    {(() => {
+                        if (props.menu === "adtrpv1") {
                             return (
-                                <li class="active nav-item"><a href="/adtrp"><i class="la la-download"></i><span class="menu-title" data-i18n="Templates">Ad Trp v2</span></a>
+                                <li class="active nav-item"><a href="/adtrpv1"><i class="la la-download"></i><span class="menu-title" data-i18n="Templates">Ad Trp v1</span></a>
                                 </li>
                             )
                         } else {
                             return (
-                                <li class=" nav-item"><a href="/adtrp"><i class="la la-download"></i><span class="menu-title" data-i18n="Templates">Ad Trp v2</span></a>
+                                <li class=" nav-item"><a href="/adtrpv1"><i class="la la-download"></i><span class="menu-title" data-i18n="Templates">Ad Trp v1</span></a>
+                                </li>
+                            )
+                        }
+                    })()}
+                    {(() => {
+                        if (props.menu === "adtrpv2") {
+                            return (
+                                <li class="active nav-item"><a href="/adtrpv2"><i class="la la-download"></i><span class="menu-title" data-i18n="Templates">Ad Trp v2</span></a>
+                                </li>
+                            )
+                        } else {
+                            return (
+                                <li class=" nav-item"><a href="/adtrpv2"><i class="la la-download"></i><span class="menu-title" data-i18n="Templates">Ad Trp v2</span></a>
                                 </li>
                             )
                         }
