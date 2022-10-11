@@ -3,7 +3,8 @@ import { BrowserRouter, Routes, Route,Navigate} from "react-router-dom";
 import Header from '../Header/Header';
 import MainMenu from '../MainMenu/MainMenu';
 import ExcelReport from '../Report/ExcelReport';
-import AdTrp from '../AdTrp/AdTrp';
+import AdTrpv2 from '../AdTrpv2/AdTrpv2';
+import AdTrpv1 from '../AdTrpv1/AdTrpv1';
 import Dashboard from '../Dashboard/Dashboard';
 import LiveChannels from '../LiveChannels/LiveChannels';
 import LiveMap from "../LiveChannels/LiveMap";
@@ -45,7 +46,8 @@ function Admin() {
       <Routes>
         <Route exact path="/" element={<Dashboard />}></Route>
         <Route exact path="/overview" element={<Overview />}></Route>
-        <Route exact path="/adtrp" element={<AdTrp />}></Route>
+        <Route exact path="/adtrpv2" element={<AdTrpv2 />}></Route>
+        <Route exact path="/adtrpv1" element={<AdTrpv1 />}></Route>
         <Route exact path="/excelreport" element={<ExcelReport />}></Route>
         <Route exact path="/livechannels" element={<LiveChannels />}></Route>
         <Route exact path="/map" element={<LiveMap />}></Route>

@@ -3,7 +3,6 @@ import { BrowserRouter, Routes, Route,Navigate} from "react-router-dom";
 import Header from '../Header/Header';
 import MainMenu from '../MainMenu/MainMenu';
 import ExcelReport from '../Report/ExcelReport';
-import AdTrp from '../AdTrp/AdTrp';
 import Dashboard from '../Dashboard/Dashboard';
 import LiveChannels from '../LiveChannels/LiveChannels';
 import LiveMap from "../LiveChannels/LiveMap";
