@@ -8,7 +8,7 @@ const DeviceForm = (props) => {
     const cookies = new Cookies();
     const [deviceID, setDeviceID] = useState("");
     const [deviceName, setDeviceName] = useState("");
-    const [economicStatus, setEconomicStatus] = useState("");
+    const [monthlyIncome, setMonthlyIncome] = useState("");
     const [socioStatus, setSocioStatus] = useState("");
     const [latitude, setLatitude] = useState("");
     const [longitude, setLongitude] = useState("");
@@ -64,7 +64,7 @@ const DeviceForm = (props) => {
                 setDeviceUsers(rsp.data.deviceUser);
                 setDeviceID(obj.id);
                 setDeviceName(obj.device_name);
-                setEconomicStatus(obj.economic_status);
+                setMonthlyIncome(obj.economic_status);
                 setSocioStatus(obj.socio_status);
                 setContactPerson(obj.contact_person);
                 setContactEmail(obj.contact_email);
@@ -168,9 +168,9 @@ const DeviceForm = (props) => {
         e.preventDefault();
         if (props.mode == "Edit") {
             const obj = {
-                id: deviceID, device_name: deviceName, lat: latitude, lng: longitude, economic_status: economicStatus, socio_status: socioStatus, installer_name: cookies.get('username'), contact_person: contactPerson, contact_email: contactEmail, contact_number: contactNumber, alt_number: altContactNumber, payment_type: mobileFinancialService, payment_number: mobileFinancialNumber, other_payment_type: otherFinancialService, other_payment_number: otherFinancialNumber,
-                house_name: houseName, house_number: houseNumber, road_number: roadNumber, state_name: stateName, ward_no: wardNo, zone_thana: zoneThana, city_corporation: cityCorporation, city_Name: cityName, zip_code: zipCode, district: districtName, household_condition: householdCondition, description: description, tv_type: tvType, tv_brand: tvBrand, tv_placement: tvPlacement, gsm_signal_strength: gsmSignalStrength, wifi: wifi, wifi_signal_strength: wifiSignalStrength, 
-                stb_provider_name: stbProviderName, stb_subscription_type: stbSubscriptionType, stb_subscription_charge: stbSubscriptionCharge
+                id: deviceID, device_name: deviceName, lat: latitude, lng: longitude, monthly_income: monthlyIncome, socio_status: socioStatus, installer_name: installerName, contact_person: contactPerson, contact_email: contactEmail, contact_number: contactNumber, alt_number: altContactNumber, payment_type: mobileFinancialService, payment_number: mobileFinancialNumber, other_payment_type: otherFinancialService, other_payment_number: otherFinancialNumber,
+                house_name: houseName, house_number: houseNumber, road_number: roadNumber, state_name: stateName, ward_no: wardNo, zone_thana: zoneThana, city_corporation: cityCorporation, city_Name: cityName, zip_code: zipCode, district: districtName, household_condition: householdCondition, description: description, tv_type: tvType, tv_brand: tvBrand, tv_placement: tvPlacement, gsm_signal_strength: gsmSignalStrength, wifi: wifi, wifi_signal_strength: wifiSignalStrength,
+                stb_provider_name: stbProviderName, stb_subscription_type: stbSubscriptionType, stb_subscription_charge: stbSubscriptionCharge, type: 'STB'
             };
             axiosConfig.post("/device/edit", obj).then((rsp) => {
 
@@ -187,9 +187,9 @@ const DeviceForm = (props) => {
 
         else {
             const obj = {
-                device_name: deviceName, lat: latitude, lng: longitude, economic_status: economicStatus, socio_status: socioStatus, installer_name: cookies.get('username'), contact_person: contactPerson, contact_email: contactEmail, contact_number: contactNumber, alt_number: altContactNumber, payment_type: mobileFinancialService, payment_number: mobileFinancialNumber, other_payment_type: otherFinancialService, other_payment_number: otherFinancialNumber,
-                house_name: houseName, house_number: houseNumber, road_number: roadNumber, state_name: stateName, ward_no: wardNo, zone_thana: zoneThana, city_corporation: cityCorporation, city_Name: cityName, zip_code: zipCode, district: districtName, household_condition: householdCondition, description: description, tv_type: tvType, tv_brand: tvBrand, tv_placement: tvPlacement, gsm_signal_strength: gsmSignalStrength, wifi: wifi, wifi_signal_strength: wifiSignalStrength, 
-                stb_provider_name: stbProviderName, stb_subscription_type: stbSubscriptionType, stb_subscription_charge: stbSubscriptionCharge
+                device_name: deviceName, lat: latitude, lng: longitude, monthly_income: monthlyIncome, socio_status: socioStatus, installer_name: cookies.get('username'), contact_person: contactPerson, contact_email: contactEmail, contact_number: contactNumber, alt_number: altContactNumber, payment_type: mobileFinancialService, payment_number: mobileFinancialNumber, other_payment_type: otherFinancialService, other_payment_number: otherFinancialNumber,
+                house_name: houseName, house_number: houseNumber, road_number: roadNumber, state_name: stateName, ward_no: wardNo, zone_thana: zoneThana, city_corporation: cityCorporation, city_Name: cityName, zip_code: zipCode, district: districtName, household_condition: householdCondition, description: description, tv_type: tvType, tv_brand: tvBrand, tv_placement: tvPlacement, gsm_signal_strength: gsmSignalStrength, wifi: wifi, wifi_signal_strength: wifiSignalStrength,
+                stb_provider_name: stbProviderName, stb_subscription_type: stbSubscriptionType, stb_subscription_charge: stbSubscriptionCharge, type: 'STB'
             };
             axiosConfig.post("/device/create", obj).then((rsp) => {
                 alert(rsp.data.message);
@@ -332,7 +332,7 @@ const DeviceForm = (props) => {
                                                 <tr>
                                                     <td class="form-label">Alternative Contact Number:</td>
                                                     <td colspan={3}><fieldset className="form-group position-relative has-icon-left">
-                                                        <input type="text" name="alt_Number" id="alt_Number" value={altContactNumber} onChange={(e) => { setAltContactNumber(e.target.value) }} className="form-control" placeholder="Alternative Contact Number" tabIndex={1}  />
+                                                        <input type="text" name="alt_Number" id="alt_Number" value={altContactNumber} onChange={(e) => { setAltContactNumber(e.target.value) }} className="form-control" placeholder="Alternative Contact Number" tabIndex={1} />
                                                         <div className="form-control-position">
                                                             <i className="la la-user" />
                                                         </div>
@@ -643,7 +643,7 @@ const DeviceForm = (props) => {
                                                         return <tr>
                                                             <td>Urban Panel:</td>
                                                             <td colspan={3}><fieldset className="form-group position-relative">
-                                                                <input type="radio" name="household_condition" value="Flat in apartment" onChange={(e) => { setHouseholdCondition(e.target.value) }} checked={householdCondition === "Flat in apartment"} />&nbsp;Flat in apartment <br />
+                                                                <input type="radio" name="household_condition" value="Flat owner / Flat in apartment" onChange={(e) => { setHouseholdCondition(e.target.value) }} checked={householdCondition === "Flat owner / Flat in apartment"} />&nbsp;Flat owner / Flat in apartment<br />
                                                                 <input type="radio" name="household_condition" value="Rented flat / Non-Flat apartment where there is no security guard and parking" onChange={(e) => { setHouseholdCondition(e.target.value) }} checked={householdCondition === "Rented flat / Non-Flat apartment where there is no security guard and parking"} />&nbsp;Rented flat / Non-Flat apartment where there is no security guard and parking <br />
                                                                 <input type="radio" name="household_condition" value="Lower tier house" onChange={(e) => { setHouseholdCondition(e.target.value) }} checked={householdCondition === "Lower tier house"} />&nbsp;Lower tier house
                                                                 <div className="help-block font-small-3" />
@@ -678,17 +678,17 @@ const DeviceForm = (props) => {
                                                 <tr>
                                                     <td>Household Monthly Income Range:</td>
                                                     <td colspan={3}><fieldset className="form-group position-relative">
-                                                        <select class="custom-select d-block w-100" value={economicStatus} onChange={(e) => { setEconomicStatus(e.target.value) }}>
+                                                        <select class="custom-select d-block w-100" value={monthlyIncome} onChange={(e) => { setMonthlyIncome(e.target.value) }}>
                                                             <option value="">Select</option>
-                                                            <option value="e1">Income above 1,00,000 Taka</option>
-                                                            <option value="d1">Income 70,000 to 99,999 Taka</option>
-                                                            <option value="c1">Income 40,000 to 69,999 Taka</option>
-                                                            <option value="b1">Income 10,000 to 39,999 Taka</option>
-                                                            <option value="a1">Income below 10,000 Taka</option>
+                                                            <option value="e">Income above 1,00,000 Taka</option>
+                                                            <option value="d">Income 70,000 to 99,999 Taka</option>
+                                                            <option value="c">Income 40,000 to 69,999 Taka</option>
+                                                            <option value="b">Income 10,000 to 39,999 Taka</option>
+                                                            <option value="a">Income below 10,000 Taka</option>
 
                                                         </select>
                                                         <div className="help-block font-small-3" />
-                                                        <span class="text-danger">{err_msg.economic_status ? err_msg.economic_status[0] : ''}</span>
+                                                        <span class="text-danger">{err_msg.monthly_income ? err_msg.monthly_income[0] : ''}</span>
                                                     </fieldset></td>
                                                 </tr>
 
@@ -697,6 +697,54 @@ const DeviceForm = (props) => {
                                                         <h6 className="card-subtitle line-on-side text-muted text-center font-medium-5 "></h6>
                                                     </td>
                                                 </tr>
+
+
+                                                {(() => {
+                                                    if (installerName == cookies.get('username')) {
+                                                        return <tr>
+                                                            <td>Installer Name:</td>
+                                                            <td colspan={3}><fieldset className="form-group position-relative">
+                                                                <select class="custom-select d-block w-100" value={installerName} onChange={(e) => { setInstallerName(e.target.value) }}>
+                                                                    <option value="">{cookies.get('username')}</option>
+
+                                                                </select>
+                                                                <div className="help-block font-small-3" />
+                                                                <span class="text-danger">{err_msg.installer_name ? err_msg.installer_name[0] : ''}</span>
+                                                            </fieldset></td>
+                                                        </tr>
+                                                    } else if (!installerName) {
+                                                        return <tr>
+                                                        <td>Installer Name:</td>
+                                                        <td colspan={3}><fieldset className="form-group position-relative">
+                                                            <select class="custom-select d-block w-100" value={cookies.get('username')} onChange={(e) => { setInstallerName(e.target.value) }}>
+                                                                <option value="">{cookies.get('username')}</option>
+
+                                                            </select>
+                                                            <div className="help-block font-small-3" />
+                                                            <span class="text-danger">{err_msg.installer_name ? err_msg.installer_name[0] : ''}</span>
+                                                        </fieldset></td>
+                                                    </tr>
+                                                    }else if (installerName && (installerName != cookies.get('username'))) {
+                                                        return <tr>
+                                                        <td>Installer Name:</td>
+                                                        <td colspan={3}><fieldset className="form-group position-relative">
+                                                            <select class="custom-select d-block w-100" value={installerName} onChange={(e) => { setInstallerName(e.target.value) }}>
+                                                                <option value="">{installerName}</option>
+                                                                <option value="">{cookies.get('username')}</option>
+
+                                                            </select>
+                                                            <div className="help-block font-small-3" />
+                                                            <span class="text-danger">{err_msg.installer_name ? err_msg.installer_name[0] : ''}</span>
+                                                        </fieldset></td>
+                                                    </tr>
+                                                    }
+                                                })()}
+
+
+
+
+
+
                                                 <tr>
                                                     <td><h5>Description:</h5></td>
                                                     <td colspan={3}>
@@ -783,19 +831,19 @@ const DeviceForm = (props) => {
                                                     </fieldset></td>
                                                 </tr>
                                                 {wifi == "y" &&
-                                                <><tr>
-                                                    <td><h5>Wi-Fi signal strength:</h5></td>
-                                                    <td colspan={3}>
-                                                        <fieldset className="form-group position-relative has-icon-left">
-                                                            <input type="text" name="wifi_signal_strength" id="wifi_signal_strength" className="form-control" value={wifiSignalStrength} onChange={(e) => { setWifiSignalStrength(e.target.value) }} placeholder="Wi-Fi signal strength" tabIndex={14} required data-validation-required-message="Please enter Wi-Fi signal strength." />
-                                                            <div className="form-control-position">
-                                                                <i className="la icon-home" />
-                                                            </div>
-                                                            <div className="help-block font-small-3" />
-                                                            <span class="text-danger">{err_msg.wifi_signal_strength ? err_msg.wifi_signal_strength[0] : ''}</span>
-                                                        </fieldset>
-                                                    </td>
-                                                </tr></>}
+                                                    <><tr>
+                                                        <td><h5>Wi-Fi signal strength:</h5></td>
+                                                        <td colspan={3}>
+                                                            <fieldset className="form-group position-relative has-icon-left">
+                                                                <input type="text" name="wifi_signal_strength" id="wifi_signal_strength" className="form-control" value={wifiSignalStrength} onChange={(e) => { setWifiSignalStrength(e.target.value) }} placeholder="Wi-Fi signal strength" tabIndex={14} required data-validation-required-message="Please enter Wi-Fi signal strength." />
+                                                                <div className="form-control-position">
+                                                                    <i className="la icon-home" />
+                                                                </div>
+                                                                <div className="help-block font-small-3" />
+                                                                <span class="text-danger">{err_msg.wifi_signal_strength ? err_msg.wifi_signal_strength[0] : ''}</span>
+                                                            </fieldset>
+                                                        </td>
+                                                    </tr></>}
 
                                                 <tr>
                                                     <td colspan={4}>
