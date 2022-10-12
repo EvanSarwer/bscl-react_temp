@@ -5,11 +5,11 @@ import MainPage from './Components/MainPages/MainPage';
 import User from './Components/MainPages/User';
 import Cookies from 'universal-cookie';
 import Deployer from './Components/MainPages/Deployer';
-import GitInfo from 'react-git-info/macro';
+//import GitInfo from 'react-git-info/macro';
 const gitInfo = GitInfo();
 function App() {
-  if(localStorage.getItem('git')=='1'){
- alert("git hash: "+gitInfo.commit.hash);}
+  //if(localStorage.getItem('git')=='1'){
+ //alert("git hash: "+gitInfo.commit.hash);}
   const cookies = new Cookies();
   if (cookies.get('_authToken') != null && cookies.get('_role') == "admin") {
     return (
