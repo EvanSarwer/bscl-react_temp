@@ -6,7 +6,7 @@ import User from './Components/MainPages/User';
 import Cookies from 'universal-cookie';
 import Deployer from './Components/MainPages/Deployer';
 //import GitInfo from 'react-git-info/macro';
-const gitInfo = GitInfo();
+//const gitInfo = GitInfo();
 function App() {
   //if(localStorage.getItem('git')=='1'){
  //alert("git hash: "+gitInfo.commit.hash);}
