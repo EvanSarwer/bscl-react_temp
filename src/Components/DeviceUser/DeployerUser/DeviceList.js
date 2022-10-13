@@ -99,7 +99,7 @@ const DeviceList = () => {
                                                                         <th>Device Name</th>
                                                                         <th>Address</th>
                                                                         <th>Type</th>
-                                                                        <th>Monthly Income</th>
+                                                                        <th>Economic Status</th>
                                                                         <th>Socio Status</th>
                                                                         <th>Status</th>
                                                                     </tr>

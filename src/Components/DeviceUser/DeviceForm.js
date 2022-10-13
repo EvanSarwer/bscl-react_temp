@@ -64,7 +64,7 @@ const DeviceForm = (props) => {
                 setDeviceUsers(rsp.data.deviceUser);
                 setDeviceID(obj.id);
                 setDeviceName(obj.device_name);
-                setMonthlyIncome(obj.economic_status);
+                setMonthlyIncome(obj.monthly_income);
                 setSocioStatus(obj.socio_status);
                 setContactPerson(obj.contact_person);
                 setContactEmail(obj.contact_email);
