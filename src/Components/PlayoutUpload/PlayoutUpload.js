@@ -37,22 +37,20 @@ const PlayoutUpload = () => {
   useEffect(() => {
     if (updater > 0) {
       var data = {
-        
+        id:id,
+        data:range
       }
-      console.log(data.id);
-      console.log(updater);
-      console.log(data.ranges);
+      //console.log(data.id);
+      //console.log(updater);
+      console.log(JSON.stringify(data));
 
 
-      // axiosConfig.post("/adtrpv3/reach0", data).then(rsp => {
-      //   setreach0f(true);
-      //   setreach0(rsp.data.value);
-      //   console.log(reach0);
-      //   console.log("done");
-      // }).catch(err => {
-      //   setbadf(true);
-      //   setbadf(false);
-      // });
+      axiosConfig.post("/playout/receive", data).then(rsp => {
+        alert("Data Succesfully Inserted");
+        console.log("done");
+      }).catch(err => {
+        alert("Server Error");
+      });
 
       // axiosConfig.post("/adtrpv3/reachp", data).then(rsp => {
       //   setreachpf(true);
@@ -92,13 +90,14 @@ const PlayoutUpload = () => {
         for (var i = 0; i < json.length; i++) {
           //var obj = json[i];
           //console.log((json[i].Duration).substr(0, 8));
-          arr.push({ channel: id, start: (json[i].Date + " " + (json[i].Time).substr(0, 8)), duration: his2sec((json[i].Duration).substr(0, 8)) });
+          arr.push({ channel_id: id,commercial_name:json[i].Commercial,program:json[i].Program, start: (json[i].Date + " " + (json[i].Time).substr(0, 8)), duration: his2sec((json[i].Duration).substr(0, 8)) });
 
         }
         console.log(arr);
         range = arr;
         wholejson = json;
         //GetData(arr);
+        document.querySelector("#excelld").style.display = "block";
 
       };
       Reader.readAsArrayBuffer(e.target.files[0]);
@@ -111,13 +110,13 @@ const PlayoutUpload = () => {
     <div><Header title="Playout Log Upload" />
       <MainMenu menu="playoutupload" />
 
-      <div class="app-content content">
+      <div class="app-content content"  style={{ backgroundColor: "azure", minHeight: "36em" }}>
         <div class="content-overlay"></div>
         <div class="content-wrapper" style={{ backgroundColor: "azure" }} >
           <div class="content-header row">
           </div>
           <div class="content-body">
-
+          <div className='h1' style={{ color: "red"}}>Under Development</div>
 
 
             <div class="card">
@@ -151,10 +150,10 @@ const PlayoutUpload = () => {
                       <div class="font-weight-bold" >Excel loaded and processed</div>
                       <br />
 
-                      <button onClick={IncrementCount} class="btn btn-info">Process Data</button>
+                      <button onClick={IncrementCount} class="btn btn-info">Upload Playout Log</button>
                     </div>
                     <br />
-                    {(() => {
+                    {/* {(() => {
                       if (!badf) {// tvr0f && tvrpf &&
                         return <button onClick={console.log("clicked")} class="btn btn-danger">Download CSV</button>
 
@@ -163,7 +162,7 @@ const PlayoutUpload = () => {
                         return
 
                       }
-                    })()}
+                    })()} */}
                     
                   </div>
                 </div>
