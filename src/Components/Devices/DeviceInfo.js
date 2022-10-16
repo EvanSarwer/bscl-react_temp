@@ -47,7 +47,7 @@ const DeviceInfo = () => {
                                     </tr>
                                     <tr>
                                         <td>{userInfo.user_name}</td>
-                                        <td>{userInfo.device_name} ( {userInfo.device_id} )</td>
+                                        <td>{userInfo.device_name} ({userInfo.device_id})</td>
                                         <td>{userInfo.gender}</td>
                                         <td>{userInfo.age}</td>
                                         <td>{userInfo.economic_status}</td>
