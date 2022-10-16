@@ -34,75 +34,7 @@ const AdTrpv2 = () => {
       settvr0f(false);
       settvrpf(false);
       var data = {
-        allrange: JSON.parse(`
-        [
-          {
-             "commercial":"CM-LUX-CORE-PINK-REVISED-APRIL-22-20sec",
-             "ranges":[
-                {
-                   "channel":"Shomoy TV",
-                   "start":"9/21/22 12:57:53",
-                   "duration":"300"
-                },
-                {
-                   "channel":"Shomoy TV",
-                   "start":"9/21/22 13:57:53",
-                   "duration":"300"
-                },
-                {
-                   "channel":"Shomoy TV",
-                   "start":"9/21/22 14:57:53",
-                   "duration":"300"
-                }
-             ]
-          },
-          {
-             "commercial":"CM-SINGER-EID-UL-ADHA-2022-30sec",
-             "ranges":[
-                {
-                   "channel":"Shomoy TV",
-                   "start":"4/23/22 14:25:13",
-                   "duration":"20"
-                },
-                {
-                   "channel":"Shomoy TV",
-                   "start":"5/26/21 14:25:13",
-                   "duration":"300"
-                }
-             ]
-          },
-          {
-             "commercial":"CM-TEER-SUGAR-RESULT-15sec",
-             "ranges":[
-                {
-                   "channel":"Shomoy TV",
-                   "start":"4/22/22 14:25:43",
-                   "duration":"40"
-                },
-                {
-                   "channel":"Shomoy TV",
-                   "start":"5/24/22 15:25:43",
-                   "duration":"200"
-                }
-             ]
-          },
-          {
-             "commercial":"CM-SINGER-REFRIGERATOR-CATEGORY-2022-30sec",
-             "ranges":[
-                {
-                   "channel":"Shomoy TV",
-                   "start":"4/21/22 15:25:58",
-                   "duration":"15"
-                },
-                {
-                   "channel":"Shomoy TV",
-                   "start":"5/25/22 14:25:58",
-                   "duration":"100"
-                }
-             ]
-          }
-       ]
-        `)
+        allrange: range
       }
       console.log(data.id);
       console.log(updater);
