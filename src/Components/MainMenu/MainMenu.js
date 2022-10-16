@@ -273,6 +273,19 @@ const MainMenu = (props) => {
                             )
                         }
                     })()}
+                    {(() => {
+                        if (props.menu === "playoutupload") {
+                            return (
+                                <li class="active nav-item"><a href="/playoutupload"><i class="la la-upload"></i><span class="menu-title" data-i18n="Templates">Playout Log Upload</span></a>
+                                </li>
+                            )
+                        } else {
+                            return (
+                                <li class=" nav-item"><a href="/playoutupload"><i class="la la-upload"></i><span class="menu-title" data-i18n="Templates">Playout Log Upload</span></a>
+                                </li>
+                            )
+                        }
+                    })()}
 
 
 
