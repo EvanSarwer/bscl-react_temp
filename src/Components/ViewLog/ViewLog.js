@@ -196,18 +196,20 @@ const ViewLog = () => {
 
                                 if (userInfo) {
                                     return <table class="table table-bordered" style={{ backgroundColor: "#FFFF" }}>
-                                        <tr>
-                                            <th>User Id</th>
-                                            <th>User Name</th>
-                                            <th>Device</th>
-                                            <th>Gender</th>
-                                        </tr>
-                                        <tr>
-                                            <td>{userInfo.id}</td>
-                                            <td>{userInfo.user_name}</td>
-                                            <td>{userInfo.device_name} ( {userInfo.device_id} )</td>
-                                            <td>{userInfo.gender}</td>
-                                        </tr>
+                                    <tr>
+                                        <th>User Name</th>
+                                        <th>Device</th>
+                                        <th>Gender</th>
+                                        <th>Age</th>
+                                        <th>Economic Status</th>
+                                    </tr>
+                                    <tr>
+                                        <td>{userInfo.user_name}</td>
+                                        <td>{userInfo.device_name} ({userInfo.device_id})</td>
+                                        <td>{userInfo.gender}</td>
+                                        <td>{userInfo.age}</td>
+                                        <td>{userInfo.economic_status}</td>
+                                    </tr>
                                     </table>
                                 }
 
