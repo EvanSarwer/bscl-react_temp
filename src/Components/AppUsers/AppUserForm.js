@@ -2,22 +2,25 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import axiosConfig from '../axiosConfig';
 
-const AppUserForm=(props)=>{
-    const [user_name,setUsername] = useState("");
-    const [email,setEmail] = useState("");
-    const [address,setAddress] = useState("");
-    const [phone,setPhone] = useState("");
-    const [password,setPassword] = useState("");
-    const [c_password,setCPassword] = useState("");
+const AppUserForm = (props) => {
+    const [user_name, setUsername] = useState("");
+    const [email, setEmail] = useState("");
+    const [address, setAddress] = useState("");
+    const [phone, setPhone] = useState("");
+    const [password, setPassword] = useState("");
+    const [c_password, setCPassword] = useState("");
+    const [role, setRole] = useState("");
 
-    useEffect(()=>{
-        if(props.mode == "Edit"){
-            axiosConfig.get("/appuser/get/"+props.id).then((rsp)=>{
+    useEffect(() => {
+        if (props.mode == "Edit") {
+            axiosConfig.get("/appuser/get/" + props.id).then((rsp) => {
                 var obj = rsp.data;
+                console.log(obj);
                 setUsername(obj.user_name);
                 setEmail(obj.email);
                 setAddress(obj.address);
                 setPhone(obj.phone);
+                setRole(obj.role);
             }, (err) => {
                 if (err.response.status === 422) {
                     setErrMsg(err.response.data);
@@ -45,10 +48,10 @@ const AppUserForm=(props)=>{
 
     const handleForm = (e) => {
         e.preventDefault();
-        if(props.mode == "Edit"){
-            const obj = {user_name:user_name,email:email,address:address,phone:phone};
-            axiosConfig.post("/appuser/edit",obj).then((rsp)=>{
-                
+        if (props.mode == "Edit") {
+            const obj = { user_name: user_name, email: email, address: address, phone: phone };
+            axiosConfig.post("/appuser/edit", obj).then((rsp) => {
+
 
                 alert(rsp.data.message);
                 window.location.href = "/app/users";
@@ -61,9 +64,9 @@ const AppUserForm=(props)=>{
             });
         }
 
-        else{
-            const obj = {user_name:user_name,email:email,address:address,phone:phone,password:password,c_password:c_password};
-            axiosConfig.post("/appuser/create",obj).then((rsp)=>{
+        else {
+            const obj = { user_name: user_name, email: email, address: address, phone: phone, password: password, c_password: c_password, role: role };
+            axiosConfig.post("/appuser/create", obj).then((rsp) => {
                 alert(rsp.data.message);
                 window.location.href = "/app/users";
 
@@ -93,7 +96,7 @@ const AppUserForm=(props)=>{
                             <div class="card border-grey border-lighten-3 m-0" >
                                 <div className="card-header border-0 pb-0">
                                     <div className="card-title text-center">
-                                    <img style={{width:'13%',height:'0%'}} src="/app-assets/images/logo/app-user.png" alt="user logo"/>
+                                        <img style={{ width: '13%', height: '0%' }} src="/app-assets/images/logo/app-user.png" alt="user logo" />
                                     </div>
                                     <h6 className="card-subtitle line-on-side text-muted text-center font-medium-5 pt-2"><span>{props.mode} Application User</span>
                                     </h6>
@@ -154,7 +157,7 @@ const AppUserForm=(props)=>{
                                                         <span class="text-danger">{err_msg.address ? err_msg.address[0] : ''}</span>
                                                     </fieldset>
                                                 </div>
-                                                
+
                                                 <div className="col-12 col-sm-6 col-md-6">
                                                     <fieldset className="form-group position-relative has-icon-left">
                                                         <input type="text" name="phone" id="phone" className="form-control" value={phone} onChange={(e) => { setPhone(e.target.value) }} placeholder="Phone" tabIndex={6} required data-validation-required-message="Please enter phone number." />
@@ -166,6 +169,24 @@ const AppUserForm=(props)=>{
                                                     </fieldset>
                                                 </div>
                                             </div>
+
+                                            <br />
+                                            <div class="row">
+                                                <div class="col-12 col-sm-6 col-md-2"></div>
+                                                <div class="col-12 col-sm-6 col-md-2 text-nowrap font-weight-bold">User Type :</div>
+                                                <div class="col-12 col-sm-6 col-md-8">
+                                                    <fieldset className="form-group position-relative">
+                                                        <input type="radio" name="role" value="general" onChange={(e) => { setRole(e.target.value) }} checked={role === "general"} />TV-Channel &nbsp;&nbsp;&nbsp;
+                                                        <input type="radio" name="role" value="add-agency" onChange={(e) => { setRole(e.target.value) }} checked={role === "add-agency"} />Add Agency &nbsp;&nbsp;&nbsp;
+                                                        <input type="radio" name="role" value="deployer" onChange={(e) => { setRole(e.target.value) }} checked={role === "deployer"} />Deployer<br />
+                                                        <div className="help-block font-small-3" />
+                                                        <span class="text-danger">{err_msg.role ? err_msg.role[0] : ''}</span>
+                                                    </fieldset>
+                                                </div>
+
+                                            </div>
+
+                                            <br />
 
                                             <div class="pl-0">
                                                 {(() => {
@@ -179,6 +200,7 @@ const AppUserForm=(props)=>{
                                                 })()}
 
                                             </div>
+
 
                                         </form>
                                     </div>
