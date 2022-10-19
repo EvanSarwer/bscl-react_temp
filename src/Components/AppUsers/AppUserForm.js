@@ -3,6 +3,7 @@ import axios from "axios";
 import axiosConfig from '../axiosConfig';
 
 const AppUserForm = (props) => {
+    const [user_id, setUserID] = useState("");
     const [user_name, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [address, setAddress] = useState("");
@@ -16,6 +17,7 @@ const AppUserForm = (props) => {
             axiosConfig.get("/appuser/get/" + props.id).then((rsp) => {
                 var obj = rsp.data;
                 console.log(obj);
+                setUserID(obj.login.id);
                 setUsername(obj.user_name);
                 setEmail(obj.email);
                 setAddress(obj.address);
@@ -39,6 +41,7 @@ const AppUserForm = (props) => {
     const refresh = () => {
         setErrMsg({});
         setUsername("");
+        setUsername("");
         setEmail("");
         setAddress("");
         setPhone("");
@@ -49,7 +52,7 @@ const AppUserForm = (props) => {
     const handleForm = (e) => {
         e.preventDefault();
         if (props.mode == "Edit") {
-            const obj = { user_name: user_name, email: email, address: address, phone: phone };
+            const obj = { user_id: user_id, user_name: user_name, email: email, address: address, phone: phone, role: role };
             axiosConfig.post("/appuser/edit", obj).then((rsp) => {
 
 
@@ -178,7 +181,12 @@ const AppUserForm = (props) => {
                                                     <fieldset className="form-group position-relative">
                                                         <input type="radio" name="role" value="general" onChange={(e) => { setRole(e.target.value) }} checked={role === "general"} />TV-Channel &nbsp;&nbsp;&nbsp;
                                                         <input type="radio" name="role" value="add-agency" onChange={(e) => { setRole(e.target.value) }} checked={role === "add-agency"} />Add Agency &nbsp;&nbsp;&nbsp;
-                                                        <input type="radio" name="role" value="deployer" onChange={(e) => { setRole(e.target.value) }} checked={role === "deployer"} />Deployer<br />
+                                                        {props.mode == "Create" &&
+                                                            <>
+                                                                <input type="radio" name="role" value="deployer" onChange={(e) => { setRole(e.target.value) }} checked={role === "deployer"} />Deployer<br />
+
+                                                            </>
+                                                        }
                                                         <div className="help-block font-small-3" />
                                                         <span class="text-danger">{err_msg.role ? err_msg.role[0] : ''}</span>
                                                     </fieldset>
