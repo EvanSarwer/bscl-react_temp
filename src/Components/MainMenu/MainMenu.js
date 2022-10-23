@@ -247,7 +247,7 @@ const MainMenu = (props) => {
                             )
                         }
                     })()}
-                    {(() => {
+                    {/* {(() => {
                         if (props.menu === "adtrpv1") {
                             return (
                                 <li class="active nav-item"><a href="/adtrpv1"><i class="la la-download"></i><span class="menu-title" data-i18n="Templates">Ad Trp v1</span></a>
@@ -259,8 +259,21 @@ const MainMenu = (props) => {
                                 </li>
                             )
                         }
-                    })()}
+                    })()} */}
                     {(() => {
+                        if (props.menu === "dailyadtrp") {
+                            return (
+                                <li class="active nav-item"><a href="/dailyadtrp"><i class="la la-download"></i><span class="menu-title" data-i18n="Templates">Daily Ad Trp</span></a>
+                                </li>
+                            )
+                        } else {
+                            return (
+                                <li class=" nav-item"><a href="/dailyadtrp"><i class="la la-download"></i><span class="menu-title" data-i18n="Templates">Daily Ad Trp</span></a>
+                                </li>
+                            )
+                        }
+                    })()}
+                    {/* {(() => {
                         if (props.menu === "adtrpv2") {
                             return (
                                 <li class="active nav-item"><a href="/adtrpv2"><i class="la la-download"></i><span class="menu-title" data-i18n="Templates">Ad Trp v2</span></a>
@@ -272,7 +285,7 @@ const MainMenu = (props) => {
                                 </li>
                             )
                         }
-                    })()}
+                    })()} */}
                     {(() => {
                         if (props.menu === "playoutupload") {
                             return (
