@@ -705,7 +705,7 @@ const DeviceForm = (props) => {
                                                             <td>Installer Name:</td>
                                                             <td colspan={3}><fieldset className="form-group position-relative">
                                                                 <select class="custom-select d-block w-100" value={installerName} onChange={(e) => { setInstallerName(e.target.value) }}>
-                                                                    <option value="">{cookies.get('username')}</option>
+                                                                    <option value={cookies.get('username')}>{cookies.get('username')}</option>
 
                                                                 </select>
                                                                 <div className="help-block font-small-3" />
@@ -717,7 +717,7 @@ const DeviceForm = (props) => {
                                                         <td>Installer Name:</td>
                                                         <td colspan={3}><fieldset className="form-group position-relative">
                                                             <select class="custom-select d-block w-100" value={cookies.get('username')} onChange={(e) => { setInstallerName(e.target.value) }}>
-                                                                <option value="">{cookies.get('username')}</option>
+                                                                <option value={cookies.get('username')}>{cookies.get('username')}</option>
 
                                                             </select>
                                                             <div className="help-block font-small-3" />
@@ -729,8 +729,8 @@ const DeviceForm = (props) => {
                                                         <td>Installer Name:</td>
                                                         <td colspan={3}><fieldset className="form-group position-relative">
                                                             <select class="custom-select d-block w-100" value={installerName} onChange={(e) => { setInstallerName(e.target.value) }}>
-                                                                <option value="">{installerName}</option>
-                                                                <option value="">{cookies.get('username')}</option>
+                                                                <option value={installerName}>{installerName}</option>
+                                                                <option value={cookies.get('username')}>{cookies.get('username')}</option>
 
                                                             </select>
                                                             <div className="help-block font-small-3" />
