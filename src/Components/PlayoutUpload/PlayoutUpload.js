@@ -21,7 +21,7 @@ const PlayoutUpload = () => {
     axiosConfig.get("/trend/channels").then(rsp => {
       //console.log(rsp.data);
       setchannels(rsp.data.channels);
-      console.log(channels);
+      //console.log(channels);
 
 
     }).catch(err => {
@@ -47,7 +47,7 @@ const PlayoutUpload = () => {
 
       axiosConfig.post("/playout/receive", data).then(rsp => {
         alert("Data Succesfully Inserted");
-        console.log("done");
+        //console.log("done");
       }).catch(err => {
         alert("Server Error");
       });
@@ -70,7 +70,7 @@ const PlayoutUpload = () => {
  
   var his2sec = (time) => {
     var actualTime = time.split(':');
-    console.log("The time=" + time);
+    //console.log("The time=" + time);
     var totalSeconds = (+actualTime[0]) * 60 * 60 + (+actualTime[1]) * 60 + (+actualTime[2]);
     return totalSeconds;
   }
@@ -80,24 +80,37 @@ const PlayoutUpload = () => {
     if (e.target.files) {
       const Reader = new FileReader();
       Reader.onload = (e) => {
+        document.querySelector("#excelld").style.display = "none";
         const data = e.target.result;
         const workbook = xlsx.read(data, { type: "array" });
         const sheetName = workbook.SheetNames[0];
         const worksheet = workbook.Sheets[sheetName];
         const json = xlsx.utils.sheet_to_json(worksheet, { raw: false });//
-        //console.log(json);
+        //console.log(json[780].Program==undefined);
         var arr = [];
         for (var i = 0; i < json.length; i++) {
+          if(json[i].Program!=undefined && json[i].Commercial!=undefined && json[i].Date!=undefined && json[i].Time!=undefined && json[i].Duration!=undefined){
           //var obj = json[i];
           //console.log((json[i].Duration).substr(0, 8));
-          arr.push({ channel_id: id,commercial_name:json[i].Commercial,program:json[i].Program, start: (json[i].Date + " " + (json[i].Time).substr(0, 8)), duration: his2sec((json[i].Duration).substr(0, 8)) });
-
+          var obj={ channel_id: id,commercial_name:json[i].Commercial,program:json[i].Program, start: (json[i].Date + " " + (json[i].Time).substr(0, 8)), duration: his2sec((json[i].Duration).substr(0, 8)) };
+          arr.push(obj);
+          
+          }
         }
-        console.log(arr);
+        //console.log(arr[780]);
         range = arr;
         wholejson = json;
         //GetData(arr);
+        if(json.length!=arr.length){
+          if (window.confirm("Some data has faulty properties, If you want to skip them and continue press ok") == true) {
+            document.querySelector("#excelld").style.display = "block";
+          } else {
+            //document.querySelector("#excelld").style.display = "block";
+          }
+        }
+        else{
         document.querySelector("#excelld").style.display = "block";
+        }
 
       };
       Reader.readAsArrayBuffer(e.target.files[0]);
@@ -116,7 +129,6 @@ const PlayoutUpload = () => {
           <div class="content-header row">
           </div>
           <div class="content-body">
-          <div className='h1' style={{ color: "red"}}>Under Development</div>
 
 
             <div class="card">
@@ -133,6 +145,9 @@ const PlayoutUpload = () => {
                       />
                     </div>
                   </div>
+                  <br/>
+                  <br/>
+                  <br/>
                   <h1>Upload excel</h1>
                   <form>
                     <label htmlFor="upload">Upload File</label>
