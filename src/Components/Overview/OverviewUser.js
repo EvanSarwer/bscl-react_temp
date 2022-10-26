@@ -284,9 +284,10 @@ const OverviewUser = () => {
                                         <div class="col-md-2">
                                             <label>Type (STB/OTT)</label>
                                             <select class="custom-select d-block w-100" onChange={(e) => { setUserType(e.target.value) }}>
+                                                <option value="">All</option>
                                                 <option value="STB">STB</option>
                                                 <option value="OTT">OTT</option>
-                                                <option value="">All</option>
+
                                             </select>
                                         </div>
 
@@ -318,11 +319,11 @@ const OverviewUser = () => {
                                             <label>SEC</label>
                                             <select class="custom-select d-block w-100" onChange={(e) => { setEconomic(e.target.value) }}>
                                                 <option value="">All SEC</option>
-                                                <option value="b1">Upper</option>
-                                                <option value="c1">Upper Middle</option>
-                                                <option value="e1">Middle</option>
-                                                <option value="d1">Lower Middle</option>
-                                                <option value="a1">Lower</option>
+                                                <option value="a">Poorest</option>
+                                                <option value="b">Poorer</option>
+                                                <option value="c">Middle</option>
+                                                <option value="d">Richer</option>
+                                                <option value="e">Richest</option>
                                             </select>
                                         </div>
 
