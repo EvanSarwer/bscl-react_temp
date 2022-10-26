@@ -9,7 +9,7 @@ import MainMenu from '../MainMenu/MainMenu';
 var range;
 var wholejson;
 const DailyAdTrp = () => {
-    const [notLoaded, setnotLoaded] = useState(false);
+    const [notLoaded, setnotLoaded] = useState(true);
     const [errorf, seterrorf] = useState(false);
     const [errorp, seterrorp] = useState(false);
     const [reachpf, setreachpf] = useState(false);
@@ -26,43 +26,48 @@ const DailyAdTrp = () => {
     const IncrementCount = () => {
         // Update state with incremented value
         setupdater(updater + 1);
+        setnotLoaded(true);
+        
     }
     useEffect(() => {
-        if (date != '') {
-            var datep = new Date();
-            datep.setDate(datep.getDate() - 30);
-            var datef = new Date();
-            datef.setDate(datef.getDate() + 1);
-            var dd = new Date(date);
-            if (!(datep < dd)) {
-                seterrorp(true);
-                seterrorf(false);
-                return;
-            }
-            if (!(datef > dd)) {
-                seterrorf(true);
-                seterrorp(false);
-                return;
-            }
-        }
+        if (updater > 0) {
+        // if (date != '') {
+        //     var datep = new Date();
+        //     datep.setDate(datep.getDate() - 30);
+        //     var datef = new Date();
+        //     datef.setDate(datef.getDate() + 1);
+        //     var dd = new Date(date);
+        //     if (!(datep < dd)) {
+        //         seterrorp(true);
+        //         seterrorf(false);
+        //         return;
+        //     }
+        //     if (!(datef > dd)) {
+        //         seterrorf(true);
+        //         seterrorp(false);
+        //         return;
+        //     }
+        // }
         var data = {
             date: date
         }
-        setnotLoaded(true);
-        axiosConfig.post("/dailyadtrp", data).then(rsp => {
+        console.log(JSON.stringify(data));
+        //setnotLoaded(true);
+        axiosConfig.post("/dailyadtrp", {
+            date: date
+        }).then(rsp => {
             //setallDataf(true);
             setallData(rsp.data.value);
-            console.log(allData);
+            console.log(rsp.data.value);
             setnotLoaded(false);
-            if (updater > 0) {
-                DownloadData();
-            }
+            
+            
         }).catch(err => {
 
             setnotLoaded(true);
         });
 
-
+    }
     }, [updater]);
 
     const DownloadData = () => {
@@ -72,20 +77,21 @@ const DailyAdTrp = () => {
         var gtvr0 = 0;
         var gtvrp = 0;
         var csv = [["Channel", "Program", "Commercial", "Date", "Start", "Duration", "Time Watched", "Reach(000)", " Gross Reach(000)", "Reach(%)", "Gross Reach(%)", "TVR(000)", "Gross TVR(000)", "TVR(%)", "Gross TVR(%)"]];
-
-        for (var i = 0; i < allData.length; i++) {
-            greach0 = greach0 + allData[i].reach0;
-            greachp = greachp + allData[i].reachp;
-            gtvr0 = gtvr0 + allData[i].tvr0;
-            gtvrp = gtvrp + allData[i].tvrp;
-            csv.push([allData[i].channel_name
-                , allData[i].program, allData[i].commercial_name
-                , allData[i].date, allData[i].start
-                , allData[i].duration, allData[i].timewatched
-                , allData[i].reach0, greach0
-                , allData[i].reachp, greachp
-                , allData[i].tvr0, gtvr0
-                , allData[i].tvrp, gtvrp]);
+var all=allData;
+        for (var i = 0; i < all.length; i++) {
+            
+            greach0 = greach0 + all[i].reach0;
+            greachp = greachp + all[i].reachp;
+            gtvr0 = gtvr0 + all[i].tvr0;
+            gtvrp = gtvrp + all[i].tvrp;
+            csv.push([all[i].channel_name
+                , all[i].program, all[i].commercial_name
+                , all[i].date, all[i].start
+                , all[i].duration, all[i].timewatched
+                , all[i].reach0, greach0
+                , all[i].reachp, greachp
+                , all[i].tvr0, gtvr0
+                , all[i].tvrp, gtvrp]);
         }
         console.log(csv);
         getCSV(csv);
@@ -189,9 +195,24 @@ const DailyAdTrp = () => {
 
 
                                     <div class="row justify-content-md-center">
-                                        <button onClick={IncrementCount} class="btn btn-danger">Download CSV</button>
+                                        <button onClick={IncrementCount} class="btn btn-info">Get Data</button>
                                     </div>
+                                    <br/>
+                                    <br/>
+                                    {(() => {
+                                        if (!notLoaded) {
+                                            return (
+                                                <div class="row justify-content-md-center">
+                                                <button onClick={DownloadData} class="btn btn-danger">Download CSV</button>
+                                                </div>
+                                            )
 
+
+                                        } else {
+                                            return
+
+                                        }
+                                    })()}
 
                                 </div>
 
