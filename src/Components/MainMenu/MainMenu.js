@@ -263,12 +263,12 @@ const MainMenu = (props) => {
                     {(() => {
                         if (props.menu === "dailyadtrp") {
                             return (
-                                <li class="active nav-item"><a href="/dailyadtrp"><i class="la la-download"></i><span class="menu-title" data-i18n="Templates">Daily Ad Trp</span></a>
+                                <li class="active nav-item"><a href="/dailyadtrp"><i class="la la-download"></i><span class="menu-title" data-i18n="Templates">Program Trp</span></a>
                                 </li>
                             )
                         } else {
                             return (
-                                <li class=" nav-item"><a href="/dailyadtrp"><i class="la la-download"></i><span class="menu-title" data-i18n="Templates">Daily Ad Trp</span></a>
+                                <li class=" nav-item"><a href="/dailyadtrp"><i class="la la-download"></i><span class="menu-title" data-i18n="Templates">Program Trp</span></a>
                                 </li>
                             )
                         }
