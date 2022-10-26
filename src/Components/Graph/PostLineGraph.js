@@ -20,14 +20,14 @@ const PostLineGraph = (props) => {
     });
     useEffect(() => {
 if(props.update>0){
-
+console.log(JSON.stringify(props.credentials));
     setloading(false);
         axiosConfig.post("/" + props.url,props.credentials)
             .then(rsp => {
-                
+                if(props.parentPass!=undefined){
                 props.parentPass({
                     labels: rsp.data.label, values: rsp.data.values
-                });
+                });}
             setloading(true);
                 //debugger;
                 console.log(rsp.data);
