@@ -139,7 +139,7 @@ var all=allData;
     }
 
     return (
-        <div><Header title="Daily Ad TRP" />
+        <div><Header title="Program TRP" />
             <MainMenu menu="dailyadtrp" />
 
 
