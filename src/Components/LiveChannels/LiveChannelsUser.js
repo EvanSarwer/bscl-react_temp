@@ -168,11 +168,11 @@ const LiveChannelsUser = () => {
 
                                 <select class="custom-select d-block w-100" onChange={(e) => { setEconomic(e.target.value) }}>
                                     <option value="">All SEC</option>
-                                    <option value="b1">Upper</option>
-                                    <option value="c1">Upper Middle</option>
-                                    <option value="e1">Middle</option>
-                                    <option value="d1">Lower Middle</option>
-                                    <option value="a1">Lower</option>
+                                    <option value="a">Poorest</option>
+                                    <option value="b">Poorer</option>
+                                    <option value="c">Middle</option>
+                                    <option value="d">Richer</option>
+                                    <option value="e">Richest</option>
                                 </select>
                             </div>
                             <div class="col-md-2">
