@@ -32,13 +32,13 @@ const DownloadReport = () => {
 
     const LivechannelDownloadfunc = () => {
         //console.log(liveChannelData.labels[0]);
-        var csv = [["Channel", "Value"]];
+        var csv = [["Channel", "No Of User"]];
         var sampleLive = liveChannelData;
         for (var i = 0; i < sampleLive.labels.length; i++) {
             csv.push([sampleLive.labels[i], sampleLive.values[i]]);
         }
         console.log(csv);
-        getCSV(csv);
+        getCSV(csv, "live-channel");
     }
     function exportToCsv(filename, rows) {
         var processRow = function (row) {
@@ -78,8 +78,15 @@ const DownloadReport = () => {
             }
         }
     }
-    var getCSV = (scsv) => {
-        exportToCsv("Export.csv", scsv)
+    var getCSV = (scsv, type) => {
+        if(type === "basic-report"){
+            exportToCsv("Basic_Report(" + category + ")_"+start+" to "+finish+".csv", scsv)
+        }else if(type === "user-status"){
+            exportToCsv("User-General_Report(" + time + ").csv", scsv)
+        }else if( type === "live-channel" ){
+            exportToCsv("Live-Channel_Report.csv", scsv)
+        }
+        
     }
     useEffect(() => {
         var data = {
@@ -116,13 +123,13 @@ const DownloadReport = () => {
 
     const userstatusDownloadfunc = () => {
         //console.log(liveChannelData.labels[0]);
-        var csv = [["Channel", "Value"]];
+        var csv = [["Channel", "Time_Spent(minute)"]];
         var sampleLive = userstatuschannelData;
         for (var i = 0; i < sampleLive.labels.length; i++) {
             csv.push([sampleLive.labels[i], sampleLive.values[i]]);
         }
         console.log(csv);
-        getCSV(csv);
+        getCSV(csv, "user-status");
     }
 
     useEffect(() => {
@@ -171,13 +178,20 @@ const DownloadReport = () => {
             csv.push([sampleLive.labels[i], sampleLive.values[i]]);
         }
         console.log(csv);
-        getCSV(csv);
+        getCSV(csv, "basic-report");
     }
 
     useEffect(() => {
         var data = {
             start: start,
             finish: finish,
+            userType: "",
+            region: "",
+            gender: "",
+            economic: "",
+            socio: "",
+            age1: 1,
+            age2: 100
         };
 
         if (start !== "" && finish !== "") {
@@ -278,10 +292,10 @@ const DownloadReport = () => {
                                         <div class="col-md-5">
                                             <select class="custom-select d-block w-100" onChange={(e) => { setTime(e.target.value) }}>
                                                 <option value="">Select Time Frame</option>
-                                                <option value="Daily">Daily</option>
-                                                <option value="Weekly">Weekly</option>
-                                                <option value="Monthly">Monthly</option>
-                                                <option value="Yearly">Yearly</option>
+                                                <option value="Daily">Last 24 Hours</option>
+                                                <option value="Weekly">Last 7 Days</option>
+                                                <option value="Monthly">Last 30 Days</option>
+                                                <option value="Yearly">Last 365 Days</option>
                                             </select>
                                         </div>
 
@@ -303,7 +317,7 @@ const DownloadReport = () => {
 
 
 
-                        <div class="card">
+                        {/* <div class="card">
                             <div class="card-content">
                                 <div class="card-body">
                                     <h1>Download Channel Trend Report:</h1>
@@ -315,7 +329,7 @@ const DownloadReport = () => {
 
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
 
 
 
@@ -402,11 +416,11 @@ const DownloadReport = () => {
 
                                             <select class="custom-select d-block w-100" onChange={(e) => { setEconomic(e.target.value) }}>
                                                 <option value="">All SEC</option>
-                                                <option value="b1">Upper</option>
-                                                <option value="c1">Upper Middle</option>
-                                                <option value="e1">Middle</option>
-                                                <option value="d1">Lower Middle</option>
-                                                <option value="a1">Lower</option>
+                                                <option value="a">Poorest</option>
+                                                <option value="b">Poorer</option>
+                                                <option value="c">Middle</option>
+                                                <option value="d">Richer</option>
+                                                <option value="e">Richest</option>
                                             </select>
                                         </div>
                                         <div class="col-md-2">
