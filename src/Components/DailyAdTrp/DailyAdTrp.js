@@ -12,13 +12,7 @@ const DailyAdTrp = () => {
     const [notLoaded, setnotLoaded] = useState(true);
     const [errorf, seterrorf] = useState(false);
     const [errorp, seterrorp] = useState(false);
-    const [reachpf, setreachpf] = useState(false);
-    const [tvr0f, settvr0f] = useState(false);
-    const [allDataf, setallDataf] = useState(false);
-    const [reach0, setreach0] = useState([]);
     const [updater, setupdater] = useState(0);
-    const [reachp, setreachp] = useState([]);
-    const [tvr0, settvr0] = useState([]);
     const [allData, setallData] = useState([]);
     const [date, setdate] = useState("");
 
@@ -139,7 +133,7 @@ var all=allData;
     }
 
     return (
-        <div><Header title="Program TRP" />
+        <div><Header title="Ad TRP" />
             <MainMenu menu="dailyadtrp" />
 
 
