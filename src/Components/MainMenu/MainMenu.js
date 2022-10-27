@@ -234,7 +234,7 @@ const MainMenu = (props) => {
                             )
                         }
                     })()}
-                    {(() => {
+                    {/* {(() => {
                         if (props.menu === "excelreport") {
                             return (
                                 <li class="active nav-item"><a href="/excelreport"><i class="la la-download"></i><span class="menu-title" data-i18n="Templates">Ad TRP</span></a>
@@ -243,6 +243,19 @@ const MainMenu = (props) => {
                         } else {
                             return (
                                 <li class=" nav-item"><a href="/excelreport"><i class="la la-download"></i><span class="menu-title" data-i18n="Templates">Ad TRP</span></a>
+                                </li>
+                            )
+                        }
+                    })()} */}
+                    {(() => {
+                        if (props.menu === "programtrp") {
+                            return (
+                                <li class="active nav-item"><a href="/programtrp"><i class="la la-download"></i><span class="menu-title" data-i18n="Templates">Program Trp</span></a>
+                                </li>
+                            )
+                        } else {
+                            return (
+                                <li class=" nav-item"><a href="/programtrp"><i class="la la-download"></i><span class="menu-title" data-i18n="Templates">Program Trp</span></a>
                                 </li>
                             )
                         }
@@ -263,12 +276,12 @@ const MainMenu = (props) => {
                     {(() => {
                         if (props.menu === "dailyadtrp") {
                             return (
-                                <li class="active nav-item"><a href="/dailyadtrp"><i class="la la-download"></i><span class="menu-title" data-i18n="Templates">Program Trp</span></a>
+                                <li class="active nav-item"><a href="/dailyadtrp"><i class="la la-download"></i><span class="menu-title" data-i18n="Templates">Ad Trp</span></a>
                                 </li>
                             )
                         } else {
                             return (
-                                <li class=" nav-item"><a href="/dailyadtrp"><i class="la la-download"></i><span class="menu-title" data-i18n="Templates">Program Trp</span></a>
+                                <li class=" nav-item"><a href="/dailyadtrp"><i class="la la-download"></i><span class="menu-title" data-i18n="Templates">Ad Trp</span></a>
                                 </li>
                             )
                         }
