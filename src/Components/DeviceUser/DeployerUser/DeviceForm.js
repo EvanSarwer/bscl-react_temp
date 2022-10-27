@@ -3,6 +3,7 @@ import axios from "axios";
 import axiosConfig from '../../axiosConfig';
 import UserListTable from "./UserListTable";
 import Cookies from 'universal-cookie';
+import Select from 'react-select';
 
 const DeviceForm = (props) => {
     const cookies = new Cookies();
@@ -51,8 +52,7 @@ const DeviceForm = (props) => {
     const [stbSubscriptionType, setStbSubscriptionType] = useState("");
     const [stbSubscriptionCharge, setStbSubscriptionCharge] = useState("");
 
-
-
+    const [districtList, setDistrictList] = useState([]);
 
 
 
@@ -127,6 +127,21 @@ const DeviceForm = (props) => {
 
 
 
+        axios.get("https://bdapis.herokuapp.com/api/v1.1/districts").then((rsp) => {
+            var obj = rsp.data.data;
+            setDistrictList(obj);
+
+            console.log(rsp.data.data);
+
+        }, (err) => {
+
+        });
+
+
+
+
+
+
         navigator.permissions
             .query({ name: "geolocation" })
             .then(function (result) {
@@ -172,6 +187,7 @@ const DeviceForm = (props) => {
                 house_name: houseName, house_number: houseNumber, road_number: roadNumber, state_name: stateName, ward_no: wardNo, zone_thana: zoneThana, city_corporation: cityCorporation, city_Name: cityName, zip_code: zipCode, district: districtName, household_condition: householdCondition, description: description, tv_type: tvType, tv_brand: tvBrand, tv_placement: tvPlacement, gsm_signal_strength: gsmSignalStrength, wifi: wifi, wifi_signal_strength: wifiSignalStrength,
                 stb_provider_name: stbProviderName, stb_subscription_type: stbSubscriptionType, stb_subscription_charge: stbSubscriptionCharge, type: 'STB'
             };
+            console.log(obj);
             axiosConfig.post("/device/edit", obj).then((rsp) => {
 
                 alert(rsp.data.message);
@@ -578,10 +594,16 @@ const DeviceForm = (props) => {
                                                         }
                                                     })()}</td>
                                                     <td colspan={3}><fieldset className="form-group position-relative has-icon-left">
-                                                        <input type="text" name="district" id="district" className="form-control" value={districtName} onChange={(e) => { setDistrictName(e.target.value) }} placeholder="District" tabIndex={2} required data-validation-required-message="Please enter District." />
-                                                        <div className="form-control-position">
+                                                        <select class="custom-select d-block w-100" value={districtName} onChange={(e) => { setDistrictName(e.target.value) }}>
+                                                            <option value="">Select</option>
+                                                            {districtList.map((district) =>
+                                                                <option value={district.district}>{district.district}</option>
+                                                            )}
+                                                        </select>
+                                                        {/* <input type="text" name="district" id="district" className="form-control" value={districtName} onChange={(e) => { setDistrictName(e.target.value) }} placeholder="District" tabIndex={2} required data-validation-required-message="Please enter District." /> */}
+                                                        {/* <div className="form-control-position">
                                                             <i className="ft-map-pin" />
-                                                        </div>
+                                                        </div> */}
                                                         <div className="help-block font-small-3" />
                                                         <span class="text-danger">{err_msg.district ? err_msg.district[0] : ''}</span>
                                                     </fieldset>
@@ -713,30 +735,31 @@ const DeviceForm = (props) => {
                                                             </fieldset></td>
                                                         </tr>
                                                     } else if (!installerName) {
+                                                        setInstallerName(cookies.get('username'))
                                                         return <tr>
-                                                        <td>Installer Name:</td>
-                                                        <td colspan={3}><fieldset className="form-group position-relative">
-                                                            <select class="custom-select d-block w-100" value={cookies.get('username')} onChange={(e) => { setInstallerName(e.target.value) }}>
-                                                                <option value={cookies.get('username')}>{cookies.get('username')}</option>
+                                                            <td>Installer Name:</td>
+                                                            <td colspan={3}><fieldset className="form-group position-relative">
+                                                                <select class="custom-select d-block w-100" value={cookies.get('username')} onChange={(e) => { setInstallerName(e.target.value) }}>
+                                                                    <option value={cookies.get('username')}>{cookies.get('username')}</option>
 
-                                                            </select>
-                                                            <div className="help-block font-small-3" />
-                                                            <span class="text-danger">{err_msg.installer_name ? err_msg.installer_name[0] : ''}</span>
-                                                        </fieldset></td>
-                                                    </tr>
-                                                    }else if (installerName && (installerName != cookies.get('username'))) {
+                                                                </select>
+                                                                <div className="help-block font-small-3" />
+                                                                <span class="text-danger">{err_msg.installer_name ? err_msg.installer_name[0] : ''}</span>
+                                                            </fieldset></td>
+                                                        </tr>
+                                                    } else if (installerName && (installerName != cookies.get('username'))) {
                                                         return <tr>
-                                                        <td>Installer Name:</td>
-                                                        <td colspan={3}><fieldset className="form-group position-relative">
-                                                            <select class="custom-select d-block w-100" value={installerName} onChange={(e) => { setInstallerName(e.target.value) }}>
-                                                                <option value={installerName}>{installerName}</option>
-                                                                <option value={cookies.get('username')}>{cookies.get('username')}</option>
+                                                            <td>Installer Name:</td>
+                                                            <td colspan={3}><fieldset className="form-group position-relative">
+                                                                <select class="custom-select d-block w-100" value={installerName} onChange={(e) => { setInstallerName(e.target.value) }}>
+                                                                    <option value={installerName}>{installerName}</option>
+                                                                    <option value={cookies.get('username')}>{cookies.get('username')}</option>
 
-                                                            </select>
-                                                            <div className="help-block font-small-3" />
-                                                            <span class="text-danger">{err_msg.installer_name ? err_msg.installer_name[0] : ''}</span>
-                                                        </fieldset></td>
-                                                    </tr>
+                                                                </select>
+                                                                <div className="help-block font-small-3" />
+                                                                <span class="text-danger">{err_msg.installer_name ? err_msg.installer_name[0] : ''}</span>
+                                                            </fieldset></td>
+                                                        </tr>
                                                     }
                                                 })()}
 
