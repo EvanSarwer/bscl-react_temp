@@ -8,7 +8,7 @@ import Select from 'react-select';
 import MainMenu from '../MainMenu/MainMenu';
 var range;
 var wholejson;
-const DailyAdTrp = () => {
+const ProgramTrp = () => {
     const [notLoaded, setnotLoaded] = useState(true);
     const [errorf, seterrorf] = useState(false);
     const [errorp, seterrorp] = useState(false);
@@ -16,6 +16,22 @@ const DailyAdTrp = () => {
     const [allData, setallData] = useState([]);
     const [date, setdate] = useState("");
 
+    const [channels, setchannels] = useState([]);
+  
+    const [id, setId] = useState("");
+    useEffect(() => {
+  
+      axiosConfig.get("/trend/channels").then(rsp => {
+          //console.log(rsp.data);
+          setchannels(rsp.data.channels);
+          console.log(channels);
+  
+  
+      }).catch(err => {
+  
+      })
+  
+  }, [])
 
     const IncrementCount = () => {
         // Update state with incremented value
@@ -24,7 +40,10 @@ const DailyAdTrp = () => {
         
     }
     useEffect(() => {
-        if (updater > 0) {
+      if (updater > 0) {
+
+        if (id==2) {
+
         // if (date != '') {
         //     var datep = new Date();
         //     datep.setDate(datep.getDate() - 30);
@@ -43,9 +62,9 @@ const DailyAdTrp = () => {
         //     }
         // }
         var data = {
-            date: date
+            date: ""
         }
-        console.log(JSON.stringify(data));
+        //console.log(JSON.stringify(data));
         //setnotLoaded(true);
         axiosConfig.post("/dailyadtrp", {
             date: date
@@ -62,6 +81,11 @@ const DailyAdTrp = () => {
         });
 
     }
+    else{
+      alert("No Data For This Channel")
+    }
+  }
+    
     }, [updater]);
 
     const DownloadData = () => {
@@ -133,8 +157,8 @@ var all=allData;
     }
 
     return (
-        <div><Header title="Ad TRP" />
-            <MainMenu menu="dailyadtrp" />
+        <div><Header title="Program TRP" />
+            <MainMenu menu="programtrp" />
 
 
             <div class="app-content content" style={{ backgroundColor: "azure", minHeight: "39em" }}>
@@ -148,7 +172,17 @@ var all=allData;
                         <div class="card">
                             <div class="card-content">
                                 <div class="card-body">
-                                    <br /><br />
+                                    <br />
+                                    <div class="row justify-content-md-center">
+                            <div class="col-md-5">
+                                <Select
+                                    placeholder="Select channel"
+                                    options={channels.map(channel => ({ label: channel.name, value: channel.id }))}
+                                    onChange={opt => setId(opt.value)}
+                                />
+                            </div>
+                            </div>
+                                    <br />
                                     <div class="row justify-content-md-center">
                                         <div class="col-md-6">
                                             <fieldset class="form-group form-group-style">
@@ -220,4 +254,4 @@ var all=allData;
     )
 
 }
-export default DailyAdTrp;
+export default ProgramTrp;
