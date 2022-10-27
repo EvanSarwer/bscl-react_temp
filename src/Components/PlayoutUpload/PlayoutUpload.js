@@ -134,7 +134,7 @@ const PlayoutUpload = () => {
             <div class="card">
               <div class="card-content">
                 <div class="card-body">
-                  <h1>Download User(General) Report:</h1>
+                  <h1>Playout Upload:</h1>
 
                   <div class="row">
                     <div class="col-md-5">
