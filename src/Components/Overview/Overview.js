@@ -120,7 +120,7 @@ const Overview = () => {
         }
     }
     var getCSV = (scsv) => {
-        exportToCsv("Export.csv", scsv)
+        exportToCsv("Basic_Report(" + category + ").csv", scsv)
     }
 
     const GetData = () => {
