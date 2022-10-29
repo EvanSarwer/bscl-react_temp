@@ -3,10 +3,10 @@ import { BrowserRouter, Routes, Route,Navigate} from "react-router-dom";
 import Header from '../Header/Header';
 import MainMenu from '../MainMenu/MainMenu';
 import ExcelReport from '../Report/ExcelReport';
-import DailyAdTrp from '../DailyAdTrp/DailyAdTrp';
+//import DailyAdTrp from '../DailyAdTrp/DailyAdTrp';
 import AdTrpv2 from '../AdTrpv2/AdTrpv2';
 import AdTrpv1 from '../AdTrpv1/AdTrpv1';
-import ProgramTrp from '../ProgramTrp/ProgramTrp';
+//import ProgramTrp from '../ProgramTrp/ProgramTrp';
 import PlayoutUpload from '../PlayoutUpload/PlayoutUpload';
 import Dashboard from '../Dashboard/Dashboard';
 import LiveChannels from '../LiveChannels/LiveChannels';
@@ -35,6 +35,8 @@ import EditDevice from "../DeviceUser/EditDevice";
 import AddUser from "../DeviceUser/User/AddUser";
 import EditUser from "../DeviceUser/User/EditUser";
 import DeviceDetails from "../DeviceUser/DeviceDetails";
+import ProgramTrp from "../TRPV4/ProgramTrp";
+import AdTrp from "../TRPV4/AdTrp";
 
 
 
@@ -54,7 +56,7 @@ function Admin() {
         <Route exact path="/programtrp" element={<ProgramTrp />}></Route>
         <Route exact path="/playoutupload" element={<PlayoutUpload />}></Route>
         <Route exact path="/excelreport" element={<ExcelReport />}></Route>
-        <Route exact path="/dailyadtrp" element={<DailyAdTrp />}></Route>
+        <Route exact path="/dailyadtrp" element={<AdTrp />}></Route>
         <Route exact path="/livechannels" element={<LiveChannels />}></Route>
         <Route exact path="/map" element={<LiveMap />}></Route>
         <Route exact path="/channelstatus" element={<ChannelStatus />}></Route>
