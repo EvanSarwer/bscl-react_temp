@@ -298,7 +298,7 @@ const Overview = () => {
 
                                         <div class="col-md-2">
                                             <label>Region</label>
-                                            <select class="custom-select d-block w-100" onChange={(e) => { setRegion(e.target.value) }}>
+                                            <select class="custom-select d-block w-100" disabled={userType == "OTT"} onChange={(e) => { setRegion(e.target.value) }}>
                                                 <option value="">All Region</option>
                                                 <option value="Dhaka">Dhaka</option>
                                                 <option value="Tangail">Tangail</option>
@@ -313,7 +313,7 @@ const Overview = () => {
                                         </div>
                                         <div class="col-md-2">
                                             <label>Gender</label>
-                                            <select class="custom-select d-block w-100" onChange={(e) => { setGender(e.target.value) }}>
+                                            <select class="custom-select d-block w-100" disabled={userType == "OTT"} onChange={(e) => { setGender(e.target.value) }}>
                                                 <option value="">All Gender</option>
                                                 <option value="m">Male</option>
                                                 <option value="f">Female</option>
@@ -322,7 +322,7 @@ const Overview = () => {
 
                                         <div class="col-md-2">
                                             <label>SEC</label>
-                                            <select class="custom-select d-block w-100" onChange={(e) => { setEconomic(e.target.value) }}>
+                                            <select class="custom-select d-block w-100" disabled={userType == "OTT"} onChange={(e) => { setEconomic(e.target.value) }}>
                                                 <option value="">All SEC</option>
                                                 <option value="a">Poorest</option>
                                                 <option value="b">Poorer</option>
@@ -355,7 +355,7 @@ const Overview = () => {
                                         <div class="col-md-2"></div>
 
                                         <div class="col-md-2">
-                                            <select class="custom-select d-block w-100" onChange={(e) => { setSocio(e.target.value) }}>
+                                            <select class="custom-select d-block w-100" disabled={userType == "OTT"} onChange={(e) => { setSocio(e.target.value) }}>
                                                 <option value="">Urban & Rural</option>
                                                 <option value="u">Urban</option>
                                                 <option value="r">Rural</option>
