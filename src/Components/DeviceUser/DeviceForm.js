@@ -127,15 +127,15 @@ const DeviceForm = (props) => {
 
 
 
-        axios.get("https://bdapis.herokuapp.com/api/v1.1/districts").then((rsp) => {
-            var obj = rsp.data.data;
-            setDistrictList(obj);
+        // axios.get("https://bdapis.herokuapp.com/api/v1.1/districts").then((rsp) => {
+        //     var obj = rsp.data.data;
+        //     setDistrictList(obj);
 
-            console.log(rsp.data.data);
+        //     console.log(rsp.data.data);
 
-        }, (err) => {
+        // }, (err) => {
 
-        });
+        // });
 
 
 
@@ -594,16 +594,16 @@ const DeviceForm = (props) => {
                                                         }
                                                     })()}</td>
                                                     <td colspan={3}><fieldset className="form-group position-relative has-icon-left">
-                                                        <select class="custom-select d-block w-100" value={districtName} onChange={(e) => { setDistrictName(e.target.value) }}>
+                                                        {/* <select class="custom-select d-block w-100" value={districtName} onChange={(e) => { setDistrictName(e.target.value) }}>
                                                             <option value="">Select</option>
                                                             {districtList.map((district) =>
                                                                 <option value={district.district}>{district.district}</option>
                                                             )}
-                                                        </select>
-                                                        {/* <input type="text" name="district" id="district" className="form-control" value={districtName} onChange={(e) => { setDistrictName(e.target.value) }} placeholder="District" tabIndex={2} required data-validation-required-message="Please enter District." /> */}
-                                                        {/* <div className="form-control-position">
+                                                        </select> */}
+                                                        <input type="text" name="district" id="district" className="form-control" value={districtName} onChange={(e) => { setDistrictName(e.target.value) }} placeholder="District" tabIndex={2} required data-validation-required-message="Please enter District." />
+                                                        <div className="form-control-position">
                                                             <i className="ft-map-pin" />
-                                                        </div> */}
+                                                        </div>
                                                         <div className="help-block font-small-3" />
                                                         <span class="text-danger">{err_msg.district ? err_msg.district[0] : ''}</span>
                                                     </fieldset>
