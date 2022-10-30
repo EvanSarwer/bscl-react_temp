@@ -42,7 +42,7 @@ const ProgramTrp = () => {
     useEffect(() => {
       if (updater > 0) {
 
-        if (id==2) {
+       // if (id==2) {
 
         // if (date != '') {
         //     var datep = new Date();
@@ -62,13 +62,12 @@ const ProgramTrp = () => {
         //     }
         // }
         var data = {
-            date: ""
+            date: date,
+            id:id
         }
         //console.log(JSON.stringify(data));
         //setnotLoaded(true);
-        axiosConfig.post("/dailyadtrp", {
-            date: date
-        }).then(rsp => {
+        axiosConfig.post("/channelwiseadtrp", data).then(rsp => {
             //setallDataf(true);
             setallData(rsp.data.value);
             console.log(rsp.data.value);
@@ -80,10 +79,10 @@ const ProgramTrp = () => {
             setnotLoaded(true);
         });
 
-    }
-    else{
-      alert("No Data For This Channel")
-    }
+    // }
+    // else{
+    //   alert("No Data For This Channel")
+    // }
   }
     
     }, [updater]);
