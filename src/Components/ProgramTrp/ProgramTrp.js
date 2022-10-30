@@ -3,100 +3,114 @@ import { useState, useEffect } from "react"
 import * as xlsx from "xlsx";
 import Header from "../Header/Header";
 import axiosConfig from "../axiosConfig";
-import Select from 'react-select';
+//import Select from 'react-select';
 
 import MainMenu from '../MainMenu/MainMenu';
 var range;
 var wholejson;
 const ProgramTrp = () => {
     const [notLoaded, setnotLoaded] = useState(true);
+
+    //const [channels, setchannels] = useState([]);
     const [errorf, seterrorf] = useState(false);
     const [errorp, seterrorp] = useState(false);
     const [updater, setupdater] = useState(0);
     const [allData, setallData] = useState([]);
     const [date, setdate] = useState("");
+    const [datestr, setdatestr] = useState("");
 
+    const [query, setQuery] = useState("");
     const [channels, setchannels] = useState([]);
-  
-    const [id, setId] = useState("");
+
+    const [id, setId] = useState("-1");
+    const [name, setName] = useState("");
+    const Search = (data) => {
+        return data.filter(
+            (item) =>
+                item.name.toLowerCase().includes(query.toLowerCase())
+        );
+    };
     useEffect(() => {
-  
-      axiosConfig.get("/trend/channels").then(rsp => {
-          //console.log(rsp.data);
-          setchannels(rsp.data.channels);
-          console.log(channels);
-  
-  
-      }).catch(err => {
-  
-      })
-  
-  }, [])
+
+        axiosConfig.get("/trend/channels").then(rsp => {
+            //console.log(rsp.data);
+            setchannels(rsp.data.channels);
+            console.log(channels);
+
+
+        }).catch(err => {
+
+        })
+        const yesterday = new Date()
+
+yesterday.setDate(yesterday.getDate() - 1)
+setdatestr(
+yesterday.toLocaleString(undefined, {
+        day:    'numeric',
+        month:  'long',
+        year:   'numeric',
+    }));
+
+    }, [])
 
     const IncrementCount = () => {
         // Update state with incremented value
         setupdater(updater + 1);
         setnotLoaded(true);
-        
+
+    }
+    const UpdateChannel = (id,name) => {
+        // Update state with incremented value
+        //setupdater(updater + 1);
+        //setchannels(id);
+        setId(id);
+        setName(name);
+        //setnotLoaded(true);
+        console.log("kk"+id)
+
     }
     useEffect(() => {
-      if (updater > 0) {
-
-       // if (id==2) {
-
-        // if (date != '') {
-        //     var datep = new Date();
-        //     datep.setDate(datep.getDate() - 30);
-        //     var datef = new Date();
-        //     datef.setDate(datef.getDate() + 1);
-        //     var dd = new Date(date);
-        //     if (!(datep < dd)) {
-        //         seterrorp(true);
-        //         seterrorf(false);
-        //         return;
-        //     }
-        //     if (!(datef > dd)) {
-        //         seterrorf(true);
-        //         seterrorp(false);
-        //         return;
-        //     }
-        // }
-        var data = {
-            date: date,
-            id:id
+        if (parseInt(id)== -1) {
+console.log("Id null")
         }
-        //console.log(JSON.stringify(data));
-        //setnotLoaded(true);
-        axiosConfig.post("/channelwiseadtrp", data).then(rsp => {
-            //setallDataf(true);
-            setallData(rsp.data.value);
-            console.log(rsp.data.value);
-            setnotLoaded(false);
-            
-            
-        }).catch(err => {
+else{
+            var data = {
+                date: "",
+                id: id
+            }
+            console.log(JSON.stringify(data));
+            //setnotLoaded(true);
+            axiosConfig.post("/channelwiseadtrp", data).then(rsp => {
+                //setallDataf(true);
+                setallData(rsp.data.value);
+                console.log(rsp.data.value);
+                DownloadData(rsp.data.value);
+                setnotLoaded(false);
 
-            setnotLoaded(true);
-        });
 
-    // }
-    // else{
-    //   alert("No Data For This Channel")
-    // }
-  }
-    
-    }, [updater]);
+            }).catch(err => {
 
-    const DownloadData = () => {
+                setnotLoaded(true);
+            });
+
+            // }
+            // else{
+            //   alert("No Data For This Channel")
+            // }
+        }
+
+    }, [id]);
+
+    const DownloadData = (all) => {
         //console.log(liveChannelData.labels[0]);
         var greach0 = 0;
         var greachp = 0;
         var gtvr0 = 0;
         var gtvrp = 0;
         var csv = [["Channel", "Program", "Commercial", "Date", "Start", "Duration", "Time Watched", "Reach(000)", " Gross Reach(000)", "Reach(%)", "Gross Reach(%)", "TVR(000)", "Gross TVR(000)", "TVR(%)", "Gross TVR(%)"]];
-var all=allData;
+        //var all = allData;
         for (var i = 0; i < all.length; i++) {
-            
+
             greach0 = greach0 + all[i].reach0;
             greachp = greachp + all[i].reachp;
             gtvr0 = gtvr0 + all[i].tvr0;
@@ -152,15 +166,15 @@ var all=allData;
         }
     }
     var getCSV = (scsv) => {
-        exportToCsv("Export.csv", scsv)
+        //if(id==""){return;}
+        exportToCsv(name+" - Program Trp.csv", scsv)
     }
 
     return (
-        <div><Header title="Program TRP" />
+
+        <div><Header title="Program Trp" />
             <MainMenu menu="programtrp" />
-
-
-            <div class="app-content content" style={{ backgroundColor: "azure", minHeight: "39em" }}>
+            <div class="app-content content">
                 <div class="content-overlay"></div>
                 <div class="content-wrapper" style={{ backgroundColor: "azure" }} >
                     <div class="content-header row">
@@ -168,88 +182,63 @@ var all=allData;
                     <div class="content-body">
 
 
-                        <div class="card">
-                            <div class="card-content">
-                                <div class="card-body">
-                                    <br />
-                                    <div class="row justify-content-md-center">
-                            <div class="col-md-5">
-                                <Select
-                                    placeholder="Select channel"
-                                    options={channels.map(channel => ({ label: channel.name, value: channel.id }))}
-                                    onChange={opt => setId(opt.value)}
-                                />
-                            </div>
-                            </div>
-                                    <br />
-                                    <div class="row justify-content-md-center">
-                                        <div class="col-md-6">
-                                            <fieldset class="form-group form-group-style">
-                                                <label for="dateTime1">Date</label>
-                                                <input type="date" class="form-control" id="date" onChange={(e) => { setdate(e.target.value) }} />
-                                            </fieldset>
+
+                        <div class="row justify-content-md-center">
+                            <div class="col-xl-12  col-12">
+                                <section id="horizontal-vertical">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="card">
+
+                                                <div class="card-content collapse show">
+                                                    <div class="card-body card-dashboard">
+
+                                                        <div class="row">
+                                                            <div class="col-md-7"><div class="h3 font-weight-bold">Program Trp of {datestr}</div></div>
+                                                            <div class="col-md-5"><input type="text" class="search form-control round border-primary mb-1" placeholder="Search" onChange={e => setQuery(e.target.value)} />
+                                                            </div>
+
+                                                        </div>
+
+                                                        <div class="table-responsive" style={{ maxHeight: '400px', minHeight: '500px' }}>
+                                                            <table class="table display nowrap table-striped table-bordered">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Index</th>
+                                                                        <th>Channel</th>
+                                                                        <th>Download CSV</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    {Search(channels).map((channel) =>
+                                                                        <tr key={channel.id}>
+                                                                            <td>{channel.id + 1}</td>
+                                                                            <td><img class="img-fluid" alt="" style={{ maxWidth: "3rem" }} src={"../../channels/logos/" + channel.logo} />{channel.name}</td>
+                                                                            <td><button class="offset-1 btn btn-danger" onClick={() => { if (window.confirm('Get Data of this Channel?')) { UpdateChannel(channel.id,channel.name) }; }} >Download CSV</button></td>
+                                                                            
+
+
+                                                                        </tr>
+                                                                    )}
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
                                         </div>
 
                                     </div>
-                                    {(() => {
-                                        if (errorp) {
-                                            return (
-                                                <div class="row justify-content-md-center">
-                                                    <div class="h3 font-weight-bold" style={{ color: "red" }}>Time Can't Exceed One Month </div>
-                                                </div>
-                                            )
-
-
-                                        } else {
-                                            return
-
-                                        }
-                                    })()}
-                                    {(() => {
-                                        if (errorf) {
-                                            return (
-                                                <div class="row justify-content-md-center">
-                                                    <div class="h3 font-weight-bold" style={{ color: "red" }}>Future Date Not Allowed</div>
-                                                </div>
-                                            )
-
-
-                                        } else {
-                                            return
-
-                                        }
-                                    })()}
-
-
-                                    <div class="row justify-content-md-center">
-                                        <button onClick={IncrementCount} class="btn btn-info">Get Data</button>
-                                    </div>
-                                    <br/>
-                                    <br/>
-                                    {(() => {
-                                        if (!notLoaded) {
-                                            return (
-                                                <div class="row justify-content-md-center">
-                                                <button onClick={DownloadData} class="btn btn-danger">Download CSV</button>
-                                                </div>
-                                            )
-
-
-                                        } else {
-                                            return
-
-                                        }
-                                    })()}
-
-                                </div>
-
+                                </section>
                             </div>
-
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
+
     )
 
 }
