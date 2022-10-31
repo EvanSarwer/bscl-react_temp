@@ -14,6 +14,7 @@ const ProgramTrp = () => {
     //const [channels, setchannels] = useState([]);
     const [errorf, seterrorf] = useState(false);
     const [errorp, seterrorp] = useState(false);
+    const [archive, setarchive] = useState(false);
     const [updater, setupdater] = useState(0);
     const [allData, setallData] = useState([]);
     const [date, setdate] = useState("");
@@ -43,39 +44,74 @@ const ProgramTrp = () => {
         })
         const yesterday = new Date()
 
-yesterday.setDate(yesterday.getDate() - 1)
-setdatestr(
-yesterday.toLocaleString(undefined, {
-        day:    'numeric',
-        month:  'long',
-        year:   'numeric',
-    }));
+        yesterday.setDate(yesterday.getDate() - 1);
+        setdatestr(
+            yesterday.toLocaleString(undefined, {
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric',
+            }));
 
     }, [])
 
+    const ChangeDate = (dates) => {
+        if (dates != '') {
+            var datep = new Date();
+            datep.setDate(datep.getDate() - 30);
+            var datef = new Date();
+            datef.setDate(datef.getDate() + 1);
+            var dd = new Date(dates);
+            if (!(datep < dd)) {
+                // seterrorp(true);
+                // seterrorf(false);
+                alert("Time exceeded 30 days");
+                document.querySelector("#date").value = date;
+                return;
+            }
+            if (!(datef > dd)) {
+                // seterrorf(true);
+                // seterrorp(false);
+
+                alert("Futute time not allowed");
+                document.querySelector("#date").value = date;
+                return;
+            }
+        }
+        setdate(dates);
+        console.log(date);
+        var t = new Date(document.querySelector("#date").value).toLocaleString(undefined, {
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric',
+        })
+        setdatestr(t);
+
+        console.log(datestr);
+    }
     const IncrementCount = () => {
         // Update state with incremented value
         setupdater(updater + 1);
         setnotLoaded(true);
 
     }
-    const UpdateChannel = (id,name) => {
+    const UpdateChannel = (id, name) => {
         // Update state with incremented value
         //setupdater(updater + 1);
         //setchannels(id);
         setId(id);
         setName(name);
+        IncrementCount();
         //setnotLoaded(true);
-        console.log("kk"+id)
+        console.log("kk" + id)
 
     }
     useEffect(() => {
-        if (parseInt(id)== -1) {
-console.log("Id null")
+        if (parseInt(id) == -1) {
+            console.log("Id null")
         }
-else{
+        else {
             var data = {
-                date: "",
+                date: ((archive)?date:""),
                 id: id
             }
             console.log(JSON.stringify(data));
@@ -99,7 +135,7 @@ else{
             // }
         }
 
-    }, [id]);
+    }, [updater]);
 
     const DownloadData = (all) => {
         //console.log(liveChannelData.labels[0]);
@@ -167,7 +203,7 @@ else{
     }
     var getCSV = (scsv) => {
         //if(id==""){return;}
-        exportToCsv(name+" - Program Trp.csv", scsv)
+        exportToCsv(name + " - Program Trp.csv", scsv)
     }
 
     return (
@@ -194,8 +230,29 @@ else{
                                                     <div class="card-body card-dashboard">
 
                                                         <div class="row">
-                                                            <div class="col-md-7"><div class="h3 font-weight-bold">Program Trp of {datestr}</div></div>
-                                                            <div class="col-md-5"><input type="text" class="search form-control round border-primary mb-1" placeholder="Search" onChange={e => setQuery(e.target.value)} />
+                                                            <div class="col-md-5"><div class="h3 font-weight-bold">Program Trp of {datestr}</div></div>
+                                                            <div class="col-md-1">
+                                                            <div class="font-weight-bold"><input type="checkbox" id="archive" name="archive" onChange={(e) => { setarchive(e.target.checked) }} />Archive
+                                                            </div>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                {(() => {
+                                                                    if (archive) {
+                                                                        return (
+                                                                            <input type="date" class="form-control" id="date" onChange={(e) => { ChangeDate(e.target.value) }} />
+                                                                        )
+
+
+                                                                    } else {
+                                                                        return
+
+                                                                    }
+                                                                })()}
+
+
+
+                                                            </div>
+                                                            <div class="col-md-3"><input type="text" class="search form-control round border-primary mb-1" placeholder="Search" onChange={e => setQuery(e.target.value)} />
                                                             </div>
 
                                                         </div>
@@ -214,8 +271,8 @@ else{
                                                                         <tr key={channel.id}>
                                                                             <td>{channel.id + 1}</td>
                                                                             <td><img class="img-fluid" alt="" style={{ maxWidth: "3rem" }} src={"../../channels/logos/" + channel.logo} />{channel.name}</td>
-                                                                            <td><button class="offset-1 btn btn-danger" onClick={() => { if (window.confirm('Get Data of this Channel?')) { UpdateChannel(channel.id,channel.name) }; }} >Download CSV</button></td>
-                                                                            
+                                                                            <td><button class="offset-1 btn btn-danger" onClick={() => { if (window.confirm('Get Data of this Channel?')) { UpdateChannel(channel.id, channel.name) }; }} >Download CSV</button></td>
+
 
 
                                                                         </tr>
