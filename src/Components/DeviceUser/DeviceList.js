@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import axiosConfig from '../axiosConfig';
 import Header from "../Header/Header";
 import MainMenu from "../MainMenu/MainMenu";
+import PopUpDetails from "./PopUpDetails";
 
 
 
@@ -16,6 +17,7 @@ const DeviceList = () => {
     const [query, setQuery] = useState("");
     useEffect(() => {
         axiosConfig.get("/device/list").then((rsp) => {
+            debugger;
             setDevices(rsp.data);
             console.log(rsp.data);
         }, (err) => { });
@@ -119,7 +121,8 @@ const DeviceList = () => {
                                                                         <tr key={device.id}>
                                                                             <td>{device.id}</td>
                                                                             {/* <td><a href={`/device/details/${device.id}`}>{device.device_name}</a></td> */}
-                                                                            <td>{device.device_name}</td>
+                                                                            {/*<td><a data-toggle="modal" data-target={`#exampleModal_${device.id}`}>{device.device_name}</a>*<PopUpDetails id={device.id}/></td>*/}
+                                                                            <td><a href={`/device/detail/${device.id}`}>{device.device_name}</a><PopUpDetails id={device.id}/></td>
                                                                             <td>{device.district}</td>
                                                                             <td>{device.type}</td>
                                                                             {/* <td>{user.gender}</td>
@@ -139,6 +142,8 @@ const DeviceList = () => {
                                                                     )}
                                                                 </tbody>
                                                             </table>
+                                                            
+                                                            
                                                         </div>
                                                     </div>
                                                 </div>

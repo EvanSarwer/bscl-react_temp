@@ -37,6 +37,7 @@ import EditUser from "../DeviceUser/User/EditUser";
 import DeviceDetails from "../DeviceUser/DeviceDetails";
 import{default as ProgramTrp2}  from "../TRPV4/ProgramTrp";
 import AdTrp from "../TRPV4/AdTrp";
+import DeviceDetailsView from "../DeviceUser/DeviceDetailsView";
 
 
 
@@ -83,6 +84,7 @@ function Admin() {
         <Route exact path="/device/user/create/:device_id/:user_index/:from" element={<AddUser />}></Route>
         <Route exact path="/device/user/edit/:id/:from" element={<EditUser />}></Route>
         <Route exact path="/device/details/:id" element={<DeviceDetails />}></Route>
+        <Route exact path="/device/detail/:id" element={<DeviceDetailsView />}></Route>
 
         {/* <Navigate to="/" /> */}
         <Route
