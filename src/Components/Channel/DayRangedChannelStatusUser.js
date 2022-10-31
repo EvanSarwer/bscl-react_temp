@@ -6,7 +6,6 @@ import BarGraph from "./Graph/BarGraph";
 import Select from 'react-select';
 import Header from '../Header/Header';
 import MainMenu from '../MainMenu/MainMenu';
-import HeaderUser from '../Header/HeaderUser';
 import MainMenuUser from '../MainMenu/MainMenuUser';
 
 
@@ -183,7 +182,7 @@ const DayRangedChannelStatusUser = () => {
 
 
     return (
-        <div><HeaderUser title="Trend Analysis Day-Ranged" />
+        <div><Header title="Trend Analysis Day-Ranged" />
             <MainMenuUser menu="daytrendranged" />
             <div class="app-content content">
                 <div class="content-overlay"></div>

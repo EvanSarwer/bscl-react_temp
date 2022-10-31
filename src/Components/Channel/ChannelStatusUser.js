@@ -9,7 +9,6 @@ import GetLineGraph from "../Graph/GetLineGraph";
 import PostLineGraph from "../Graph/PostLineGraph";
 import Header from '../Header/Header';
 import MainMenu from '../MainMenu/MainMenu';
-import HeaderUser from '../Header/HeaderUser';
 import MainMenuUser from '../MainMenu/MainMenuUser';
 
 
@@ -37,7 +36,7 @@ const ChannelStatusUser = () => {
         setUpdate(update + 1);
     }
     return (
-        <div><HeaderUser title="Trend Analysis-General" />
+        <div><Header title="Trend Analysis-General" />
             <MainMenuUser menu="trendgeneral" />
             <div class="app-content content" style={{ backgroundColor: "azure", minHeight: "36em" }}>
                 <div class="content-overlay"></div>

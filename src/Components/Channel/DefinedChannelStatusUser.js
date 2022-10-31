@@ -5,7 +5,6 @@ import Select from 'react-select';
 import PostLineGraph from "../Graph/PostLineGraph";
 import Header from '../Header/Header';
 import MainMenu from '../MainMenu/MainMenu';
-import HeaderUser from '../Header/HeaderUser';
 import MainMenuUser from '../MainMenu/MainMenuUser';
 
 
@@ -166,7 +165,7 @@ const DefinedChannelStatusUser = () => {
         console.log(credentials);
     }
     return (
-        <div><HeaderUser title="Trend Analysis-Day Parts" />
+        <div><Header title="Trend Analysis-Day Parts" />
             <MainMenuUser menu="trenddaypart" />
 
             <div class="app-content content" style={{ backgroundColor: "azure", minHeight: "36em" }}>

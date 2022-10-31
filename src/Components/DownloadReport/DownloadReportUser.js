@@ -4,7 +4,6 @@ import React from 'react';
 import Select from 'react-select';
 import Header from "../Header/Header";
 import MainMenu from "../MainMenu/MainMenu";
-import HeaderUser from "../Header/HeaderUser";
 import MainMenuUser from "../MainMenu/MainMenuUser";
 
 const DownloadReportUser = () => {
@@ -252,7 +251,7 @@ const DownloadReportUser = () => {
 
 
     return (
-        <div><HeaderUser title="Report Generation" />
+        <div><Header title="Report Generation" />
             <MainMenuUser menu="reportgeneration" />
             <div class="app-content content">
                 <div class="content-overlay"></div>

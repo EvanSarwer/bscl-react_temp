@@ -4,7 +4,7 @@ import axios from "axios";
 import axiosConfig from '../../axiosConfig';
 import UserListTable from "./UserListTable";
 import Header from "../../Header/Header";
-import MainMenuDeployer from "../../MainMenu/MainMenuDeployer";
+import MainMenu from "../../MainMenu/MainMenu";
 
 const DeviceDetails = (props) => {
     const { id } = useParams();
@@ -81,7 +81,7 @@ const DeviceDetails = (props) => {
 
     return (
         <div><Header title="Device Details" />
-            <MainMenuDeployer menu="device" />
+            <MainMenu menu="device" />
 
             <div class="app-content content" style={{ backgroundColor: "azure" }}>
                 <div class="content-overlay"></div>

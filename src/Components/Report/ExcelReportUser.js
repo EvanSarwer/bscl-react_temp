@@ -6,7 +6,6 @@ import axiosConfig from "../axiosConfig";
 import Select from 'react-select';
 import MainMenu from '../MainMenu/MainMenu';
 import MainMenuUser from '../MainMenu/MainMenuUser';
-import HeaderUser from '../Header/HeaderUser';
 
 
 var range;
@@ -254,7 +253,7 @@ console.log(data.id);
 
 
   return (
-    <div><HeaderUser title="Ad TRP" />
+    <div><Header title="Ad TRP" />
       <MainMenuUser menu="excelreport" />
 
       <div class="app-content content" style={{ backgroundColor: "azure", minHeight: "36em" }} >

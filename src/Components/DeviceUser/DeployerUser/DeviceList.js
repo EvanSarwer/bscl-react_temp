@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from "react";
-import MainMenuDeployer from "../../MainMenu/MainMenuDeployer";
+import MainMenu from "../../MainMenu/MainMenu";
 import axiosConfig from '../../axiosConfig';
 import Header from "../../Header/Header";
 
@@ -63,7 +63,7 @@ const DeviceList = () => {
 
     return (
         <div><Header title="Devices" />
-            <MainMenuDeployer menu="device" />
+            <MainMenu menu="device" />
             <div class="app-content content">
                 <div class="content-overlay"></div>
                 <div class="content-wrapper" style={{ backgroundColor: "azure" }} >

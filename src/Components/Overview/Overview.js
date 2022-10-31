@@ -12,9 +12,12 @@ import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS } from 'chart.js/auto';
 import Header from '../Header/Header';
 import MainMenu from '../MainMenu/MainMenu';
+import Cookies from 'universal-cookie';
+import MainMenuUser from '../MainMenu/MainMenuUser';
 
 
 const Overview = () => {
+    const cookies = new Cookies();
 
     function pad(n) {
         return n < 10 ? '0' + n : n
@@ -25,6 +28,14 @@ const Overview = () => {
     var today = new Date(),
         datetime = today.getFullYear() + '-' + pad((today.getMonth() + 1)) + '-' + pad(today.getDate()) + ' ' + today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
 
+    if (cookies.get('_role') === "admin") {
+        var role_datetime = today.getFullYear() + '-' + pad((today.getMonth() + 1)) + '-' + pad(today.getDate()) + ' ' + today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+    } else if (cookies.get('_role') === "general") {
+        var role_datetime = yesterday.getFullYear() + '-' + pad((yesterday.getMonth() + 1)) + '-' + pad(yesterday.getDate()) + ' 00:00:00';
+    }
+
+    console.log(role_datetime);
+
     const [category, setCategory] = useState("Reach(000)");
     const [start, setStart] = useState(y_datetime);
     const [finish, setFinish] = useState(datetime);
@@ -33,6 +44,7 @@ const Overview = () => {
     const [gender, setGender] = useState("");
     const [economic, setEconomic] = useState("");
     const [socio, setSocio] = useState("");
+    const [err, setErr] = useState("error");
 
     const [channelData, setChannelData] = useState({
         labels: [],
@@ -52,21 +64,27 @@ const Overview = () => {
             age2: parseInt(document.querySelector("#small-slider > div > div:nth-child(3) > div > div.noUi-tooltip").innerHTML)
         };
 
-        axiosConfig.post("/overview/reachusergraph", data).then(rsp => {
-            console.log(rsp.data);
-            setChannelData(() => ({
-                labels: rsp.data.channels, datasets: [{
-                    label: "Reach (000)", data: rsp.data.reach,
-                    backgroundColor: ["#50AF95"],
-                    //borderColor: "black",
-                    borderWidth: 1,
-                    categoryPercentage: 0.9,
-                    barPercentage: 1
-                }]
-            }));
-        }).catch(err => {
+        if (start !== "" && finish !== "" && (new Date(start).getTime() <= new Date(role_datetime).getTime()) && (new Date(finish).getTime() <= new Date(role_datetime).getTime())) {
+            setErr("");
+            axiosConfig.post("/overview/reachusergraph", data).then(rsp => {
+                console.log(rsp.data);
+                setChannelData(() => ({
+                    labels: rsp.data.channels, datasets: [{
+                        label: "Reach (000)", data: rsp.data.reach,
+                        backgroundColor: ["#50AF95"],
+                        //borderColor: "black",
+                        borderWidth: 1,
+                        categoryPercentage: 0.9,
+                        barPercentage: 1
+                    }]
+                }));
+            }).catch(err => {
 
-        });
+            });
+
+        } else {
+            setErr("error");
+        }
 
     }, [])
     const BasicchannelDownloadfunc = () => {
@@ -136,7 +154,8 @@ const Overview = () => {
             age2: parseInt(document.querySelector("#small-slider > div > div:nth-child(3) > div > div.noUi-tooltip").innerHTML)
         };
 
-        if (start !== "" && finish !== "") {
+        if (start !== "" && finish !== "" && (new Date(start).getTime() <= new Date(role_datetime).getTime()) && (new Date(finish).getTime() <= new Date(role_datetime).getTime())) {
+            setErr("");
             if (category === "Reach(000)") {
                 axiosConfig.post("/overview/reachusergraph", data).then(rsp => {
                     console.log(rsp.data);
@@ -237,6 +256,8 @@ const Overview = () => {
                 });
             }
 
+        } else {
+            setErr("error");
         }
 
 
@@ -260,11 +281,32 @@ const Overview = () => {
 
 
 
+    const modify_date = (date) => {
+
+        return new Date(date).toLocaleString(undefined, {
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+        });
+    }
+
 
     return (
         <div>
             <Header title="Basic Reports" />
-            <MainMenu menu="basicreports" />
+            {(() => {
+                if (cookies.get('_role') === "general") {
+                    return (
+                        <MainMenuUser menu="basicreports" />
+                    )
+                } else {
+                    return (
+                        <MainMenu menu="basicreports" />
+                    )
+                }
+            })()}
             <div class="app-content content">
                 <div class="content-overlay"></div>
                 <div class="content-wrapper" style={{ backgroundColor: "azure" }} >
@@ -292,13 +334,13 @@ const Overview = () => {
                                                 <option value="">All</option>
                                                 <option value="STB">STB</option>
                                                 <option value="OTT">OTT</option>
-                                                
+
                                             </select>
                                         </div>
 
                                         <div class="col-md-2">
                                             <label>Region</label>
-                                            <select class="custom-select d-block w-100" disabled={userType == "OTT"} onChange={(e) => { setRegion(e.target.value) }}>
+                                            <select class="custom-select d-block w-100" disabled={userType == "OTT" || userType == ""} onChange={(e) => { setRegion(e.target.value) }}>
                                                 <option value="">All Region</option>
                                                 <option value="Dhaka">Dhaka</option>
                                                 <option value="Tangail">Tangail</option>
@@ -313,7 +355,7 @@ const Overview = () => {
                                         </div>
                                         <div class="col-md-2">
                                             <label>Gender</label>
-                                            <select class="custom-select d-block w-100" disabled={userType == "OTT"} onChange={(e) => { setGender(e.target.value) }}>
+                                            <select class="custom-select d-block w-100" disabled={userType == "OTT" || userType == ""} onChange={(e) => { setGender(e.target.value) }}>
                                                 <option value="">All Gender</option>
                                                 <option value="m">Male</option>
                                                 <option value="f">Female</option>
@@ -322,7 +364,7 @@ const Overview = () => {
 
                                         <div class="col-md-2">
                                             <label>SEC</label>
-                                            <select class="custom-select d-block w-100" disabled={userType == "OTT"} onChange={(e) => { setEconomic(e.target.value) }}>
+                                            <select class="custom-select d-block w-100" disabled={userType == "OTT" || userType == ""} onChange={(e) => { setEconomic(e.target.value) }}>
                                                 <option value="">All SEC</option>
                                                 <option value="a">Poorest</option>
                                                 <option value="b">Poorer</option>
@@ -332,6 +374,7 @@ const Overview = () => {
 
                                             </select>
                                         </div>
+
 
                                         <div class="col-md-2">
                                             <div class="price-range">
@@ -355,7 +398,7 @@ const Overview = () => {
                                         <div class="col-md-2"></div>
 
                                         <div class="col-md-2">
-                                            <select class="custom-select d-block w-100" disabled={userType == "OTT"} onChange={(e) => { setSocio(e.target.value) }}>
+                                            <select class="custom-select d-block w-100" disabled={userType == "OTT" || userType == ""} onChange={(e) => { setSocio(e.target.value) }}>
                                                 <option value="">Urban & Rural</option>
                                                 <option value="u">Urban</option>
                                                 <option value="r">Rural</option>
@@ -376,10 +419,16 @@ const Overview = () => {
                                             <button onClick={GetData} class="btn btn-info">Get Data</button>
 
                                         </div>
-                                        <div class="col-md-2 ">
-                                            <button onClick={BasicchannelDownloadfunc} class="btn btn-danger">Download CSV</button>
+                                        {(() => {
+                                            if (err === "") {
+                                                return (
+                                                    <div class="col-md-2 ">
+                                                        <button onClick={BasicchannelDownloadfunc} class="btn btn-danger">Download CSV</button>
 
-                                        </div>
+                                                    </div>
+                                                )
+                                            }
+                                        })()}
 
                                     </div>
 
@@ -398,38 +447,61 @@ const Overview = () => {
                         <div class="row justify-content-md-center">
                             <div class="col">
                                 {/* <PostGraph title="Active Users" text="Active Channels" url="reach/percent" label="Active Users" color="blue" credentials={credential} /> */}
-                                <div class="card">
-                                    <div class="card-header">
-                                        <div class="row"><div class="col-6 h2 card-title font-weight-bold">Channels {category}</div><div class="row col h2 card-title text-left">From [<p class="text-primary bold"> {start_string}</p>] to [<p class="text-primary bold">{finish_string}</p>] </div></div>
 
-                                    </div>
-                                    <div class="card-body collapse show" style={{ height: "35em" }}>
+                                {(() => {
+                                    if (err === "error") {
+                                        return (
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <div class="h2 card-title text-warning font-weight-bold">Please enter a valid date before <span class="text-primary bold"> {modify_date(role_datetime)}</span></div>
 
-
-                                        <Bar
-                                            data={channelData}
-                                            options={{
-                                                responsive: true,
-                                                maintainAspectRatio: false,
-                                                title: {
-                                                    display: true,
-                                                    text: "Channels",
-                                                    fontSize: 1
-                                                },
-                                                legend: {
-                                                    display: true,
-                                                    position: 'right'
-                                                }, plugins: {
-                                                    legend: {
-                                                        display: false  //remove if want to show label 
-                                                    }
-                                                }
-                                            }}
-                                        />
+                                                </div>
+                                                <div class="card-body collapse show">
 
 
-                                    </div>
-                                </div>
+                                                </div>
+                                            </div>
+                                        )
+                                    } else {
+                                        return (
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <div class="row"><div class="col-6 h2 card-title font-weight-bold">Channels {category}</div><div class="row col h2 card-title text-left">From [<p class="text-primary bold"> {start_string}</p>] to [<p class="text-primary bold">{finish_string}</p>] </div></div>
+
+                                                </div>
+                                                <div class="card-body collapse show" style={{ height: "35em" }}>
+
+
+                                                    <Bar
+                                                        data={channelData}
+                                                        options={{
+                                                            responsive: true,
+                                                            maintainAspectRatio: false,
+                                                            title: {
+                                                                display: true,
+                                                                text: "Channels",
+                                                                fontSize: 1
+                                                            },
+                                                            legend: {
+                                                                display: true,
+                                                                position: 'right'
+                                                            }, plugins: {
+                                                                legend: {
+                                                                    display: false  //remove if want to show label 
+                                                                }
+                                                            }
+                                                        }}
+                                                    />
+
+
+                                                </div>
+                                            </div>
+                                        )
+                                    }
+                                })()}
+
+
+
                             </div>
                         </div>
                     </div>

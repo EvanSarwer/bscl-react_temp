@@ -1,7 +1,6 @@
 
 import { BrowserRouter, Routes, Route,Navigate} from "react-router-dom";
 import Header from '../Header/Header';
-import MainMenu from '../MainMenu/MainMenu';
 import ExcelReport from '../Report/ExcelReport';
 import Dashboard from '../Dashboard/Dashboard';
 import LiveChannels from '../LiveChannels/LiveChannels';
@@ -30,7 +29,7 @@ import EditDevice from "../DeviceUser/DeployerUser/EditDevice";
 import AddUser from "../DeviceUser/DeployerUser/User/AddUser";
 import EditUser from "../DeviceUser/DeployerUser/User/EditUser";
 import DeviceDetails from "../DeviceUser/DeployerUser/DeviceDetails";
-import MainMenuDeployer from "../MainMenu/MainMenuDeployer";
+import MainMenu from "../MainMenu/MainMenu";
 
 
 
@@ -41,7 +40,7 @@ function Deployer() {
     
     
     <BrowserRouter>
-    <MainMenuDeployer />
+    <MainMenu />
       <Routes>
         <Route exact path="/" element={<DeviceList />}></Route>
         <Route exact path="/device/create" element={<AddDevice />}></Route>

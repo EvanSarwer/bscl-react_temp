@@ -1,6 +1,6 @@
 
 import { useParams } from "react-router-dom";
-import MainMenuDeployer from "../../MainMenu/MainMenuDeployer";
+import MainMenu from "../../MainMenu/MainMenu";
 import Header from "../../Header/Header";
 import DeviceForm from "./DeviceForm";
 
@@ -8,7 +8,7 @@ const EditDevice = () => {
     const { id } = useParams();
     return (
         <div><Header title="Device" />
-            <MainMenuDeployer menu="device" />
+            <MainMenu menu="device" />
             <DeviceForm mode="Edit" id={id} />
         </div>
     )
