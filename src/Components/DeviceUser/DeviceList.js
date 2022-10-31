@@ -68,7 +68,87 @@ const DeviceList = () => {
 
         console.log(event.target.checked);
 
+
+        
+
     };
+
+    function exportToCsv(filename, rows) {
+        var processRow = function (row) {
+            var finalVal = '';
+            for (var j = 0; j < row.length; j++) {
+                var innerValue = row[j] === null ? '' : row[j].toString();
+                if (row[j] instanceof Date) {
+                    innerValue = row[j].toLocaleString();
+                };
+                var result = innerValue.replace(/"/g, '""');
+                if (result.search(/("|,|\n)/g) >= 0)
+                    result = '"' + result + '"';
+                if (j > 0)
+                    finalVal += ',';
+                finalVal += result;
+            }
+            return finalVal + '\n';
+        };
+        var csvFile = '';
+        for (var i = 0; i < rows.length; i++) {
+            csvFile += processRow(rows[i]);
+        }
+        var blob = new Blob([csvFile], { type: 'text/csv;charset=utf-8;' });
+        if (navigator.msSaveBlob) { // IE 10+
+            navigator.msSaveBlob(blob, filename);
+        } else {
+            var link = document.createElement("a");
+            if (link.download !== undefined) { // feature detection
+                // Browsers that support HTML5 download attribute
+                var url = URL.createObjectURL(blob);
+                link.setAttribute("href", url);
+                link.setAttribute("download", filename);
+                link.style.visibility = 'hidden';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
+        }
+    }
+    var getCSV = (scsv) => {
+        exportToCsv("deployed_"+new Date().toLocaleString()+".csv", scsv)
+    }
+
+    const exportDevices = () => {
+        //console.log(liveChannelData.labels[0]);
+        var csv = [["Id", "Name","Contact Person","Contact No","Alt No","Email","SEC","Adress","Ward","City Corp","District","Household Cond","TV Details","GSM Status","Wifi","STB Provider","STB Subscription","Installation Date","Deployer","Survey Date"]];
+        
+        for (var i = 0; i < devices.length; i++) {
+            if(devices[i].contact_person){
+                csv.push([
+                            devices[i].id, 
+                            devices[i].device_name,
+                            devices[i].contact_person,
+                            devices[i].contact_number,
+                            devices[i].alt_number,
+                            devices[i].contact_email,
+                            devices[i].economic_status,
+                            "House:" +devices[i].house_number +", "+devices[i].house_name+ ", Road#:"+devices[i].road_number,
+                            devices[i].ward_no,
+                            devices[i].city_corporation,
+                            devices[i].district,
+                            devices[i].household_condition,
+                            devices[i].tv_type+" "+devices[i].tv_brand+",Placed in " +devices[i].tv_placement,
+                            devices[i].gsm_signal_strength,
+                            devices[i].wifi_signal_strength,
+                            devices[i].stb_provider_name,
+                            devices[i].stb_subscription_type+", "+devices[i].stb_subscription_charge,
+                            devices[i].installation_date,
+                            devices[i].installer_name,
+                            devices[i].survey_date
+                        ]);
+            }
+                
+        }
+        console.log(csv);
+        getCSV(csv);
+    }
 
 
 
@@ -101,7 +181,7 @@ const DeviceList = () => {
 
                                                         </div>
                                                         <a class="btn btn-primary" href="/device/create">Create New</a>
-
+                                                        <button class="btn btn-success pull-right" onClick={exportDevices}>Export</button>
                                                         <div class="table-responsive" style={{ maxHeight: '400px', minHeight: '500px' }}>
                                                             <table class="table display nowrap table-striped table-bordered">
                                                                 <thead>
