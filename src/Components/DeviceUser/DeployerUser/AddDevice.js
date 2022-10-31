@@ -1,11 +1,11 @@
-import MainMenuDeployer from '../../MainMenu/MainMenuDeployer';
+import MainMenu from '../../MainMenu/MainMenu';
 import Header from '../../Header/Header';
 import DeviceForm from './DeviceForm';
 
 const AddDevice = () => {
     return (
         <div><Header title="Device" />
-            <MainMenuDeployer menu="device" />
+            <MainMenu menu="device" />
             <DeviceForm mode="Create" />
         </div>
     )

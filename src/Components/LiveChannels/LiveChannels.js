@@ -12,12 +12,14 @@ import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS } from 'chart.js/auto';
 import Header from '../Header/Header';
 import MainMenu from '../MainMenu/MainMenu';
-
+import Cookies from 'universal-cookie';
 import LiveMap from "./LiveMap";
+import MainMenuUser from '../MainMenu/MainMenuUser';
 
 
 
 const LiveChannels = () => {
+    const cookies = new Cookies();
 
     const [region, setRegion] = useState("");
     const [gender, setGender] = useState("");
@@ -127,7 +129,18 @@ const LiveChannels = () => {
 
     return (
         <div><Header title="Live Channels" />
-            <MainMenu menu="livechannels" />
+
+            {(() => {
+                if (cookies.get('_role') === "general") {
+                    return (
+                        <MainMenuUser menu="livechannels" />
+                    )
+                } else {
+                    return (
+                        <MainMenu menu="livechannels" />
+                    )
+                }
+            })()}
 
             {/* <div class="app-content content"> */}
             <div class=" content">
@@ -137,7 +150,14 @@ const LiveChannels = () => {
 
                         <div class="row">
                             <div class="col-md-2">
-                                <select class="custom-select d-block w-100" onChange={(e) => { setRegion(e.target.value) }}>
+                                <select class="custom-select d-block w-100" onChange={(e) => { setUserType(e.target.value) }}>
+                                    <option value="">All (STB/OTT)</option>
+                                    <option value="STB">STB</option>
+                                    <option value="OTT">OTT</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <select class="custom-select d-block w-100" disabled={userType == "OTT" || userType == ""} onChange={(e) => { setRegion(e.target.value) }}>
                                     <option value="">All Region</option>
                                     <option value="Dhaka">Dhaka</option>
                                     <option value="Tangail">Tangail</option>
@@ -150,15 +170,9 @@ const LiveChannels = () => {
                                     <option value="Barishal">Barishal</option>
                                 </select>
                             </div>
+
                             <div class="col-md-2">
-                                <select class="custom-select d-block w-100" onChange={(e) => { setUserType(e.target.value) }}>
-                                    <option value="">All (STB/OTT)</option>
-                                    <option value="STB">STB</option>
-                                    <option value="OTT">OTT</option>
-                                </select>
-                            </div>
-                            <div class="col-md-2">
-                                <select class="custom-select d-block w-100" onChange={(e) => { setGender(e.target.value) }}>
+                                <select class="custom-select d-block w-100" disabled={userType == "OTT" || userType == ""} onChange={(e) => { setGender(e.target.value) }}>
                                     <option value="">All Gender</option>
                                     <option value="m">Male</option>
                                     <option value="f">Female</option>
@@ -166,7 +180,7 @@ const LiveChannels = () => {
                             </div>
                             <div class="col-md-2">
 
-                                <select class="custom-select d-block w-100" onChange={(e) => { setEconomic(e.target.value) }}>
+                                <select class="custom-select d-block w-100" disabled={userType == "OTT" || userType == ""} onChange={(e) => { setEconomic(e.target.value) }}>
                                     <option value="">All SEC</option>
                                     <option value="a">Poorest</option>
                                     <option value="b">Poorer</option>
@@ -178,7 +192,7 @@ const LiveChannels = () => {
                             <div class="col-md-2">
 
 
-                                <select class="custom-select d-block w-100" onChange={(e) => { setSocio(e.target.value) }}>
+                                <select class="custom-select d-block w-100" disabled={userType == "OTT" || userType == ""} onChange={(e) => { setSocio(e.target.value) }}>
                                     <option value="">Urban & Rural</option>
                                     <option value="u">Urban</option>
                                     <option value="r">Rural</option>
@@ -243,25 +257,30 @@ const LiveChannels = () => {
                             </div>
                         </div>
 
+                        {cookies.get('_role') === "admin" &&
+                            <div class="row justify-content-md-center">
+                                <div class="col">
+                                    {/* <PostGraph title="Active Users" text="Active Channels" url="reach/percent" label="Active Users" color="blue" credentials={credential} /> */}
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <div class="row"><div class="col-11 h2 card-title font-weight-bold">Active User</div><div class="row col card-title align-items-right"><button onClick={LivechannelDownloadfunc} class="btn btn-sm btn-secondary">Download CSV</button></div></div>
 
-                        <div class="row justify-content-md-center">
-                            <div class="col">
-                                {/* <PostGraph title="Active Users" text="Active Channels" url="reach/percent" label="Active Users" color="blue" credentials={credential} /> */}
-                                <div class="card">
-                                    <div class="card-header">
-                                        <div class="row"><div class="col-11 h2 card-title font-weight-bold">Active User</div><div class="row col card-title align-items-right"><button onClick={LivechannelDownloadfunc} class="btn btn-sm btn-secondary">Download CSV</button></div></div>
-
-                                    </div>
-                                    <div class="card-content collapse show" style={{ height: "15em !important" }}>
-
-
-                                        <LiveMap points={points} />
+                                        </div>
+                                        <div class="card-content collapse show" style={{ height: "15em !important" }}>
 
 
+                                            <LiveMap points={points} />
+
+
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        }
+
+
+
+
                     </div>
 
                 </div>

@@ -10,7 +10,6 @@ import axiosConfig from "../axiosConfig";
 import Header from '../Header/Header';
 import MainMenu from '../MainMenu/MainMenu';
 import MainMenuUser from '../MainMenu/MainMenuUser';
-import HeaderUser from '../Header/HeaderUser';
 
 
 
@@ -18,7 +17,7 @@ const DashboardUser = () => {
 
     return (
         <div>
-            <HeaderUser title="Dashboard" />
+            <Header title="Dashboard" />
             <MainMenuUser menu="dashboard" />
 
             <div class="app-content content">

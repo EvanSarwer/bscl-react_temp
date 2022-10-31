@@ -6,7 +6,6 @@ import PostLineGraph from "../Graph/PostLineGraph";
 import Header from '../Header/Header';
 import MainMenu from '../MainMenu/MainMenu';
 import MainMenuUser from '../MainMenu/MainMenuUser';
-import HeaderUser from '../Header/HeaderUser';
 
 
 const RangedChannelStatusUser = () => {
@@ -36,7 +35,7 @@ const RangedChannelStatusUser = () => {
         console.log(credentials);
     }
     return (
-        <div><HeaderUser title="Trend Analysis-Ranged" />
+        <div><Header title="Trend Analysis-Ranged" />
             <MainMenuUser menu="trendranged" />
             <div class="app-content content" style={{ backgroundColor: "azure", minHeight: "36em" }}>
                 <div class="content-overlay"></div>
