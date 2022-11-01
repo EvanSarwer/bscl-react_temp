@@ -296,13 +296,13 @@ const DeviceForm = (props) => {
 
 
                                             {/* <button class="btn btn-danger">1</button> &nbsp; <button class="btn btn-danger">2</button> &nbsp; <button class="btn btn-danger">3</button> &nbsp; <button class="btn btn-danger">4</button> &nbsp; <button class="btn btn-danger">5</button> &nbsp; <button class="btn btn-danger">6</button> &nbsp; <button class="btn btn-danger">7</button> &nbsp;<button class="btn btn-danger">8</button> */}
-                                        </div>
-                                        <p></p>
+                                        </div> <br/>
+                                        <p class="text-danger">👉 (<span class="text-danger font-weight-bold ">*</span>) marked fields are mandatory.</p>
                                         <form className="form-horizontal" onSubmit={handleForm} noValidate>
 
                                             <table style={{ width: '100%' }} >
                                                 <tr>
-                                                    <td class="form-label"><span class="text-danger font-weight-bold ">* </span>Device Name:</td>
+                                                    <td class="form-label">Device Name<span class="text-danger font-weight-bold ">* </span>:</td>
                                                     <td style={{ width: '68%' }} colspan={3}><fieldset className="form-group position-relative has-icon-left">
                                                         <input type="text" name="device_id" id="device_id" value={deviceName} onChange={(e) => { setDeviceName(e.target.value) }} readOnly={props.mode == "Edit"} className="form-control" placeholder="Device name" tabIndex={1} required data-validation-required-message="Please enter device name." />
                                                         <div className="form-control-position">
@@ -313,7 +313,7 @@ const DeviceForm = (props) => {
                                                     </fieldset></td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="form-label"><span class="text-danger font-weight-bold ">* </span>Contact Person:</td>
+                                                    <td class="form-label">Contact Person<span class="text-danger font-weight-bold ">* </span>:</td>
                                                     <td colspan={3}><fieldset className="form-group position-relative has-icon-left">
                                                         <input type="text" name="contact_person" id="contact_person" value={contactPerson} onChange={(e) => { setContactPerson(e.target.value) }} className="form-control" placeholder="Contact Person" tabIndex={1} required data-validation-required-message="Please enter device contact person." />
                                                         <div className="form-control-position">
@@ -324,7 +324,7 @@ const DeviceForm = (props) => {
                                                     </fieldset></td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="form-label"><span class="text-danger font-weight-bold ">* </span>Contact Email:</td>
+                                                    <td class="form-label">Contact Email<span class="text-danger font-weight-bold ">* </span>:</td>
                                                     <td colspan={3}><fieldset className="form-group position-relative has-icon-left">
                                                         <input type="email" name="contact_Email" id="contact_Email" value={contactEmail} onChange={(e) => { setContactEmail(e.target.value) }} className="form-control" placeholder="Contact Email" tabIndex={1} required data-validation-required-message="Please enter device user contact email." />
                                                         <div className="form-control-position">
@@ -335,7 +335,7 @@ const DeviceForm = (props) => {
                                                     </fieldset></td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="form-label"><span class="text-danger font-weight-bold ">* </span>Contact Number:</td>
+                                                    <td class="form-label">Contact Number<span class="text-danger font-weight-bold ">* </span>:</td>
                                                     <td colspan={3}><fieldset className="form-group position-relative has-icon-left">
                                                         <input type="text" name="contact_Number" id="contact_Number" value={contactNumber} onChange={(e) => { setContactNumber(e.target.value) }} className="form-control" placeholder="Contact Number" tabIndex={1} required data-validation-required-message="Please enter device user contact number." />
                                                         <div className="form-control-position">
@@ -367,11 +367,11 @@ const DeviceForm = (props) => {
                                                         <input type="radio" name="payment_type" value="Bkash" onChange={(e) => { setMobileFinancialService(e.target.value) }} checked={mobileFinancialService === "Bkash"} />&nbsp;Bkash &nbsp;&nbsp;&nbsp;
                                                         <input type="radio" name="payment_type" value="Nagad" onChange={(e) => { setMobileFinancialService(e.target.value) }} checked={mobileFinancialService === "Nagad"} />&nbsp;Nagad &nbsp;&nbsp;&nbsp;
                                                         <input type="radio" name="payment_type" value="Ucash" onChange={(e) => { setMobileFinancialService(e.target.value) }} checked={mobileFinancialService === "Ucash"} />&nbsp;Ucash &nbsp;&nbsp;&nbsp;
-                                                        <input type="radio" name="payment_type" value="SureCash" onChange={(e) => { setMobileFinancialService(e.target.value) }} checked={mobileFinancialService === "SureCash"} />&nbsp;SureCash &nbsp;&nbsp;&nbsp;&nbsp; <span class="text-danger font-weight-bold ">* </span>
+                                                        <input type="radio" name="payment_type" value="SureCash" onChange={(e) => { setMobileFinancialService(e.target.value) }} checked={mobileFinancialService === "SureCash"} />&nbsp;SureCash &nbsp;&nbsp;&nbsp; <span class="text-danger font-weight-bold ">* </span>
                                                         <div className="help-block font-small-3" />
                                                         <span class="text-danger">{err_msg.payment_type ? err_msg.payment_type[0] : ''}</span>
                                                     </fieldset>
-                                                        <div><div class="row"><div style={{ whiteSpace: 'nowrap' }} class="col-sm-3 col-form-label"><span class="text-danger font-weight-bold ">* </span>Mobile Number:</div><div class="col-sm-9"><input style={{ width: '68%' }} type="text" name="payment_number" id="payment_number" value={mobileFinancialNumber} onChange={(e) => { setMobileFinancialNumber(e.target.value) }} className="form-control" placeholder="Number" tabIndex={3} /></div></div>
+                                                        <div><div class="row"><div style={{ whiteSpace: 'nowrap' }} class="col-sm-3 col-form-label">Mobile Number<span class="text-danger font-weight-bold ">* </span>:</div><div class="col-sm-9"><input style={{ width: '68%' }} type="text" name="payment_number" id="payment_number" value={mobileFinancialNumber} onChange={(e) => { setMobileFinancialNumber(e.target.value) }} className="form-control" placeholder="Number" tabIndex={3} /></div></div>
                                                             <div className="help-block font-small-3" />
                                                             <span class="text-danger">{err_msg.payment_number ? err_msg.payment_number[0] : ''}</span><br />
 
@@ -400,7 +400,7 @@ const DeviceForm = (props) => {
 
 
                                                 <tr>
-                                                    <td><span class="text-danger font-weight-bold ">* </span>Urban or Rural</td>
+                                                    <td>Urban or Rural<span class="text-danger font-weight-bold ">* </span>:</td>
                                                     <td colspan={3}><fieldset className="form-group position-relative">
                                                         <input type="radio" name="sociostatus" value="u" onChange={(e) => { setSocioStatus(e.target.value) }} checked={socioStatus === "u"} />Urban &nbsp;&nbsp;&nbsp;
                                                         <input type="radio" name="sociostatus" value="r" onChange={(e) => { setSocioStatus(e.target.value) }} checked={socioStatus === "r"} />Rural <br />
@@ -423,7 +423,7 @@ const DeviceForm = (props) => {
 
 
                                                 <tr>
-                                                    <td><span class="text-danger font-weight-bold ">* </span>House Name:</td>
+                                                    <td>House Name<span class="text-danger font-weight-bold ">* </span>:</td>
                                                     <td colspan={3}>
                                                         <fieldset className="form-group position-relative has-icon-left">
                                                             <input type="text" name="house_name" id="house_name" className="form-control" value={houseName} onChange={(e) => { setHouseName(e.target.value) }} placeholder="House Name" tabIndex={14} required data-validation-required-message="Please enter house name." />
@@ -439,7 +439,7 @@ const DeviceForm = (props) => {
 
 
                                                 <tr>
-                                                    <td><span class="text-danger font-weight-bold ">* </span>House Number:</td>
+                                                    <td>House Number<span class="text-danger font-weight-bold ">* </span>:</td>
                                                     <td>
                                                         <fieldset className="form-group position-relative has-icon-left">
                                                             <input type="text" name="house_number" id="house_number" className="form-control" value={houseNumber} onChange={(e) => { setHouseNumber(e.target.value) }} placeholder="House Number" tabIndex={15} required data-validation-required-message="Please enter house number." />
@@ -451,7 +451,7 @@ const DeviceForm = (props) => {
                                                         </fieldset>
 
                                                     </td>
-                                                    <td><span class="text-danger font-weight-bold ">* </span>Road Number:</td>
+                                                    <td>Road Number<span class="text-danger font-weight-bold ">* </span>:</td>
                                                     <td>
                                                         <fieldset className="form-group position-relative has-icon-left">
                                                             <input type="text" name="road_number" id="road_number" className="form-control" value={roadNumber} onChange={(e) => { setRoadNumber(e.target.value) }} placeholder="Road Number" tabIndex={16} required data-validation-required-message="Please enter road number." />
@@ -471,7 +471,7 @@ const DeviceForm = (props) => {
 
 
                                                 <tr>
-                                                    <td><span class="text-danger font-weight-bold ">* </span>Area Name/ Village Name/ State Name:</td>
+                                                    <td>Area Name/ Village Name/ State Name<span class="text-danger font-weight-bold ">* </span>:</td>
                                                     <td colspan={3}>
                                                         <fieldset className="form-group position-relative has-icon-left">
                                                             <input type="text" name="state_name" id="state_name" className="form-control" value={stateName} onChange={(e) => { setStateName(e.target.value) }} placeholder="State Name" tabIndex={17} required data-validation-required-message="Please enter state name." />
@@ -486,7 +486,7 @@ const DeviceForm = (props) => {
 
 
                                                 <tr>
-                                                    <td><span class="text-danger font-weight-bold ">* </span>Ward no:</td>
+                                                    <td>Ward no<span class="text-danger font-weight-bold ">* </span>:</td>
                                                     <td>
                                                         <fieldset className="form-group position-relative has-icon-left">
                                                             <input type="text" name="ward_no" id="ward_no" className="form-control" value={wardNo} onChange={(e) => { setWardNo(e.target.value) }} placeholder="Ward no" tabIndex={15} required data-validation-required-message="Please enter ward no." />
@@ -501,7 +501,7 @@ const DeviceForm = (props) => {
 
                                                     {(() => {
                                                         if (socioStatus == "r") {
-                                                            return <><td><span class="text-danger font-weight-bold ">* </span>Thana:</td>
+                                                            return <><td>Thana<span class="text-danger font-weight-bold ">* </span>:</td>
                                                                 <td>
                                                                     <fieldset className="form-group position-relative has-icon-left">
                                                                         <input type="text" name="zone_thana" id="zone_thana" className="form-control" value={zoneThana} onChange={(e) => { setZoneThana(e.target.value) }} placeholder="Thana" tabIndex={16} required data-validation-required-message="Please enter Thana." />
@@ -514,7 +514,7 @@ const DeviceForm = (props) => {
 
                                                                 </td> </>
                                                         } else {
-                                                            return <><td><span class="text-danger font-weight-bold ">* </span>Zone no:</td>
+                                                            return <><td>Zone no<span class="text-danger font-weight-bold ">* </span>:</td>
                                                                 <td>
                                                                     <fieldset className="form-group position-relative has-icon-left">
                                                                         <input type="text" name="zone_thana" id="zone_thana" className="form-control" value={zoneThana} onChange={(e) => { setZoneThana(e.target.value) }} placeholder="Zone no" tabIndex={16} required data-validation-required-message="Please enter zone no." />
@@ -534,7 +534,7 @@ const DeviceForm = (props) => {
                                                 {(() => {
                                                     if (socioStatus == "u") {
                                                         return <><tr>
-                                                            <td><span class="text-danger font-weight-bold ">* </span>City Corporation:</td>
+                                                            <td>City Corporation<span class="text-danger font-weight-bold ">* </span>:</td>
                                                             <td colspan={3}>
                                                                 <fieldset className="form-group position-relative has-icon-left">
                                                                     <input type="text" name="city_corporation" id="city_corporation" className="form-control" value={cityCorporation} onChange={(e) => { setCityCorporation(e.target.value) }} placeholder="City Corporation" tabIndex={14} required data-validation-required-message="Please enter city corporation." />
@@ -566,7 +566,7 @@ const DeviceForm = (props) => {
 
 
                                                 <tr>
-                                                    <td><span class="text-danger font-weight-bold ">* </span>Postal/Zip Code:</td>
+                                                    <td>Postal/Zip Code<span class="text-danger font-weight-bold ">* </span>:</td>
                                                     <td colspan={3}>
                                                         <fieldset className="form-group position-relative has-icon-left">
                                                             <input type="text" name="zip_code" id="zip_code" className="form-control" value={zipCode} onChange={(e) => { setZipCode(e.target.value) }} placeholder="Postal/Zip Code" tabIndex={14} required data-validation-required-message="Please enter postal/zip code." />
@@ -586,7 +586,7 @@ const DeviceForm = (props) => {
 
 
                                                 <tr>
-                                                    <td class="form-label"><span class="text-danger font-weight-bold ">* </span>District <br /><br /><br /><br /><br /> {(() => {
+                                                    <td class="form-label">District<span class="text-danger font-weight-bold ">* </span>: <br /><br /><br /><br /><br /> {(() => {
                                                         if (props.mode !== "aEdit") {
                                                             return <div><input type="checkbox" id="location" onChange={handleChange} value={isSubscribed} name="location" />
                                                                 <label class="form-label" for="vehicle1">&nbsp; Update Location</label></div>
@@ -609,19 +609,19 @@ const DeviceForm = (props) => {
                                                     </fieldset>
                                                         {(() => {
                                                             if (props.mode == "Edit") {
-                                                                return <div><div class="row"><div class="col-sm-3 col-form-label"><span class="text-danger font-weight-bold ">* </span>Lat:</div><div class="col-sm-9"><input type="text" name="lat" id="lat" value={latitude} onChange={(e) => { setLatitude(e.target.value) }} className="form-control" placeholder="Latitude" tabIndex={3} /></div></div>
+                                                                return <div><div class="row"><div class="col-sm-3 col-form-label">Lat<span class="text-danger font-weight-bold ">* </span>:</div><div class="col-sm-9"><input type="text" name="lat" id="lat" value={latitude} onChange={(e) => { setLatitude(e.target.value) }} className="form-control" placeholder="Latitude" tabIndex={3} /></div></div>
                                                                     <div className="help-block font-small-3" />
                                                                     <span class="text-danger">{err_msg.lat ? err_msg.lat[0] : ''}</span>
 
-                                                                    <div class="row"><div class="col-sm-3 col-form-label"><span class="text-danger font-weight-bold ">* </span>Lng:</div><div class="col-sm-9"><input type="text" name="lng" id="lng" value={longitude} onChange={(e) => { setLongitude(e.target.value) }} className="form-control" placeholder="Longitude" tabIndex={4} /></div></div>
+                                                                    <div class="row"><div class="col-sm-3 col-form-label">Lng<span class="text-danger font-weight-bold ">* </span>:</div><div class="col-sm-9"><input type="text" name="lng" id="lng" value={longitude} onChange={(e) => { setLongitude(e.target.value) }} className="form-control" placeholder="Longitude" tabIndex={4} /></div></div>
                                                                     <div className="help-block font-small-3" />
                                                                     <span class="text-danger">{err_msg.lng ? err_msg.lng[0] : ''}</span></div>
 
                                                             } else {
-                                                                return <div><div class="row"><div class="col-sm-3 col-form-label"><span class="text-danger font-weight-bold ">* </span>Lat:</div><div class="col-sm-9"><input type="text" name="lat" id="lat" value={latitude} onChange={(e) => { setLatitude(e.target.value) }} className="form-control" placeholder="Latitude" tabIndex={3} /></div></div>
+                                                                return <div><div class="row"><div class="col-sm-3 col-form-label">Lat<span class="text-danger font-weight-bold ">* </span>:</div><div class="col-sm-9"><input type="text" name="lat" id="lat" value={latitude} onChange={(e) => { setLatitude(e.target.value) }} className="form-control" placeholder="Latitude" tabIndex={3} /></div></div>
                                                                     <div className="help-block font-small-3" />
                                                                     <span class="text-danger">{err_msg.lat ? err_msg.lat[0] : ''}</span>
-                                                                    <div class="row"><div class="col-sm-3 col-form-label"><span class="text-danger font-weight-bold ">* </span>Lng:</div><div class="col-sm-9"><input type="text" name="lng" id="lng" value={longitude} onChange={(e) => { setLongitude(e.target.value) }} className="form-control" placeholder="Longitude" tabIndex={4} /></div></div>
+                                                                    <div class="row"><div class="col-sm-3 col-form-label">Lng<span class="text-danger font-weight-bold ">* </span>:</div><div class="col-sm-9"><input type="text" name="lng" id="lng" value={longitude} onChange={(e) => { setLongitude(e.target.value) }} className="form-control" placeholder="Longitude" tabIndex={4} /></div></div>
                                                                     <div className="help-block font-small-3" />
                                                                     <span class="text-danger">{err_msg.lng ? err_msg.lng[0] : ''}</span></div>
                                                             }
@@ -663,7 +663,7 @@ const DeviceForm = (props) => {
                                                 {(() => {
                                                     if (socioStatus == "u") {
                                                         return <tr>
-                                                            <td><span class="text-danger font-weight-bold ">* </span>Urban Panel:</td>
+                                                            <td>Urban Panel<span class="text-danger font-weight-bold ">* </span>:</td>
                                                             <td colspan={3}><fieldset className="form-group position-relative">
                                                                 <input type="radio" name="household_condition" value="Flat owner / Flat in apartment" onChange={(e) => { setHouseholdCondition(e.target.value) }} checked={householdCondition === "Flat owner / Flat in apartment"} />&nbsp;Flat owner / Flat in apartment<br />
                                                                 <input type="radio" name="household_condition" value="Rented flat / Non-Flat apartment where there is no security guard and parking" onChange={(e) => { setHouseholdCondition(e.target.value) }} checked={householdCondition === "Rented flat / Non-Flat apartment where there is no security guard and parking"} />&nbsp;Rented flat / Non-Flat apartment where there is no security guard and parking <br />
@@ -677,7 +677,7 @@ const DeviceForm = (props) => {
 
                                                     } else if (socioStatus == "r") {
                                                         return <tr>
-                                                            <td><span class="text-danger font-weight-bold ">* </span>Rural Panel:</td>
+                                                            <td>Rural Panel<span class="text-danger font-weight-bold ">* </span>:</td>
                                                             <td colspan={3}><fieldset className="form-group position-relative">
                                                                 <input type="radio" name="household_condition" value="Full Concrete house (wall, floor and roof)" onChange={(e) => { setHouseholdCondition(e.target.value) }} checked={householdCondition === "Full Concrete house (wall, floor and roof)"} />&nbsp;Full Concrete house (wall, floor and roof) <br />
                                                                 <input type="radio" name="household_condition" value="Semi Concrete house (wall and floor concrete but the roof is made by Tin)" onChange={(e) => { setHouseholdCondition(e.target.value) }} checked={householdCondition === "Semi Concrete house (wall and floor concrete but the roof is made by Tin)"} />&nbsp;Semi Concrete house (wall and floor concrete but the roof is made by Tin) <br />
@@ -698,7 +698,7 @@ const DeviceForm = (props) => {
 
 
                                                 <tr>
-                                                    <td><span class="text-danger font-weight-bold ">* </span>Household Monthly Income Range:</td>
+                                                    <td>Household Monthly Income Range<span class="text-danger font-weight-bold ">* </span>:</td>
                                                     <td colspan={3}><fieldset className="form-group position-relative">
                                                         <select class="custom-select d-block w-100" value={monthlyIncome} onChange={(e) => { setMonthlyIncome(e.target.value) }}>
                                                             <option value="">Select</option>
@@ -724,7 +724,7 @@ const DeviceForm = (props) => {
                                                 {(() => {
                                                     if (installerName == cookies.get('username')) {
                                                         return <tr>
-                                                            <td><span class="text-danger font-weight-bold ">* </span>Installer Name:</td>
+                                                            <td>Installer Name<span class="text-danger font-weight-bold ">* </span>:</td>
                                                             <td colspan={3}><fieldset className="form-group position-relative">
                                                                 <select class="custom-select d-block w-100" value={installerName} onChange={(e) => { setInstallerName(e.target.value) }}>
                                                                     <option value={cookies.get('username')}>{cookies.get('username')}</option>
@@ -737,7 +737,7 @@ const DeviceForm = (props) => {
                                                     } else if (!installerName) {
                                                         setInstallerName(cookies.get('username'))
                                                         return <tr>
-                                                            <td><span class="text-danger font-weight-bold ">* </span>Installer Name:</td>
+                                                            <td>Installer Name<span class="text-danger font-weight-bold ">* </span>:</td>
                                                             <td colspan={3}><fieldset className="form-group position-relative">
                                                                 <select class="custom-select d-block w-100" value={cookies.get('username')} onChange={(e) => { setInstallerName(e.target.value) }}>
                                                                     <option value={cookies.get('username')}>{cookies.get('username')}</option>
@@ -749,7 +749,7 @@ const DeviceForm = (props) => {
                                                         </tr>
                                                     } else if (installerName && (installerName != cookies.get('username'))) {
                                                         return <tr>
-                                                            <td><span class="text-danger font-weight-bold ">* </span>Installer Name:</td>
+                                                            <td>Installer Name<span class="text-danger font-weight-bold ">* </span>:</td>
                                                             <td colspan={3}><fieldset className="form-group position-relative">
                                                                 <select class="custom-select d-block w-100" value={installerName} onChange={(e) => { setInstallerName(e.target.value) }}>
                                                                     <option value={installerName}>{installerName}</option>
@@ -794,7 +794,7 @@ const DeviceForm = (props) => {
 
                                                 </tr>
                                                 <tr>
-                                                    <td><span class="text-danger font-weight-bold ">* </span>TV Type:</td>
+                                                    <td>TV Type<span class="text-danger font-weight-bold ">* </span>:</td>
                                                     <td colspan={3}><fieldset className="form-group position-relative">
                                                         <input type="radio" name="tv_type" value="CRT" onChange={(e) => { setTvType(e.target.value) }} checked={tvType === "CRT"} />&nbsp;CRT &nbsp;&nbsp;&nbsp;
                                                         <input type="radio" name="tv_type" value="LED" onChange={(e) => { setTvType(e.target.value) }} checked={tvType === "LED"} />&nbsp;LED &nbsp;&nbsp;&nbsp;
@@ -804,7 +804,7 @@ const DeviceForm = (props) => {
                                                     </fieldset></td>
                                                 </tr>
                                                 <tr>
-                                                    <td><span class="text-danger font-weight-bold ">* </span>TV Brand:</td>
+                                                    <td>TV Brand<span class="text-danger font-weight-bold ">* </span>:</td>
                                                     <td colspan={3}><fieldset className="form-group position-relative">
                                                         <input type="radio" name="tv_brand" value="Sony" onChange={(e) => { setTvBrand(e.target.value) }} checked={tvBrand === "Sony"} />&nbsp;Sony &nbsp;&nbsp;&nbsp;
                                                         <input type="radio" name="tv_brand" value="Samsung" onChange={(e) => { setTvBrand(e.target.value) }} checked={tvBrand === "Samsung"} />&nbsp;Samsung &nbsp;&nbsp;&nbsp;
@@ -819,7 +819,7 @@ const DeviceForm = (props) => {
                                                 </tr>
 
                                                 <tr>
-                                                    <td><span class="text-danger font-weight-bold ">* </span>TV placement/ Location:</td>
+                                                    <td>TV placement/ Location<span class="text-danger font-weight-bold ">* </span>:</td>
                                                     <td colspan={3}><fieldset className="form-group position-relative">
                                                         <input type="radio" name="tv_placement" value="Bed Room" onChange={(e) => { setTvPlacement(e.target.value) }} checked={tvPlacement === "Bed Room"} />&nbsp;Bed Room &nbsp;&nbsp;&nbsp;
                                                         <input type="radio" name="tv_placement" value="Dinning" onChange={(e) => { setTvPlacement(e.target.value) }} checked={tvPlacement === "Dinning"} />&nbsp;Dinning &nbsp;&nbsp;&nbsp;
@@ -831,7 +831,7 @@ const DeviceForm = (props) => {
                                                 </tr>
 
                                                 <tr>
-                                                    <td><span class="text-danger font-weight-bold ">* </span>GSM signal strength:</td>
+                                                    <td>GSM signal strength<span class="text-danger font-weight-bold ">* </span>:</td>
                                                     <td colspan={3}>
                                                         <fieldset className="form-group position-relative has-icon-left">
                                                             <input type="text" name="gsm_signal_strength" id="gsm_signal_strength" className="form-control" value={gsmSignalStrength} onChange={(e) => { setGsmSignalStrength(e.target.value) }} placeholder="GSM signal strength" tabIndex={14} required data-validation-required-message="Please enter GSM signal strength." />
@@ -845,7 +845,7 @@ const DeviceForm = (props) => {
                                                 </tr>
 
                                                 <tr>
-                                                    <td><span class="text-danger font-weight-bold ">* </span>Wi-Fi user:</td>
+                                                    <td>Wi-Fi user<span class="text-danger font-weight-bold ">* </span>:</td>
                                                     <td colspan={3}><fieldset className="form-group position-relative">
                                                         <input type="radio" name="wifi" value="y" onChange={(e) => { setWifi(e.target.value) }} checked={wifi === "y"} />&nbsp;Yes &nbsp;&nbsp;&nbsp;
                                                         <input type="radio" name="wifi" value="n" onChange={(e) => { setWifi(e.target.value) }} checked={wifi === "n"} />&nbsp;No <br />
@@ -855,7 +855,7 @@ const DeviceForm = (props) => {
                                                 </tr>
                                                 {wifi == "y" &&
                                                     <><tr>
-                                                        <td><span class="text-danger font-weight-bold ">* </span>Wi-Fi signal strength:</td>
+                                                        <td>Wi-Fi signal strength<span class="text-danger font-weight-bold ">* </span>:</td>
                                                         <td colspan={3}>
                                                             <fieldset className="form-group position-relative has-icon-left">
                                                                 <input type="text" name="wifi_signal_strength" id="wifi_signal_strength" className="form-control" value={wifiSignalStrength} onChange={(e) => { setWifiSignalStrength(e.target.value) }} placeholder="Wi-Fi signal strength" tabIndex={14} required data-validation-required-message="Please enter Wi-Fi signal strength." />
@@ -882,7 +882,7 @@ const DeviceForm = (props) => {
 
 
                                                 <tr>
-                                                    <td><span class="text-danger font-weight-bold ">* </span>Set-Top Box Provider name:</td>
+                                                    <td>Set-Top Box Provider name<span class="text-danger font-weight-bold ">* </span>:</td>
                                                     <td colspan={3}>
                                                         <fieldset className="form-group position-relative has-icon-left">
                                                             <input type="text" name="stb_provider_name" id="stb_provider_name" className="form-control" value={stbProviderName} onChange={(e) => { setStbProviderName(e.target.value) }} placeholder="STB Provider name" tabIndex={14} required data-validation-required-message="Please enter Set-Top Box Provider name." />
@@ -896,7 +896,7 @@ const DeviceForm = (props) => {
                                                 </tr>
 
                                                 <tr>
-                                                    <td><span class="text-danger font-weight-bold ">* </span>Set-Top Box subscription package type:</td>
+                                                    <td>Set-Top Box subscription package type<span class="text-danger font-weight-bold ">* </span>:</td>
                                                     <td colspan={3}>
                                                         <fieldset className="form-group position-relative has-icon-left">
                                                             <input type="text" name="stb_subscription_type" id="stb_subscription_type" className="form-control" value={stbSubscriptionType} onChange={(e) => { setStbSubscriptionType(e.target.value) }} placeholder="STB subscription type" tabIndex={14} required data-validation-required-message="Please enter Set-Top Box subscription package type." />
@@ -910,7 +910,7 @@ const DeviceForm = (props) => {
                                                 </tr>
 
                                                 <tr>
-                                                    <td><span class="text-danger font-weight-bold ">* </span>Set-Top Box subscription payment/ monthly charge:</td>
+                                                    <td>Set-Top Box subscription payment/ monthly charge<span class="text-danger font-weight-bold ">* </span>:</td>
                                                     <td colspan={3}>
                                                         <fieldset className="form-group position-relative has-icon-left">
                                                             <input type="text" name="stb_subscription_charge" id="stb_subscription_charge" className="form-control" value={stbSubscriptionCharge} onChange={(e) => { setStbSubscriptionCharge(e.target.value) }} placeholder="STB subscription payment/ monthly charge" tabIndex={14} required data-validation-required-message="Please enter Set-Top Box subscription payment/ monthly charge." />
