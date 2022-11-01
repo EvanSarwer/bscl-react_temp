@@ -194,7 +194,7 @@ const KeywordTrp = () => {
     return (
         <div>
             <Header title="Ad TRP" />
-            <MainMenu menu="Ad TRP" />
+            <MainMenu menu="dailyadtrp" />
             <div class="app-content content" style={{ minHeight: "39em" }}>
                 <div class="content-overlay"></div>
                 <div class="content-wrapper" style={{ backgroundColor: "azure", minHeight: "39em" }} >
