@@ -10,6 +10,7 @@ import axiosConfig from "../axiosConfig";
 import Header from '../Header/Header';
 import MainMenu from '../MainMenu/MainMenu';
 import MainMenuUser from '../MainMenu/MainMenuUser';
+import PieGraph from '../Graph/PieGraph';
 
 
 
@@ -30,12 +31,15 @@ const DashboardUser = () => {
                         <CurrentStatus />
 
                         {/* Dashboard Table Start */}
-                        <div class="row" style={{ minHeight: '390px' }}>
+                        <div class="row" style={{ minHeight: '550px', maxHeight: '550px' }}>
                             {/* <div class="col-xl-12 col-12">
                                 <ActiveUserTable />
                             </div> */}
-                            <div class="col-xl-12 col-12">
+                            <div class="card col-xl-6 col-12" style={{ minHeight: '500px', maxHeight: '550px' }}>
                                 <ActiveChannelTable />
+                            </div>
+                            <div class="col-xl-6 col-12" style={{ minHeight: '500px', maxHeight: '550px' }}>
+                                <PieGraph title="Daily Top Share" text="Channel vs TVR" url="sharegraph/dashboard" color="yellow" get={true} timerange={true} />
                             </div>
                         </div>
 
