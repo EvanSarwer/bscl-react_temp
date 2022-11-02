@@ -39,6 +39,7 @@ import{default as ProgramTrp2}  from "../TRPV4/ProgramTrp";
 //import AdTrp from "../TRPV4/AdTrp";
 import KeywordTrp from "../KeywordTrp/KeywordTrp";
 import DeviceDetailsView from "../DeviceUser/DeviceDetailsView";
+import KeywordTrpV2 from "../KeywordTrp/KeywordTrpV2";
 
 
 
@@ -60,7 +61,7 @@ function Admin() {
         <Route exact path="/playoutupload" element={<PlayoutUpload />}></Route>
         <Route exact path="/excelreport" element={<ExcelReport />}></Route>
         {/* <Route exact path="/dailyadtrp" element={<AdTrp />}></Route> */}
-        <Route exact path="/dailyadtrp" element={<KeywordTrp />}></Route>
+        <Route exact path="/dailyadtrp" element={<KeywordTrpV2 />}></Route>
         <Route exact path="/livechannels" element={<LiveChannels />}></Route>
         <Route exact path="/map" element={<LiveMap />}></Route>
         <Route exact path="/channelstatus" element={<ChannelStatus />}></Route>
