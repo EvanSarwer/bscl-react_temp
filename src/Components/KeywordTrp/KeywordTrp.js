@@ -95,6 +95,22 @@ const KeywordTrp = () => {
         console.log(frontkeywords);
         }
     }
+    var AddKeywords2 = () => {
+
+        var key=document.querySelector("#horizontal-vertical > div > div > div > div > div > div.row > div.col-md-4 > input").value;
+        if(key!=""){
+        var keys = frontkeywords;
+        if(!keys.includes(key)){
+        keys.push(key);
+        setfrontkeywords([...keys]);
+        console.log(frontkeywords);
+        document.querySelector("#horizontal-vertical > div > div > div > div > div > div.row > div.col-md-4 > input").value="";
+        }
+        else{
+            alert("already exists");
+        }
+    }
+    }
     var Remove = (key) => {
         let value = key;
 
@@ -214,16 +230,21 @@ const KeywordTrp = () => {
                                                 <div class="card-content collapse show">
                                                     <div class="card-body card-dashboard">
                                                         <div class="row">
-                                                            <div class="col-md-4">
+                                                            {/* <div class="col-md-4">
                                                                 <Select
                                                                     placeholder="Select keyword"
                                                                     options={keywords.map(keyword => ({ label: keyword, value: keyword }))}
                                                                     onChange={opt => AddKeywords(opt.value)}
                                                                 />
+                                                            </div> */}
+                                                            <div class="col-md-4"><input type="text" class="form-control" placeholder="New Keyword"/>
+                                                            </div>
+                                                            <div class="col-md-1"><input type="button" class="btn btn-success" onClick={AddKeywords2} value="Add"/>
                                                             </div>
                                                             <div class="col-md-2"><button class="offset-1 btn btn-danger" onClick={DownloadY} >Download Trp of Yesterday</button></div>
-                                                            <div class="col-md-2"><h4 class="text-right">Archieve</h4></div>
+                                                            <div class="col-md-1"></div>
                                                             <div class="col-md-2">
+                                                            <strong>Archieve</strong>
                                                             <input type="date" class="form-control" id="date" onChange={(e) => { ChangeDate(e.target.value) }} />
                                                             </div>
                                                             <div class="col-md-2">
