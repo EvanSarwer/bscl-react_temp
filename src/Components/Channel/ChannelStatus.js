@@ -16,6 +16,7 @@ const ChannelStatus = () => {
     const [update, setUpdate] = useState(0);
     const [time, setTime] = useState("Daily");
     const [id, setId] = useState("");
+    const [type, setType] = useState("");
     const [channels, setchannels] = useState([]);
     useEffect(() => {
 
@@ -77,7 +78,7 @@ const ChannelStatus = () => {
 
                                         <div class="col-md-2">
                                             <label>Type (STB/OTT)</label>
-                                            <select class="custom-select d-block w-100" onChange={(e) => { }}>
+                                            <select class="custom-select d-block w-100" onChange={(e) => { setType(e.target.value)}}>
                                                 <option value="">All</option>
                                                 <option value="STB">STB</option>
                                                 <option value="OTT">OTT</option>
@@ -154,22 +155,22 @@ const ChannelStatus = () => {
 
                         <div class="row">
                             <div class="col-md-6">
-                                <PostLineGraph title="Reach (%)" text="Active Channels" url="trend/reach/percent" label="Reach (%)" color="blue" credentials={{ "id": id, "time": time }} update={update} />
+                                <PostLineGraph title="Reach (%)" text="Active Channels" url="trend/reach/percent" label="Reach (%)" color="blue" credentials={{ "id": id, "time": time,"type":type }} update={update} />
 
                             </div>
                             <div class="col-md-6">
-                                <PostLineGraph title="Reach (000)" text="Active Channels" url="trend/reach/zero" label="Reach (000)" color="red" credentials={{ "id": id, "time": time }} update={update} />
+                                <PostLineGraph title="Reach (000)" text="Active Channels" url="trend/reach/zero" label="Reach (000)" color="red" credentials={{ "id": id, "time": time,"type":type }} update={update} />
 
                             </div>
 
                         </div>
                         <div class="row">
                             <div class="col-md-6">
-                                <PostLineGraph title="TVR (000)" text="Active Channels" url="trend/tvr/zero" label="TVR (000)" color="violet" credentials={{ "id": id, "time": time }} update={update} />
+                                <PostLineGraph title="TVR (000)" text="Active Channels" url="trend/tvr/zero" label="TVR (000)" color="violet" credentials={{ "id": id, "time": time,"type":type }} update={update} />
 
                             </div>
                             <div class="col-md-6">
-                                <PostLineGraph title="TVR (%)" text="Active Channels" url="trend/tvr/percent" label="TVR (%)" color="green" credentials={{ "id": id, "time": time }} update={update} />
+                                <PostLineGraph title="TVR (%)" text="Active Channels" url="trend/tvr/percent" label="TVR (%)" color="green" credentials={{ "id": id, "time": time,"type":type }} update={update} />
 
                             </div>
 
