@@ -10,10 +10,17 @@ import MainMenu from "../MainMenu/MainMenu";
 const AppUserList = () => {
 
     const [appUsers, setAppUsers] = useState([]);
+    const [adminUsers, setAdminUsers] = useState([]);
+    const [channelUsers, setChannelUsers] = useState([]);
+    const [addAgencyUsers, setAddAgencyUsers] = useState([]);
+    const [listName, setListName] = useState("channel");
     const [query, setQuery] = useState("");
     useEffect(() => {
         axiosConfig.get("/appuser/list").then((rsp) => {
-            setAppUsers(rsp.data);
+            //setAppUsers(rsp.data);
+            setAdminUsers(rsp.data.admin_users);
+            setChannelUsers(rsp.data.channel_users);
+            setAddAgencyUsers(rsp.data.addAgency_users);
         }, (err) => { });
 
 
@@ -58,7 +65,7 @@ const AppUserList = () => {
                         <div class="row justify-content-md-center">
                             <div class="col-xl-12  col-12">
                                 <section id="horizontal-vertical">
-                                    <div class="row">
+                                    {/* <div class="row">
                                         <div class="col-12">
                                             <div class="card">
 
@@ -107,7 +114,163 @@ const AppUserList = () => {
 
                                             </div>
                                         </div>
+                                    </div> */}
+
+                                    <div class="card card-shadow">
+                                        <div class="card-header card-header-transparent py-20">
+                                            <ul class="nav nav-pills nav-pills-rounded chart-action float-left btn-group" role="group">
+                                                <li class="nav-item"><a class="active nav-link" data-toggle="tab" href="#scoreLineToDay" onClick={() => {setListName("channel")}}>Channel</a></li>
+                                                <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#scoreLineToWeek" onClick={() => {setListName("addAgency")}}>Add Agency</a></li>
+                                                <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#scoreLineToMonth" onClick={() => {setListName("admin")}}>Admin</a></li>
+                                            </ul>
+                                            <a class="btn btn-primary float-right" href="/app/user/create">Create New</a>
+                                        </div>
+                                        <div class="widget-content tab-content bg-white p-20">
+                                            {/* <div class="ct-chart tab-pane active scoreLineShadow" id="scoreLineToDay"></div> */}
+
+
+
+                                            {listName == "channel" &&
+                                                <div class="card-body">
+
+                                                    <div class="row">
+                                                        <div class="col-md-7"><div class="h3 font-weight-bold">Channel User List</div></div>
+                                                        <div class="col-md-5"><input type="text" class="search form-control round border-primary mb-1" placeholder="Search" onChange={e => setQuery(e.target.value)} />
+                                                        </div>
+
+                                                    </div>
+
+
+                                                    <div class="table-responsive" style={{ maxHeight: '400px', minHeight: '500px' }}>
+                                                        <table class="table display nowrap table-striped table-bordered">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Username</th>
+                                                                    <th>Email</th>
+                                                                    <th>Address</th>
+                                                                    <th>Phone</th>
+                                                                    <th>Status</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                {Search(channelUsers).map((user) =>
+                                                                    <tr>
+                                                                        <td>{user.user_name} <span class={`badge badge-${user.active ? "success" : "danger"}`} >{user.active ? 'Active' : 'Inactive'}</span></td>
+                                                                        <td>{user.email}</td>
+                                                                        <td>{user.address}</td>
+                                                                        <td>{user.phone}</td>
+                                                                        <td style={{ whiteSpace: 'nowrap' }}>
+                                                                            <a class="btn btn-secondary" href={`/app/user/edit/${user.user_name}`}>Edit</a>
+                                                                            <button class="offset-1 btn btn-danger" onClick={() => { if (window.confirm('Delete the item?')) { deleteUser(user.user_name) }; }} >Delete</button>
+                                                                            <button class={`offset-1 btn btn-${user.active ? "danger" : "success"}`} onClick={() => { if (window.confirm('Change Status?')) { activateDeactivate(user.user_name, !user.active) }; }} >{user.active ? 'Deactivate' : 'Activate'}</button>
+                                                                        </td>
+
+                                                                    </tr>
+                                                                )}
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+
+
+                                                </div>
+                                            }
+
+                                            {/* <div class="ct-chart tab-pane scoreLineShadow" id="scoreLineToWeek"></div> */}
+                                            {listName == "addAgency" &&
+                                            <div class="card-body" >
+
+
+                                                <div class="row">
+                                                    <div class="col-md-7"><div class="h3 font-weight-bold">Add Agency User List</div></div>
+                                                    <div class="col-md-5"><input type="text" class="search form-control round border-primary mb-1" placeholder="Search" onChange={e => setQuery(e.target.value)} />
+                                                    </div>
+
+                                                </div>
+
+
+                                                <div class="table-responsive" style={{ maxHeight: '400px', minHeight: '500px' }}>
+                                                    <table class="table display nowrap table-striped table-bordered">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Username</th>
+                                                                <th>Email</th>
+                                                                <th>Address</th>
+                                                                <th>Phone</th>
+                                                                <th>Status</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            {Search(addAgencyUsers).map((user) =>
+                                                                <tr>
+                                                                    <td>{user.user_name} <span class={`badge badge-${user.active ? "success" : "danger"}`} >{user.active ? 'Active' : 'Inactive'}</span></td>
+                                                                    <td>{user.email}</td>
+                                                                    <td>{user.address}</td>
+                                                                    <td>{user.phone}</td>
+                                                                    <td style={{ whiteSpace: 'nowrap' }}>
+                                                                        <a class="btn btn-secondary" href={`/app/user/edit/${user.user_name}`}>Edit</a>
+                                                                        <button class="offset-1 btn btn-danger" onClick={() => { if (window.confirm('Delete the item?')) { deleteUser(user.user_name) }; }} >Delete</button>
+                                                                        <button class={`offset-1 btn btn-${user.active ? "danger" : "success"}`} onClick={() => { if (window.confirm('Change Status?')) { activateDeactivate(user.user_name, !user.active) }; }} >{user.active ? 'Deactivate' : 'Activate'}</button>
+                                                                    </td>
+
+                                                                </tr>
+                                                            )}
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+
+
+                                            </div>}
+                                            {/* <div class="ct-chart tab-pane scoreLineShadow" id="scoreLineToMonth"></div> */}
+                                            {listName == "admin" &&
+                                            <div class="card-body">
+
+
+                                                <div class="row">
+                                                    <div class="col-md-7"><div class="h3 font-weight-bold">Admin User List</div></div>
+                                                    <div class="col-md-5"><input type="text" class="search form-control round border-primary mb-1" placeholder="Search" onChange={e => setQuery(e.target.value)} />
+                                                    </div>
+
+                                                </div>
+
+
+                                                <div class="table-responsive" style={{ maxHeight: '400px', minHeight: '500px' }}>
+                                                    <table class="table display nowrap table-striped table-bordered">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Username</th>
+                                                                <th>Email</th>
+                                                                <th>Address</th>
+                                                                <th>Phone</th>
+                                                                <th>Status</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            {Search(adminUsers).map((user) =>
+                                                                <tr>
+                                                                    <td>{user.user_name} <span class={`badge badge-${user.active ? "success" : "danger"}`} >{user.active ? 'Active' : 'Inactive'}</span></td>
+                                                                    <td>{user.email}</td>
+                                                                    <td>{user.address}</td>
+                                                                    <td>{user.phone}</td>
+                                                                    <td style={{ whiteSpace: 'nowrap' }}>
+                                                                        <a class="btn btn-secondary" href={`/app/user/edit/${user.user_name}`}>Edit</a>
+                                                                        <button class="offset-1 btn btn-danger" onClick={() => { if (window.confirm('Delete the item?')) { deleteUser(user.user_name) }; }} >Delete</button>
+                                                                        <button class={`offset-1 btn btn-${user.active ? "danger" : "success"}`} onClick={() => { if (window.confirm('Change Status?')) { activateDeactivate(user.user_name, !user.active) }; }} >{user.active ? 'Deactivate' : 'Activate'}</button>
+                                                                    </td>
+
+                                                                </tr>
+                                                            )}
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+
+
+                                            </div>}
+
+                                        </div>
                                     </div>
+
+
+
                                 </section >
 
 
