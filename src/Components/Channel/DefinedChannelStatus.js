@@ -5,7 +5,9 @@ import Select from 'react-select';
 import PostLineGraph from "../Graph/PostLineGraph";
 import Header from '../Header/Header';
 import MainMenu from '../MainMenu/MainMenu';
+import axios from 'axios';
 
+import * as XLSX from "xlsx";
 
 const DefinedChannelStatus = () => {
 
@@ -16,6 +18,7 @@ const DefinedChannelStatus = () => {
     const [channels, setchannels] = useState([]);
     const [start, setstart] = useState("");
     const [finish, setfinish] = useState("");
+    const [allchannelf, setallchannelf] = useState(false);
 
     const [reachZeroCSV, setReachZeroCSV] = useState({});
     const [reachPercentCSV, setReachPercentCSV] = useState([]);
@@ -63,12 +66,12 @@ const DefinedChannelStatus = () => {
         }
     }
     var getCSV = (scsv) => {
-        exportToCsv(channelName+"-Day_Parts.csv", scsv)
+        exportToCsv(channelName + "-Day_Parts.csv", scsv)
     }
 
     const Downloadfunc = () => {
         //console.log(liveChannelData.labels[0]);
-        var csv = [["Time-Frame", "Reach(000)", "Reach(%)","TVR(000)", "TVR(%)"]];
+        var csv = [["Time-Frame", "Reach(000)", "Reach(%)", "TVR(000)", "TVR(%)"]];
         var sampleLive = reachZeroCSV;
         var sampleLive1 = reachPercentCSV;
         var sampleLive2 = tvrZeroCSV;
@@ -78,65 +81,33 @@ const DefinedChannelStatus = () => {
             csv.push([sampleLive.labels[i], sampleLive.values[i], sampleLive1[i], sampleLive2[i], sampleLive3[i]]);
         }
         console.log(csv);
-        getCSV(csv);
+        
+        const wb = XLSX.utils.book_new();
+        
+        var ws = XLSX.utils.aoa_to_sheet(csv);
+        XLSX.utils.book_append_sheet(wb, ws, "Day Parts");
+        
+        XLSX.writeFile(wb, "Day Parts "+channels[id].name+".xlsx");
+        //getCSV(csv);
     }
 
-    const getReach0=(p)=>{
+    const getReach0 = (p) => {
         setReachZeroCSV(p);
         console.log(p);
     }
-    const getReachp=(p)=>{
+    const getReachp = (p) => {
         setReachPercentCSV(p.values);
         console.log(p);
     }
-    const getTvr0=(p)=>{
+    const getTvr0 = (p) => {
         setTvrZeroCSV(p.values);
         console.log(p);
     }
-    const getTvrp=(p)=>{
+    const getTvrp = (p) => {
         setTvrPercentCSV(p.values);
         console.log(p);
     }
 
-    // useEffect(() => {
-    //     if(update>0){
-    //     var data = {
-    //         id: id, range: time, start: start, finish: finish
-    //     };
-
-    //     axiosConfig.post("/trend/dayrangedreach0", data).then(rsp => {
-
-    //         setReachZeroCSV(() => ({
-    //             labels: rsp.data.label, values: rsp.data.values
-    //         }));
-    //     }).catch(err => {
-
-    //     });
-
-    //     axiosConfig.post("/trend/dayrangedreachp", data).then(rsp => {
-
-    //         setReachPercentCSV(rsp.data.values);
-    //     }).catch(err => {
-
-    //     });
-
-    //     axiosConfig.post("/trend/dayrangedtvr0", data).then(rsp => {
-
-    //         setTvrZeroCSV(rsp.data.values);
-    //     }).catch(err => {
-
-    //     });
-
-    //     axiosConfig.post("/trend/dayrangedtvrp", data).then(rsp => {
-
-    //         setTvrPercentCSV(rsp.data.values);
-    //     }).catch(err => {
-
-    //     });
-
-    // }
-
-    // }, [update]);
 
 
     useEffect(() => {
@@ -152,9 +123,41 @@ const DefinedChannelStatus = () => {
         })
 
     }, [])
-    
+
     const updater = () => {
         setUpdate(update + 1);
+    }
+
+    const DownloadAll = () => {
+        setallchannelf(true);
+        const wb = XLSX.utils.book_new();
+        let axiosArray = [];
+        console.log(channels.length);
+        channels.forEach((item) => {
+            //if (item.id < 2) {
+                let postData = { "id": item.id, "range": time, "start": start, "finish": finish };
+                let newPromise = axiosConfig.post('/dayparts/all', postData);
+                axiosArray.push(newPromise);
+            //}
+
+        })
+
+        Promise
+            .all(axiosArray)
+            .then(axios.spread((...responses) => {
+                responses.forEach((res) => {
+                    console.log('Success');
+                    console.log(res.data.channel);
+                    var ws = XLSX.utils.aoa_to_sheet(res.data.all);
+                    XLSX.utils.book_append_sheet(wb, ws, res.data.channel);
+
+                })
+
+                setallchannelf(false);
+                console.log('submitted all axios calls');
+                XLSX.writeFile(wb, "Day Parts All Channel.xlsx");
+            }))
+            .catch(error => { })
     }
     return (
         <div><Header title="Trend Analysis-Day Parts" />
@@ -220,9 +223,9 @@ const DefinedChannelStatus = () => {
                                             </select>
                                         </div>
 
-                                        <div class="col-md-7"></div>
+                                        {/*<div class="col-md-3"></div>
 
-                                        {/* <div class="col-md-2">
+                                         <div class="col-md-2">
                                             <label>Region</label>
                                             <select class="custom-select d-block w-100" onChange={(e) => { }}>
                                                 <option value="">All Region</option>
@@ -279,22 +282,41 @@ const DefinedChannelStatus = () => {
                                                 </div>
                                             </div>
                                         </div> */}
+                                        <div class="col-md-2"></div>
+                                        <div class="col-md-3">
+                                        {(() => {
+                                            if (allchannelf) {
+                                                return (
+                                                    <div class="row">
+                                                <div class="col-md-4"><img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/Loading_2.gif?20170503175831" style={{height:"5em",width:"5em"}} class="rounded mx-auto d-block" alt="..." /></div>
+                                                <div class="col-md-8"> Please Wait Some Minutes</div>
+                                                </div>
+                                                )
+                                            } else {
+                                                return 
 
+
+                                            }
+                                        })()}</div>
+                                        <div class="col-md-3">
+                                            <label>Download (All Channel)</label><br/>
+                                            <button onClick={DownloadAll} class="btn btn-danger">Download CSV</button>
+
+                                        </div>
                                         {(() => {
                                             if (reachPercentCSV.length > 0) {
                                                 return <div class="col-md-2">
-                                                    <label>Download All In One</label>
+                                                    <label>Download Data</label><br/>
                                                     <button onClick={Downloadfunc} class="btn btn-danger">Download CSV</button>
 
                                                 </div>
-                                                
+
                                             } else {
                                                 return null;
-                                                
+
 
                                             }
                                         })()}
-
                                     </div>
 
 
@@ -318,20 +340,21 @@ const DefinedChannelStatus = () => {
 
                         </div>
                         <div class="row">
-                        <div class="col-md-12">
-                                <PostLineGraph title="TVR (000)" text="Active Channels" url="trend/dayrangedtvr0" label="TVR (000)" color="violet" credentials={{ "id": id, "range": time, "start":start,"finish":finish }} parentPass={getTvr0} update={update} />
+                            <div class="col-md-12">
+                                <PostLineGraph title="TVR (000)" text="Active Channels" url="trend/dayrangedtvr0" label="TVR (000)" color="violet" credentials={{ "id": id, "range": time, "start": start, "finish": finish }} parentPass={getTvr0} update={update} />
 
                             </div>
                             <div class="col-md-12">
-                                <PostLineGraph title="TVR (%)" text="Active Channels" url="trend/dayrangedtvrp" label="TVR (%)" color="green" credentials={{ "id": id, "range": time, "start":start,"finish":finish }} parentPass={getTvrp} update={update} />
+                                <PostLineGraph title="TVR (%)" text="Active Channels" url="trend/dayrangedtvrp" label="TVR (%)" color="green" credentials={{ "id": id, "range": time, "start": start, "finish": finish }} parentPass={getTvrp} update={update} />
 
                             </div>
 
-                        </div> 
+                        </div>
 
                     </div>
                 </div>
             </div>
+
         </div>
 
 
