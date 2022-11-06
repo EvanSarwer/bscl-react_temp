@@ -89,7 +89,15 @@ const Overview = () => {
     }, [])
     const BasicchannelDownloadfunc = () => {
         //console.log(liveChannelData.labels[0]);
-        var csv = [["Channel", "Value"]];
+        if(userType == ""){
+            var csv = [[category, "All_User_type","Start-"+modify_date(start)+"_Finish-"+modify_date(finish)],["Channel", "Value"]];
+        }else if(userType == "OTT"){
+            var csv = [[category, userType,"Start-"+modify_date(start)+"_Finish-"+modify_date(finish)],["Channel", "Value"]];
+        }else if(userType == "STB"){
+            var csv = [[category, userType,(region? region:"All_Region"),(gender ? gender=="m"? "Male":"Female":"All-Gender"),(economic ? (economic==="a"?"Poorest":economic==="b"?"Poorer":economic==="c"?"Middle":economic==="d"?"Richer":"Richest"):"All SEC"),(socio ? socio== "u"? "Urban":"Rural":"Urban&Rural"),"Age-Range-"+parseInt(document.querySelector("#small-slider > div > div:nth-child(2) > div > div.noUi-tooltip").innerHTML)+" to "+parseInt(document.querySelector("#small-slider > div > div:nth-child(3) > div > div.noUi-tooltip").innerHTML),"Start-"+modify_date(start)+"_Finish-"+modify_date(finish)],["Channel", "Value"]];
+        }
+
+        //var csv = [["Channel", "Value"]];
         var sampleLive = channelData;
         console.log(sampleLive);
         for (var i = 0; i < sampleLive.labels.length; i++) {
@@ -138,7 +146,14 @@ const Overview = () => {
         }
     }
     var getCSV = (scsv) => {
-        exportToCsv("Basic_Report(" + category + ").csv", scsv)
+        if(userType == ""){
+            exportToCsv("Basic_Report(" + category +"_All-User-Type_"+modify_date(start)+" - "+modify_date(finish)+").csv", scsv)
+        }else if(userType == "OTT"){
+            exportToCsv("Basic_Report(" + category +"_"+userType+"_"+modify_date(start)+" - "+modify_date(finish)+").csv", scsv)
+        }else if(userType == "STB"){
+            exportToCsv("Basic_Report(" + category +"_"+userType+"_"+(region? region:"All_Region")+"_"+(gender ? gender=="m"? "Male":"Female":"All-Gender")+"_"+(economic ? (economic==="a"?"Poorest":economic==="b"?"Poorer":economic==="c"?"Middle":economic==="d"?"Richer":"Richest"):"All SEC")+"_"+(socio ? socio== "u"? "Urban":"Rural":"Urban&Rural")+"_Age-"+parseInt(document.querySelector("#small-slider > div > div:nth-child(2) > div > div.noUi-tooltip").innerHTML)+" - "+parseInt(document.querySelector("#small-slider > div > div:nth-child(3) > div > div.noUi-tooltip").innerHTML)+"_"+modify_date(start)+" - "+modify_date(finish)+").csv", scsv)
+        }
+        
     }
 
     const GetData = () => {
