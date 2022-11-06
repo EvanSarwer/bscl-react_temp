@@ -17,9 +17,8 @@ const DeviceList = () => {
     const [query, setQuery] = useState("");
     useEffect(() => {
         axiosConfig.get("/device/list").then((rsp) => {
-            debugger;
             setDevices(rsp.data);
-            console.log(rsp.data);
+            console.log(rsp.data[0].users[0].user_name);
         }, (err) => { });
 
 
@@ -117,7 +116,7 @@ const DeviceList = () => {
 
     const exportDevices = () => {
         //console.log(liveChannelData.labels[0]);
-        var csv = [["Id", "Name","Contact Person","Contact No","Alt No","Email","SEC","Adress","Ward","City Corp","District","Household Cond","TV Details","GSM Status","Wifi","STB Provider","STB Subscription","Installation Date","Deployer","Survey Date"]];
+        var csv = [["Id", "Name","Contact Person","Contact No","Alt No","Email","SEC","Adress","Ward","City Corp","District","Household Cond","TV Details","GSM Status","Wifi","STB Provider","STB Subscription","Installation Date","Deployer","Survey Date","1st_Index_User_Name","1st_Index_User_Info","2nd_Index_User_Name","2nd_Index_User_Info","3rd_Index_User_Name","3rd_Index_User_Info","4th_Index_User_Name","4th_Index_User_Info","5th_Index_User_Name","5th_Index_User_Info","6th_Index_User_Name","6th_Index_User_Info","7th_Index_User_Name","7th_Index_User_Info","8th_Index_User_Name","8th_Index_User_Info"]];
         
         for (var i = 0; i < devices.length; i++) {
             if(devices[i].contact_person){
@@ -141,7 +140,23 @@ const DeviceList = () => {
                             devices[i].stb_subscription_type+", "+devices[i].stb_subscription_charge,
                             devices[i].installation_date,
                             devices[i].installer_name,
-                            devices[i].survey_date
+                            devices[i].survey_date,
+                            (devices[i]?.users[0]?.user_name? devices[i].users[0].user_name : ""),
+                            (devices[i]?.users[0]?.gender? ("Gender:" +(devices[i].users[0].gender =="m"? "Male":"Female")) : "") +""+(devices[i]?.users[0]?.dob? ", DOB:"+devices[i].users[0].dob : ""),
+                            (devices[i]?.users[1]?.user_name? devices[i].users[1].user_name : ""),
+                            (devices[i]?.users[1]?.gender? ("Gender:" +(devices[i].users[1].gender =="m"? "Male":"Female")) : "") +""+(devices[i]?.users[1]?.dob? ", DOB:"+devices[i].users[1].dob : ""),
+                            (devices[i]?.users[2]?.user_name? devices[i].users[2].user_name : ""),
+                            (devices[i]?.users[2]?.gender? ("Gender:" +(devices[i].users[2].gender =="m"? "Male":"Female")) : "") +""+(devices[i]?.users[2]?.dob? ", DOB:"+devices[i].users[2].dob : ""),
+                            (devices[i]?.users[3]?.user_name? devices[i].users[3].user_name : ""),
+                            (devices[i]?.users[3]?.gender? ("Gender:" +(devices[i].users[3].gender =="m"? "Male":"Female")) : "") +""+(devices[i]?.users[3]?.dob? ", DOB:"+devices[i].users[3].dob : ""),
+                            (devices[i]?.users[4]?.user_name? devices[i].users[4].user_name : ""),
+                            (devices[i]?.users[4]?.gender? ("Gender:" +(devices[i].users[4].gender =="m"? "Male":"Female")) : "") +""+(devices[i]?.users[4]?.dob? ", DOB:"+devices[i].users[4].dob : ""),
+                            (devices[i]?.users[5]?.user_name? devices[i].users[5].user_name : ""),
+                            (devices[i]?.users[5]?.gender? ("Gender:" +(devices[i].users[5].gender =="m"? "Male":"Female")) : "") +""+(devices[i]?.users[5]?.dob? ", DOB:"+devices[i].users[5].dob : ""),
+                            (devices[i]?.users[6]?.user_name? devices[i].users[6].user_name : ""),
+                            (devices[i]?.users[6]?.gender? ("Gender:" +(devices[i].users[6].gender =="m"? "Male":"Female")) : "") +""+(devices[i]?.users[6]?.dob? ", DOB:"+devices[i].users[6].dob : ""),
+                            (devices[i]?.users[7]?.user_name? devices[i].users[7].user_name : ""),
+                            (devices[i]?.users[7]?.gender? ("Gender:" +(devices[i].users[7].gender =="m"? "Male":"Female")) : "") +""+(devices[i]?.users[7]?.dob? ", DOB:"+devices[i].users[7].dob : ""),
                         ]);
             }
                 
