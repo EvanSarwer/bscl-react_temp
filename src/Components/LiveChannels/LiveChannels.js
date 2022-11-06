@@ -34,6 +34,12 @@ const LiveChannels = () => {
         datasets: []
     });
 
+    function pad(n) {
+        return n < 10 ? '0' + n : n
+    }
+    var today = new Date(),
+        datetime = today.getFullYear() + '-' + pad((today.getMonth() + 1)) + '-' + pad(today.getDate()) + ' ' + today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+
 
     function exportToCsv(filename, rows) {
         var processRow = function (row) {
@@ -74,12 +80,29 @@ const LiveChannels = () => {
         }
     }
     var getCSV = (scsv) => {
-        exportToCsv("Acive-User.csv", scsv)
+        if (userType == "") {
+            exportToCsv("Active_User(_All-User-Type_" + modify_date(datetime)+ ").csv", scsv)
+        } else if (userType == "OTT") {
+            exportToCsv("Active_User(" + userType + "_" + modify_date(datetime) + ").csv", scsv)
+        } else if (userType == "STB") {
+            exportToCsv("Active_User(" + userType + "_" + (region ? region : "All_Region") + "_" + (gender ? gender == "m" ? "Male" : "Female" : "All-Gender") + "_" + (economic ? (economic === "a" ? "Poorest" : economic === "b" ? "Poorer" : economic === "c" ? "Middle" : economic === "d" ? "Richer" : "Richest") : "All SEC") + "_" + (socio ? socio == "u" ? "Urban" : "Rural" : "Urban&Rural") + "_Age-" + parseInt(document.querySelector("#small-slider > div > div:nth-child(2) > div > div.noUi-tooltip").innerHTML) + " - " + parseInt(document.querySelector("#small-slider > div > div:nth-child(3) > div > div.noUi-tooltip").innerHTML) + "_" + modify_date(datetime) + ").csv", scsv)
+        }
+
+        //exportToCsv("Acive-User.csv", scsv)
     }
 
     const LivechannelDownloadfunc = () => {
         //console.log(liveChannelData.labels[0]);
-        var csv = [["Channel", "Active Users"]];
+        if(userType == ""){
+            var csv = [["All_User_type","Time-"+modify_date(datetime)],["Channel", "Active_Users"]];
+        }else if(userType == "OTT"){
+            var csv = [[userType,"Time-"+modify_date(datetime)],["Channel", "Active_Users"]];
+        }else if(userType == "STB"){
+            var csv = [[userType,(region? region:"All_Region"),(gender ? gender=="m"? "Male":"Female":"All-Gender"),(economic ? (economic==="a"?"Poorest":economic==="b"?"Poorer":economic==="c"?"Middle":economic==="d"?"Richer":"Richest"):"All SEC"),(socio ? socio== "u"? "Urban":"Rural":"Urban&Rural"),"Age-Range-"+parseInt(document.querySelector("#small-slider > div > div:nth-child(2) > div > div.noUi-tooltip").innerHTML)+" to "+parseInt(document.querySelector("#small-slider > div > div:nth-child(3) > div > div.noUi-tooltip").innerHTML),"Time-"+modify_date(datetime)],["Channel", "Active_Users"]];
+        }
+
+
+        //var csv = [["Channel", "Active Users"]];
         var sampleLive = activeUserCSV;
         for (var i = 0; i < sampleLive.labels.length; i++) {
             csv.push([sampleLive.labels[i], sampleLive.values[i]]);
@@ -124,7 +147,16 @@ const LiveChannels = () => {
     }, [region, gender, economic, socio, userType, age]);
 
 
+    const modify_date = (date) => {
 
+        return new Date(date).toLocaleString(undefined, {
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+        });
+    }
 
 
     return (
