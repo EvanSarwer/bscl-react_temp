@@ -202,7 +202,7 @@ const DeviceList = () => {
                                                                             <td>{device.id}</td>
                                                                             {/* <td><a href={`/device/details/${device.id}`}>{device.device_name}</a></td> */}
                                                                             {/*<td><a data-toggle="modal" data-target={`#exampleModal_${device.id}`}>{device.device_name}</a>*<PopUpDetails id={device.id}/></td>*/}
-                                                                            <td><a href={`/device/detail/${device.id}`}>{device.device_name}</a><PopUpDetails id={device.id}/></td>
+                                                                            <td><a href={`/device/detail/${device.id}`}>{device.device_name}</a></td>
                                                                             <td>{device.district}</td>
                                                                             <td>{device.type}</td>
                                                                             {/* <td>{user.gender}</td>
