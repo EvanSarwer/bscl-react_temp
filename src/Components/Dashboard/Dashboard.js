@@ -9,10 +9,13 @@ import axios from 'axios';
 import axiosConfig from "../axiosConfig";
 import Header from '../Header/Header';
 import MainMenu from '../MainMenu/MainMenu';
+import PieGraph from '../Graph/PieGraph';
+import Cookies from 'universal-cookie';
 
 
 
 const Dashboard = () => {
+    const cookies = new Cookies();
 
     return (
         <div>
@@ -29,14 +32,31 @@ const Dashboard = () => {
                         <CurrentStatus />
 
                         {/* Dashboard Table Start */}
-                        <div class="row" style={{ minHeight: '390px' }}>
-                            <div class="col-xl-8 col-12">
+                        {cookies.get('_role') === "admin" &&
+                            <div class="row" style={{ minHeight: '390px' }}>
+                                <div class="col-xl-8 col-12">
+                                    <ActiveUserTable />
+                                </div>
+                                <div class="col-xl-4 col-12">
+                                    <ActiveChannelTable />
+                                </div>
+                            </div>
+                        }
+
+                        {cookies.get('_role') === "general" &&
+                            <div class="row" >
+                                {/* <div class="col-xl-12 col-12">
                                 <ActiveUserTable />
+                            </div> */}
+                                <div class="card col-xl-6 col-12" style={{ minHeight: '500px', maxHeight: '550px' }}>
+                                    <ActiveChannelTable />
+                                </div>
+                                <div class="col-xl-6 col-12" style={{ minHeight: '500px', maxHeight: '550px' }}>
+                                    <PieGraph title="Daily Top Share" text="Channel vs TVR" url="sharegraph/dashboard" color="yellow" get={true} timerange={true} />
+                                </div>
                             </div>
-                            <div class="col-xl-4 col-12">
-                                <ActiveChannelTable />
-                            </div>
-                        </div>
+                        }
+
 
 
                         {/* Dashboard Graph Start */}

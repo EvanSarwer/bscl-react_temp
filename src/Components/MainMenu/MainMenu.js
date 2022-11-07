@@ -14,7 +14,7 @@ const MainMenu = (props) => {
 
 
                     {(() => {
-                        if (cookies.get('_role') === "admin") {
+                        if (cookies.get('_role') === "admin" || cookies.get('_role') === "general") {
                             if (props.menu === "dashboard") {
                                 return (
                                     <li class="active nav-item"><a href="/"><i class="la la-home"></i><span class="menu-title" data-i18n="Dashboard">Dashboard</span><span class="badge badge badge-info badge-pill float-right mr-2"></span></a>
@@ -31,7 +31,7 @@ const MainMenu = (props) => {
                     })()}
 
                     {(() => {
-                        if (cookies.get('_role') === "admin") {
+                        if (cookies.get('_role') === "admin" || cookies.get('_role') === "general") {
                             if (props.menu === "basicreports") {
                                 return (
                                     <li class="active nav-item"><a href="/overview"><i class="la la-history"></i><span class="menu-title" data-i18n="Templates">Basic Reports</span></a>
@@ -48,7 +48,7 @@ const MainMenu = (props) => {
 
 
                     {(() => {
-                        if (cookies.get('_role') === "admin") {
+                        if (cookies.get('_role') === "admin" || cookies.get('_role') === "general") {
                             if (props.menu === "livechannels") {
                                 return (
                                     <li class="active nav-item"><a href="/livechannels"><i class="la la-tencent-weibo"></i><span class="menu-title" data-i18n="Templates">Live Channels</span></a>
@@ -128,13 +128,13 @@ const MainMenu = (props) => {
                     })()}
 
                     {(() => {
-                        if (cookies.get('_role') === "admin") {
+                        if (cookies.get('_role') === "admin" || cookies.get('_role') === "general") {
                             return <li class=" nav-item"><a  ><i class="la la-television"></i><span class="menu-title" data-i18n="Templates">Trend Analysis</span></a>
                                 <div>
                                     <ul class="menu-content">
 
                                         {(() => {
-                                            if (cookies.get('_role') === "admin") {
+                                            if (cookies.get('_role') === "admin" || cookies.get('_role') === "general") {
                                                 if (props.menu === "trendgeneral") {
                                                     return (
                                                         <li class="active"><a class="menu-item" href="/channelstatus"><i></i><span data-i18n="Crypto">General</span></a>
@@ -164,7 +164,7 @@ const MainMenu = (props) => {
                                 })()} */}
 
                                         {(() => {
-                                            if (cookies.get('_role') === "admin") {
+                                            if (cookies.get('_role') === "admin" || cookies.get('_role') === "general") {
                                                 if (props.menu === "daytrendranged") {
                                                     return (
                                                         <li class="active"><a class="menu-item" href="/dayrangedchannelstatus"><i></i><span data-i18n="Crypto">Day-Ranged</span></a>
@@ -180,7 +180,7 @@ const MainMenu = (props) => {
                                         })()}
 
                                         {(() => {
-                                            if (cookies.get('_role') === "admin") {
+                                            if (cookies.get('_role') === "admin" || cookies.get('_role') === "general") {
                                                 if (props.menu === "trenddaypart") {
                                                     return (
                                                         <li class="active"><a class="menu-item" href="/definedchannelstatus"><i></i><span data-i18n="Crypto">Day Parts</span></a>
@@ -206,7 +206,7 @@ const MainMenu = (props) => {
                     })()}
 
                     {(() => {
-                        if (cookies.get('_role') === "admin") {
+                        if (cookies.get('_role') === "admin" || cookies.get('_role') === "general") {
                             if (props.menu === "reportgeneration") {
                                 return (
                                     <li class="active nav-item"><a href="/downloadreport"><i class="la la-download"></i><span class="menu-title" data-i18n="Templates">Report Generation</span></a>
@@ -312,7 +312,7 @@ const MainMenu = (props) => {
                         }
                     })()} */}
                     {(() => {
-                        if (cookies.get('_role') === "admin") {
+                        if (cookies.get('_role') === "admin" || cookies.get('_role') === "general") {
                             if (props.menu === "dailyadtrp") {
                                 return (
                                     <li class="active nav-item"><a href="/dailyadtrp"><i class="la la-download"></i><span class="menu-title" data-i18n="Templates">Ad Trp</span></a>
