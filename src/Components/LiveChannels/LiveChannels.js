@@ -14,7 +14,6 @@ import Header from '../Header/Header';
 import MainMenu from '../MainMenu/MainMenu';
 import Cookies from 'universal-cookie';
 import LiveMap from "./LiveMap";
-import MainMenuUser from '../MainMenu/MainMenuUser';
 
 
 
@@ -81,7 +80,7 @@ const LiveChannels = () => {
     }
     var getCSV = (scsv) => {
         if (userType == "") {
-            exportToCsv("Active_User(_All-User-Type_" + modify_date(datetime)+ ").csv", scsv)
+            exportToCsv("Active_User(_All-User-Type_" + modify_date(datetime) + ").csv", scsv)
         } else if (userType == "OTT") {
             exportToCsv("Active_User(" + userType + "_" + modify_date(datetime) + ").csv", scsv)
         } else if (userType == "STB") {
@@ -93,12 +92,12 @@ const LiveChannels = () => {
 
     const LivechannelDownloadfunc = () => {
         //console.log(liveChannelData.labels[0]);
-        if(userType == ""){
-            var csv = [["All_User_type","Time-"+modify_date(datetime)],["Channel", "Active_Users"]];
-        }else if(userType == "OTT"){
-            var csv = [[userType,"Time-"+modify_date(datetime)],["Channel", "Active_Users"]];
-        }else if(userType == "STB"){
-            var csv = [[userType,(region? region:"All_Region"),(gender ? gender=="m"? "Male":"Female":"All-Gender"),(economic ? (economic==="a"?"Poorest":economic==="b"?"Poorer":economic==="c"?"Middle":economic==="d"?"Richer":"Richest"):"All SEC"),(socio ? socio== "u"? "Urban":"Rural":"Urban&Rural"),"Age-Range-"+parseInt(document.querySelector("#small-slider > div > div:nth-child(2) > div > div.noUi-tooltip").innerHTML)+" to "+parseInt(document.querySelector("#small-slider > div > div:nth-child(3) > div > div.noUi-tooltip").innerHTML),"Time-"+modify_date(datetime)],["Channel", "Active_Users"]];
+        if (userType == "") {
+            var csv = [["All_User_type", "Time-" + modify_date(datetime)], ["Channel", "Active_Users"]];
+        } else if (userType == "OTT") {
+            var csv = [[userType, "Time-" + modify_date(datetime)], ["Channel", "Active_Users"]];
+        } else if (userType == "STB") {
+            var csv = [[userType, (region ? region : "All_Region"), (gender ? gender == "m" ? "Male" : "Female" : "All-Gender"), (economic ? (economic === "a" ? "Poorest" : economic === "b" ? "Poorer" : economic === "c" ? "Middle" : economic === "d" ? "Richer" : "Richest") : "All SEC"), (socio ? socio == "u" ? "Urban" : "Rural" : "Urban&Rural"), "Age-Range-" + parseInt(document.querySelector("#small-slider > div > div:nth-child(2) > div > div.noUi-tooltip").innerHTML) + " to " + parseInt(document.querySelector("#small-slider > div > div:nth-child(3) > div > div.noUi-tooltip").innerHTML), "Time-" + modify_date(datetime)], ["Channel", "Active_Users"]];
         }
 
 
@@ -161,18 +160,7 @@ const LiveChannels = () => {
 
     return (
         <div><Header title="Live Channels" />
-
-            {(() => {
-                if (cookies.get('_role') === "general") {
-                    return (
-                        <MainMenuUser menu="livechannels" />
-                    )
-                } else {
-                    return (
-                        <MainMenu menu="livechannels" />
-                    )
-                }
-            })()}
+            <MainMenu menu="livechannels" />
 
             {/* <div class="app-content content"> */}
             <div class=" content">

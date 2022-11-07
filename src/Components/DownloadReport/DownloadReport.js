@@ -4,8 +4,10 @@ import React from 'react';
 import Select from 'react-select';
 import Header from "../Header/Header";
 import MainMenu from "../MainMenu/MainMenu";
+import Cookies from 'universal-cookie';
 
 const DownloadReport = () => {
+    const cookies = new Cookies();
 
     const [region, setRegion] = useState("");
     const [gender, setGender] = useState("");
@@ -79,14 +81,14 @@ const DownloadReport = () => {
         }
     }
     var getCSV = (scsv, type) => {
-        if(type === "basic-report"){
-            exportToCsv("Basic_Report(" + category + ")_"+start+" to "+finish+".csv", scsv)
-        }else if(type === "user-status"){
+        if (type === "basic-report") {
+            exportToCsv("Basic_Report(" + category + ")_" + start + " to " + finish + ".csv", scsv)
+        } else if (type === "user-status") {
             exportToCsv("User-General_Report(" + time + ").csv", scsv)
-        }else if( type === "live-channel" ){
+        } else if (type === "live-channel") {
             exportToCsv("Live-Channel_Report.csv", scsv)
         }
-        
+
     }
     useEffect(() => {
         var data = {
@@ -133,14 +135,15 @@ const DownloadReport = () => {
     }
 
     useEffect(() => {
+        if (cookies.get('_role') === "admin") {
+            axiosConfig.get("/getuserlist").then(rsp => {
+                console.log(rsp.data.users);
+                setUsers(rsp.data.users);
 
-        axiosConfig.get("/getuserlist").then(rsp => {
-            console.log(rsp.data.users);
-            setUsers(rsp.data.users);
+            }).catch(err => {
 
-        }).catch(err => {
-
-        })
+            })
+        }
 
     }, [])
 
@@ -150,16 +153,17 @@ const DownloadReport = () => {
             time: time,
         };
 
-        axiosConfig.post("/user/usertimespent", data).then(rsp => {
-            console.log(rsp.data);
-            setuserstatusChannelData(() => ({
-                labels: rsp.data.channels, values: rsp.data.totaltime
-            }));
-            //console.log(userstatuschannelData);
-        }).catch(err => {
+        if (cookies.get('_role') === "admin") {
+            axiosConfig.post("/user/usertimespent", data).then(rsp => {
+                console.log(rsp.data);
+                setuserstatusChannelData(() => ({
+                    labels: rsp.data.channels, values: rsp.data.totaltime
+                }));
+                //console.log(userstatuschannelData);
+            }).catch(err => {
 
-        });
-
+            });
+        }
 
 
     }, [user, time]);
@@ -273,47 +277,49 @@ const DownloadReport = () => {
                     </div>
                     <div class="content-body">
 
+                        {cookies.get('_role') === "admin" &&
+                            <div class="card">
+                                <div class="card-content">
+                                    <div class="card-body">
+                                        <h1>Download User(General) Report:</h1>
+
+                                        <div class="row">
+
+                                            <div class="col-md-5">
+                                                <Select
+                                                    placeholder="Select User"
+                                                    options={users.map(user => ({ label: user.user_name, value: user.id }))}
+                                                    onChange={opt => setUser(opt.value)}
+                                                />
+                                            </div>
+                                            <div class="col-md-5">
+                                                <select class="custom-select d-block w-100" onChange={(e) => { setTime(e.target.value) }}>
+                                                    <option value="">Select Time Frame</option>
+                                                    <option value="Daily">Last 24 Hours</option>
+                                                    <option value="Weekly">Last 7 Days</option>
+                                                    <option value="Monthly">Last 30 Days</option>
+                                                    <option value="Yearly">Last 365 Days</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="col-md-2">
+
+                                                <button onClick={userstatusDownloadfunc} class="btn btn-danger">Download CSV</button>
 
 
-                        <div class="card">
-                            <div class="card-content">
-                                <div class="card-body">
-                                    <h1>Download User(General) Report:</h1>
 
-                                    <div class="row">
-
-                                        <div class="col-md-5">
-                                            <Select
-                                                placeholder="Select User"
-                                                options={users.map(user => ({ label: user.user_name, value: user.id }))}
-                                                onChange={opt => setUser(opt.value)}
-                                            />
+                                            </div>
                                         </div>
-                                        <div class="col-md-5">
-                                            <select class="custom-select d-block w-100" onChange={(e) => { setTime(e.target.value) }}>
-                                                <option value="">Select Time Frame</option>
-                                                <option value="Daily">Last 24 Hours</option>
-                                                <option value="Weekly">Last 7 Days</option>
-                                                <option value="Monthly">Last 30 Days</option>
-                                                <option value="Yearly">Last 365 Days</option>
-                                            </select>
-                                        </div>
 
-                                        <div class="col-md-2">
+                                        <br />
+                                        <br />
 
-                                            <button onClick={userstatusDownloadfunc} class="btn btn-danger">Download CSV</button>
-
-
-
-                                        </div>
                                     </div>
-
-                                    <br />
-                                    <br />
-
                                 </div>
                             </div>
-                        </div>
+                        }
+
+
 
 
 

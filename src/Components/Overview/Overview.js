@@ -13,7 +13,6 @@ import { Chart as ChartJS } from 'chart.js/auto';
 import Header from '../Header/Header';
 import MainMenu from '../MainMenu/MainMenu';
 import Cookies from 'universal-cookie';
-import MainMenuUser from '../MainMenu/MainMenuUser';
 
 
 const Overview = () => {
@@ -311,17 +310,8 @@ const Overview = () => {
     return (
         <div>
             <Header title="Basic Reports" />
-            {(() => {
-                if (cookies.get('_role') === "general") {
-                    return (
-                        <MainMenuUser menu="basicreports" />
-                    )
-                } else {
-                    return (
-                        <MainMenu menu="basicreports" />
-                    )
-                }
-            })()}
+            <MainMenu menu="basicreports" />
+            
             <div class="app-content content">
                 <div class="content-overlay"></div>
                 <div class="content-wrapper" style={{ backgroundColor: "azure" }} >
