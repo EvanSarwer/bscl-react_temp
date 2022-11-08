@@ -21,7 +21,7 @@ const Overview = () => {
     function pad(n) {
         return n < 10 ? '0' + n : n
     }
-    var yesterday = new Date(new Date().getTime() - (24 * 60 * 60 * 1000)),
+    var yesterday = new Date(new Date().getTime() - (2*(24 * 60 * 60 * 1000))),
         y_datetime = yesterday.getFullYear() + '-' + pad((yesterday.getMonth() + 1)) + '-' + pad(yesterday.getDate()) + ' ' + yesterday.getHours() + ':' + yesterday.getMinutes() + ':' + yesterday.getSeconds();
 
     var today = new Date(),
@@ -30,7 +30,7 @@ const Overview = () => {
     if (cookies.get('_role') === "admin") {
         var role_datetime = today.getFullYear() + '-' + pad((today.getMonth() + 1)) + '-' + pad(today.getDate()) + ' ' + today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
     } else if (cookies.get('_role') === "general" || cookies.get('_role') === "add-agency") {
-        var role_datetime = yesterday.getFullYear() + '-' + pad((yesterday.getMonth() + 1)) + '-' + pad(yesterday.getDate()) + ' 00:00:00';
+        var role_datetime = yesterday.getFullYear() + '-' + pad((yesterday.getMonth() + 1)) + '-' + pad(yesterday.getDate()) + ' 23:59:59';
     }
 
     console.log(role_datetime);
@@ -303,6 +303,7 @@ const Overview = () => {
             year: 'numeric',
             hour: '2-digit',
             minute: '2-digit',
+            second: '2-digit',
         });
     }
 
@@ -458,7 +459,7 @@ const Overview = () => {
                                         return (
                                             <div class="card">
                                                 <div class="card-header">
-                                                    <div class="h2 card-title text-warning font-weight-bold">Please enter a valid date before <span class="text-primary bold"> {modify_date(role_datetime)}</span></div>
+                                                    <div class="h2 card-title text-warning font-weight-bold">Please enter a valid date until <span class="text-primary bold"> {modify_date(role_datetime)}</span></div>
 
                                                 </div>
                                                 <div class="card-body collapse show">
