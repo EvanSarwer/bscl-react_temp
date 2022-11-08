@@ -43,7 +43,7 @@ const Dashboard = () => {
                             </div>
                         }
 
-                        {cookies.get('_role') === "general" &&
+                        {(cookies.get('_role') === "general" || cookies.get('_role') === "add-agency") &&
                             <div class="row" >
                                 {/* <div class="col-xl-12 col-12">
                                 <ActiveUserTable />

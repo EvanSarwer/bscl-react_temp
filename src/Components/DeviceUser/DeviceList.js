@@ -116,7 +116,7 @@ const DeviceList = () => {
 
     const exportDevices = () => {
         //console.log(liveChannelData.labels[0]);
-        var csv = [["Id", "Name","Contact Person","Contact No","Alt No","Email","SEC","Adress","Ward","City Corp","District","Household Cond","TV Details","GSM Status","Wifi","STB Provider","STB Subscription","Installation Date","Deployer","Survey Date","1st_Index_User_Name","1st_Index_User_Info","2nd_Index_User_Name","2nd_Index_User_Info","3rd_Index_User_Name","3rd_Index_User_Info","4th_Index_User_Name","4th_Index_User_Info","5th_Index_User_Name","5th_Index_User_Info","6th_Index_User_Name","6th_Index_User_Info","7th_Index_User_Name","7th_Index_User_Info","8th_Index_User_Name","8th_Index_User_Info"]];
+        var csv = [["Id", "Name","Contact Person","Contact No","Alt No","Email","SEC","Adress","Area/State","Ward","City Corp","District","Lat, Lang","Household Cond","TV Details","GSM Status","Wifi","STB Provider","STB Subscription","Installation Date","Deployer","Survey Date","1st_Index_User_Name","1st_Index_User_Info","2nd_Index_User_Name","2nd_Index_User_Info","3rd_Index_User_Name","3rd_Index_User_Info","4th_Index_User_Name","4th_Index_User_Info","5th_Index_User_Name","5th_Index_User_Info","6th_Index_User_Name","6th_Index_User_Info","7th_Index_User_Name","7th_Index_User_Info","8th_Index_User_Name","8th_Index_User_Info"]];
         
         for (var i = 0; i < devices.length; i++) {
             if(devices[i].contact_person){
@@ -129,9 +129,11 @@ const DeviceList = () => {
                             devices[i].contact_email,
                             devices[i].economic_status,
                             "House:" +devices[i].house_number +", "+devices[i].house_name+ ", Road#:"+devices[i].road_number,
+                            devices[i].state_name,
                             devices[i].ward_no,
                             devices[i].city_corporation,
                             devices[i].district,
+                            devices[i].lat+", "+devices[i].lng,
                             devices[i].household_condition,
                             devices[i].tv_type+" "+devices[i].tv_brand+",Placed in " +devices[i].tv_placement,
                             devices[i].gsm_signal_strength,

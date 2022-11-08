@@ -29,7 +29,7 @@ const Overview = () => {
 
     if (cookies.get('_role') === "admin") {
         var role_datetime = today.getFullYear() + '-' + pad((today.getMonth() + 1)) + '-' + pad(today.getDate()) + ' ' + today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
-    } else if (cookies.get('_role') === "general") {
+    } else if (cookies.get('_role') === "general" || cookies.get('_role') === "add-agency") {
         var role_datetime = yesterday.getFullYear() + '-' + pad((yesterday.getMonth() + 1)) + '-' + pad(yesterday.getDate()) + ' 00:00:00';
     }
 

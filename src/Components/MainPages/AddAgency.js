@@ -20,7 +20,7 @@ import Dashboard from "../Dashboard/Dashboard";
 import ProgramTrp from '../ProgramTrp/ProgramTrp';
 import PlayoutUpload from '../PlayoutUpload/PlayoutUpload';
 
-function User() {
+function AddAgency() {
 
   return (
     <div>
@@ -57,4 +57,4 @@ function User() {
     );
 }
 
-export default User;
+export default AddAgency;
