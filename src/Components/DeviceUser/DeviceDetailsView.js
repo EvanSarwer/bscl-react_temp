@@ -179,6 +179,10 @@ const DeviceDetailsView=()=>{
                         <td>House: {houseName},{houseNumber},Road#:{roadNumber}</td>
                     </tr>
                     <tr>
+                        <td>Area/State</td>
+                        <td>{stateName}</td>
+                    </tr>
+                    <tr>
                         <td>Ward</td>
                         <td>{wardNo}</td>
                     </tr>
@@ -189,6 +193,10 @@ const DeviceDetailsView=()=>{
                     <tr>
                         <td>District</td>
                         <td>{districtName}</td>
+                    </tr>
+                    <tr>
+                        <td>Latitude & Longitude</td>
+                        <td>{latitude}, {longitude}</td>
                     </tr>
                     <tr>
                         <td>Household Condition</td>
