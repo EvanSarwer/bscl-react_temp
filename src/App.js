@@ -5,6 +5,7 @@ import MainPage from './Components/MainPages/MainPage';
 import User from './Components/MainPages/User';
 import Cookies from 'universal-cookie';
 import Deployer from './Components/MainPages/Deployer';
+import AddAgency from './Components/MainPages/AddAgency';
 //import GitInfo from 'react-git-info/macro';
 //const gitInfo = GitInfo();
 function App() {
@@ -25,6 +26,15 @@ function App() {
       <div>
 
         <User />
+      </div>
+    );
+  }
+
+  else if (cookies.get('_authToken') != null && cookies.get('_role')== "add-agency") {
+    return (
+      <div>
+
+        <AddAgency />
       </div>
     );
   }
