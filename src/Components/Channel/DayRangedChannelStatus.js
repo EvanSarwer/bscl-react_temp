@@ -251,11 +251,8 @@ const DayRangedChannelStatus = () => {
                                         <div class="col-md-1">
                                             <br />
                                             <div class="h4 font-weight-bold">Select Year</div>
-                                            <input type="checkbox" name="year" value="2018" onChange={function (event) { checkbox('year'); }} />2018<br />
-                                            <input type="checkbox" name="year" value="2019" onChange={function (event) { checkbox('year'); }} />2019<br />
-                                            <input type="checkbox" name="year" value="2020" onChange={function (event) { checkbox('year'); }} />2020<br />
-                                            <input type="checkbox" name="year" value="2021" onChange={function (event) { checkbox('year'); }} />2021<br />
-                                            <input type="checkbox" name="year" value="2022" onChange={function (event) { checkbox('year'); }} />2022
+                                            <input type="checkbox" name="year" value="2022" onChange={function (event) { checkbox('year'); }} />2022<br />
+                                            <input type="checkbox" name="year" value="2023" onChange={function (event) { checkbox('year'); }} />2023
                                         </div>
 
 
