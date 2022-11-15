@@ -6,6 +6,8 @@ import { useParams } from "react-router-dom";
 const DeployerForm = (props) => {
     const { token } = useParams();
     const [name, setName] = useState("");
+    const [education, setEducation] = useState("");
+    const [occupation, setOccupation] = useState("");
     const [organizationName, setOrganizationName] = useState("");
     const [designation, setDesignation] = useState("");
     const [number, setNumber] = useState("");
@@ -31,7 +33,6 @@ const DeployerForm = (props) => {
 
 
     console.log(token);
-    debugger;
 
     useEffect(() => {
 
@@ -120,7 +121,6 @@ const DeployerForm = (props) => {
             const obj = { user_name: name, email: email, address: address, phone: phone };
             axiosConfig.post("/appuser/edit", obj).then((rsp) => {
 
-
                 alert(rsp.data.message);
                 window.location.href = "/app/users";
 
@@ -133,7 +133,7 @@ const DeployerForm = (props) => {
         }
 
         else {
-            const obj = { user_name: name, organization_name: organizationName, designation: designation, email: email, password: password, c_password: c_password, number: number, alt_number: altNumber, doj: doj, dob: dob, nid: nid, employee_id: employeeID, description: description, house_name: houseName, house_number: houseNumber, road_number: roadNumber, state_name: stateName, district_name: districtName, division_name: divisionName };
+            const obj = { user_name: name,education:education, occupation:occupation ,organization_name: organizationName, designation: designation, email: email, password: password, c_password: c_password, number: number, alt_number: altNumber, doj: doj, dob: dob, nid: nid, employee_id: employeeID, description: description, house_name: houseName, house_number: houseNumber, road_number: roadNumber, state_name: stateName, district_name: districtName, division_name: divisionName };
 
             if (checkbox1 == "true" && checkbox2 == "true") {
                 axiosConfig.post("/deployer/create", obj).then((rsp) => {
@@ -198,6 +198,32 @@ const DeployerForm = (props) => {
                                                         </div>
                                                         <div className="help-block font-small-3" />
                                                         <span class="text-danger">{err_msg.user_name ? err_msg.user_name[0] : ''}</span>
+                                                    </fieldset>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><h5>Education:</h5></td>
+                                                <td colspan={3}>
+                                                    <fieldset className="form-group position-relative has-icon-left">
+                                                        <input type="text" name="education" id="education" className="form-control" value={education} onChange={(e) => { setEducation(e.target.value) }} placeholder="Education" tabIndex={2} required data-validation-required-message="Please enter education." />
+                                                        <div className="form-control-position">
+                                                            <i className="la la-graduation-cap" />
+                                                        </div>
+                                                        <div className="help-block font-small-3" />
+                                                        <span class="text-danger">{err_msg.education ? err_msg.education[0] : ''}</span>
+                                                    </fieldset>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><h5>Occupation:</h5></td>
+                                                <td colspan={3}>
+                                                    <fieldset className="form-group position-relative has-icon-left">
+                                                        <input type="text" name="occupation" id="occupation" className="form-control" value={occupation} onChange={(e) => { setOccupation(e.target.value) }} placeholder="Occupation" tabIndex={3} required data-validation-required-message="Please enter your occupation." />
+                                                        <div className="form-control-position">
+                                                            <i className="la la-institution" />
+                                                        </div>
+                                                        <div className="help-block font-small-3" />
+                                                        <span class="text-danger">{err_msg.occupation ? err_msg.occupation[0] : ''}</span>
                                                     </fieldset>
                                                 </td>
                                             </tr>
