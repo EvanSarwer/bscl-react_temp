@@ -25,7 +25,7 @@ const LiveChannels = () => {
     const [economic, setEconomic] = useState("");
     const [socio, setSocio] = useState("");
     const [age, setAge] = useState("");
-    const [userType, setUserType] = useState("");
+    const [userType, setUserType] = useState("STB");
     const [activeUserCSV, setActiveUserCSV] = useState({});
     const [points, setpoints] = useState([]);
     const [channelData, setChannelData] = useState({
@@ -170,7 +170,7 @@ const LiveChannels = () => {
 
                         <div class="row">
                             <div class="col-md-2">
-                                <select class="custom-select d-block w-100" onChange={(e) => { setUserType(e.target.value) }}>
+                                <select class="custom-select d-block w-100" value={userType} onChange={(e) => { setUserType(e.target.value) }}>
                                     <option value="">All (STB/OTT)</option>
                                     <option value="STB">STB</option>
                                     <option value="OTT">OTT</option>
