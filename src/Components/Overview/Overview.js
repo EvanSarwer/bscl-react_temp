@@ -38,7 +38,7 @@ const Overview = () => {
     const [category, setCategory] = useState("Reach(000)");
     const [start, setStart] = useState(y_datetime);
     const [finish, setFinish] = useState(datetime);
-    const [userType, setUserType] = useState("");
+    const [userType, setUserType] = useState("STB");
     const [region, setRegion] = useState("");
     const [gender, setGender] = useState("");
     const [economic, setEconomic] = useState("");
@@ -336,7 +336,7 @@ const Overview = () => {
                                         </div>
                                         <div class="col-md-2">
                                             <label>Type (STB/OTT)</label>
-                                            <select class="custom-select d-block w-100" onChange={(e) => { setUserType(e.target.value) }}>
+                                            <select class="custom-select d-block w-100" value={userType} onChange={(e) => { setUserType(e.target.value) }}>
                                                 <option value="">All</option>
                                                 <option value="STB">STB</option>
                                                 <option value="OTT">OTT</option>
