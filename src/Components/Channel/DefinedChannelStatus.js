@@ -157,7 +157,13 @@ const DefinedChannelStatus = () => {
                 console.log('submitted all axios calls');
                 XLSX.writeFile(wb, "Day Parts All Channel.xlsx");
             }))
-            .catch(error => { })
+            .catch(error => {
+                alert('Server Error');
+                setallchannelf(false);
+                console.log('Error');
+                console.log(error);
+
+             })
     }
     return (
         <div><Header title="Trend Analysis-Day Parts" />
