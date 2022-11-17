@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import axiosConfig from '../axiosConfig';
+import Cookies from 'universal-cookie';
 
 const AppUserForm = (props) => {
+    const cookies = new Cookies();
     const [user_id, setUserID] = useState("");
     const [user_name, setUsername] = useState("");
     const [email, setEmail] = useState("");
@@ -17,7 +19,7 @@ const AppUserForm = (props) => {
             axiosConfig.get("/appuser/get/" + props.id).then((rsp) => {
                 var obj = rsp.data;
                 console.log(obj);
-                setUserID(obj.login.id);
+                setUserID(obj.id);
                 setUsername(obj.user_name);
                 setEmail(obj.email);
                 setAddress(obj.address);
@@ -52,7 +54,7 @@ const AppUserForm = (props) => {
     const handleForm = (e) => {
         e.preventDefault();
         if (props.mode == "Edit") {
-            const obj = { user_id: user_id, user_name: user_name, email: email, address: address, phone: phone, role: role };
+            const obj = { user_id: user_id, user_name: user_name, email: email, address: address, phone: phone, role: role, updated_by: cookies.get('username') };
             axiosConfig.post("/appuser/edit", obj).then((rsp) => {
 
 
@@ -68,7 +70,7 @@ const AppUserForm = (props) => {
         }
 
         else {
-            const obj = { user_name: user_name, email: email, address: address, phone: phone, password: password, c_password: c_password, role: role };
+            const obj = { user_name: user_name, email: email, address: address, phone: phone, password: password, c_password: c_password, role: role, created_by: cookies.get('username') };
             axiosConfig.post("/appuser/create", obj).then((rsp) => {
                 alert(rsp.data.message);
                 window.location.href = "/app/users";
@@ -174,27 +176,41 @@ const AppUserForm = (props) => {
                                             </div>
 
                                             <br />
-                                            <div class="row">
-                                                <div class="col-12 col-sm-6 col-md-2"></div>
-                                                <div class="col-12 col-sm-6 col-md-2 text-nowrap font-weight-bold">User Type :</div>
-                                                <div class="col-12 col-sm-6 col-md-8">
-                                                    <fieldset className="form-group position-relative">
-                                                        <input type="radio" name="role" value="general" onChange={(e) => { setRole(e.target.value) }} checked={role === "general"} />TV-Channel &nbsp;&nbsp;&nbsp;
-                                                        <input type="radio" name="role" value="add-agency" onChange={(e) => { setRole(e.target.value) }} checked={role === "add-agency"} />Add Agency &nbsp;&nbsp;&nbsp;
-                                                        {props.mode == "Create" &&
-                                                            <>
-                                                                <input type="radio" name="role" value="deployer" onChange={(e) => { setRole(e.target.value) }} checked={role === "deployer"} />Deployer<br />
 
-                                                            </>
-                                                        }
-                                                        <div className="help-block font-small-3" />
-                                                        <span class="text-danger">{err_msg.role ? err_msg.role[0] : ''}</span>
-                                                    </fieldset>
-                                                </div>
+                                            {(() => {
 
-                                            </div>
+                                                if (props.mode == "Edit" && role == "deployer") {
+                                                    return null
+                                                } else {
+                                                    return (
+                                                        <>
+                                                        <div class="row">
+                                                            <div class="col-12 col-sm-6 col-md-2"></div>
+                                                            <div class="col-12 col-sm-6 col-md-2 text-nowrap font-weight-bold">User Type :</div>
+                                                            <div class="col-12 col-sm-6 col-md-8">
+                                                                <fieldset className="form-group position-relative">
+                                                                    <input type="radio" name="role" value="general" onChange={(e) => { setRole(e.target.value) }} checked={role === "general"} />TV-Channel &nbsp;&nbsp;&nbsp;
+                                                                    <input type="radio" name="role" value="add-agency" onChange={(e) => { setRole(e.target.value) }} checked={role === "add-agency"} />Add Agency &nbsp;&nbsp;&nbsp;
+                                                                    {props.mode == "Create" &&
+                                                                        <>
+                                                                            <input type="radio" name="role" value="deployer" onChange={(e) => { setRole(e.target.value) }} checked={role === "deployer"} />Deployer<br />
+            
+                                                                        </>
+                                                                    }
+                                                                    <div className="help-block font-small-3" />
+                                                                    <span class="text-danger">{err_msg.role ? err_msg.role[0] : ''}</span>
+                                                                </fieldset>
+                                                            </div>
+                                                        </div>
+                                                        <br />
+                                                        </>
+                                                    )
+                                                }
 
-                                            <br />
+
+                                            })()}
+
+
 
                                             <div class="pl-0">
                                                 {(() => {
