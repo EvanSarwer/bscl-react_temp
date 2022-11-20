@@ -86,13 +86,13 @@ const PlayoutUpload = () => {
         const sheetName = workbook.SheetNames[0];
         const worksheet = workbook.Sheets[sheetName];
         const json = xlsx.utils.sheet_to_json(worksheet, { raw: false });//
-        //console.log(json[780].Program==undefined);
+        
         var arr = [];
         for (var i = 0; i < json.length; i++) {
-          if(json[i].Program!=undefined && json[i].Commercial!=undefined && json[i].Date!=undefined && json[i].Time!=undefined && json[i].Duration!=undefined){
+          if( json[i].Commercial!=undefined && json[i].Date!=undefined && json[i].Time!=undefined && json[i].Duration!=undefined){
           //var obj = json[i];
           //console.log((json[i].Duration).substr(0, 8));
-          var obj={ channel_id: id,commercial_name:json[i].Commercial,program:json[i].Program, start: (json[i].Date + " " + (json[i].Time).substr(0, 8)), duration: his2sec((json[i].Duration).substr(0, 8)) };
+          var obj={ channel_id: id,commercial_name:json[i].Commercial, start: (json[i].Date + " " + (json[i].Time).substr(0, 8)), duration: his2sec((json[i].Duration).substr(0, 8)) };
           arr.push(obj);
           
           }
