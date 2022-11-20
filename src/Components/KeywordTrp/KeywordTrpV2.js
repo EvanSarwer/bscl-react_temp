@@ -82,7 +82,7 @@ const KeywordTrpV2 = () => {
         var greachp = 0;
         var gtvr0 = 0;
         var gtvrp = 0;
-        var csv = [["Channel", "Program", "Commercial", "Date", "Start", "Duration", "Time Watched", "Reach(000)", " Gross Reach(000)", "Reach(%)", "Gross Reach(%)", "TVR(000)", "Gross TVR(000)", "TVR(%)", "Gross TVR(%)"]];
+        var csv = [["Channel", "Commercial", "Date", "Start", "Duration", "Time Watched", "Reach(000)", " Gross Reach(000)", "Reach(%)", "Gross Reach(%)", "TVR(000)", "Gross TVR(000)", "TVR(%)", "Gross TVR(%)"]];
         //var all = allData;
         for (var i = 0; i < all.length; i++) {
 
@@ -91,7 +91,7 @@ const KeywordTrpV2 = () => {
             gtvr0 = gtvr0 + all[i].tvr0;
             gtvrp = gtvrp + all[i].tvrp;
             csv.push([all[i].channel_name
-                , all[i].program, all[i].commercial_name
+                ,  all[i].commercial_name
                 , all[i].date, all[i].start
                 , all[i].duration, all[i].timewatched
                 , all[i].reach0, greach0
