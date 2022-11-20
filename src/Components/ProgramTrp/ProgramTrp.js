@@ -143,7 +143,8 @@ const ProgramTrp = () => {
         var greachp = 0;
         var gtvr0 = 0;
         var gtvrp = 0;
-        var csv = [["Channel", "Commercial", "Date", "Start", "Duration", "Time Watched", "Reach(000)", " Gross Reach(000)", "Reach(%)", "Gross Reach(%)", "TVR(000)", "Gross TVR(000)", "TVR(%)", "Gross TVR(%)"]];
+        var csv = [["Channel", "Commercial", "Date", "Start", "Duration", "Time Watched", "Reach(000)", " Gross Reach(000)", "Reach(%)", "Gross Reach(%)", "TVR(000)", "Gross TVR(000)", "TVR(%)", "Gross TVR(%)"
+        ,"1+","2+","3+","4+","5+","6+","7+","8+","9+","10+"]];
         //var all = allData;
         for (var i = 0; i < all.length; i++) {
 
@@ -158,7 +159,9 @@ const ProgramTrp = () => {
                 , all[i].reach0, greach0
                 , all[i].reachp, greachp
                 , all[i].tvr0, gtvr0
-                , all[i].tvrp, gtvrp]);
+                , all[i].tvrp, gtvrp
+                , all[i].c1, all[i].c2, all[i].c3, all[i].c4, all[i].c5, all[i].c6, all[i].c7, all[i].c8, all[i].c9, all[i].c10
+            ]);
         }
         console.log(csv);
         getCSV(csv);
