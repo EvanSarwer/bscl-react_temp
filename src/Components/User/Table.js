@@ -17,7 +17,7 @@ const Table = (props) => {
         );
     };
 
-    console.log(Search(data));
+    //console.log(Search(data));
     return (
         <section id="horizontal-vertical">
             <div class="row">

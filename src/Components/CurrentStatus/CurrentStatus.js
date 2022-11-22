@@ -30,14 +30,12 @@ const CurrentStatus = () => {
         });
 
         axiosConfig.get("/dashboard/CurrentStatusTopReach").then(rsp => {
-            console.log(rsp.data);
             setTopReach(rsp.data.top_reach);
         }).catch(err => {
 
         });
 
         axiosConfig.get("/dashboard/CurrentStatusTopTvr").then(rsp => {
-            console.log(rsp.data);
             setTopTVR(rsp.data.top_tvr);
         }).catch(err => {
 
@@ -58,14 +56,12 @@ const CurrentStatus = () => {
             });
 
             axiosConfig.get("/dashboard/CurrentStatusTopReach").then(rsp => {
-                console.log(rsp.data);
                 setTopReach(rsp.data.top_reach);
             }).catch(err => {
 
             });
 
             axiosConfig.get("/dashboard/CurrentStatusTopTvr").then(rsp => {
-                console.log(rsp.data);
                 setTopTVR(rsp.data.top_tvr);
             }).catch(err => {
 

@@ -20,7 +20,7 @@ instance.interceptors.request.use(function (config) {
     // Do something before request is sent
     config.headers.common['Authorization'] =cookies.get('_authToken');//  localStorage.getItem("_authToken");
     //this.$Progress.start(); 
-    console.log("intercepted");
+    //console.log("intercepted");
     return config;
   }, function (error) {
     
@@ -29,7 +29,7 @@ instance.interceptors.request.use(function (config) {
   });
 instance.interceptors.response.use(function (response) {
   //const cookies = new Cookies();
-  console.log('request interceptor good');
+  //console.log('request interceptor good');
   return response;
 }, function(error) {
 

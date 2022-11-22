@@ -192,7 +192,7 @@ const UserDefined = () => {
         };
 
         axiosConfig.post("/user/userdefined/usertimespent", data).then(rsp => {
-            console.log(rsp.data);
+            //console.log(rsp.data);
             setMsg(rsp.data.error);
             setErrorChannelData("");
             setChannelData(() => ({

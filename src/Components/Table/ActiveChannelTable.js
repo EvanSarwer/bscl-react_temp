@@ -8,7 +8,7 @@ const ActiveChannelTable = () => {
 
     const getData=()=>{
         axiosConfig.get("/dashboard/activechannellist").then(rsp => {
-            console.log(rsp.data);
+            //console.log(rsp.data);
             setActiveChannelList(rsp.data.activeChannels);
         }).catch(err => {
 
