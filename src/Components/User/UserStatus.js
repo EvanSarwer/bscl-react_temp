@@ -94,7 +94,7 @@ const UserStatus = () => {
         for (var i = 0; i < sampleLive.labels.length; i++) {
             csv.push([sampleLive.labels[i], sampleLive.values[i], sampleLive1[i].totaltime, sampleLive2[i].totaltime]);
         }
-        console.log(csv);
+        //console.log(csv);
         getCSV(csv, user, userName);
     }
 
@@ -105,7 +105,7 @@ const UserStatus = () => {
         for (var i = 0; i < sampleLive.labels.length; i++) {
             csv.push([sampleLive.labels[i], sampleLive.values[i]]);
         }
-        console.log(csv);
+        //console.log(csv);
         getCSV(csv, user, userName);
     }
     const AlltimeDownloadfunc = () => {
@@ -115,7 +115,7 @@ const UserStatus = () => {
         for (var i = 0; i < sampleLive.length; i++) {
             csv.push([sampleLive[i].channel_name, sampleLive[i].totaltime]);
         }
-        console.log(csv);
+        //console.log(csv);
         getCSV(csv, user, userName);
     }
     const OneDayDownloadfunc = () => {
@@ -125,7 +125,7 @@ const UserStatus = () => {
         for (var i = 0; i < sampleLive.length; i++) {
             csv.push([sampleLive[i].channel_name, sampleLive[i].totaltime]);
         }
-        console.log(csv);
+        //console.log(csv);
         getCSV(csv, user, userName);
     }
 

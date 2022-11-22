@@ -11,7 +11,6 @@ const Header = (props) => {
 
     const getData = () => {
         axiosConfig.get("/dashboard/notification").then(rsp => {
-            console.log(rsp.data);
             setNotifyNumber(rsp.data.notifyNumber)
             setNotifyData(rsp.data.data);
         }).catch(err => {
@@ -20,7 +19,7 @@ const Header = (props) => {
     }
     useEffect(() => {
         getData();
-        const interval = setInterval(() => { getData() }, 5000);
+        const interval = setInterval(() => { getData() }, 600000);
 
         return () => clearInterval(interval);
     }, []);

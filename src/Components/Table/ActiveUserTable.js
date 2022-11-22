@@ -9,7 +9,7 @@ const ActiveUserTable = () => {
     const [activeUserList, setActiveUserList] = useState([]);
     const getData=()=>{
         axiosConfig.get("/dashboard/activeuserlist").then(rsp => {
-            console.log(rsp.data);
+            //console.log(rsp.data);
     
             setActiveUserList(rsp.data);
         }).catch(err => {

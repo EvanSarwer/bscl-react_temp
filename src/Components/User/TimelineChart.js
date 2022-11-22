@@ -34,7 +34,7 @@ const TimelineChart = (props) => {
 
   }, [props.user]);
 
-  console.log(lasthrData);
+  //console.log(lasthrData);
 
 
 

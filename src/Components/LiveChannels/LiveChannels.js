@@ -106,7 +106,7 @@ const LiveChannels = () => {
         for (var i = 0; i < sampleLive.labels.length; i++) {
             csv.push([sampleLive.labels[i], sampleLive.values[i]]);
         }
-        console.log(csv);
+        //console.log(csv);
         getCSV(csv);
     }
 
@@ -121,10 +121,10 @@ const LiveChannels = () => {
             age2: parseInt(document.querySelector("#small-slider > div > div:nth-child(3) > div > div.noUi-tooltip").innerHTML)
         };
 
-        console.log(data);
+        //console.log(data);
 
         axiosConfig.post("/livechannel/activechannellistgraph", data).then(rsp => {
-            console.log(rsp.data);
+            //console.log(rsp.data);
             setpoints(rsp.data.points);
             setChannelData(() => ({
                 labels: rsp.data.channels, datasets: [{

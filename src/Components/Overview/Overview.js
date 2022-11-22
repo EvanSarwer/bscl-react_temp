@@ -33,7 +33,7 @@ const Overview = () => {
         var role_datetime = yesterday.getFullYear() + '-' + pad((yesterday.getMonth() + 1)) + '-' + pad(yesterday.getDate()) + ' 23:59:59';
     }
 
-    console.log(role_datetime);
+    //console.log(role_datetime);
 
     const [category, setCategory] = useState("Reach(000)");
     const [start, setStart] = useState(y_datetime);
@@ -66,7 +66,7 @@ const Overview = () => {
         if (start !== "" && finish !== "" && (new Date(start).getTime() <= new Date(role_datetime).getTime()) && (new Date(finish).getTime() <= new Date(role_datetime).getTime())) {
             setErr("");
             axiosConfig.post("/overview/reachusergraph", data).then(rsp => {
-                console.log(rsp.data);
+                //console.log(rsp.data);
                 setChannelData(() => ({
                     labels: rsp.data.channels, datasets: [{
                         label: "Reach (000)", data: rsp.data.reach,
@@ -98,11 +98,11 @@ const Overview = () => {
 
         //var csv = [["Channel", "Value"]];
         var sampleLive = channelData;
-        console.log(sampleLive);
+        //console.log(sampleLive);
         for (var i = 0; i < sampleLive.labels.length; i++) {
             csv.push([sampleLive.labels[i], sampleLive.datasets[0].data[i]]);
         }
-        console.log(csv);
+        //console.log(csv);
         getCSV(csv);
     }
 
@@ -172,7 +172,7 @@ const Overview = () => {
             setErr("");
             if (category === "Reach(000)") {
                 axiosConfig.post("/overview/reachusergraph", data).then(rsp => {
-                    console.log(rsp.data);
+                    //console.log(rsp.data);
                     setChannelData(() => ({
                         labels: rsp.data.channels, datasets: [{
                             label: "Reach (000)", data: rsp.data.reach,
@@ -237,7 +237,7 @@ const Overview = () => {
             }
             else if (category === "TVR Share(%)") {
                 axiosConfig.post("/overview/tvrsharegraph", data).then(rsp => {
-                    console.log(rsp.data);
+                    //console.log(rsp.data);
                     setChannelData(() => ({
                         labels: rsp.data.channels, datasets: [{
                             label: "TVR Share (%)", data: rsp.data.share,
@@ -254,7 +254,7 @@ const Overview = () => {
             }
             else if (category === "Time Spent-Universe(minute)") {
                 axiosConfig.post("/overview/timespentgraph", data).then(rsp => {
-                    console.log(rsp.data);
+                    //console.log(rsp.data);
                     setChannelData(() => ({
                         labels: rsp.data.channels, datasets: [{
                             label: "Time Spent (Uni)", data: rsp.data.totaltime,

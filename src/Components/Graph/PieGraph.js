@@ -14,28 +14,12 @@ const PieGraph = (props) => {
         labels: [],
         datasets: []
     });
-    const [startrange, setStartRange] = useState("");
-    const [loading, setloading] = useState(false);
-    const [finishrange, setFinishRange] = useState("");
     useEffect(() => {
-        if (props.get) {
-
-            setloading(false);
-            axiosConfig.get(props.url)
-                .then(rsp => {
-
-                    setloading(true);
-                    //debugger;
-                    //console.log(rsp.data.label);
-                    if (props.timerange) {
-                        setStartRange(rsp.data.start);
-                        setFinishRange(rsp.data.finish);
-                    }
 
                     setData(() => ({
-                        labels: rsp.data.label, 
+                        labels: props.channel, 
                         datasets: [{
-                            data: rsp.data.value,
+                            data: props.value,
                             backgroundColor: [
                                 'rgb(255, 99, 132)',
                                 'rgb(54, 162, 235)',
@@ -56,56 +40,25 @@ const PieGraph = (props) => {
                             hoverOffset: 4
                         }]
                     }));
-                    console.log(Data);
-                }).catch(err => {
-
-                })
-        }
-        else {
-
-            setloading(false);
-            axiosConfig.post("/" + props.url, props.credentials)
-                .then(rsp => {
-
-                    setloading(true);
-                    //debugger;
-                    //console.log(rsp.data.label);
-                    if (props.timerange) {
-                        setStartRange(rsp.data.start);
-                        setFinishRange(rsp.data.finish);
-                    }
-
-                    setData(() => ({
-                        labels: rsp.data.label, 
-                        datasets: [{
-                            data: rsp.data.value,
-                            //backgroundColor: props.color,
-                            //borderColor: "black",
-                            borderWidth: 1,
-                            //categoryPercentage: 0.7,
-                            //barPercentage: 0.7
-                        }]
-                    }));
-                    console.log(Data);
-                }).catch(err => {
-
-                })
-        }
+                    
+        
     }, [props]);
 
-    var start_string = new Date(startrange).toLocaleString(undefined, {
+    var start_string = new Date(props.start).toLocaleString(undefined, {
         day: 'numeric',
         month: 'long',
         year: 'numeric',
         hour: '2-digit',
         minute: '2-digit',
+        second: '2-digit',
     });
-    var finish_string = new Date(finishrange).toLocaleString(undefined, {
+    var finish_string = new Date(props.finish).toLocaleString(undefined, {
         day: 'numeric',
         month: 'long',
         year: 'numeric',
         hour: '2-digit',
         minute: '2-digit',
+        second: '2-digit',
     });
 
     return (
@@ -128,7 +81,7 @@ const PieGraph = (props) => {
                     </div>
                     {(() => {
 
-                        if (loading) {
+                        if (props.loading) {
                             return <Pie style={{  maxHeight: '440px' }}
                                 data={Data}
                                 options={{
