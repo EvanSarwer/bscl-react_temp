@@ -30,11 +30,41 @@ const Dashboard = () => {
     const [shareValue, setShareValue] = useState("");
     const [timeSpentChannel, setTimeSpentChannel] = useState("");
     const [timeSpentValue, setTimeSpentValue] = useState("");
-
     const [startrange, setStartRange] = useState("");
     const [loading, setloading] = useState(false);
     const [finishrange, setFinishRange] = useState("");
+
+    const [activeUserList, setActiveUserList] = useState([]);
+    const [activeChannelList, setActiveChannelList] = useState([]);
+
+    const [activeUser, setActiveUser] = useState("");
+    const [stbCountActive, setSTBCountActive] = useState("");
+    const [ottCountActive, setOTTCountActive] = useState("");
+    const [activePercet, setActivePercent] = useState("");
+    const [stbCountTotal, setSTBCountTotal] = useState("");
+    const [ottCountTotal, setOTTCountTotal] = useState("");
+    const [totalUser, setTotalUser] = useState("");
+
+    //const [topReach, setTopReach] = useState("");
+    //const [topTVR, setTopTVR] = useState("");
+
     useEffect(() => {
+
+        axiosConfig.get("/dashboard/activeuserlist").then(rsp => {
+            //console.log(rsp.data);
+            setActiveUserList(rsp.data.activeUsers);
+            setActiveChannelList(rsp.data.activeChannels);
+            setTotalUser(rsp.data.total_user);
+            setSTBCountTotal(rsp.data.stb_total);
+            setOTTCountTotal(rsp.data.ott_total);
+            setActiveUser(rsp.data.active_user);
+            setActivePercent(rsp.data.active_percent);
+            setSTBCountActive(rsp.data.stb_active);
+            setOTTCountActive(rsp.data.ott_active);
+        }).catch(err => {
+
+        });
+
 
         setloading(false);
         axiosConfig.get("allgraph/dashboard")
@@ -57,10 +87,47 @@ const Dashboard = () => {
                 setStartRange(rsp.data.start);
                 setFinishRange(rsp.data.finish);
 
-
             }).catch(err => {
-
             })
+
+
+
+            axiosConfig.get("/dashboard/CurrentStatusTopTvrReach").then(rsp => {
+                //console.log(rsp.data);
+                // setTopReach(rsp.data.top_reach);
+                // setTopTVR(rsp.data.top_tvr);
+                cookies.set('_chnlTopReach', rsp.data.top_reach);
+                cookies.set('_chnlTopTVR', rsp.data.top_tvr);
+    
+    
+            }).catch(err => {
+    
+            });
+
+
+        const interval = setInterval(() => {
+            axiosConfig.get("/dashboard/activeuserlist").then(rsp => {
+                //console.log(rsp.data);
+                setActiveUserList(rsp.data.activeUsers);
+                setActiveChannelList(rsp.data.activeChannels);
+                setTotalUser(rsp.data.total_user);
+                setSTBCountTotal(rsp.data.stb_total);
+                setOTTCountTotal(rsp.data.ott_total);
+                setActiveUser(rsp.data.active_user);
+                setActivePercent(rsp.data.active_percent);
+                setSTBCountActive(rsp.data.stb_active);
+                setOTTCountActive(rsp.data.ott_active);
+            }).catch(err => {
+    
+            });
+            
+            }, 10000);
+
+        return () => clearInterval(interval);
+
+
+
+
 
     }, []);
 
@@ -80,16 +147,16 @@ const Dashboard = () => {
                     </div>
                     <div class="content-body">
 
-                        <CurrentStatus />
+                        <CurrentStatus topReach={cookies.get('_chnlTopReach')} topTVR={cookies.get('_chnlTopTVR')} totalUser={totalUser} stbCountTotal={stbCountTotal} ottCountTotal={ottCountTotal} activeUser={activeUser} stbCountActive={stbCountActive} ottCountActive={ottCountActive} activePercet={activePercet} />
 
                         {/* Dashboard Table Start */}
                         {cookies.get('_role') === "admin" &&
                             <div class="row" style={{ minHeight: '390px' }}>
                                 <div class="col-xl-8 col-12">
-                                    <ActiveUserTable />
+                                    <ActiveUserTable activeUserList={activeUserList} />
                                 </div>
                                 <div class="col-xl-4 col-12">
-                                    <ActiveChannelTable />
+                                    <ActiveChannelTable activeChannelList={activeChannelList} />
                                 </div>
                             </div>
                         }
@@ -100,7 +167,7 @@ const Dashboard = () => {
                                 <ActiveUserTable />
                             </div> */}
                                 <div class="card col-xl-6 col-12" style={{ minHeight: '500px', maxHeight: '550px' }}>
-                                    <ActiveChannelTable />
+                                    <ActiveChannelTable activeChannelList={activeChannelList} />
                                 </div>
                                 <div class="col-xl-6 col-12" style={{ minHeight: '500px', maxHeight: '550px' }}>
                                     <PieGraph title="Daily Top Share" text="Channel vs TVR" channel={shareChannel} value={shareValue} color="yellow" loading={loading} start={startrange} finish={finishrange} />
