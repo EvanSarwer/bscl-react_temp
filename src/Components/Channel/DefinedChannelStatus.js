@@ -2,7 +2,7 @@ import React from 'react';
 import { useState, useEffect } from "react";
 import axiosConfig from "../axiosConfig";
 import Select from 'react-select';
-import PostLineGraph from "../Graph/PostLineGraph";
+import LineGraph from "../Graph/LineGraph";
 import Header from '../Header/Header';
 import MainMenu from '../MainMenu/MainMenu';
 import axios from 'axios';
@@ -14,18 +14,44 @@ const DefinedChannelStatus = () => {
     const [update, setUpdate] = useState(0);
     const [time, setTime] = useState("15");
     const [id, setId] = useState("0");
+    const [type, setType] = useState("");
     const [channelName, setChannelName] = useState("");
     const [channels, setchannels] = useState([]);
     const [start, setstart] = useState("");
     const [finish, setfinish] = useState("");
     const [allchannelf, setallchannelf] = useState(false);
 
-    const [reachZeroCSV, setReachZeroCSV] = useState({});
-    const [reachPercentCSV, setReachPercentCSV] = useState([]);
-    const [tvrZeroCSV, setTvrZeroCSV] = useState([]);
-    const [tvrPercentCSV, setTvrPercentCSV] = useState([]);
+    const [label, setlabel] = useState([]);
+    const [reach0, setReach0] = useState([]);
+    const [reachp, setReachp] = useState([]);
+    const [tvr0, setTvr0] = useState([]);
+    const [tvrp, setTvrp] = useState([]);
+    
+    const [loading,setloading] = useState(false);
 
-
+    useEffect(() => {
+        if(update>0){
+            var credentials={ "id": id,"type":type, "range": time, "start": start, "finish": finish };
+        console.log(JSON.stringify(credentials));
+            setloading(false);
+                axiosConfig.post("/dayparts/all",credentials)
+                    .then(rsp => {
+                        
+                    setloading(true);
+                        //debugger;
+                        console.log(rsp.data);
+        
+                        setReachp(rsp.data.value.reachp);
+                        setReach0(rsp.data.value.reach0);
+                        setTvrp(rsp.data.value.tvrp);
+                        setTvr0(rsp.data.value.tvr0);
+                        setlabel(rsp.data.value.label);
+                    }).catch(err => {
+        alert("Server Error");
+        setUpdate(0);
+                    })
+                }
+            }, [update]);
 
     function exportToCsv(filename, rows) {
         var processRow = function (row) {
@@ -72,13 +98,14 @@ const DefinedChannelStatus = () => {
     const Downloadfunc = () => {
         //console.log(liveChannelData.labels[0]);
         var csv = [["Time-Frame", "Reach(000)", "Reach(%)", "TVR(000)", "TVR(%)"]];
-        var sampleLive = reachZeroCSV;
-        var sampleLive1 = reachPercentCSV;
-        var sampleLive2 = tvrZeroCSV;
-        var sampleLive3 = tvrPercentCSV;
+        var sampleLive0 = label;
+        var sampleLive = reach0;
+        var sampleLive1 = reachp;
+        var sampleLive2 = tvr0;
+        var sampleLive3 = tvrp;
 
-        for (var i = 0; i < sampleLive.labels.length; i++) {
-            csv.push([sampleLive.labels[i], sampleLive.values[i], sampleLive1[i], sampleLive2[i], sampleLive3[i]]);
+        for (var i = 0; i < sampleLive.length; i++) {
+            csv.push([sampleLive0[i], sampleLive[i], sampleLive1[i], sampleLive2[i], sampleLive3[i]]);
         }
         console.log(csv);
         
@@ -91,24 +118,7 @@ const DefinedChannelStatus = () => {
         //getCSV(csv);
     }
 
-    const getReach0 = (p) => {
-        setReachZeroCSV(p);
-        console.log(p);
-    }
-    const getReachp = (p) => {
-        setReachPercentCSV(p.values);
-        console.log(p);
-    }
-    const getTvr0 = (p) => {
-        setTvrZeroCSV(p.values);
-        console.log(p);
-    }
-    const getTvrp = (p) => {
-        setTvrPercentCSV(p.values);
-        console.log(p);
-    }
-
-
+   
 
     useEffect(() => {
 
@@ -135,7 +145,7 @@ const DefinedChannelStatus = () => {
         console.log(channels.length);
         channels.forEach((item) => {
             //if (item.id < 2) {
-                let postData = { "id": item.id, "range": time, "start": start, "finish": finish };
+                let postData = { "id": item.id,"type":type, "range": time, "start": start, "finish": finish };
                 let newPromise = axiosConfig.post('/dayparts/all', postData);
                 axiosArray.push(newPromise);
             //}
@@ -221,8 +231,8 @@ const DefinedChannelStatus = () => {
                                     <div class="row">
 
                                         <div class="col-md-2">
-                                            <label>Type (STB/OTT)</label>
-                                            <select class="custom-select d-block w-100" onChange={(e) => { }}>
+                                        <label>Type (STB/OTT)</label>
+                                            <select class="custom-select d-block w-100" onChange={(e) => { setType(e.target.value)}}>
                                                 <option value="">All</option>
                                                 <option value="STB">STB</option>
                                                 <option value="OTT">OTT</option>
@@ -310,7 +320,7 @@ const DefinedChannelStatus = () => {
 
                                         </div>
                                         {(() => {
-                                            if (reachPercentCSV.length > 0) {
+                                            if (loading) {
                                                 return <div class="col-md-2">
                                                     <label>Download Data</label><br/>
                                                     <button onClick={Downloadfunc} class="btn btn-danger">Download CSV</button>
@@ -336,22 +346,22 @@ const DefinedChannelStatus = () => {
 
                         <div class="row">
                             <div class="col-md-12">
-                                <PostLineGraph title="Reach (%)" text="Active Channels" url="trend/dayrangedreachp" label="Reach (%)" color="blue" credentials={{ "id": id, "range": time, "start": start, "finish": finish }} parentPass={getReachp} update={update} />
+                                <LineGraph title="Reach (%)" text="Active Channels" loading={loading} labels={label} values={reachp} color="blue"  update={update} />
 
                             </div>
                             <div class="col-md-12">
-                                <PostLineGraph title="Reach (000)" text="Active Channels" url="trend/dayrangedreach0" label="Reach (000)" color="red" credentials={{ "id": id, "range": time, "start": start, "finish": finish }} parentPass={getReach0} update={update} />
+                                <LineGraph title="Reach (000)" text="Active Channels" loading={loading} labels={label} values={reach0}  color="red"  update={update} />
 
                             </div>
 
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <PostLineGraph title="TVR (000)" text="Active Channels" url="trend/dayrangedtvr0" label="TVR (000)" color="violet" credentials={{ "id": id, "range": time, "start": start, "finish": finish }} parentPass={getTvr0} update={update} />
+                                <LineGraph title="TVR (000)" text="Active Channels" loading={loading} labels={label} values={tvr0} color="violet"  update={update} />
 
                             </div>
                             <div class="col-md-12">
-                                <PostLineGraph title="TVR (%)" text="Active Channels" url="trend/dayrangedtvrp" label="TVR (%)" color="green" credentials={{ "id": id, "range": time, "start": start, "finish": finish }} parentPass={getTvrp} update={update} />
+                                <LineGraph title="TVR (%)" text="Active Channels" loading={loading} labels={label} values={tvrp} color="green"  update={update} />
 
                             </div>
 
