@@ -1,25 +1,25 @@
 import { useState, useEffect } from 'react';
 import axiosConfig from '../axiosConfig';
 
-const ActiveChannelTable = () => {
-    const [channeldata, setChannelData] = useState([]);
+const ActiveChannelTable = (props) => {
+    //const [channeldata, setChannelData] = useState([]);
     const [ query, setQuery ] = useState("");
-    const [activeChannelList, setActiveChannelList] = useState([]);
+    //const [activeChannelList, setActiveChannelList] = useState([]);
 
-    const getData=()=>{
-        axiosConfig.get("/dashboard/activechannellist").then(rsp => {
-            //console.log(rsp.data);
-            setActiveChannelList(rsp.data.activeChannels);
-        }).catch(err => {
+    // const getData=()=>{
+    //     axiosConfig.get("/dashboard/activechannellist").then(rsp => {
+    //         //console.log(rsp.data);
+    //         setActiveChannelList(rsp.data.activeChannels);
+    //     }).catch(err => {
 
-        })
-    }
-    useEffect(() => {
-        getData();
-        const interval = setInterval(() => {getData()}, 5000);
+    //     })
+    // }
+    // useEffect(() => {
+    //     getData();
+    //     const interval = setInterval(() => {getData()}, 5000);
       
-        return () => clearInterval(interval);
-      }, []);
+    //     return () => clearInterval(interval);
+    //   }, []);
 
     // useEffect(() => {
     //     setChannelData(props.data);
@@ -30,7 +30,7 @@ const ActiveChannelTable = () => {
         return data.filter(
             (item) =>
                 item.channel_name.toLowerCase().includes(query.toLowerCase()) ||
-                item.channel_id.toString().includes(query)
+                item.id.toString().includes(query)
         );
     };
 
@@ -60,9 +60,9 @@ const ActiveChannelTable = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                {Search(activeChannelList).map((channel) =>
-                                                <tr key={channel.channel_id}>
-                                                    <td><a><div style={{ whiteSpace: 'nowrap' }}><img class="img-fluid" alt="" style={{ maxWidth: "3rem" }} src={"../../channels/logos/" + channel.channel_logo} />{channel.channel_name}</div></a>
+                                {Search(props.activeChannelList).map((channel) =>
+                                                <tr key={channel.id}>
+                                                    <td><a><div style={{ whiteSpace: 'nowrap' }}><img class="img-fluid" alt="" style={{ maxWidth: "3rem" }} src={"../../channels/logos/" + channel.logo} />{channel.channel_name}</div></a>
                                                     </td>
                                                     <td>{channel.user_count}</td>
                                                 </tr>

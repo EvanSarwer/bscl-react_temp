@@ -2,26 +2,26 @@ import { useState, useEffect } from 'react';
 import axiosConfig from '../axiosConfig';
 
 
-const ActiveUserTable = () => {
+const ActiveUserTable = (props) => {
 
  
     const [ query, setQuery ] = useState("");
-    const [activeUserList, setActiveUserList] = useState([]);
-    const getData=()=>{
-        axiosConfig.get("/dashboard/activeuserlist").then(rsp => {
-            //console.log(rsp.data);
+    // const [activeUserList, setActiveUserList] = useState([]);
+    // const getData=()=>{
+    //     axiosConfig.get("/dashboard/activeuserlist").then(rsp => {
+    //         //console.log(rsp.data);
     
-            setActiveUserList(rsp.data);
-        }).catch(err => {
+    //         setActiveUserList(rsp.data);
+    //     }).catch(err => {
 
-        });
-    }
-    useEffect(() => {
-        getData();
-        const interval = setInterval(() => { getData() },5000);
+    //     });
+    // }
+    // useEffect(() => {
+    //     getData();
+    //     const interval = setInterval(() => { getData() },5000);
       
-        return () => clearInterval(interval);
-      }, []);
+    //     return () => clearInterval(interval);
+    //   }, []);
 
     const Search = (data) => {
         return data.filter(
@@ -57,7 +57,7 @@ const ActiveUserTable = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                {Search(activeUserList).map((user) =>
+                                {Search(props.activeUserList).map((user) =>
                                                 <tr key={user.user_id}>
                                                     <td><a href={`/device/user/details/${user.user_id}`}>{user.user.user_name}</a></td>
                                                     <td>{user.device_name}</td>
