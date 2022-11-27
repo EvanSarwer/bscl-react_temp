@@ -40,6 +40,7 @@ import{default as ProgramTrp2}  from "../TRPV4/ProgramTrp";
 import KeywordTrp from "../KeywordTrp/KeywordTrp";
 import DeviceDetailsView from "../DeviceUser/DeviceDetailsView";
 import KeywordTrpV2 from "../KeywordTrp/KeywordTrpV2";
+import Notification from "../Header/Notification";
 
 
 
@@ -83,6 +84,7 @@ function Admin() {
         <Route exact path="/device" element={<DeviceList />}></Route>
         <Route exact path="/device/create" element={<AddDevice />}></Route>
         <Route exact path="/device/edit/:id" element={<EditDevice />}></Route>
+        <Route exact path="/notification" element={<Notification />}></Route>
 
         <Route exact path="/device/user/create/:device_id/:user_index/:from" element={<AddUser />}></Route>
         <Route exact path="/device/user/edit/:id/:from" element={<EditUser />}></Route>
