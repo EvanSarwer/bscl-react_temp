@@ -123,7 +123,7 @@ const LiveChannels = () => {
 
         //console.log(data);
 
-        axiosConfig.post("/livechannel/activechannellistgraph", data).then(rsp => {
+        axiosConfig.post("/livechannel/activechannellistgraphfast", data).then(rsp => {
             //console.log(rsp.data);
             setpoints(rsp.data.points);
             setChannelData(() => ({
