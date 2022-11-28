@@ -56,7 +56,7 @@ const Table2 = (props) => {
                                         <tbody>
                                             {Search(data).map((log) =>
                                                 <tr key={log.log_id}>
-                                                <td>{log.log_id}</td>
+                                                    <td>{log.log_id}</td>
                                                     <td>{log.user_id}</td>
                                                     <td>{log.channel_name}</td>
                                                     <td>{log.started_watching_at}</td>
