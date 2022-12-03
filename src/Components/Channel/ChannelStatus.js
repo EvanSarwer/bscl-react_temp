@@ -67,7 +67,7 @@ const ChannelStatus = () => {
                                         </div>
 
                                         <div class="col-md-2">
-                                            <button onClick={updater} class="btn btn-info">Get Data</button>
+                                            <button onClick={updater} class="btn btn-info">View</button>
                                         </div>
 
                                     </div>

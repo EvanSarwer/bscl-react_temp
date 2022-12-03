@@ -223,7 +223,7 @@ const DefinedChannelStatus = () => {
                                             </div>
                                         </div>
                                         <div class="col-md-1">
-                                            <button onClick={updater} class="btn btn-info">Get Data</button>
+                                            <button onClick={updater} class="btn btn-info">View</button>
                                         </div>
                                     </div>
 
