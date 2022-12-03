@@ -422,7 +422,7 @@ const Overview = () => {
                                         </fieldset>
 
                                         <div class="col-md-2 ">
-                                            <button onClick={GetData} class="btn btn-info">Get Data</button>
+                                            <button onClick={GetData} class="btn btn-info">View</button>
 
                                         </div>
                                         {(() => {

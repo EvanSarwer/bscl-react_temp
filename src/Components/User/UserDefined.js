@@ -269,7 +269,7 @@ const UserDefined = () => {
                                         </div>
 
                                         <div class="col-1">
-                                            <button type="submit" className="btn btn-sm btn-success">Get Data</button>
+                                            <button type="submit" className="btn btn-success">View</button>
                                         </div>
 
 

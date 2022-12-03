@@ -316,7 +316,7 @@ const DayRangedChannelStatus = () => {
                                                 <div class="col-md-6">
 
                                                 </div><div class="col-md-6">
-                                                    <button onClick={updater} class="btn btn-info">Get Data</button>
+                                                    <button onClick={updater} class="btn btn-info">View</button>
 
                                                 </div>
                                             </div>
