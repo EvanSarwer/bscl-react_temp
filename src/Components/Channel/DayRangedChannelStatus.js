@@ -2,11 +2,12 @@ import React from 'react';
 import { useState, useEffect } from "react";
 import axiosConfig from "../axiosConfig";
 
-import BarGraph from "./Graph/BarGraph";
+import PreBarGraph from "./Graph/PreBarGraph";
 import Select from 'react-select';
 import Header from '../Header/Header';
 import MainMenu from '../MainMenu/MainMenu';
 
+import * as XLSX from "xlsx";
 
 const DayRangedChannelStatus = () => {
 
@@ -22,88 +23,68 @@ const DayRangedChannelStatus = () => {
     const [finish, setfinish] = useState("");
     const [channels, setchannels] = useState([]);
 
-    const [reachZeroCSV, setReachZeroCSV] = useState({});
-    const [reachPercentCSV, setReachPercentCSV] = useState([]);
-    const [tvrZeroCSV, setTvrZeroCSV] = useState([]);
-    const [tvrPercentCSV, setTvrPercentCSV] = useState([]);
+    const [label, setlabel] = useState([]);
+    const [reach0, setReach0] = useState([]);
+    const [reachp, setReachp] = useState([]);
+    const [tvr0, setTvr0] = useState([]);
+    const [tvrp, setTvrp] = useState([]);
+    const [type, setType] = useState("");
+    
+    const [loading,setloading] = useState(true);
+
+    useEffect(() => {
+        if(update>0){
+            var credentials={ id: id,type:type, month: month, year: year, day: day, start: start, finish: finish };
+        console.log(JSON.stringify(credentials));
+            setloading(true);
+                axiosConfig.post("/dayrangedall",credentials)
+                    .then(rsp => {
+                        
+                    setloading(false);
+                        //debugger;
+                        console.log(rsp.data);
+        
+                        setReachp(rsp.data.reachp);
+                        setReach0(rsp.data.reach0);
+                        setTvrp(rsp.data.tvrp);
+                        setTvr0(rsp.data.tvr0);
+                        setlabel(rsp.data.label);
+                    }).catch(err => {
+        alert("Server Error");
+        setUpdate(0);
+                    })
+                }
+            }, [update]);
 
 
 
 
 
-    function exportToCsv(filename, rows) {
-        var processRow = function (row) {
-            var finalVal = '';
-            for (var j = 0; j < row.length; j++) {
-                var innerValue = row[j] === null ? '' : row[j].toString();
-                if (row[j] instanceof Date) {
-                    innerValue = row[j].toLocaleString();
-                };
-                var result = innerValue.replace(/"/g, '""');
-                if (result.search(/("|,|\n)/g) >= 0)
-                    result = '"' + result + '"';
-                if (j > 0)
-                    finalVal += ',';
-                finalVal += result;
-            }
-            return finalVal + '\n';
-        };
-        var csvFile = '';
-        for (var i = 0; i < rows.length; i++) {
-            csvFile += processRow(rows[i]);
-        }
-        var blob = new Blob([csvFile], { type: 'text/csv;charset=utf-8;' });
-        if (navigator.msSaveBlob) { // IE 10+
-            navigator.msSaveBlob(blob, filename);
-        } else {
-            var link = document.createElement("a");
-            if (link.download !== undefined) { // feature detection
-                // Browsers that support HTML5 download attribute
-                var url = URL.createObjectURL(blob);
-                link.setAttribute("href", url);
-                link.setAttribute("download", filename);
-                link.style.visibility = 'hidden';
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-            }
-        }
-    }
-    var getCSV = (scsv) => {
-        exportToCsv("Day_Ranged.csv", scsv)
-    }
 
     const Downloadfunc = () => {
         //console.log(liveChannelData.labels[0]);
         var csv = [["Channel", "Reach(000)", "Reach(%)", "TVR(000)", "TVR(%)"]];
-        var sampleLive = reachZeroCSV;
-        var sampleLive1 = reachPercentCSV;
-        var sampleLive2 = tvrZeroCSV;
-        var sampleLive3 = tvrPercentCSV;
+        //var csv = [["Time-Frame", "Reach(000)", "Reach(%)", "TVR(000)", "TVR(%)"]];
+        var sampleLive0 = label;
+        var sampleLive = reach0;
+        var sampleLive1 = reachp;
+        var sampleLive2 = tvr0;
+        var sampleLive3 = tvrp;
 
-        for (var i = 0; i < sampleLive.labels.length; i++) {
-            csv.push([sampleLive.labels[i], sampleLive.values[i], sampleLive1[i], sampleLive2[i], sampleLive3[i]]);
+        for (var i = 0; i < sampleLive.length; i++) {
+            csv.push([sampleLive0[i], sampleLive[i], sampleLive1[i], sampleLive2[i], sampleLive3[i]]);
         }
         console.log(csv);
-        getCSV(csv);
+        
+        const wb = XLSX.utils.book_new();
+        
+        var ws = XLSX.utils.aoa_to_sheet(csv);
+        XLSX.utils.book_append_sheet(wb, ws, "Day Ranged");
+        
+        XLSX.writeFile(wb, "Day_Ranged.csv.xlsx");
+        
     }
 
-    const getReach0=(p)=>{
-        setReachZeroCSV(p);
-        console.log(p);
-    }
-    const getReachp=(p)=>{
-        setReachPercentCSV(p.values);
-        console.log(p);
-    }
-    const getTvr0=(p)=>{
-        setTvrZeroCSV(p.values);
-        console.log(p);
-    }
-    const getTvrp=(p)=>{
-        setTvrPercentCSV(p.values);
-        console.log(p);
-    }
 
 //     useEffect(() => {
 // if(update>0){
@@ -332,7 +313,7 @@ const DayRangedChannelStatus = () => {
 
                                         <div class="col-md-2">
                                             <label>Type (STB/OTT)</label>
-                                            <select class="custom-select d-block w-100" onChange={(e) => { }}>
+                                            <select class="custom-select d-block w-100" onChange={(e) => { setType(e.target.value)}}>
                                                 <option value="">All</option>
                                                 <option value="STB">STB</option>
                                                 <option value="OTT">OTT</option>
@@ -400,7 +381,7 @@ const DayRangedChannelStatus = () => {
                                         </div> */}
 
                                         {(() => {
-                                            if (reachPercentCSV.length > 0 && tvrPercentCSV.length > 0) {
+                                            if (!loading) {
                                                 return <div class="col-md-2">
                                                     <label>Download All In One</label>
                                                     <button onClick={Downloadfunc} class="btn btn-danger">Download CSV</button>
@@ -529,10 +510,10 @@ const DayRangedChannelStatus = () => {
 
 
                             <div class="col-md-6">
-                                <BarGraph title="Reach(%)" text="Channel vs Reach(%)" url="channel/definedtrendreachp" color="#28D094" get={false} credentials={{ id: id, month: month, year: year, day: day, start: start, finish: finish }} parentPass={getReachp} update={update} />
+                                <PreBarGraph title="Reach(%)" text="Channel vs Reach(%)"  loading={loading} labels={label} values={reachp} url="channel/definedtrendreachp" color="#28D094"  update={update} />
                             </div>
                             <div class="col-md-6">
-                                <BarGraph title="Reach(000)" text="Channel vs Reach(000)" url="channel/definedtrendreach0" color="yellow" get={false} credentials={{ id: id, month: month, year: year, day: day, start: start, finish: finish }} parentPass={getReach0} update={update} />
+                                <PreBarGraph title="Reach(000)" text="Channel vs Reach(000)"  loading={loading} labels={label} values={reach0} url="channel/definedtrendreach0" color="yellow"   update={update} />
                             </div>
 
 
@@ -542,10 +523,10 @@ const DayRangedChannelStatus = () => {
 
 
                             <div class="col-md-6">
-                                <BarGraph title="TVR(%)" text="Channel vs TVR(%)" url="channel/definedtrendtvrp" color="#68D094" get={false} credentials={{ id: id, month: month, year: year, day: day, start: start, finish: finish }} parentPass={getTvrp} update={update} />
+                                <PreBarGraph title="TVR(%)" text="Channel vs TVR(%)"  loading={loading} labels={label} values={tvrp} url="channel/definedtrendtvrp" color="#68D094"   update={update} />
                             </div>
                             <div class="col-md-6">
-                                <BarGraph title="TVR(000)" text="Channel vs TVR(000)" url="channel/definedtrendtvr0" color="#8D0394" get={false} credentials={{ id: id, month: month, year: year, day: day, start: start, finish: finish }} parentPass={getTvr0} update={update} />
+                                <PreBarGraph title="TVR(000)" text="Channel vs TVR(000)"  loading={loading} labels={label} values={tvr0} url="channel/definedtrendtvr0" color="#8D0394" update={update} />
                             </div>
 
 
