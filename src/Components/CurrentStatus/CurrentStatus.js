@@ -67,10 +67,10 @@ const CurrentStatus = (props) => {
         <div class="row gx-1">
 
             <div class="col-xl-2 col-lg-1 col-12">
-                <CountComponent title="Total User" count={props.totalUser} stb={props.stbCountTotal} ott={props.ottCountTotal} icon="icon-users success" color="success" percentage="100%" />
+                <CountComponent title="Total Device" count={props.totalUser} stb={props.stbCountTotal} ott={props.ottCountTotal} icon="icon-users success" color="success" percentage="100%" />
             </div>
             <div class="col-xl-2 col-lg-1 col-12">
-                <CountComponent title="Active User" count={props.activeUser} stb={props.stbCountActive} ott={props.ottCountActive} icon="icon-user-following success" color="success" percentage={props.activePercet} />
+                <CountComponent title="Active Device" count={props.activeUser} stb={props.stbCountActive} ott={props.ottCountActive} icon="icon-user-following success" color="success" percentage={props.activePercet} />
             </div>
             <div class="col-xl-2 col-lg-1 col-12">
                 <TopCount title="Top Reach" count={props.topReach} icon="icon-pie-chart warning" color="warning" percentage="" />
