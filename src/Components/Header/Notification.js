@@ -64,9 +64,23 @@ const Notification = () => {
     }
 
     var getCSV = (scsv) => {
-        exportToCsv("Notification(Issues)_.csv", scsv);
-
+        function pad(n) {
+            return n < 10 ? '0' + n : n
+        }
+        var today = new Date(),
+        datetime = today.getFullYear() + '-' + pad((today.getMonth() + 1)) + '-' + pad(today.getDate()) + ' ' + today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+        var date_local = new Date(datetime).toLocaleString(undefined, {
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+        });
+        
+        exportToCsv("Notification(Issues)_"+date_local+".csv", scsv);
     }
+
     const Download = () => {
             //console.log(liveChannelData.labels[0]);
             var csv = [["Issue_name", "Details", "Time"]];
@@ -74,7 +88,7 @@ const Notification = () => {
             //console.log(logs);
             for (var i = 0; i < ss.length; i++) {
                 csv.push([(ss[i].flag == 1? "Device Connection !": ss[i].flag == 2? "Device Offline": "Warning Temperature" ),
-                (ss[i].flag == 1? ss[i].device_name+"- has not made any requests yet.": ss[i].flag == 2? ss[i].device_name+"- has been offline for more than 3 days.": ss[i].device_name+"- Temperature is Now -"+ss[i].temp ),
+                (ss[i].flag == 1? ss[i].device_name+"- has not made any requests yet.": ss[i].flag == 2? ss[i].device_name+"- has been offline for more than 5 days.": ss[i].device_name+"- Temperature is Now -"+ss[i].temp ),
                   ss[i].duration]);
             }
             //console.log(csv);
@@ -159,7 +173,7 @@ const Notification = () => {
                                                     <div class="card-body card-dashboard">
 
                                                         <div class="row">
-                                                            <div class="col-md-7"><div class="h3 font-weight-bold">Notification List <button type="button" onClick={Download} class="btn btn-sm btn-danger" disabled>Download</button></div></div>
+                                                            <div class="col-md-7"><div class="h3 font-weight-bold">Notification List <button type="button" onClick={Download} class="btn btn-sm btn-danger" >Download</button></div></div>
                                                             <div class="col-md-5"><input type="text" class="search form-control round border-primary mb-1" placeholder="Search" onChange={e => setQuery(e.target.value)} />
                                                             </div>
 
@@ -201,7 +215,7 @@ const Notification = () => {
                                                                                 </td>
                                                                                 <td >
                                                                                     <div class="media-body">
-                                                                                        <p class="notification-text font-small-5 text-muted"><span class="text-warning ">{notify.device_name}</span> has been offline for more than 3 days.</p>
+                                                                                        <p class="notification-text font-small-5 text-muted"><span class="text-warning ">{notify.device_name}</span> has been offline for more than 5 days.</p>
                                                                                     </div>
                                                                                 </td>
                                                                                 <td >
