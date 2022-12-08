@@ -18,7 +18,7 @@ const DayRangedChannelStatus = () => {
     const [month, setmonth] = useState([]);
     const [months, setmonths] = useState(['Jan ', 'Feb ', 'Mar ', 'Apr ', 'May ', 'Jun ', 'July ', 'Aug ', 'Sep ', 'Oct ', 'Nov ', 'Dec']);
     const [day, setday] = useState([]);
-    const [days, setdays] = useState([ 'Sun ','Mon ', 'Tue ', 'Wed ', 'Thu ', 'Fri ', 'Sat']);
+    const [days, setdays] = useState(['Sun ', 'Mon ', 'Tue ', 'Wed ', 'Thu ', 'Fri ', 'Sat']);
     const [start, setstart] = useState("");
     const [finish, setfinish] = useState("");
     const [channels, setchannels] = useState([]);
@@ -29,32 +29,32 @@ const DayRangedChannelStatus = () => {
     const [tvr0, setTvr0] = useState([]);
     const [tvrp, setTvrp] = useState([]);
     const [type, setType] = useState("");
-    
-    const [loading,setloading] = useState(true);
+
+    const [loading, setloading] = useState(true);
 
     useEffect(() => {
-        if(update>0){
-            var credentials={ id: id,type:type, month: month, year: year, day: day, start: start, finish: finish };
-        console.log(JSON.stringify(credentials));
+        if (update > 0) {
+            var credentials = { id: id, type: type, month: month, year: year, day: day, start: start, finish: finish };
+            console.log(JSON.stringify(credentials));
             setloading(true);
-                axiosConfig.post("/dayrangedall",credentials)
-                    .then(rsp => {
-                        
+            axiosConfig.post("/dayrangedall", credentials)
+                .then(rsp => {
+
                     setloading(false);
-                        //debugger;
-                        console.log(rsp.data);
-        
-                        setReachp(rsp.data.reachp);
-                        setReach0(rsp.data.reach0);
-                        setTvrp(rsp.data.tvrp);
-                        setTvr0(rsp.data.tvr0);
-                        setlabel(rsp.data.label);
-                    }).catch(err => {
-        alert("Server Error");
-        setUpdate(0);
-                    })
-                }
-            }, [update]);
+                    //debugger;
+                    console.log(rsp.data);
+
+                    setReachp(rsp.data.reachp);
+                    setReach0(rsp.data.reach0);
+                    setTvrp(rsp.data.tvrp);
+                    setTvr0(rsp.data.tvr0);
+                    setlabel(rsp.data.label);
+                }).catch(err => {
+                    alert("Server Error");
+                    setUpdate(0);
+                })
+        }
+    }, [update]);
 
 
 
@@ -75,56 +75,56 @@ const DayRangedChannelStatus = () => {
             csv.push([sampleLive0[i], sampleLive[i], sampleLive1[i], sampleLive2[i], sampleLive3[i]]);
         }
         console.log(csv);
-        
+
         const wb = XLSX.utils.book_new();
-        
+
         var ws = XLSX.utils.aoa_to_sheet(csv);
         XLSX.utils.book_append_sheet(wb, ws, "Day Ranged");
-        
+
         XLSX.writeFile(wb, "Day_Ranged.csv.xlsx");
-        
+
     }
 
 
-//     useEffect(() => {
-// if(update>0){
-//         var data = {
-//             id: id, month: month, year: year, day: day, start: start, finish: finish
-//         };
+    //     useEffect(() => {
+    // if(update>0){
+    //         var data = {
+    //             id: id, month: month, year: year, day: day, start: start, finish: finish
+    //         };
 
-//         axiosConfig.post("/channel/definedtrendreach0", data).then(rsp => {
+    //         axiosConfig.post("/channel/definedtrendreach0", data).then(rsp => {
 
-//             setReachZeroCSV(() => ({
-//                 labels: rsp.data.label, values: rsp.data.value
-//             }));
-//         }).catch(err => {
+    //             setReachZeroCSV(() => ({
+    //                 labels: rsp.data.label, values: rsp.data.value
+    //             }));
+    //         }).catch(err => {
 
-//         });
+    //         });
 
-//         axiosConfig.post("/channel/definedtrendreachp", data).then(rsp => {
+    //         axiosConfig.post("/channel/definedtrendreachp", data).then(rsp => {
 
-//             setReachPercentCSV(rsp.data.value);
-//         }).catch(err => {
+    //             setReachPercentCSV(rsp.data.value);
+    //         }).catch(err => {
 
-//         });
+    //         });
 
-//         axiosConfig.post("/channel/definedtrendtvr0", data).then(rsp => {
+    //         axiosConfig.post("/channel/definedtrendtvr0", data).then(rsp => {
 
-//             setTvrZeroCSV(rsp.data.value);
-//         }).catch(err => {
+    //             setTvrZeroCSV(rsp.data.value);
+    //         }).catch(err => {
 
-//         });
+    //         });
 
-//         axiosConfig.post("/channel/definedtrendtvrp", data).then(rsp => {
+    //         axiosConfig.post("/channel/definedtrendtvrp", data).then(rsp => {
 
-//             setTvrPercentCSV(rsp.data.value);
-//         }).catch(err => {
+    //             setTvrPercentCSV(rsp.data.value);
+    //         }).catch(err => {
 
-//         });
+    //         });
 
-//     }
+    //     }
 
-//     }, [update]);
+    //     }, [update]);
 
 
 
@@ -166,7 +166,7 @@ const DayRangedChannelStatus = () => {
     }
     const weekend = () => {
         var checkboxes = document.querySelectorAll('input[name=day]');
-        var val=document.querySelector("#root > div > div > div:nth-child(2) > div.app-content.content > div.content-wrapper > div.content-body > div.card > div > div > div:nth-child(2) > div:nth-child(4) > input[type=checkbox]:nth-child(7)").checked;
+        var val = document.querySelector("#root > div > div > div:nth-child(2) > div.app-content.content > div.content-wrapper > div.content-body > div.card > div > div > div:nth-child(2) > div:nth-child(4) > input[type=checkbox]:nth-child(7)").checked;
 
         for (var i = 5; i < 7; i++) {
             checkboxes[i].checked = val;
@@ -177,7 +177,7 @@ const DayRangedChannelStatus = () => {
 
     const weekday = () => {
         var checkboxes = document.querySelectorAll('input[name=day]')
-        var val=document.querySelector("#root > div > div > div:nth-child(2) > div.app-content.content > div.content-wrapper > div.content-body > div.card > div > div > div:nth-child(2) > div:nth-child(4) > input[type=checkbox]:nth-child(5)").checked;
+        var val = document.querySelector("#root > div > div > div:nth-child(2) > div.app-content.content > div.content-wrapper > div.content-body > div.card > div > div > div:nth-child(2) > div:nth-child(4) > input[type=checkbox]:nth-child(5)").checked;
         for (var i = 0; i < 5; i++) {
             checkboxes[i].checked = val;
         }
@@ -207,7 +207,7 @@ const DayRangedChannelStatus = () => {
 
     return (
         <div><Header title="Trend Analysis Day-Ranged" />
-        <MainMenu menu="daytrendranged" />
+            <MainMenu menu="daytrendranged" />
             <div class="app-content content">
                 <div class="content-overlay"></div>
                 <div class="content-wrapper" style={{ backgroundColor: "azure" }} >
@@ -226,6 +226,15 @@ const DayRangedChannelStatus = () => {
                                                 onChange={opt => setId(opt.value)}
                                             />
                                         </div>
+
+                                        <div class="col-md-2">
+                                            <select class="custom-select d-block w-100" onChange={(e) => { setType(e.target.value) }}>
+                                                <option value="">All (STB & OTT)</option>
+                                                <option value="STB">STB</option>
+                                                <option value="OTT">OTT</option>
+                                            </select>
+                                        </div>
+
                                     </div>
                                     <div class="row">
 
@@ -262,22 +271,34 @@ const DayRangedChannelStatus = () => {
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-2">
-                                            <div class="h4 font-weight-bold">Select Day</div>
-                                            <input type="checkbox" name="day" value="0" onChange={function (event) { checkbox('day'); }} /><span class="h6">Sunday</span><br />
-                                            <input type="checkbox" name="day" value="1" onChange={function (event) { checkbox('day'); }} /><span class="h6">Monday</span><br />
-                                            <input type="checkbox" name="day" value="2" onChange={function (event) { checkbox('day'); }} /><span class="h6">Tuesday</span><br />
-                                            <input type="checkbox" name="day" value="3" onChange={function (event) { checkbox('day'); }} /><span class="h6">Wednesday</span><br />
-                                            <input type="checkbox" name="day" value="4" onChange={function (event) { checkbox('day'); }} /><span class="h6">Thursday</span><br />
-                                            <input type="checkbox" name="day" value="5" onChange={function (event) { checkbox('day'); }} /><span class="h6">Friday</span><br />
-                                            <input type="checkbox" name="day" value="6" onChange={function (event) { checkbox('day'); }} /><span class="h6">Saturday</span><br />
-                                        </div>
-                                        <div class="col-md-2">
-                                            <br></br><br /><br></br><br />
-                                            <input type="checkbox" name="week" value="1" onChange={weekday} />Weekdays<br />
-                                            <input type="checkbox" name="week" value="2" onChange={weekend} />Weekends<br />
-                                        </div>
+
                                         <div class="col-md-3">
+                                            <br />
+                                            <div class="h4 font-weight-bold">Select Day</div>
+                                            <div class="row">
+                                                <div class="col-md-5">
+
+                                                    <input type="checkbox" name="day" value="0" onChange={function (event) { checkbox('day'); }} /><span class="h6">Sunday</span><br />
+                                                    <input type="checkbox" name="day" value="1" onChange={function (event) { checkbox('day'); }} /><span class="h6">Monday</span><br />
+                                                    <input type="checkbox" name="day" value="2" onChange={function (event) { checkbox('day'); }} /><span class="h6">Tuesday</span><br />
+                                                    <input type="checkbox" name="day" value="3" onChange={function (event) { checkbox('day'); }} /><span class="h6">Wednesday</span><br />
+                                                    <input type="checkbox" name="day" value="4" onChange={function (event) { checkbox('day'); }} /><span class="h6">Thursday</span><br />
+                                                    <input type="checkbox" name="day" value="5" onChange={function (event) { checkbox('day'); }} /><span class="h6">Friday</span><br />
+                                                    <input type="checkbox" name="day" value="6" onChange={function (event) { checkbox('day'); }} /><span class="h6">Saturday</span><br />
+
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <br /><br /><br />
+                                                    <input type="checkbox" name="week" value="1" onChange={weekday} />Weekdays<br />
+                                                    <input type="checkbox" name="week" value="2" onChange={weekend} />Weekends<br />
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <br />
                                             <div class="h4 font-weight-bold">Select Time</div>
                                             <div class="row">
                                                 <div class="col-md-6">
@@ -293,27 +314,42 @@ const DayRangedChannelStatus = () => {
                                                     </fieldset>
                                                 </div>
                                             </div>
-                                            <div class="row">
-                                                <div class="col-md-6">
 
-                                                </div><div class="col-md-6">
-                                                    <button onClick={updater} class="btn btn-info">View</button>
+                                            <div class="row">
+                                                <div class="col-md-3"></div>
+                                                <div class="col-md-4 pt-2">
+                                                    <button onClick={updater} class="btn btn-info ">View</button>
 
                                                 </div>
+
+                                                {(() => {
+                                                    if (!loading) {
+                                                        return <div class="col-md-5">
+                                                            <span class=""><small>Download All In One</small></span>
+                                                            <button onClick={Downloadfunc} class="btn btn-danger">Download CSV</button>
+
+                                                        </div>
+                                                    } else {
+                                                        return null;
+
+                                                    }
+                                                })()}
+
+
+
                                             </div>
                                         </div>
 
 
                                     </div>
 
-                                    <br />
-
+                                    {/* <br />
 
                                     <div class="row">
 
                                         <div class="col-md-2">
                                             <label>Type (STB/OTT)</label>
-                                            <select class="custom-select d-block w-100" onChange={(e) => { setType(e.target.value)}}>
+                                            <select class="custom-select d-block w-100" onChange={(e) => { setType(e.target.value) }}>
                                                 <option value="">All</option>
                                                 <option value="STB">STB</option>
                                                 <option value="OTT">OTT</option>
@@ -380,7 +416,7 @@ const DayRangedChannelStatus = () => {
                                             </div>
                                         </div> */}
 
-                                        {(() => {
+                                    {/* {(() => {
                                             if (!loading) {
                                                 return <div class="col-md-2">
                                                     <label>Download All In One</label>
@@ -393,17 +429,7 @@ const DayRangedChannelStatus = () => {
                                             }
                                         })()}
 
-
-
-
-
-
-
-                                    </div>
-
-
-
-
+                                    </div> */}
 
 
                                 </div>
@@ -510,10 +536,10 @@ const DayRangedChannelStatus = () => {
 
 
                             <div class="col-md-6">
-                                <PreBarGraph title="Reach(%)" text="Channel vs Reach(%)"  loading={loading} labels={label} values={reachp} url="channel/definedtrendreachp" color="#28D094"  update={update} />
+                                <PreBarGraph title="Reach(%)" text="Channel vs Reach(%)" loading={loading} labels={label} values={reachp} url="channel/definedtrendreachp" color="#28D094" update={update} />
                             </div>
                             <div class="col-md-6">
-                                <PreBarGraph title="Reach(000)" text="Channel vs Reach(000)"  loading={loading} labels={label} values={reach0} url="channel/definedtrendreach0" color="yellow"   update={update} />
+                                <PreBarGraph title="Reach(000)" text="Channel vs Reach(000)" loading={loading} labels={label} values={reach0} url="channel/definedtrendreach0" color="yellow" update={update} />
                             </div>
 
 
@@ -523,10 +549,10 @@ const DayRangedChannelStatus = () => {
 
 
                             <div class="col-md-6">
-                                <PreBarGraph title="TVR(%)" text="Channel vs TVR(%)"  loading={loading} labels={label} values={tvrp} url="channel/definedtrendtvrp" color="#68D094"   update={update} />
+                                <PreBarGraph title="TVR(%)" text="Channel vs TVR(%)" loading={loading} labels={label} values={tvrp} url="channel/definedtrendtvrp" color="#68D094" update={update} />
                             </div>
                             <div class="col-md-6">
-                                <PreBarGraph title="TVR(000)" text="Channel vs TVR(000)"  loading={loading} labels={label} values={tvr0} url="channel/definedtrendtvr0" color="#8D0394" update={update} />
+                                <PreBarGraph title="TVR(000)" text="Channel vs TVR(000)" loading={loading} labels={label} values={tvr0} url="channel/definedtrendtvr0" color="#8D0394" update={update} />
                             </div>
 
 
