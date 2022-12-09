@@ -15,7 +15,7 @@ const Footer = () => {
 
                         <div class="col-md-8">
                             <div class="row justify-content-center">
-                                <span class="col-md-2 text-right d-none d-md-inline-block pt-1" style={{ whiteSpace: 'nowrap' }}>A Joint Venture of</span>
+                                <span class="col-md-2 text-right d-none d-md-inline-block pt-1" style={{ whiteSpace: 'nowrap' }}>Jointly Developed by</span>
                                 <div class="col-md-6 ">
                                     <table class="justify-content-left">
                                         <tr style={{ borderBottom: '0.5pt', borderBottom: 'thin solid', borderBottomColor: 'grey' }}>
