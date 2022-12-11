@@ -1,13 +1,9 @@
 import React from 'react';
 import { useState, useEffect } from "react";
 import axiosConfig from "../axiosConfig";
-import CurrentStatus from "../CurrentStatus/CurrentStatus";
-import Graph from "../Graph/Graph";
-import DemoGraph from "../Graph/DemoGraph";
 import Select from 'react-select';
-import GetLineGraph from "../Graph/GetLineGraph";
-import PostLineGraph from "../Graph/PostLineGraph";
 import Header from '../Header/Header';
+import LineGraph from "../Graph/LineGraph";
 import MainMenu from '../MainMenu/MainMenu';
 
 
@@ -18,6 +14,39 @@ const ChannelStatus = () => {
     const [id, setId] = useState("");
     const [type, setType] = useState("");
     const [channels, setchannels] = useState([]);
+    
+    const [label, setlabel] = useState([]);
+    const [reach0, setReach0] = useState([]);
+    const [reachp, setReachp] = useState([]);
+    const [tvr0, setTvr0] = useState([]);
+    const [tvrp, setTvrp] = useState([]);
+    
+    const [loading,setloading] = useState(false);
+
+    useEffect(() => {
+        if(update>0){
+            var credentials={ "id": id, "time": time,"type":type };
+        console.log(JSON.stringify(credentials));
+            setloading(false);
+                axiosConfig.post("/trend/general/all",credentials)
+                    .then(rsp => {
+                        
+                    setloading(true);
+                        //debugger;
+                        console.log(rsp.data);
+        
+                        setReachp(rsp.data.reachp);
+                        setReach0(rsp.data.reach0);
+                        setTvrp(rsp.data.tvrp);
+                        setTvr0(rsp.data.tvr0);
+                        setlabel(rsp.data.label);
+                    }).catch(err => {
+        alert("Server Error");
+        setUpdate(0);
+                    })
+                }
+            }, [update]);
+
     useEffect(() => {
 
         axiosConfig.get("/trend/channels").then(rsp => {
@@ -152,29 +181,30 @@ const ChannelStatus = () => {
                         <br />
 
 
-
                         <div class="row">
-                            <div class="col-md-6">
-                                <PostLineGraph title="Reach (%)" text="Active Channels" url="trend/reach/percent" label="Reach (%)" color="blue" credentials={{ "id": id, "time": time,"type":type }} update={update} />
+                            <div class="col-md-12">
+                                <LineGraph title="Reach (%)" text="Active Channels" loading={loading} labels={label} values={reachp} color="blue"  update={update} />
 
                             </div>
-                            <div class="col-md-6">
-                                <PostLineGraph title="Reach (000)" text="Active Channels" url="trend/reach/zero" label="Reach (000)" color="red" credentials={{ "id": id, "time": time,"type":type }} update={update} />
+                            <div class="col-md-12">
+                                <LineGraph title="Reach (000)" text="Active Channels" loading={loading} labels={label} values={reach0}  color="red"  update={update} />
 
                             </div>
 
                         </div>
                         <div class="row">
-                            <div class="col-md-6">
-                                <PostLineGraph title="TVR (000)" text="Active Channels" url="trend/tvr/zero" label="TVR (000)" color="violet" credentials={{ "id": id, "time": time,"type":type }} update={update} />
+                            <div class="col-md-12">
+                                <LineGraph title="TVR (000)" text="Active Channels" loading={loading} labels={label} values={tvr0} color="violet"  update={update} />
 
                             </div>
-                            <div class="col-md-6">
-                                <PostLineGraph title="TVR (%)" text="Active Channels" url="trend/tvr/percent" label="TVR (%)" color="green" credentials={{ "id": id, "time": time,"type":type }} update={update} />
+                            <div class="col-md-12">
+                                <LineGraph title="TVR (%)" text="Active Channels" loading={loading} labels={label} values={tvrp} color="green"  update={update} />
 
                             </div>
 
                         </div>
+
+                        
                     </div>
                 </div>
             </div>
