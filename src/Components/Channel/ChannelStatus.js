@@ -182,22 +182,22 @@ const ChannelStatus = () => {
 
 
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <LineGraph title="Reach (%)" text="Active Channels" loading={loading} labels={label} values={reachp} color="blue"  update={update} />
 
                             </div>
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <LineGraph title="Reach (000)" text="Active Channels" loading={loading} labels={label} values={reach0}  color="red"  update={update} />
 
                             </div>
 
                         </div>
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <LineGraph title="TVR (000)" text="Active Channels" loading={loading} labels={label} values={tvr0} color="violet"  update={update} />
 
                             </div>
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <LineGraph title="TVR (%)" text="Active Channels" loading={loading} labels={label} values={tvrp} color="green"  update={update} />
 
                             </div>
