@@ -25,7 +25,24 @@ const Header = (props) => {
     }, []);
 
 
+    const Seen = () => {
 
+        axiosConfig.get("/dashboard/seennotification").then(rsp => {
+
+        }).catch(err => {
+
+        });
+
+        axiosConfig.get("/dashboard/notification").then(rsp => {
+            setNotifyNumber(rsp.data.notifyNumber)
+            setNotifyData(rsp.data.data);
+        }).catch(err => {
+
+        });
+    }
+
+
+    console.log(notifyData);
 
 
 
@@ -46,9 +63,9 @@ const Header = (props) => {
         <nav class="header-navbar navbar-expand-md navbar navbar-with-menu navbar-without-dd-arrow fixed-top navbar-semi-light bg-info navbar-shadow">
             <div class="navbar-wrapper">
                 <div class="navbar-header">
-                <ul class="nav navbar-nav flex-row">
+                    <ul class="nav navbar-nav flex-row">
                         <li class="nav-item mobile-menu d-md-none mr-auto"><a class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i class="ft-menu font-large-1"></i></a></li>
-                        <li class="nav-item"><a class="navbar-brand" href="/">&nbsp;&nbsp;&nbsp;<img class="brand-logo" alt="modern admin logo" style={{zoom:"1.7"}} src="../../../app-assets/images/logo/bscl-logo.png"></img>
+                        <li class="nav-item"><a class="navbar-brand" href="/">&nbsp;&nbsp;&nbsp;<img class="brand-logo" alt="modern admin logo" style={{ zoom: "1.7" }} src="../../../app-assets/images/logo/bscl-logo.png"></img>
                             <h3 class="brand-text">BSCL</h3>
                         </a></li>
                         <li class="nav-item d-md-none"><a class="nav-link open-navbar-container" data-toggle="collapse" data-target="#navbar-mobile"><i class="la la-ellipsis-v"></i></a></li>
@@ -137,47 +154,134 @@ const Header = (props) => {
                             </li> */}
 
                             {cookies.get('_role') === "admin" &&
-                                <li class="dropdown dropdown-notification nav-item"><a class="nav-link nav-link-label" href="#" data-toggle="dropdown"><i class="ficon ft-bell"></i><span class="badge badge-pill badge-danger badge-up badge-glow">{notifyNumber}</span></a>
+                                <li class="dropdown dropdown-notification nav-item"><a class="nav-link nav-link-label" href="#" data-toggle="dropdown"><i class="ficon ft-bell"></i>
+                                    {(() => {
+                                        if (notifyNumber > 0) {
+                                            return <span class="badge badge-pill badge-danger badge-up badge-glow">{notifyNumber}</span>
+                                        } else {
+                                            return null;
+
+                                        }
+                                    })()}
+                                </a>
                                     <ul class="dropdown-menu dropdown-menu-media dropdown-menu-right">
                                         <li class="dropdown-menu-header">
-                                            <h6 class="dropdown-header m-0"><span class="grey darken-2">Notifications</span></h6><span class="notification-tag badge badge-danger float-right m-0">-</span>
+                                            <h6 class="dropdown-header m-0"><span class="grey darken-2">Notifications</span></h6>
+                                                {(() => {
+                                                    if (notifyNumber > 0) {
+                                                        return <span type="button" onClick={Seen} class="btn notification-tag badge badge-danger float-right m-0"><i class="la la-eye-slash la-lg" style={{ fontSize: '20px' }}></i></span>
+                                                    } else {
+                                                        return <span class="notification-tag badge badge-danger float-right m-0"><i class="la la-eye la-lg" style={{ fontSize: '20px' }}></i></span>
+                                                    }
+                                                })()}
+                                            
                                         </li>
                                         <li class="scrollable-container media-list w-100" style={{ overflowY: "overlay" }}>
 
                                             {notifyData.map((notify) => {
                                                 if (notify.flag === 1) {
-                                                    return <a href="javascript:void(0)">
-                                                        <div class="media">
-                                                            <div class="media-left align-self-center"><i class="ft-plus-square icon-bg-circle bg-cyan mr-0"></i></div>
-                                                            <div class="media-body">
-                                                                <h6 class="media-heading">Device Connection!</h6>
-                                                                <p class="notification-text font-small-3 text-muted"><span class="text-warning ">{notify.device_name}</span> has not made any requests yet.</p><small>
-                                                                    <time class="media-meta text-muted" datetime="2015-06-11T18:29:20+08:00">{notify.duration}</time></small>
+                                                    if (notify.status === "unseen") {
+                                                        return <a href="javascript:void(0)">
+                                                            <div class="media">
+                                                                <div class="media-left align-self-center"><i class="ft-plus-square icon-bg-circle bg-cyan mr-0"></i></div>
+                                                                <div class="media-body">
+                                                                    <h6 class="media-heading font-weight-bold">Device Connection!</h6>
+                                                                    <p class="notification-text font-small-3 text-muted font-weight-bold"><span class="text-warning ">{notify.du_name}</span> {notify.details}</p><small>
+                                                                        <time class="media-meta text-muted" datetime="2015-06-11T18:29:20+08:00">{notify.created_at}</time></small>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                    </a>
+                                                        </a>
+                                                    } else {
+                                                        return <a href="javascript:void(0)">
+                                                            <div class="media">
+                                                                <div class="media-left align-self-center"><i class="ft-plus-square icon-bg-circle bg-cyan mr-0"></i></div>
+                                                                <div class="media-body">
+                                                                    <h6 class="media-heading">Device Connection!</h6>
+                                                                    <p class="notification-text font-small-3 text-muted"><span class="text-warning ">{notify.du_name}</span> {notify.details}</p><small>
+                                                                        <time class="media-meta text-muted" datetime="2015-06-11T18:29:20+08:00">{notify.created_at}</time></small>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                    }
+
                                                 } else if (notify.flag === 2) {
-                                                    return <a href="javascript:void(0)">
-                                                        <div class="media">
-                                                            <div class="media-left align-self-center"><i class="ft-download-cloud icon-bg-circle bg-red bg-darken-1 mr-0"></i></div>
-                                                            <div class="media-body">
-                                                                <h6 class="media-heading red darken-1">Device Offline</h6>
-                                                                <p class="notification-text font-small-3 text-muted"><span class="text-warning ">{notify.device_name}</span> has been offline for more than 5 days.</p><small>
-                                                                    <time class="media-meta text-muted" datetime="2015-06-11T18:29:20+08:00">{notify.duration}</time></small>
+                                                    if (notify.status === "unseen") {
+                                                        return <a href="javascript:void(0)">
+                                                            <div class="media">
+                                                                <div class="media-left align-self-center"><i class="ft-download-cloud icon-bg-circle bg-red bg-darken-1 mr-0"></i></div>
+                                                                <div class="media-body">
+                                                                    <h6 class="media-heading red darken-1 font-weight-bold">Device Offline</h6>
+                                                                    <p class="notification-text font-small-3 text-muted font-weight-bold"><span class="text-warning ">{notify.du_name}</span> {notify.details}</p><small>
+                                                                        <time class="media-meta text-muted" datetime="2015-06-11T18:29:20+08:00">{notify.created_at}</time></small>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                    </a>
+                                                        </a>
+                                                    } else {
+                                                        return <a href="javascript:void(0)">
+                                                            <div class="media">
+                                                                <div class="media-left align-self-center"><i class="ft-download-cloud icon-bg-circle bg-red bg-darken-1 mr-0"></i></div>
+                                                                <div class="media-body">
+                                                                    <h6 class="media-heading red darken-1">Device Offline</h6>
+                                                                    <p class="notification-text font-small-3 text-muted"><span class="text-warning ">{notify.du_name}</span> {notify.details}</p><small>
+                                                                        <time class="media-meta text-muted" datetime="2015-06-11T18:29:20+08:00">{notify.created_at}</time></small>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                    }
+
+
                                                 } else if (notify.flag === 3) {
-                                                    return <a href="javascript:void(0)">
-                                                        <div class="media">
-                                                            <div class="media-left align-self-center"><i class="ft-alert-triangle icon-bg-circle bg-yellow bg-darken-3 mr-0"></i></div>
-                                                            <div class="media-body">
-                                                                <h6 class="media-heading yellow darken-3">Warning Temperature</h6>
-                                                                <p class="notification-text font-small-3 text-muted"><span class="text-warning ">{notify.device_name}</span> Temperature is Now {notify.temp} </p><small>
-                                                                    <time class="media-meta text-muted" datetime="2015-06-11T18:29:20+08:00">{notify.duration}</time></small>
+                                                    if (notify.status === "unseen") {
+                                                        return <a href="javascript:void(0)">
+                                                            <div class="media">
+                                                                <div class="media-left align-self-center"><i class="ft-alert-triangle icon-bg-circle bg-yellow bg-darken-3 mr-0"></i></div>
+                                                                <div class="media-body">
+                                                                    <h6 class="media-heading yellow darken-3 font-weight-bold">Warning Temperature</h6>
+                                                                    <p class="notification-text font-small-3 text-muted font-weight-bold"><span class="text-warning ">{notify.du_name}</span> {notify.details} </p><small>
+                                                                        <time class="media-meta text-muted" datetime="2015-06-11T18:29:20+08:00">{notify.created_at}</time></small>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                    </a>
+                                                        </a>
+                                                    } else {
+                                                        return <a href="javascript:void(0)">
+                                                            <div class="media">
+                                                                <div class="media-left align-self-center"><i class="ft-alert-triangle icon-bg-circle bg-yellow bg-darken-3 mr-0"></i></div>
+                                                                <div class="media-body">
+                                                                    <h6 class="media-heading yellow darken-3">Warning Temperature</h6>
+                                                                    <p class="notification-text font-small-3 text-muted"><span class="text-warning ">{notify.du_name}</span> {notify.details} </p><small>
+                                                                        <time class="media-meta text-muted" datetime="2015-06-11T18:29:20+08:00">{notify.created_at}</time></small>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                    }
+
+                                                }
+
+                                                else if (notify.flag === 4) {
+                                                    if (notify.status === "unseen") {
+                                                        return <a href="javascript:void(0)">
+                                                            <div class="media">
+                                                                <div class="media-left align-self-center"><i class="ft-alert-triangle icon-bg-circle bg-yellow bg-darken-3 mr-0"></i></div>
+                                                                <div class="media-body">
+                                                                    <h6 class="media-heading yellow darken-3 font-weight-bold">People's Meter</h6>
+                                                                    <p class="notification-text font-small-3 text-muted font-weight-bold"><span class="text-warning ">{notify.du_name}</span> {notify.details} </p><small>
+                                                                        <time class="media-meta text-muted" datetime="2015-06-11T18:29:20+08:00">{notify.created_at}</time></small>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                    } else {
+                                                        return <a href="javascript:void(0)">
+                                                            <div class="media">
+                                                                <div class="media-left align-self-center"><i class="ft-alert-triangle icon-bg-circle bg-yellow bg-darken-3 mr-0"></i></div>
+                                                                <div class="media-body">
+                                                                    <h6 class="media-heading yellow darken-3">People's Meter</h6>
+                                                                    <p class="notification-text font-small-3 text-muted"><span class="text-warning ">{notify.du_name}</span> {notify.details} </p><small>
+                                                                        <time class="media-meta text-muted" datetime="2015-06-11T18:29:20+08:00">{notify.created_at}</time></small>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                    }
+
                                                 }
                                             })}
 

@@ -11,19 +11,19 @@ const Footer = () => {
             <footer class="footer fixed-bottom footer-light navbar-border navbar-shadow">
                 <p class="clearfix blue-grey lighten-2 text-sm-center mb-0 px-2">
                     <div class="row">
-                        <span class="col-md text-left d-block d-md-inline-block pt-1">Copyright &copy; 2022 </span>
+                        <span class="col-md text-left d-none d-lg-block pt-1">Copyright &copy; 2022 </span>
 
                         <div class="col-md-8">
                             <div class="row justify-content-center">
-                                <span class="col-md-2 text-right d-none d-md-inline-block pt-1" style={{ whiteSpace: 'nowrap' }}>Jointly Developed by</span>
-                                <div class="col-md-6 ">
+                                <p class="col-md-3 text-left d-block d-md-inline-block pt-1">Jointly Developed by</p>
+                                <div class="col-md-5 ">
                                     <table class="justify-content-left">
                                         <tr style={{ borderBottom: '0.5pt', borderBottom: 'thin solid', borderBottomColor: 'grey' }}>
-                                            <td><a class="text-bold-800 grey darken-2"  href="http://www.bscl.gov.bd/" target="_blank">Bangladesh Satellite Company Limited <img style={{ zoom: 0.13 }} class="brand-logo" alt="aiub logo" src="../../../app-assets/images/logo/bscl-logo.png"></img></a></td>
+                                            <td style={{ whiteSpace: 'nowrap' }}><a class="text-bold-800 grey darken-2"  href="http://www.bscl.gov.bd/" target="_blank">Bangladesh Satellite Company Limited <img style={{ height:'auto', width:'7%' }} class="brand-logo" alt="aiub logo" src="../../../app-assets/images/logo/bscl-logo.png"></img></a></td>
 
                                         </tr>
                                         <tr>
-                                            <td ><a class="text-bold-800 grey darken-2" href="https://www.aiub.edu/" target="_blank">American International University-Bangladesh <img style={{ zoom: 0.29 }} class="brand-logo" alt="aiub logo" src="../../../app-assets/images/logo/aiub-logo.png"></img></a></td>
+                                            <td style={{ whiteSpace: 'nowrap' }}><a class="text-bold-800 grey darken-2" href="https://www.aiub.edu/" target="_blank">American International University-Bangladesh <img style={{ height:'auto', width:'7%' }} class="brand-logo" alt="aiub logo" src="../../../app-assets/images/logo/aiub-logo.png"></img></a></td>
                                         </tr>
                                     </table>
                                 </div>

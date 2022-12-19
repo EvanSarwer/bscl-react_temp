@@ -68,7 +68,7 @@ const Notification = () => {
             return n < 10 ? '0' + n : n
         }
         var today = new Date(),
-        datetime = today.getFullYear() + '-' + pad((today.getMonth() + 1)) + '-' + pad(today.getDate()) + ' ' + today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+            datetime = today.getFullYear() + '-' + pad((today.getMonth() + 1)) + '-' + pad(today.getDate()) + ' ' + today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
         var date_local = new Date(datetime).toLocaleString(undefined, {
             day: 'numeric',
             month: 'long',
@@ -77,23 +77,42 @@ const Notification = () => {
             minute: '2-digit',
             second: '2-digit',
         });
-        
-        exportToCsv("Notification(Issues)_"+date_local+".csv", scsv);
+
+        exportToCsv("Notification(Issues)_" + date_local + ".csv", scsv);
     }
 
     const Download = () => {
-            //console.log(liveChannelData.labels[0]);
-            var csv = [["Issue_name", "Details", "Time"]];
-            var ss = notifyData;
-            //console.log(logs);
-            for (var i = 0; i < ss.length; i++) {
-                csv.push([(ss[i].flag == 1? "Device Connection !": ss[i].flag == 2? "Device Offline": "Warning Temperature" ),
-                (ss[i].flag == 1? ss[i].device_name+"- has not made any requests yet.": ss[i].flag == 2? ss[i].device_name+"- has been offline for more than 5 days.": ss[i].device_name+"- Temperature is Now -"+ss[i].temp ),
-                  ss[i].duration]);
+        //console.log(liveChannelData.labels[0]);
+        var csv = [["Issue_name", "Details", "Time"]];
+        var ss = notifyData;
+        //console.log(logs);
+        for (var i = 0; i < ss.length; i++) {
+            if (ss[i].status == "unseen") {
+                csv.push([(ss[i].flag == 1 ? "Device Connection !" : ss[i].flag == 2 ? "Device Offline" : ss[i].flag == 3 ? "Warning Temperature" : "People's Meter"),
+                (ss[i].du_name + " -- " + ss[i].details),
+                ss[i].created_at]);
             }
-            //console.log(csv);
-            getCSV(csv);
-        
+
+        }
+        //console.log(csv);
+        getCSV(csv);
+
+    }
+
+    const Seen = () => {
+
+        axiosConfig.get("/dashboard/seennotification").then(rsp => {
+
+        }).catch(err => {
+
+        });
+
+        axiosConfig.get("/dashboard/notification").then(rsp => {
+            setNotifyNumber(rsp.data.notifyNumber)
+            setNotifyData(rsp.data.data);
+        }).catch(err => {
+
+        });
     }
 
 
@@ -138,7 +157,7 @@ const Notification = () => {
     const Search = (data) => {
         return data.filter(
             (item) =>
-                item.device_name.toLowerCase().includes(query.toLowerCase())
+                item.du_name.toLowerCase().includes(query.toLowerCase())
         );
     };
 
@@ -173,7 +192,25 @@ const Notification = () => {
                                                     <div class="card-body card-dashboard">
 
                                                         <div class="row">
-                                                            <div class="col-md-7"><div class="h3 font-weight-bold">Notification List <button type="button" onClick={Download} class="btn btn-sm btn-danger" >Download</button></div></div>
+                                                            <div class="col-md-5"><div class="h3 font-weight-bold">Notification List {(() => {
+                                                                if (notifyNumber > 0) {
+                                                                    return <button type="button" onClick={Download} class="btn btn-sm btn-danger" >Download</button>
+                                                                } else {
+                                                                    return <button type="button" onClick={Download} class="btn btn-sm btn-danger " disabled>Download</button>
+
+                                                                }
+                                                            })()}
+                                                            </div></div>
+                                                            <div class="col-md-2">
+                                                                {(() => {
+                                                                    if (notifyNumber > 0) {
+                                                                        return <i type="button" onClick={Seen} class="btn la la-eye-slash la-lg" style={{ fontSize: '30px' }}></i>
+                                                                    } else {
+                                                                        return <i class="la la-eye la-lg" style={{ fontSize: '30px' }}></i>
+
+                                                                    }
+                                                                })()}
+                                                            </div>
                                                             <div class="col-md-5"><input type="text" class="search form-control round border-primary mb-1" placeholder="Search" onChange={e => setQuery(e.target.value)} />
                                                             </div>
 
@@ -191,55 +228,148 @@ const Notification = () => {
                                                                 <tbody>
                                                                     {Search(notifyData).map((notify) => {
                                                                         if (notify.flag === 1) {
-                                                                            return <tr key={notify.id}>
-                                                                                <td >
-                                                                                    <div class="media-left align-self-center" style={{ whiteSpace: 'nowrap' }}><h6 class="media-heading"><i class="ft-plus-square icon-bg-circle bg-cyan mr-0"></i> Device Connection !</h6></div>
-                                                                                 
-                                                                                </td>
-                                                                                <td>
-                                                                                    <div class="media-body">
-                                                                                        <p class="notification-text font-small-5 text-muted"><span class="text-warning ">{notify.device_name}</span> has not made any requests yet.</p>
-                                                                                    </div>
-                                                                                </td>
-                                                                                <td><medium>
-                                                                                        <time class="media-meta text-muted" datetime="2015-06-11T18:29:20+08:00">{notify.duration}</time></medium>
-                                                                                   
-                                                                                </td>
-                                                                            </tr>
-                                                                            
+                                                                            if (notify.status === "unseen") {
+                                                                                return <tr key={notify.id}>
+                                                                                    <td >
+                                                                                        <div class="media-left align-self-center" style={{ whiteSpace: 'nowrap' }}><h6 class="media-heading font-weight-bold"><i class="ft-plus-square icon-bg-circle bg-cyan mr-0"></i> Device Connection !</h6></div>
+
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="media-body">
+                                                                                            <p class="notification-text font-small-5 text-muted font-weight-bold"><span class="text-warning ">{notify.du_name}</span> {notify.details}</p>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td><medium>
+                                                                                        <time class="media-meta text-muted" datetime="2015-06-11T18:29:20+08:00">{notify.created_at}</time></medium>
+
+                                                                                    </td>
+                                                                                </tr>
+                                                                            } else {
+                                                                                return <tr key={notify.id}>
+                                                                                    <td >
+                                                                                        <div class="media-left align-self-center" style={{ whiteSpace: 'nowrap' }}><h6 class="media-heading"><i class="ft-plus-square icon-bg-circle bg-cyan mr-0"></i> Device Connection !</h6></div>
+
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="media-body">
+                                                                                            <p class="notification-text font-small-5 text-muted"><span class="text-warning ">{notify.du_name}</span> {notify.details}</p>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td><medium>
+                                                                                        <time class="media-meta text-muted" datetime="2015-06-11T18:29:20+08:00">{notify.created_at}</time></medium>
+
+                                                                                    </td>
+                                                                                </tr>
+                                                                            }
+
+
                                                                         } else if (notify.flag === 2) {
-                                                                            return <tr key={notify.id}>
-                                                                                <td>
-                                                                                    <div class="media-left align-self-center"><h6 class="media-heading red darken-1"><i class="ft-download-cloud icon-bg-circle bg-red bg-darken-1 mr-0"></i> Device Offline</h6></div>
-                                                                        
-                                                                                </td>
-                                                                                <td >
-                                                                                    <div class="media-body">
-                                                                                        <p class="notification-text font-small-5 text-muted"><span class="text-warning ">{notify.device_name}</span> has been offline for more than 5 days.</p>
-                                                                                    </div>
-                                                                                </td>
-                                                                                <td >
-                                                                                    <medium>
-                                                                                        <time class="media-meta text-muted" datetime="2015-06-11T18:29:20+08:00">{notify.duration}</time></medium>
-                                                                                   
-                                                                                </td>
-                                                                            </tr>
+                                                                            if (notify.status === "unseen") {
+                                                                                return <tr key={notify.id}>
+                                                                                    <td>
+                                                                                        <div class="media-left align-self-center"><h6 class="media-heading red darken-1 font-weight-bold"><i class="ft-download-cloud icon-bg-circle bg-red bg-darken-1 mr-0"></i> Device Offline</h6></div>
+
+                                                                                    </td>
+                                                                                    <td >
+                                                                                        <div class="media-body">
+                                                                                            <p class="notification-text font-small-5 text-muted font-weight-bold"><span class="text-warning ">{notify.du_name}</span> {notify.details}</p>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td >
+                                                                                        <medium>
+                                                                                            <time class="media-meta text-muted" datetime="2015-06-11T18:29:20+08:00">{notify.created_at}</time></medium>
+
+                                                                                    </td>
+                                                                                </tr>
+                                                                            } else {
+                                                                                return <tr key={notify.id}>
+                                                                                    <td>
+                                                                                        <div class="media-left align-self-center"><h6 class="media-heading red darken-1"><i class="ft-download-cloud icon-bg-circle bg-red bg-darken-1 mr-0"></i> Device Offline</h6></div>
+
+                                                                                    </td>
+                                                                                    <td >
+                                                                                        <div class="media-body">
+                                                                                            <p class="notification-text font-small-5 text-muted"><span class="text-warning ">{notify.du_name}</span> {notify.details}</p>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td >
+                                                                                        <medium>
+                                                                                            <time class="media-meta text-muted" datetime="2015-06-11T18:29:20+08:00">{notify.created_at}</time></medium>
+
+                                                                                    </td>
+                                                                                </tr>
+                                                                            }
+
                                                                         } else if (notify.flag === 3) {
-                                                                            return <tr key={notify.id}>
-                                                                                <td >
-                                                                                    <div class="media-left align-self-center"> <h6 class="media-heading yellow darken-3"><i class="ft-alert-triangle icon-bg-circle bg-yellow bg-darken-3 mr-0"></i> Warning Temperature</h6></div>
-                                                                                    
-                                                                                </td>
-                                                                                <td >
-                                                                                    <div class="media-body">
-                                                                                        <p class="notification-text font-small-5 text-muted"><span class="text-warning ">{notify.device_name}</span> Temperature is Now {notify.temp} </p>
-                                                                                    </div>
-                                                                                </td>
-                                                                                <td ><medium>
-                                                                                        <time class="media-meta text-muted" datetime="2015-06-11T18:29:20+08:00">{notify.duration}</time></medium>
-                                                                                    
-                                                                                </td>
-                                                                            </tr>
+                                                                            if (notify.status === "unseen") {
+                                                                                return <tr key={notify.id}>
+                                                                                    <td >
+                                                                                        <div class="media-left align-self-center"> <h6 class="media-heading yellow darken-3 font-weight-bold"><i class="ft-alert-triangle icon-bg-circle bg-yellow bg-darken-3 mr-0"></i> Warning Temperature</h6></div>
+
+                                                                                    </td>
+                                                                                    <td >
+                                                                                        <div class="media-body">
+                                                                                            <p class="notification-text font-small-5 text-muted font-weight-bold"><span class="text-warning ">{notify.du_name}</span> {notify.details} </p>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td ><medium>
+                                                                                        <time class="media-meta text-muted" datetime="2015-06-11T18:29:20+08:00">{notify.created_at}</time></medium>
+
+                                                                                    </td>
+                                                                                </tr>
+                                                                            } else {
+                                                                                return <tr key={notify.id}>
+                                                                                    <td >
+                                                                                        <div class="media-left align-self-center"> <h6 class="media-heading yellow darken-3"><i class="ft-alert-triangle icon-bg-circle bg-yellow bg-darken-3 mr-0"></i> Warning Temperature</h6></div>
+
+                                                                                    </td>
+                                                                                    <td >
+                                                                                        <div class="media-body">
+                                                                                            <p class="notification-text font-small-5 text-muted"><span class="text-warning ">{notify.du_name}</span> {notify.details} </p>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td ><medium>
+                                                                                        <time class="media-meta text-muted" datetime="2015-06-11T18:29:20+08:00">{notify.created_at}</time></medium>
+
+                                                                                    </td>
+                                                                                </tr>
+                                                                            }
+
+                                                                        } else if (notify.flag === 4) {
+                                                                            if (notify.status === "unseen") {
+                                                                                return <tr key={notify.id}>
+                                                                                    <td >
+                                                                                        <div class="media-left align-self-center"> <h6 class="media-heading yellow darken-3 font-weight-bold"><i class="ft-alert-triangle icon-bg-circle bg-yellow bg-darken-3 mr-0"></i>People's Meter</h6></div>
+
+                                                                                    </td>
+                                                                                    <td >
+                                                                                        <div class="media-body">
+                                                                                            <p class="notification-text font-small-5 text-muted font-weight-bold"><span class="text-warning ">{notify.du_name}</span> {notify.details} </p>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td ><medium>
+                                                                                        <time class="media-meta text-muted" datetime="2015-06-11T18:29:20+08:00">{notify.created_at}</time></medium>
+
+                                                                                    </td>
+                                                                                </tr>
+                                                                            } else {
+                                                                                return <tr key={notify.id}>
+                                                                                    <td >
+                                                                                        <div class="media-left align-self-center"> <h6 class="media-heading yellow darken-3"><i class="ft-alert-triangle icon-bg-circle bg-yellow bg-darken-3 mr-0"></i>People's Meter</h6></div>
+
+                                                                                    </td>
+                                                                                    <td >
+                                                                                        <div class="media-body">
+                                                                                            <p class="notification-text font-small-5 text-muted"><span class="text-warning ">{notify.du_name}</span> {notify.details} </p>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td ><medium>
+                                                                                        <time class="media-meta text-muted" datetime="2015-06-11T18:29:20+08:00">{notify.created_at}</time></medium>
+
+                                                                                    </td>
+                                                                                </tr>
+                                                                            }
+
                                                                         }
                                                                     }
                                                                         //             <tr key={notify.id}>
