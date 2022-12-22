@@ -42,7 +42,6 @@ const Header = (props) => {
     }
 
 
-    console.log(notifyData);
 
 
 
