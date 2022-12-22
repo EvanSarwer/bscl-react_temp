@@ -166,7 +166,7 @@ const DayRangedChannelStatus = () => {
     }
     const weekend = () => {
         var checkboxes = document.querySelectorAll('input[name=day]');
-        var val = document.querySelector("#root > div > div > div:nth-child(2) > div.app-content.content > div.content-wrapper > div.content-body > div.card > div > div > div:nth-child(2) > div:nth-child(4) > input[type=checkbox]:nth-child(7)").checked;
+        var val = document.querySelector("#weekend").checked;
 
         for (var i = 5; i < 7; i++) {
             checkboxes[i].checked = val;
@@ -177,7 +177,7 @@ const DayRangedChannelStatus = () => {
 
     const weekday = () => {
         var checkboxes = document.querySelectorAll('input[name=day]')
-        var val = document.querySelector("#root > div > div > div:nth-child(2) > div.app-content.content > div.content-wrapper > div.content-body > div.card > div > div > div:nth-child(2) > div:nth-child(4) > input[type=checkbox]:nth-child(5)").checked;
+        var val = document.querySelector("#weekday").checked;
         for (var i = 0; i < 5; i++) {
             checkboxes[i].checked = val;
         }
@@ -290,8 +290,8 @@ const DayRangedChannelStatus = () => {
 
                                                 <div class="col-md-6">
                                                     <br /><br /><br />
-                                                    <input type="checkbox" name="week" value="1" onChange={weekday} />Weekdays<br />
-                                                    <input type="checkbox" name="week" value="2" onChange={weekend} />Weekends<br />
+                                                    <input type="checkbox" id="weekday" name="week" value="1" onChange={weekday} />Weekdays<br />
+                                                    <input type="checkbox" id="weekend" name="week" value="2" onChange={weekend} />Weekends<br />
                                                 </div>
                                             </div>
 
