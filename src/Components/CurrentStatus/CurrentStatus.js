@@ -67,10 +67,13 @@ const CurrentStatus = (props) => {
         <div class="row gx-1">
 
             <div class="col-xl-2 col-lg-1 col-12">
-                <CountComponent title="Total Device" count={props.totalUser} stb={props.stbCountTotal} ott={props.ottCountTotal} icon="icon-users success" color="success" percentage="100%" />
+                <CountComponent title="Total Device" count={props.totalUser} stb={props.stbAll} ott={props.ottCountTotal} icon="la la-hdd-o success" color="success" percentage="100%" />
             </div>
             <div class="col-xl-2 col-lg-1 col-12">
-                <CountComponent title="Active Device" count={props.activeUser} stb={props.stbCountActive} ott={props.ottCountActive} icon="icon-user-following success" color="success" percentage={props.activePercet+"%"} />
+                <CountComponent title="Total Viewer" count={props.totalUser} stb={props.stbCountTotal} ott={props.ottCountTotal} icon="icon-users success" color="success" percentage="100%" />
+            </div>
+            <div class="col-xl-2 col-lg-1 col-12">
+                <CountComponent title="Active Device & Viewer" count={props.activeUser} stb={props.stbCountActive} ott={props.ottCountActive} icon="icon-user-following success" color="success" percentage={props.activePercet+"%"} />
             </div>
             <div class="col-xl-2 col-lg-1 col-12">
                 <TopCount title="Top Reach" count={props.topReach} icon="icon-pie-chart warning" color="warning" percentage="" />
@@ -81,9 +84,9 @@ const CurrentStatus = (props) => {
             <div class="col-xl-2 col-lg-1 col-12">
                 <TopCount title="Top Share" count={props.topTVR} icon="icon-pie-chart danger" color="danger" percentage="" />
             </div>
-            <div class="col-xl-2 col-lg-1 col-12">
+            {/* <div class="col-xl-2 col-lg-1 col-12">
                 <TopCount title="Top Program" count="N/A" icon="icon-pie-chart warning" color="" percentage="" />
-            </div>
+            </div> */}
 
         </div>
 
