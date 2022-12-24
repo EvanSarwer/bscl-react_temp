@@ -44,6 +44,7 @@ const Dashboard = () => {
     const [stbCountTotal, setSTBCountTotal] = useState("");
     const [ottCountTotal, setOTTCountTotal] = useState("");
     const [totalUser, setTotalUser] = useState("");
+    const [stbAll, setStbAll] = useState("");
 
     //const [topReach, setTopReach] = useState("");
     //const [topTVR, setTopTVR] = useState("");
@@ -54,6 +55,7 @@ const Dashboard = () => {
             //console.log(rsp.data);
             setActiveUserList(rsp.data.activeUsers);
             setActiveChannelList(rsp.data.activeChannels);
+            setStbAll(rsp.data.stb_all);
             setTotalUser(rsp.data.total_user);
             setSTBCountTotal(rsp.data.stb_total);
             setOTTCountTotal(rsp.data.ott_total);
@@ -147,7 +149,7 @@ const Dashboard = () => {
                     </div>
                     <div class="content-body">
 
-                        <CurrentStatus topReach={cookies.get('_chnlTopReach')} topTVR={cookies.get('_chnlTopTVR')} totalUser={totalUser} stbCountTotal={stbCountTotal} ottCountTotal={ottCountTotal} activeUser={activeUser} stbCountActive={stbCountActive} ottCountActive={ottCountActive} activePercet={activePercet} />
+                        <CurrentStatus topReach={cookies.get('_chnlTopReach')} topTVR={cookies.get('_chnlTopTVR')} stbAll={stbAll} totalUser={totalUser} stbCountTotal={stbCountTotal} ottCountTotal={ottCountTotal} activeUser={activeUser} stbCountActive={stbCountActive} ottCountActive={ottCountActive} activePercet={activePercet} />
 
                         {/* Dashboard Table Start */}
                         {cookies.get('_role') === "admin" &&
