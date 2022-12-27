@@ -314,7 +314,7 @@ const UserDataFilter = () => {
                                                                 <td>{userFilterData.gender}</td>
                                                                 <td>{userFilterData.from_age} - {userFilterData.to_age}</td>
                                                                 <td style={{ whiteSpace: 'nowrap' }}>
-                                                                    <a class="btn btn-secondary" href={`/device/edit/${userFilterData.id}`} disabled>Download</a>
+                                                                    <a class="btn btn-secondary disabled" href={`/device/edit/${userFilterData.id}`} >Download</a>
                                                                     {/* <button class="offset-1 btn btn-danger" onClick={() => { if (window.confirm('Delete the item?')) { deleteDevice(device.id) }; }} >Delete</button> */}
                                                                 </td>
                                                                 {/* <td><div><input type="checkbox" id="deselect" onChange={ (event) =>{ if (window.confirm('Want to run This Deselection operation?')) {handleChange(event, device.id)}else {window.location.reload(false)} }} value={isSubscribed} checked={device.deselect === "deselect"} name="deselect" />
