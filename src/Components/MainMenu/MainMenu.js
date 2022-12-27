@@ -340,7 +340,7 @@ const MainMenu = (props) => {
                         }
                     })()} */}
                     {(() => {
-                        if (cookies.get('_role') === "admin" || cookies.get('_role') === "general" ) {
+                        if (cookies.get('_role') === "admin" || cookies.get('_role') === "general") {
                             if (props.menu === "playoutupload") {
                                 return (
                                     <li class="active nav-item"><Link to="/playoutupload"><i class="la la-upload"></i><span class="menu-title" data-i18n="Templates">Playout Log Upload</span></Link>
@@ -349,6 +349,22 @@ const MainMenu = (props) => {
                             } else {
                                 return (
                                     <li class=" nav-item"><Link to="/playoutupload"><i class="la la-upload"></i><span class="menu-title" data-i18n="Templates">Playout Log Upload</span></Link>
+                                    </li>
+                                )
+                            }
+                        }
+                    })()}
+
+                    {(() => {
+                        if (cookies.get('_role') === "admin") {
+                            if (props.menu === "userdatafilter") {
+                                return (
+                                    <li class="active nav-item"><Link to="/userdatafilter"><i class="la la-search-plus"></i><span class="menu-title" data-i18n="Templates">User Data Filter</span></Link>
+                                    </li>
+                                )
+                            } else {
+                                return (
+                                    <li class=" nav-item"><Link to="/userdatafilter"><i class="la la-search-plus"></i><span class="menu-title" data-i18n="Templates">User Data Filter</span></Link>
                                     </li>
                                 )
                             }

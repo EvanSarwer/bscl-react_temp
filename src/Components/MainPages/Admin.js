@@ -41,6 +41,7 @@ import KeywordTrp from "../KeywordTrp/KeywordTrp";
 import DeviceDetailsView from "../DeviceUser/DeviceDetailsView";
 import KeywordTrpV2 from "../KeywordTrp/KeywordTrpV2";
 import Notification from "../Header/Notification";
+import UserDataFilter from "../User/UserDataFilter";
 
 
 
@@ -90,6 +91,7 @@ function Admin() {
         <Route exact path="/device/user/edit/:id/:from" element={<EditUser />}></Route>
         <Route exact path="/device/details/:id" element={<DeviceDetails />}></Route>
         <Route exact path="/device/detail/:id" element={<DeviceDetailsView />}></Route>
+        <Route exact path="/userdatafilter" element={<UserDataFilter />}></Route>
 
         {/* <Navigate to="/" /> */}
         <Route
