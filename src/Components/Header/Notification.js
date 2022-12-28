@@ -88,7 +88,7 @@ const Notification = () => {
         //console.log(logs);
         for (var i = 0; i < ss.length; i++) {
             if (ss[i].status == "unseen") {
-                csv.push([(ss[i].flag == 1 ? "Device Connection !" : ss[i].flag == 2 ? "Device Offline" : ss[i].flag == 3 ? "Warning Temperature" : ss[i].flag == 4 ? "People's Meter":"Too much unknown & foreign"),
+                csv.push([(ss[i].flag == 1 ? "Device Connection !" : ss[i].flag == 2 ? "Device Offline" : ss[i].flag == 3 ? "Warning Temperature" : ss[i].flag == 4 ? "People's Meter": ss[i].flag == 5 ? "Too much unknown & foreign":"Same Channel"),
                 (ss[i].du_name + " -- " + ss[i].details),
                 ss[i].created_at]);
             }
@@ -391,6 +391,42 @@ const Notification = () => {
                                                                                 return <tr key={notify.id}>
                                                                                     <td >
                                                                                         <div class="media-left align-self-center"> <h6 class="media-heading yellow darken-3"><i class="ft-eye-off icon-bg-circle bg-yellow bg-darken-3 mr-0"></i>Unknown/Foreign</h6></div>
+
+                                                                                    </td>
+                                                                                    <td >
+                                                                                        <div class="media-body">
+                                                                                            <p class="notification-text font-small-5 text-muted"><span class="text-warning ">{notify.du_name}</span> {notify.details} </p>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td ><medium>
+                                                                                        <time class="media-meta text-muted" datetime="2015-06-11T18:29:20+08:00">{notify.created_at}</time></medium>
+
+                                                                                    </td>
+                                                                                </tr>
+                                                                            }
+
+                                                                        }
+                                                                        else if (notify.flag === 6) {
+                                                                            if (notify.status === "unseen") {
+                                                                                return <tr key={notify.id}>
+                                                                                    <td >
+                                                                                        <div class="media-left align-self-center"> <h6 class="media-heading yellow darken-3 font-weight-bold"><i class="ft-minus-circle icon-bg-circle bg-yellow bg-darken-3 mr-0"></i>Same Channel</h6></div>
+
+                                                                                    </td>
+                                                                                    <td >
+                                                                                        <div class="media-body">
+                                                                                            <p class="notification-text font-small-5 text-muted font-weight-bold"><span class="text-warning ">{notify.du_name}</span> {notify.details} </p>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td ><medium>
+                                                                                        <time class="media-meta text-muted" datetime="2015-06-11T18:29:20+08:00">{notify.created_at}</time></medium>
+
+                                                                                    </td>
+                                                                                </tr>
+                                                                            } else {
+                                                                                return <tr key={notify.id}>
+                                                                                    <td >
+                                                                                        <div class="media-left align-self-center"> <h6 class="media-heading yellow darken-3"><i class="ft-minus-circle icon-bg-circle bg-yellow bg-darken-3 mr-0"></i>Same Channel</h6></div>
 
                                                                                     </td>
                                                                                     <td >
