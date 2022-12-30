@@ -87,9 +87,9 @@ const UserDataFilter = () => {
             }
         }
     }
-    var getCSV = (scsv,view_id) => {
+    var getCSV = (scsv, view_id) => {
 
-        exportToCsv("User_data_filter_"+ view_id +".csv", scsv)
+        exportToCsv("User_data_filter_" + view_id + ".csv", scsv)
     }
 
     const Downloadfunc = (data) => {
@@ -109,7 +109,7 @@ const UserDataFilter = () => {
                     csv.push([sampleLive[i].id, sampleLive[i].user_name, sampleLive[i].device_id]);
                 }
                 //console.log(csv);
-                getCSV(csv,data);
+                getCSV(csv, data);
             }
 
         }, (err) => {
@@ -200,7 +200,7 @@ const UserDataFilter = () => {
     const Search = (data) => {
         return data.filter(
             (item) =>
-                item.start.toLowerCase().includes(query.toLowerCase())
+                item.filter_name.toLowerCase().includes(query.toLowerCase())
             // || item.id.toString().includes(query)
         );
     };
@@ -291,9 +291,6 @@ const UserDataFilter = () => {
 
                             </div>
 
-
-
-
                         </div>
 
 
@@ -307,8 +304,8 @@ const UserDataFilter = () => {
 
                                             <div class="row">
                                                 <div class="col-md-7"><div class="h3 font-weight-bold">User Data Filter List</div></div>
-                                                {/* <div class="col-md-5"><input type="text" class="search form-control round border-primary mb-1" placeholder="Search" onChange={e => setQuery(e.target.value)} />
-                                                            </div> */}
+                                                <div class="col-md-5"><input type="text" class="search form-control round border-primary mb-1" placeholder="Search Filter Name" onChange={e => setQuery(e.target.value)} />
+                                                            </div>
 
 
                                             </div>
@@ -353,57 +350,57 @@ const UserDataFilter = () => {
                                                                         console.log(allGeneratedData);
                                                                         if (allGeneratedData.length > 0) {
 
-                                                                            return <div class="col-12">
-                                                                                <div class="card">
+                                                                            return <tr>
+                                                                                <td colspan="8"><div class="col-12">
+                                                                                    <div class="card bg-light">
 
-                                                                                    <div class="card-content collapse show">
-                                                                                        <div class="card-body card-dashboard">
+                                                                                        <div class="card-content collapse show">
+                                                                                            <div class="card-body card-dashboard">
 
-                                                                                            <div class="row">
-                                                                                                <div class="col-md-7"><div class="h3 font-weight-bold">User  List</div></div>
-                                                                                                {/* <div class="col-md-5"><input type="text" class="search form-control round border-primary mb-1" placeholder="Search" onChange={e => setQuery(e.target.value)} />
+                                                                                                <div class="row">
+                                                                                                    <div class="col-md-7"><div class="h3 font-weight-bold">User  List</div></div>
+                                                                                                    {/* <div class="col-md-5"><input type="text" class="search form-control round border-primary mb-1" placeholder="Search" onChange={e => setQuery(e.target.value)} />
                                                                                                         </div> */}
 
 
-                                                                                            </div>
-                                                                                            <br />
-                                                                                            <div class="table-responsive" style={{ maxHeight: '400px', minHeight: '500px' }}>
-                                                                                                <table class="table display nowrap table-striped table-bordered">
-                                                                                                    <thead>
-                                                                                                        <tr>
-                                                                                                            <th>ID</th>
-                                                                                                            <th>Filter Name</th>
-                                                                                                            <th>Device ID</th>
-
-                                                                                                        </tr>
-                                                                                                    </thead>
-                                                                                                    <tbody>
-                                                                                                        {allGeneratedData.map((generatedData) =>
-
-                                                                                                            <tr key={generatedData.id}>
-                                                                                                                <td>{generatedData.id}</td>
-                                                                                                                <td><a href={`/device/user/details/${generatedData.id}`}>{generatedData.user_name}</a></td>
-                                                                                                                <td>{userFilterData.device_id}</td>
+                                                                                                </div>
+                                                                                                <br />
+                                                                                                <div class="table-responsive" style={{ maxHeight: '400px', minHeight: '500px' }}>
+                                                                                                    <table class="table display nowrap table-striped table-bordered">
+                                                                                                        <thead>
+                                                                                                            <tr>
+                                                                                                                <th>ID</th>
+                                                                                                                <th>Filter Name</th>
+                                                                                                                <th>Device ID</th>
 
                                                                                                             </tr>
+                                                                                                        </thead>
+                                                                                                        <tbody>
+                                                                                                            {allGeneratedData.map((generatedData) =>
 
-                                                                                                        )}
-                                                                                                    </tbody>
-                                                                                                </table>
+                                                                                                                <tr key={generatedData.id}>
+                                                                                                                    <td>{generatedData.id}</td>
+                                                                                                                    <td><a href={`/device/user/details/${generatedData.id}`}>{generatedData.user_name}</a></td>
+                                                                                                                    <td>{generatedData.device_id}</td>
+
+                                                                                                                </tr>
+
+                                                                                                            )}
+                                                                                                        </tbody>
+                                                                                                    </table>
 
 
+                                                                                                </div>
                                                                                             </div>
                                                                                         </div>
+
                                                                                     </div>
-
-                                                                                </div>
-                                                                            </div>
-
-
+                                                                                </div></td>
+                                                                            </tr>
 
                                                                         } else {
                                                                             return <tr>
-                                                                                <td colspan="6">No Available Data</td>
+                                                                                <td colspan="8">No Available Data</td>
                                                                             </tr>
                                                                         }
 
