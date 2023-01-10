@@ -413,14 +413,6 @@ const UserDataFilter = () => {
 
 
 
-
-
-
-
-
-                                                                {/* <tr>
-                                                                    <td colspan="6">Data</td>
-                                                                </tr> */}
                                                             </>
                                                         )}
                                                     </tbody>
