@@ -137,14 +137,34 @@ const DefinedChannelStatus = () => {
     const updater = () => {
         setUpdate(update + 1);
     }
-
+    var datagenerate=(label,data,channel)=>{
+        var nlabel=['Mid Point of Range'];
+    channel.forEach((i)=>{nlabel.push(i);})
+    var alldata=[nlabel];
+    for (var i=0;i<label.length;i++){
+        var narr=[label[i]];
+        console.log(label[i]);
+        for (var j=0;j<channel.length;j++){
+            console.log(data[j][i]);
+        narr.push(data[j][i]);
+    }
+        alldata.push(narr);
+    }
+        return alldata;
+    }
     const DownloadAll = () => {
+        var nchannel=[];
+        var nreachp=[];
+        var nreach0=[];
+        var ntvr0=[];
+        var ntvrp=[];
+        var nlabel=[];
         setallchannelf(true);
         const wb = XLSX.utils.book_new();
         let axiosArray = [];
         console.log(channels.length);
         channels.forEach((item) => {
-            //if (item.id < 2) {
+            //if (item.id < 1) {
                 let postData = { "id": item.id,"type":type, "range": time, "start": start, "finish": finish };
                 let newPromise = axiosConfig.post('/dayparts/all', postData);
                 axiosArray.push(newPromise);
@@ -158,13 +178,36 @@ const DefinedChannelStatus = () => {
                 responses.forEach((res) => {
                     console.log('Success');
                     console.log(res.data.channel);
-                    var ws = XLSX.utils.aoa_to_sheet(res.data.all);
-                    XLSX.utils.book_append_sheet(wb, ws, res.data.channel);
+                    nchannel.push(res.data.channel);
+                    nreach0.push(res.data.value.reach0);
+                    nreachp.push(res.data.value.reachp);
+                    ntvr0.push(res.data.value.tvr0);
+                    ntvrp.push(res.data.value.tvrp);
+                    if(nlabel.length==0){
+                        
+                    nlabel=(res.data.value.label);
+                    }
+
+                    //var ws = XLSX.utils.aoa_to_sheet(res.data.all);
+                    //XLSX.utils.book_append_sheet(wb, ws, res.data.channel);
 
                 })
 
                 setallchannelf(false);
                 console.log('submitted all axios calls');
+                console.log(nreach0);
+                var reach0data=datagenerate(nlabel,nreach0,nchannel);
+                var reachpdata=datagenerate(nlabel,nreachp,nchannel);
+                var tvr0data=datagenerate(nlabel,ntvr0,nchannel);
+                var tvrpdata=datagenerate(nlabel,ntvrp,nchannel);
+                var ws = XLSX.utils.aoa_to_sheet(reach0data);
+                XLSX.utils.book_append_sheet(wb, ws,'Reach (000)');
+                var ws = XLSX.utils.aoa_to_sheet(reachpdata);
+                XLSX.utils.book_append_sheet(wb, ws,'Reach (%)');
+                var ws = XLSX.utils.aoa_to_sheet(tvr0data);
+                XLSX.utils.book_append_sheet(wb, ws,'TVR (000)');
+                var ws = XLSX.utils.aoa_to_sheet(tvrpdata);
+                XLSX.utils.book_append_sheet(wb, ws,'TVR (%)');
                 XLSX.writeFile(wb, "Day Parts All Channel.xlsx");
             }))
             .catch(error => {
