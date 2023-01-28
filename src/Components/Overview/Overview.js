@@ -44,6 +44,7 @@ const Overview = () => {
     const [economic, setEconomic] = useState("");
     const [socio, setSocio] = useState("");
     const [err, setErr] = useState("error");
+    const [loading, setloading] = useState(false);
 
     const [channelData, setChannelData] = useState({
         labels: [],
@@ -65,8 +66,11 @@ const Overview = () => {
 
         if (start !== "" && finish !== "" && (new Date(start).getTime() <= new Date(role_datetime).getTime()) && (new Date(finish).getTime() <= new Date(role_datetime).getTime())) {
             setErr("");
+            setloading(false);
             axiosConfig.post("/overview/reachusergraph", data).then(rsp => {
+                setloading(true);
                 //console.log(rsp.data);
+
                 setChannelData(() => ({
                     labels: rsp.data.channels, datasets: [{
                         label: "Reach (000)", data: rsp.data.reach,
@@ -88,12 +92,12 @@ const Overview = () => {
     }, [])
     const BasicchannelDownloadfunc = () => {
         //console.log(liveChannelData.labels[0]);
-        if(userType == ""){
-            var csv = [[category, "All_User_type","Start-"+modify_date(start)+"_Finish-"+modify_date(finish)],["Channel", "Value"]];
-        }else if(userType == "OTT"){
-            var csv = [[category, userType,"Start-"+modify_date(start)+"_Finish-"+modify_date(finish)],["Channel", "Value"]];
-        }else if(userType == "STB"){
-            var csv = [[category, userType,(region? region:"All_Region"),(gender ? gender=="m"? "Male":"Female":"All-Gender"),(economic ? (economic==="a"?"Poorest":economic==="b"?"Poorer":economic==="c"?"Middle":economic==="d"?"Richer":"Richest"):"All SEC"),(socio ? socio== "u"? "Urban":"Rural":"Urban&Rural"),"Age-Range-"+parseInt(document.querySelector("#small-slider > div > div:nth-child(2) > div > div.noUi-tooltip").innerHTML)+" to "+parseInt(document.querySelector("#small-slider > div > div:nth-child(3) > div > div.noUi-tooltip").innerHTML),"Start-"+modify_date(start)+"_Finish-"+modify_date(finish)],["Channel", "Value"]];
+        if (userType == "") {
+            var csv = [[category, "All_User_type", "Start-" + modify_date(start) + "_Finish-" + modify_date(finish)], ["Channel", "Value"]];
+        } else if (userType == "OTT") {
+            var csv = [[category, userType, "Start-" + modify_date(start) + "_Finish-" + modify_date(finish)], ["Channel", "Value"]];
+        } else if (userType == "STB") {
+            var csv = [[category, userType, (region ? region : "All_Region"), (gender ? gender == "m" ? "Male" : "Female" : "All-Gender"), (economic ? (economic === "a" ? "Poorest" : economic === "b" ? "Poorer" : economic === "c" ? "Middle" : economic === "d" ? "Richer" : "Richest") : "All SEC"), (socio ? socio == "u" ? "Urban" : "Rural" : "Urban&Rural"), "Age-Range-" + parseInt(document.querySelector("#small-slider > div > div:nth-child(2) > div > div.noUi-tooltip").innerHTML) + " to " + parseInt(document.querySelector("#small-slider > div > div:nth-child(3) > div > div.noUi-tooltip").innerHTML), "Start-" + modify_date(start) + "_Finish-" + modify_date(finish)], ["Channel", "Value"]];
         }
 
         //var csv = [["Channel", "Value"]];
@@ -145,14 +149,14 @@ const Overview = () => {
         }
     }
     var getCSV = (scsv) => {
-        if(userType == ""){
-            exportToCsv("Basic_Report(" + category +"_All-User-Type_"+modify_date(start)+" - "+modify_date(finish)+").csv", scsv)
-        }else if(userType == "OTT"){
-            exportToCsv("Basic_Report(" + category +"_"+userType+"_"+modify_date(start)+" - "+modify_date(finish)+").csv", scsv)
-        }else if(userType == "STB"){
-            exportToCsv("Basic_Report(" + category +"_"+userType+"_"+(region? region:"All_Region")+"_"+(gender ? gender=="m"? "Male":"Female":"All-Gender")+"_"+(economic ? (economic==="a"?"Poorest":economic==="b"?"Poorer":economic==="c"?"Middle":economic==="d"?"Richer":"Richest"):"All SEC")+"_"+(socio ? socio== "u"? "Urban":"Rural":"Urban&Rural")+"_Age-"+parseInt(document.querySelector("#small-slider > div > div:nth-child(2) > div > div.noUi-tooltip").innerHTML)+" - "+parseInt(document.querySelector("#small-slider > div > div:nth-child(3) > div > div.noUi-tooltip").innerHTML)+"_"+modify_date(start)+" - "+modify_date(finish)+").csv", scsv)
+        if (userType == "") {
+            exportToCsv("Basic_Report(" + category + "_All-User-Type_" + modify_date(start) + " - " + modify_date(finish) + ").csv", scsv)
+        } else if (userType == "OTT") {
+            exportToCsv("Basic_Report(" + category + "_" + userType + "_" + modify_date(start) + " - " + modify_date(finish) + ").csv", scsv)
+        } else if (userType == "STB") {
+            exportToCsv("Basic_Report(" + category + "_" + userType + "_" + (region ? region : "All_Region") + "_" + (gender ? gender == "m" ? "Male" : "Female" : "All-Gender") + "_" + (economic ? (economic === "a" ? "Poorest" : economic === "b" ? "Poorer" : economic === "c" ? "Middle" : economic === "d" ? "Richer" : "Richest") : "All SEC") + "_" + (socio ? socio == "u" ? "Urban" : "Rural" : "Urban&Rural") + "_Age-" + parseInt(document.querySelector("#small-slider > div > div:nth-child(2) > div > div.noUi-tooltip").innerHTML) + " - " + parseInt(document.querySelector("#small-slider > div > div:nth-child(3) > div > div.noUi-tooltip").innerHTML) + "_" + modify_date(start) + " - " + modify_date(finish) + ").csv", scsv)
         }
-        
+
     }
 
     const GetData = () => {
@@ -171,7 +175,9 @@ const Overview = () => {
         if (start !== "" && finish !== "" && (new Date(start).getTime() <= new Date(role_datetime).getTime()) && (new Date(finish).getTime() <= new Date(role_datetime).getTime())) {
             setErr("");
             if (category === "Reach(000)") {
+                setloading(false);
                 axiosConfig.post("/overview/reachusergraph", data).then(rsp => {
+                    setloading(true);
                     //console.log(rsp.data);
                     setChannelData(() => ({
                         labels: rsp.data.channels, datasets: [{
@@ -188,7 +194,9 @@ const Overview = () => {
                 });
             }
             else if (category === "Reach(%)") {
+                setloading(false);
                 axiosConfig.post("/overview/reachpercentgraph", data).then(rsp => {
+                    setloading(true);
                     setChannelData(() => ({
                         labels: rsp.data.channels, datasets: [{
                             label: "Reach (%)", data: rsp.data.reach,
@@ -204,7 +212,9 @@ const Overview = () => {
                 });
             }
             else if (category === "TVR(000)") {
+                setloading(false);
                 axiosConfig.post("/overview/tvrgraphallchannelzero", data).then(rsp => {
+                    setloading(true);
                     setChannelData(() => ({
                         labels: rsp.data.channels, datasets: [{
                             label: "TVR (000)", data: rsp.data.tvrs,
@@ -220,7 +230,9 @@ const Overview = () => {
                 });
             }
             else if (category === "TVR(%)") {
+                setloading(false);
                 axiosConfig.post("/overview/tvrgraphallchannelpercent", data).then(rsp => {
+                    setloading(true);
                     setChannelData(() => ({
                         labels: rsp.data.channels, datasets: [{
                             label: "TVR (%)", data: rsp.data.tvrs,
@@ -236,7 +248,9 @@ const Overview = () => {
                 });
             }
             else if (category === "TVR Share(%)") {
+                setloading(false);
                 axiosConfig.post("/overview/tvrsharegraph", data).then(rsp => {
+                    setloading(true);
                     //console.log(rsp.data);
                     setChannelData(() => ({
                         labels: rsp.data.channels, datasets: [{
@@ -253,7 +267,9 @@ const Overview = () => {
                 });
             }
             else if (category === "Time Spent-Universe(minute)") {
+                setloading(false);
                 axiosConfig.post("/overview/timespentgraph", data).then(rsp => {
+                    setloading(true);
                     //console.log(rsp.data);
                     setChannelData(() => ({
                         labels: rsp.data.channels, datasets: [{
@@ -312,7 +328,7 @@ const Overview = () => {
         <div>
             <Header title="Basic Reports" />
             <MainMenu menu="basicreports" />
-            
+
             <div class="app-content content">
                 <div class="content-overlay"></div>
                 <div class="content-wrapper" style={{ backgroundColor: "azure" }} >
@@ -426,7 +442,7 @@ const Overview = () => {
 
                                         </div>
                                         {(() => {
-                                            if (err === "") {
+                                            if (loading === true) {
                                                 return (
                                                     <div class="col-md-2 ">
                                                         <button onClick={BasicchannelDownloadfunc} class="btn btn-danger">Download CSV</button>
@@ -469,40 +485,64 @@ const Overview = () => {
                                             </div>
                                         )
                                     } else {
-                                        return (
-                                            <div class="card">
-                                                <div class="card-header">
-                                                    <div class="row"><div class="col-6 h2 card-title font-weight-bold">Channels {category}</div><div class="row col h2 card-title text-left">From [<p class="text-primary bold"> {start_string}</p>] to [<p class="text-primary bold">{finish_string}</p>] </div></div>
 
-                                                </div>
-                                                <div class="card-body collapse show" style={{ height: "35em" }}>
+                                        if (loading) {
+                                            return (
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        <div class="row"><div class="col-6 h2 card-title font-weight-bold">Channels {category}</div><div class="row col h2 card-title text-left">From [<p class="text-primary bold"> {start_string}</p>] to [<p class="text-primary bold">{finish_string}</p>] </div></div>
+
+                                                    </div>
+                                                    <div class="card-body collapse show" style={{ height: "35em" }}>
 
 
-                                                    <Bar
-                                                        data={channelData}
-                                                        options={{
-                                                            responsive: true,
-                                                            maintainAspectRatio: false,
-                                                            title: {
-                                                                display: true,
-                                                                text: "Channels",
-                                                                fontSize: 1
-                                                            },
-                                                            legend: {
-                                                                display: true,
-                                                                position: 'right'
-                                                            }, plugins: {
+                                                        <Bar
+                                                            data={channelData}
+                                                            options={{
+                                                                responsive: true,
+                                                                maintainAspectRatio: false,
+                                                                title: {
+                                                                    display: true,
+                                                                    text: "Channels",
+                                                                    fontSize: 1
+                                                                },
                                                                 legend: {
-                                                                    display: false  //remove if want to show label 
+                                                                    display: true,
+                                                                    position: 'right'
+                                                                }, plugins: {
+                                                                    legend: {
+                                                                        display: false  //remove if want to show label 
+                                                                    }
                                                                 }
-                                                            }
-                                                        }}
-                                                    />
+                                                            }}
+                                                        />
 
 
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        )
+                                            )
+
+
+                                        } else {
+                                            return (
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        <div class="row"><div class="col-6 h2 card-title font-weight-bold">Channels {category}</div></div>
+
+                                                    </div>
+                                                    <div class="card-body collapse show" style={{ height: "35em" }}>
+
+                                                        <img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/Loading_2.gif?20170503175831" class="rounded mx-auto d-block" alt="..." />
+
+
+                                                    </div>
+                                                </div>
+
+                                            )
+
+                                        }
+
+
                                     }
                                 })()}
 
