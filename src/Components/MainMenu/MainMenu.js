@@ -237,6 +237,22 @@ const MainMenu = (props) => {
                         }
                     })()}
 
+                    {(() => {
+                        if (cookies.get('_role') === "admin") {
+                            if (props.menu === "devicehealth") {
+                                return (
+                                    <li class="active nav-item"><Link to="/devicehealth"><i class="la la-cogs"></i><span class="menu-title" data-i18n="Templates">Device Health</span></Link>
+                                    </li>
+                                )
+                            } else {
+                                return (
+                                    <li class=" nav-item"><Link to="/devicehealth"><i class="la la-cogs"></i><span class="menu-title" data-i18n="Templates">Device Health</span></Link>
+                                    </li>
+                                )
+                            }
+                        }
+                    })()}
+
 
 
                     {(() => {
