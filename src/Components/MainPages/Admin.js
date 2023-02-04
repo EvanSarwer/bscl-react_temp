@@ -16,6 +16,7 @@ import DayRangedChannelStatus from '../Channel/DayRangedChannelStatus';
 import RangedChannelStatus from '../Channel/RangedChannelStatus';
 import DefinedChannelStatus from '../Channel/DefinedChannelStatus';
 import DeviceMonitor from '../DeviceMonitor/DeviceMonitor';
+import DeviceHealth from '../DeviceHealth/DeviceHealth';
 import DownloadReport from '../DownloadReport/DownloadReport';
 import UserStatus from '../User/UserStatus';
 import UserDefined from '../User/UserDefined';
@@ -74,6 +75,7 @@ function Admin() {
         <Route exact path="/userdefined" element={<UserDefined />}></Route>
         <Route exact path="/downloadreport" element={<DownloadReport />}></Route>
         <Route exact path="/devicemonitor" element={<DeviceMonitor />}></Route>
+        <Route exact path="/devicehealth" element={<DeviceHealth />}></Route>
         <Route exact path="/logs" element={<ViewLog />}></Route>
         <Route exact path="/testlogs" element={<ViewLog2 />}></Route>
         <Route exact path="/app/users" element={<AppUserList />}></Route>
