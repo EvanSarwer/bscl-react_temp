@@ -97,6 +97,19 @@ const Notification = () => {
         //console.log(csv);
         getCSV(csv);
 
+        axiosConfig.get("/dashboard/seennotification").then(rsp => {
+
+        }).catch(err => {
+
+        });
+
+        axiosConfig.get("/dashboard/notification").then(rsp => {
+            setNotifyNumber(rsp.data.notifyNumber)
+            setNotifyData(rsp.data.data);
+        }).catch(err => {
+
+        });
+
     }
 
     const Seen = () => {
