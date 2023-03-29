@@ -1,6 +1,8 @@
 
 import { BrowserRouter, Routes, Route,Navigate} from "react-router-dom";
 import Header from '../Header/Header';
+
+import Cookies from 'universal-cookie';
 import MainMenu from '../MainMenu/MainMenu';
 import ExcelReport from '../Report/ExcelReport';
 //import DailyAdTrp from '../DailyAdTrp/DailyAdTrp';
@@ -48,6 +50,7 @@ import UserDataFilter from "../User/UserDataFilter";
 
 function Admin() {
 
+  const cookies = new Cookies();
   return (
     <div>
     
@@ -78,13 +81,20 @@ function Admin() {
         <Route exact path="/devicehealth" element={<DeviceHealth />}></Route>
         <Route exact path="/logs" element={<ViewLog />}></Route>
         <Route exact path="/testlogs" element={<ViewLog2 />}></Route>
-        <Route exact path="/app/users" element={<AppUserList />}></Route>
+        
+        { (cookies.get('_role')==='admin') && 
+          <Route exact path="/app/users" element={<AppUserList />}></Route>
+          
+        }
+        { (cookies.get('_role')==='admin') && 
+          <Route exact path="/device" element={<DeviceList />}></Route>
+          
+        }
         <Route exact path="/app/user/create" element={<AddAppUser />}></Route>
         <Route exact path="/app/user/edit/:id" element={<EditAppUser />}></Route>
         <Route exact path="/profile/edit" element={<EditProfile />}></Route>
         <Route exact path="/app/user/changepass" element={<ChangePass />}></Route>
         <Route exact path="/device/user/details/:id" element={<DeviceInfo />}></Route>
-        <Route exact path="/device" element={<DeviceList />}></Route>
         <Route exact path="/device/create" element={<AddDevice />}></Route>
         <Route exact path="/device/edit/:id" element={<EditDevice />}></Route>
         <Route exact path="/notification" element={<Notification />}></Route>
