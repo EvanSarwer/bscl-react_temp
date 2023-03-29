@@ -152,7 +152,7 @@ const Header = (props) => {
                                 <div class="dropdown-menu" aria-labelledby="dropdown-flag"><a class="dropdown-item" href="#" data-language="en"><i class="flag-icon flag-icon-us"></i> English</a><a class="dropdown-item" href="#" data-language="fr"><i class="flag-icon flag-icon-fr"></i> French</a><a class="dropdown-item" href="#" data-language="pt"><i class="flag-icon flag-icon-pt"></i> Portuguese</a><a class="dropdown-item" href="#" data-language="de"><i class="flag-icon flag-icon-de"></i> German</a></div>
                             </li> */}
 
-                            {cookies.get('_role') === "admin" &&
+                            {(cookies.get('_role') === "admin"||cookies.get('_role') === "operator") &&
                                 <li class="dropdown dropdown-notification nav-item"><a class="nav-link nav-link-label" href="#" data-toggle="dropdown"><i class="ficon ft-bell"></i>
                                     {(() => {
                                         if (notifyNumber > 0) {

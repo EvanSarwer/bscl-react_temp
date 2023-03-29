@@ -277,7 +277,7 @@ const LiveChannels = () => {
                             </div>
                         </div>
 
-                        {cookies.get('_role') === "admin" &&
+                        {(cookies.get('_role') === "admin"||cookies.get('_role') === "operator") &&
                             <div class="row justify-content-md-center">
                                 <div class="col">
                                     {/* <PostGraph title="Active Users" text="Active Channels" url="reach/percent" label="Active Users" color="blue" credentials={credential} /> */}
