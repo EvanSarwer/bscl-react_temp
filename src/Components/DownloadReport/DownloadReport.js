@@ -135,7 +135,7 @@ const DownloadReport = () => {
     }
 
     useEffect(() => {
-        if (cookies.get('_role') === "admin") {
+        if ((cookies.get('_role') === "admin"||cookies.get('_role') === "operator")) {
             axiosConfig.get("/getuserlist").then(rsp => {
                 console.log(rsp.data.users);
                 setUsers(rsp.data.users);
@@ -153,7 +153,7 @@ const DownloadReport = () => {
             time: time,
         };
 
-        if (cookies.get('_role') === "admin") {
+        if ((cookies.get('_role') === "admin"||cookies.get('_role') === "operator")) {
             axiosConfig.post("/user/usertimespent", data).then(rsp => {
                 console.log(rsp.data);
                 setuserstatusChannelData(() => ({
@@ -277,7 +277,7 @@ const DownloadReport = () => {
                     </div>
                     <div class="content-body">
 
-                        {cookies.get('_role') === "admin" &&
+                        {(cookies.get('_role') === "admin"|| cookies.get('_role') === "operator") &&
                             <div class="card">
                                 <div class="card-content">
                                     <div class="card-body">

@@ -27,7 +27,7 @@ const Overview = () => {
     var today = new Date(),
         datetime = today.getFullYear() + '-' + pad((today.getMonth() + 1)) + '-' + pad(today.getDate()) + ' ' + today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
 
-    if (cookies.get('_role') === "admin") {
+    if (cookies.get('_role') === "admin"||cookies.get('_role') === "operator") {
         var role_datetime = today.getFullYear() + '-' + pad((today.getMonth() + 1)) + '-' + pad(today.getDate()) + ' ' + today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
     } else if (cookies.get('_role') === "general" || cookies.get('_role') === "add-agency") {
         var role_datetime = yesterday.getFullYear() + '-' + pad((yesterday.getMonth() + 1)) + '-' + pad(yesterday.getDate()) + ' 23:59:59';

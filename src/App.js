@@ -12,7 +12,7 @@ function App() {
   //if(localStorage.getItem('git')=='1'){
  //alert("git hash: "+gitInfo.commit.hash);}
   const cookies = new Cookies();
-  if (cookies.get('_authToken') != null && cookies.get('_role') == "admin") {
+  if (cookies.get('_authToken') != null && (cookies.get('_role') == "admin" || cookies.get('_role') == "operator")) {
     return (
       <div>
 

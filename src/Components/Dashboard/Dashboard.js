@@ -152,7 +152,7 @@ const Dashboard = () => {
                         <CurrentStatus topReach={cookies.get('_chnlTopReach')} topTVR={cookies.get('_chnlTopTVR')} stbAll={stbAll} totalUser={totalUser} stbCountTotal={stbCountTotal} ottCountTotal={ottCountTotal} activeUser={activeUser} stbCountActive={stbCountActive} ottCountActive={ottCountActive} activePercet={activePercet} />
 
                         {/* Dashboard Table Start */}
-                        {cookies.get('_role') === "admin" &&
+                        {(cookies.get('_role') === "admin"||cookies.get('_role') === "operator") &&
                             <div class="row" style={{ minHeight: '390px' }}>
                                 <div class="col-xl-8 col-12">
                                     <ActiveUserTable activeUserList={activeUserList} />
