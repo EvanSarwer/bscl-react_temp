@@ -93,11 +93,11 @@ const LiveChannels = () => {
     const LivechannelDownloadfunc = () => {
         //console.log(liveChannelData.labels[0]);
         if (userType == "") {
-            var csv = [["All_User_type", "Time-" + modify_date(datetime)], ["Channel", "Active_Users"]];
+            var csv = [["Audience/User Type-","All_User_type"],[ "Time-" , modify_date(datetime)],["",""], ["Channel", "Active_Users"]];
         } else if (userType == "OTT") {
-            var csv = [[userType, "Time-" + modify_date(datetime)], ["Channel", "Active_Users"]];
+            var csv = [["Audience/User Type-",userType],[ "Time-" , modify_date(datetime)],["",""], ["Channel", "Active_Users"]];
         } else if (userType == "STB") {
-            var csv = [[userType, (region ? region : "All_Region"), (gender ? gender == "m" ? "Male" : "Female" : "All-Gender"), (economic ? (economic === "a" ? "Poorest" : economic === "b" ? "Poorer" : economic === "c" ? "Middle" : economic === "d" ? "Richer" : "Richest") : "All SEC"), (socio ? socio == "u" ? "Urban" : "Rural" : "Urban&Rural"), "Age-Range-" + parseInt(document.querySelector("#small-slider > div > div:nth-child(2) > div > div.noUi-tooltip").innerHTML) + " to " + parseInt(document.querySelector("#small-slider > div > div:nth-child(3) > div > div.noUi-tooltip").innerHTML), "Time-" + modify_date(datetime)], ["Channel", "Active_Users"]];
+            var csv = [["Audience/User Type-",userType],["Region-", (region ? region : "All_Region")],["Gender-", (gender ? gender == "m" ? "Male" : "Female" : "All-Gender")],["SEC-", (economic ? (economic === "a" ? "Poorest" : economic === "b" ? "Poorer" : economic === "c" ? "Middle" : economic === "d" ? "Richer" : "Richest") : "All SEC")],["Socio-", (socio ? socio == "u" ? "Urban" : "Rural" : "Urban&Rural")],[ "Age Range-" , parseInt(document.querySelector("#small-slider > div > div:nth-child(2) > div > div.noUi-tooltip").innerHTML) + " to " + parseInt(document.querySelector("#small-slider > div > div:nth-child(3) > div > div.noUi-tooltip").innerHTML)],[ "Time-" , modify_date(datetime)],["",""], ["Channel", "Active_Users"]];
         }
 
 
