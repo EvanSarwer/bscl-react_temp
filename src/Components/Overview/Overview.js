@@ -365,7 +365,6 @@ const Overview = () => {
                                             <select class="custom-select d-block w-100" disabled={userType == "OTT" || userType == ""} onChange={(e) => { setRegion(e.target.value) }}>
                                                 <option value="">All Region</option>
                                                 <option value="Dhaka">Dhaka</option>
-                                                <option value="Tangail">Tangail</option>
                                                 <option value="Chittagong">Chittagong</option>
                                                 <option value="Rajshahi">Rajshahi</option>
                                                 <option value="Sylhet">Sylhet</option>
