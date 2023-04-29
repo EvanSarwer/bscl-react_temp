@@ -107,6 +107,12 @@ const DefinedChannelStatus = () => {
         for (var i = 0; i < sampleLive.length; i++) {
             csv.push([sampleLive0[i], sampleLive[i], sampleLive1[i], sampleLive2[i], sampleLive3[i]]);
         }
+        csv.push(["Start:",start]);
+        csv.push(["Finish:",finish]);
+        csv.push(["Range:",time]);
+        
+        csv.push(["Channel:",channels[id].name]);
+        
         console.log(csv);
         
         const wb = XLSX.utils.book_new();
@@ -200,6 +206,9 @@ const DefinedChannelStatus = () => {
                 var reachpdata=datagenerate(nlabel,nreachp,nchannel);
                 var tvr0data=datagenerate(nlabel,ntvr0,nchannel);
                 var tvrpdata=datagenerate(nlabel,ntvrp,nchannel);
+                var parameters=[['Start','End','Range']];
+                parameters.push([start,finish,time]);
+
                 var ws = XLSX.utils.aoa_to_sheet(reach0data);
                 XLSX.utils.book_append_sheet(wb, ws,'Reach (000)');
                 var ws = XLSX.utils.aoa_to_sheet(reachpdata);
@@ -208,6 +217,9 @@ const DefinedChannelStatus = () => {
                 XLSX.utils.book_append_sheet(wb, ws,'TVR (000)');
                 var ws = XLSX.utils.aoa_to_sheet(tvrpdata);
                 XLSX.utils.book_append_sheet(wb, ws,'TVR (%)');
+                
+                var ws = XLSX.utils.aoa_to_sheet(parameters);
+                XLSX.utils.book_append_sheet(wb, ws,'Parameters');
                 XLSX.writeFile(wb, "Day Parts All Channel.xlsx");
             }))
             .catch(error => {
