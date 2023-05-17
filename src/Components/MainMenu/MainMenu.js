@@ -46,6 +46,15 @@ console.log(cookies.get('_role'));
                         }
                     })()}
 
+                    {(() => {
+                        if (cookies.get('_role') === "admin" || cookies.get('_role') === "operator" || cookies.get('_role') === "general" || cookies.get('_role') === "add-agency") {
+                            return (
+                                <li class="nav-item"><Link to="https://tvr.bscl.gov.bd:8443/" target="_blank" ><i class="la la-sliders"></i><span class="menu-title" data-i18n="Templates">Media Anlysis</span></Link>
+                                </li>
+                            )
+                        }
+                    })()}
+
 
                     {(() => {
                         if (cookies.get('_role') === "admin"||cookies.get('_role') === "operator" || cookies.get('_role') === "general" || cookies.get('_role') === "add-agency") {
