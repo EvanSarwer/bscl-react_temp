@@ -37,9 +37,9 @@ const Dashboard = () => {
     const [activeUserList, setActiveUserList] = useState([]);
     const [activeChannelList, setActiveChannelList] = useState([]);
 
-    const [activeUser, setActiveUser] = useState("");
-    const [stbCountActive, setSTBCountActive] = useState("");
-    const [ottCountActive, setOTTCountActive] = useState("");
+    const [stbActiveUser, setSTBActiveUser] = useState("");
+    const [stbDeviceActive, setSTBDeviceActive] = useState("");
+    const [ottActiveUser, setOTTActiveUser] = useState("");
     const [activePercet, setActivePercent] = useState("");
     const [stbCountTotal, setSTBCountTotal] = useState("");
     const [ottCountTotal, setOTTCountTotal] = useState("");
@@ -51,7 +51,7 @@ const Dashboard = () => {
 
     useEffect(() => {
 
-        axiosConfig.get("/dashboard/activeuserlist").then(rsp => {
+        axiosConfig.get("/dashboard/dashboardstatus").then(rsp => {
             //console.log(rsp.data);
             setActiveUserList(rsp.data.activeUsers);
             setActiveChannelList(rsp.data.activeChannels);
@@ -59,10 +59,10 @@ const Dashboard = () => {
             setTotalUser(rsp.data.total_user);
             setSTBCountTotal(rsp.data.stb_total);
             setOTTCountTotal(rsp.data.ott_total);
-            setActiveUser(rsp.data.active_user);
+            setSTBDeviceActive(rsp.data.stb_active);
             setActivePercent(rsp.data.active_percent);
-            setSTBCountActive(rsp.data.stb_active);
-            setOTTCountActive(rsp.data.ott_active);
+            setSTBActiveUser(rsp.data.stb_active_user);
+            setOTTActiveUser(rsp.data.ott_active_user);
         }).catch(err => {
 
         });
@@ -108,17 +108,18 @@ const Dashboard = () => {
 
 
         const interval = setInterval(() => {
-            axiosConfig.get("/dashboard/activeuserlist").then(rsp => {
+            axiosConfig.get("/dashboard/dashboardstatus").then(rsp => {
                 //console.log(rsp.data);
                 setActiveUserList(rsp.data.activeUsers);
                 setActiveChannelList(rsp.data.activeChannels);
                 setTotalUser(rsp.data.total_user);
                 setSTBCountTotal(rsp.data.stb_total);
                 setOTTCountTotal(rsp.data.ott_total);
-                setActiveUser(rsp.data.active_user);
+                setSTBDeviceActive(rsp.data.stb_active);
                 setActivePercent(rsp.data.active_percent);
-                setSTBCountActive(rsp.data.stb_active);
-                setOTTCountActive(rsp.data.ott_active);
+                setSTBActiveUser(rsp.data.stb_active_user);
+                setOTTActiveUser(rsp.data.ott_active_user);
+                
             }).catch(err => {
     
             });
@@ -149,7 +150,7 @@ const Dashboard = () => {
                     </div>
                     <div class="content-body">
 
-                        <CurrentStatus topReach={cookies.get('_chnlTopReach')} topTVR={cookies.get('_chnlTopTVR')} stbAll={stbAll} totalUser={totalUser} stbCountTotal={stbCountTotal} ottCountTotal={ottCountTotal} activeUser={activeUser} stbCountActive={stbCountActive} ottCountActive={ottCountActive} activePercet={activePercet} />
+                        <CurrentStatus topReach={cookies.get('_chnlTopReach')} topTVR={cookies.get('_chnlTopTVR')} stbAll={stbAll} totalUser={totalUser} stbCountTotal={stbCountTotal} ottCountTotal={ottCountTotal} stbActiveUser={stbActiveUser} stbDeviceActive={stbDeviceActive} ottActiveUser={ottActiveUser} activePercet={activePercet} />
 
                         {/* Dashboard Table Start */}
                         {(cookies.get('_role') === "admin"||cookies.get('_role') === "operator") &&

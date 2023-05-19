@@ -26,8 +26,9 @@ const ActiveUserTable = (props) => {
     const Search = (data) => {
         return data.filter(
             (item) =>
-                item.user.user_name.toLowerCase().includes(query.toLowerCase()) ||
-                item.user_id.toString().includes(query) ||
+                item.user_name.toLowerCase().includes(query.toLowerCase()) ||
+                item.device_name.toLowerCase().includes(query.toLowerCase()) ||
+                item.id.toString().includes(query) ||
                 item.channel.channel_name.toLowerCase().includes(query.toLowerCase()) ||
                 item.channel.id.toString().includes(query)
 
@@ -58,8 +59,8 @@ const ActiveUserTable = (props) => {
                                 </thead>
                                 <tbody>
                                 {Search(props.activeUserList).map((user) =>
-                                                <tr key={user.user_id}>
-                                                    <td><a href={`/device/user/details/${user.user_id}`}>{user.user.user_name}</a></td>
+                                                <tr key={user.id}>
+                                                    <td><a href={`/device/user/details/${user.id}`}>{user.user_name}</a></td>
                                                     <td>{user.device_name}</td>
                                                     <td style={{ whiteSpace: 'nowrap' }}>{user.started_watching_at}</td>
                                                     <td style={{ whiteSpace: 'nowrap' }}>{user.duration}</td>
