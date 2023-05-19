@@ -6,7 +6,7 @@ const cookies = new Cookies();
 const instance = axios.create({
 // .. where we make our configurations
     baseURL: 'http://127.0.0.1:8000/api'
-    //baseURL: 'http://api.bscl.gov.bd/api'
+    //baseURL: 'https://api.bscl.gov.bd/api'
 
 });
 
