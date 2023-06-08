@@ -89,22 +89,25 @@ const Dashboard = () => {
                 setStartRange(rsp.data.start);
                 setFinishRange(rsp.data.finish);
 
+                cookies.set('_chnlTopReach', rsp.data.top_reach);
+                cookies.set('_chnlTopTVR', rsp.data.top_tvr);
+
             }).catch(err => {
             })
 
 
 
-            axiosConfig.get("/dashboard/CurrentStatusTopTvrReach").then(rsp => {
-                //console.log(rsp.data);
-                // setTopReach(rsp.data.top_reach);
-                // setTopTVR(rsp.data.top_tvr);
-                cookies.set('_chnlTopReach', rsp.data.top_reach);
-                cookies.set('_chnlTopTVR', rsp.data.top_tvr);
+            // axiosConfig.get("/dashboard/CurrentStatusTopTvrReach").then(rsp => {
+            //     //console.log(rsp.data);
+            //     // setTopReach(rsp.data.top_reach);
+            //     // setTopTVR(rsp.data.top_tvr);
+            //     cookies.set('_chnlTopReach', rsp.data.top_reach);
+            //     cookies.set('_chnlTopTVR', rsp.data.top_tvr);
     
     
-            }).catch(err => {
+            // }).catch(err => {
     
-            });
+            // });
 
 
         const interval = setInterval(() => {
