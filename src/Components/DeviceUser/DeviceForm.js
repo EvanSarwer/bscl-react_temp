@@ -547,10 +547,10 @@ const DeviceForm = (props) => {
                                                             </td>
                                                         </tr>
                                                             <tr>
-                                                                <td>City Name:</td>
+                                                                <td>District:</td>
                                                                 <td colspan={3}>
                                                                     <fieldset className="form-group position-relative has-icon-left">
-                                                                        <input type="text" name="city_Name" id="city_Name" className="form-control" value={cityName} onChange={(e) => { setCityName(e.target.value) }} placeholder="City Name" tabIndex={14} required data-validation-required-message="Please enter city name." />
+                                                                        <input type="text" name="city_Name" id="city_Name" className="form-control" value={cityName} onChange={(e) => { setCityName(e.target.value) }} placeholder="District Name" tabIndex={14} required data-validation-required-message="Please enter city name." />
                                                                         <div className="form-control-position">
                                                                             <i className="la icon-home" />
                                                                         </div>
@@ -586,7 +586,7 @@ const DeviceForm = (props) => {
 
 
                                                 <tr>
-                                                    <td class="form-label">District<span class="text-danger font-weight-bold ">* </span>: <br /><br /><br /><br /><br /> {(() => {
+                                                    <td class="form-label">Division<span class="text-danger font-weight-bold ">* </span>: <br /><br /><br /><br /><br /> {(() => {
                                                         if (props.mode !== "aEdit") {
                                                             return <div><input type="checkbox" id="location" onChange={handleChange} value={isSubscribed} name="location" />
                                                                 <label class="form-label" for="vehicle1">&nbsp; Update Location</label></div>
@@ -600,7 +600,7 @@ const DeviceForm = (props) => {
                                                                 <option value={district.district}>{district.district}</option>
                                                             )}
                                                         </select> */}
-                                                        <input type="text" name="district" id="district" className="form-control" value={districtName} onChange={(e) => { setDistrictName(e.target.value) }} placeholder="District" tabIndex={2} required data-validation-required-message="Please enter District." />
+                                                        <input type="text" name="district" id="district" className="form-control" value={districtName} onChange={(e) => { setDistrictName(e.target.value) }} placeholder="Division" tabIndex={2} required data-validation-required-message="Please enter District." />
                                                         <div className="form-control-position">
                                                             <i className="ft-map-pin" />
                                                         </div>
