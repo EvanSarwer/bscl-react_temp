@@ -14,15 +14,18 @@ const AppUserList = () => {
     const [channelUsers, setChannelUsers] = useState([]);
     const [addAgencyUsers, setAddAgencyUsers] = useState([]);
     const [deployerUsers, setDeployerUsers] = useState([]);
+    const [operatorUsers, setOperatorUsers] = useState([]);
     const [listName, setListName] = useState("channel");
     const [query, setQuery] = useState("");
     useEffect(() => {
         axiosConfig.get("/appuser/list").then((rsp) => {
             //setAppUsers(rsp.data);
+            console.log(rsp.data)
             setAdminUsers(rsp.data.admin_users);
             setChannelUsers(rsp.data.channel_users);
             setAddAgencyUsers(rsp.data.addAgency_users);
             setDeployerUsers(rsp.data.deployer_users);
+            setOperatorUsers(rsp.data.operator_users);
         }, (err) => { });
 
 
@@ -124,6 +127,7 @@ const AppUserList = () => {
                                                 <li class="nav-item"><a class="active nav-link" data-toggle="tab" href="#scoreLineToDay" onClick={() => {setListName("channel")}}>Channel</a></li>
                                                 <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#scoreLineToWeek" onClick={() => {setListName("addAgency")}}>Add Agency</a></li>
                                                 <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#scoreLineToWeek" onClick={() => {setListName("deployer")}}>Deployer</a></li>
+                                                <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#scoreLineToWeek" onClick={() => {setListName("operator")}}>Operator</a></li>
                                                 <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#scoreLineToMonth" onClick={() => {setListName("admin")}}>Admin</a></li>
                                             </ul>
                                             <a class="btn btn-primary float-right" href="/app/user/create">Create New</a>
@@ -254,6 +258,53 @@ const AppUserList = () => {
                                                                         <td>{user.email}</td>
                                                                         <td>{user.state_name}</td>
                                                                         <td>{user.number}</td>
+                                                                        <td style={{ whiteSpace: 'nowrap' }}>
+                                                                            <a class="btn btn-secondary" href={`/app/user/edit/${user.user_name}`}>Edit</a>
+                                                                            <button class="offset-1 btn btn-danger" onClick={() => { if (window.confirm('Delete the item?')) { deleteUser(user.user_name) }; }} >Delete</button>
+                                                                            <button class={`offset-1 btn btn-${user.active ? "danger" : "success"}`} onClick={() => { if (window.confirm('Change Status?')) { activateDeactivate(user.user_name, !user.active) }; }} >{user.active ? 'Deactivate' : 'Activate'}</button>
+                                                                        </td>
+
+                                                                    </tr>
+                                                                )}
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+
+
+                                                </div>
+                                            }
+
+
+                                            {listName == "operator" &&
+                                                <div class="card-body">
+
+
+                                                    <div class="row">
+                                                        <div class="col-md-7"><div class="h3 font-weight-bold">Operator User List</div></div>
+                                                        <div class="col-md-5"><input type="text" class="search form-control round border-primary mb-1" placeholder="Search" onChange={e => setQuery(e.target.value)} />
+                                                        </div>
+
+                                                    </div>
+
+
+                                                    <div class="table-responsive" style={{ maxHeight: '400px', minHeight: '500px' }}>
+                                                        <table class="table display nowrap table-striped table-bordered">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Username</th>
+                                                                    <th>Email</th>
+                                                                    <th>Address</th>
+                                                                    <th>Phone</th>
+                                                                    <th>Status</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                {Search(operatorUsers).map((user) =>
+                                                                    <tr>
+                                                                        <td>{user.user_name} <span class={`badge badge-${user.active ? "success" : "danger"}`} >{user.active ? 'Active' : 'Inactive'}</span></td>
+                                                                        <td>{user.email}</td>
+                                                                        <td>{user.address}</td>
+                                                                        <td>{user.phone}</td>
                                                                         <td style={{ whiteSpace: 'nowrap' }}>
                                                                             <a class="btn btn-secondary" href={`/app/user/edit/${user.user_name}`}>Edit</a>
                                                                             <button class="offset-1 btn btn-danger" onClick={() => { if (window.confirm('Delete the item?')) { deleteUser(user.user_name) }; }} >Delete</button>
