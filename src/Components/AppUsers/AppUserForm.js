@@ -191,6 +191,7 @@ const AppUserForm = (props) => {
                                                                 <fieldset className="form-group position-relative">
                                                                     <input type="radio" name="role" value="general" onChange={(e) => { setRole(e.target.value) }} checked={role === "general"} />TV-Channel &nbsp;&nbsp;&nbsp;
                                                                     <input type="radio" name="role" value="add-agency" onChange={(e) => { setRole(e.target.value) }} checked={role === "add-agency"} />Add Agency &nbsp;&nbsp;&nbsp;
+                                                                    <input type="radio" name="role" value="operator" onChange={(e) => { setRole(e.target.value) }} checked={role === "operator"} />Operator &nbsp;&nbsp;&nbsp;
                                                                     {props.mode == "Create" &&
                                                                         <>
                                                                             <input type="radio" name="role" value="deployer" onChange={(e) => { setRole(e.target.value) }} checked={role === "deployer"} />Deployer<br />
