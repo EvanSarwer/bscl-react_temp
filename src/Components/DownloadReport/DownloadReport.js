@@ -445,7 +445,7 @@ const DownloadReport = () => {
                                                 </div>
                                                 <div class="price-slider">
                                                     <div class="price_slider_amount mb-2">
-                                                        <div class="range-amt"><strong>Age Range : </strong> 15
+                                                        <div class="range-amt"><strong>Age Range : </strong> 1
                                                             - 100</div>
                                                     </div>
 

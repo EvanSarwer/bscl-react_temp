@@ -13,7 +13,7 @@ $(document).ready(function() {
     ************************************/
 
     var sm_options = {
-        start: [15,100],
+        start: [1,100],
         behaviour: 'drag',
         connect: true,
         tooltips: [wNumb({
@@ -22,7 +22,7 @@ $(document).ready(function() {
             decimals: 0
         })],
         range: {
-            'min': 15,
+            'min': 1,
             'max': 100
         }
     };
