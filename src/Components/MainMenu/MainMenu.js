@@ -396,6 +396,22 @@ console.log(cookies.get('_role'));
                         }
                     })()}
 
+                    {(() => {
+                        if (cookies.get('_role') === "admin"||cookies.get('_role') === "operator") {
+                            if (props.menu === "datacleansing") {
+                                return (
+                                    <li class="active nav-item"><Link to="/datacleansing"><i class="la la-cut"></i><span class="menu-title" data-i18n="Templates">Data Cleansing</span></Link>
+                                    </li>
+                                )
+                            } else {
+                                return (
+                                    <li class=" nav-item"><Link to="/datacleansing"><i class="la la-cut"></i><span class="menu-title" data-i18n="Templates">Data Cleansing</span></Link>
+                                    </li>
+                                )
+                            }
+                        }
+                    })()}       
+
 
 
                 </ul>

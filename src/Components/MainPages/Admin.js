@@ -45,6 +45,7 @@ import DeviceDetailsView from "../DeviceUser/DeviceDetailsView";
 import KeywordTrpV2 from "../KeywordTrp/KeywordTrpV2";
 import Notification from "../Header/Notification";
 import UserDataFilter from "../User/UserDataFilter";
+import DataCleanse from "../User/DataCleanse";
 
 
 
@@ -104,6 +105,8 @@ function Admin() {
         <Route exact path="/device/details/:id" element={<DeviceDetails />}></Route>
         <Route exact path="/device/detail/:id" element={<DeviceDetailsView />}></Route>
         <Route exact path="/userdatafilter" element={<UserDataFilter />}></Route>
+        <Route exact path="/datacleansing" element={<DataCleanse />}></Route>
+        
 
         {/* <Navigate to="/" /> */}
         <Route
