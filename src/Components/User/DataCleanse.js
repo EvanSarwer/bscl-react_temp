@@ -2,21 +2,44 @@ import { useState, useEffect } from "react";
 import axiosConfig from '../axiosConfig';
 import Header from "../Header/Header";
 import MainMenu from "../MainMenu/MainMenu";
+import Dashboard from "../Dashboard/Dashboard";
 
 const DataCleanse = ()=>{
     const [cleans, setCleans] = useState([]);
+    const [lastUpdatedDate, setLastUpdatedDate] = useState("");
     const [viewLog,setViewLog] = useState({});
     const [logs,setLogs] = useState([]);
     const  hours = new Date().getHours();
     const  mins = new Date().getMinutes();
     useEffect(() => {
         axiosConfig.get("/data/cleanse/alldates").then((rsp) => {
-            setCleans(rsp.data);
+            setCleans(rsp.data.data);
+            setLastUpdatedDate(rsp.data.lastUpdatedDate);
             
         }, (err) => { });
 
 
     }, []);
+
+    const CleaDataDate=(id)=>{
+        axiosConfig.get("/cleaning/data/date/"+id).then((rsp) => {
+          
+            setCleans(rsp.data.data);
+            setLastUpdatedDate(rsp.data.lastUpdatedDate);
+           
+            
+        }, (err) => { });
+    };
+
+    const DashboardGraphGenerate=(date)=>{
+        axiosConfig.get("/clean/data/"+date).then((rsp) => {
+           
+            
+        }, (err) => { });
+    };
+
+
+
     const Search = (e) => {
         var data = e.target.value;
         axiosConfig.get("/viewlog/"+data).then((rsp) => {
@@ -36,6 +59,8 @@ const DataCleanse = ()=>{
         }, (err) => { });
     };
 
+    console.log(new Date().getHours());
+
     return (
 
         <div><Header title="Data Cleansing" />
@@ -47,7 +72,8 @@ const DataCleanse = ()=>{
                     </div>
                     <div class="content-body">
                         <div class="row">
-                            <div class="col-md-5"><div class="h3 text-center font-weight-bold">Cleansing Status</div></div>
+                            <div class="col-md-5"><div class="h3 text-center font-weight-bold">Cleansing Status</div>
+                            <div class="h6 text-center ">Last Cleaned at {lastUpdatedDate}</div></div>
                             <div className="col-md-3"><div class="h3 text-center font-weight-bold">Viewlogs</div></div>
                             <div class="col-md-4"><input type="text" class="search form-control round border-primary mb-1" placeholder="Search with ViewLog Id" onChange={e=>Search(e)} />
                             </div>
@@ -66,18 +92,18 @@ const DataCleanse = ()=>{
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {cleans.map((c)=>
+                                            {cleans?.map((c)=>
                                                 <tr>
                                                     
                                                     <td>{c.date}</td>
                                                     <td>{c.status==0? "Raw":"Clean"}</td>
                                                    
                                                     <td>
-                                                        <button disabled={(c.status)} className="btn btn-danger">Proceed</button>
+                                                        <button onClick={e=>CleaDataDate(c.id)} disabled={(c.status)} className="btn btn-danger">Proceed</button>
                                                         &nbsp; &nbsp; 
                                                         {
-                                                            c.status && hours >12 && mins >10 &&
-                                                            <button className="btn btn-success">Generate</button>
+                                                            c.status == 1 && (hours >12 || hours ===12) && mins >15 &&
+                                                            <button onClick={e=>DashboardGraphGenerate(c.date)} className="btn btn-success">Generate</button>
                                                         }
                                                     </td>
                                                 </tr>
