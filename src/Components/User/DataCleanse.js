@@ -32,7 +32,7 @@ const DataCleanse = ()=>{
     };
 
     const DashboardGraphGenerate=(date)=>{
-        axiosConfig.get("/clean/data/"+date).then((rsp) => {
+        axiosConfig.get("/dashboard/graphGenerate/byDate/"+date).then((rsp) => {
            
             
         }, (err) => { });
@@ -102,7 +102,7 @@ const DataCleanse = ()=>{
                                                         <button onClick={e=>CleaDataDate(c.id)} disabled={(c.status)} className="btn btn-danger">Proceed</button>
                                                         &nbsp; &nbsp; 
                                                         {
-                                                            c.status == 1 && (hours >12 || hours ===12) && mins >15 &&
+                                                            c.status == 1 && (hours >12 || (hours ===12 && mins >15)) &&
                                                             <button onClick={e=>DashboardGraphGenerate(c.date)} className="btn btn-success">Generate</button>
                                                         }
                                                     </td>
