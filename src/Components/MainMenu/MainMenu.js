@@ -213,7 +213,7 @@ console.log(cookies.get('_role'));
                             </li>
                         }
                     })()}
-
+{/* 
                     {(() => {
                         if (cookies.get('_role') === "admin"||cookies.get('_role') === "operator" || cookies.get('_role') === "general" || cookies.get('_role') === "add-agency") {
                             if (props.menu === "reportgeneration") {
@@ -228,7 +228,7 @@ console.log(cookies.get('_role'));
                                 )
                             }
                         }
-                    })()}
+                    })()} */}
 
                     {(() => {
                         if (cookies.get('_role') === "admin"||cookies.get('_role') === "operator") {
@@ -308,6 +308,7 @@ console.log(cookies.get('_role'));
                             )
                         }
                     })()} */}
+{/*                     
                     {(() => {
                         if (cookies.get('_role') === "admin"||cookies.get('_role') === "operator" || cookies.get('_role') === "general" || cookies.get('_role') === "add-agency") {
                             if (props.menu === "programtrp") {
@@ -322,7 +323,7 @@ console.log(cookies.get('_role'));
                                 )
                             }
                         }
-                    })()}
+                    })()} */}
                     {/* {(() => {
                         if (props.menu === "adtrpv1") {
                             return (
@@ -364,7 +365,7 @@ console.log(cookies.get('_role'));
                             )
                         }
                     })()} */}
-                    {(() => {
+                    {/* {(() => {
                         if (cookies.get('_role') === "admin"||cookies.get('_role') === "operator" || cookies.get('_role') === "general") {
                             if (props.menu === "playoutupload") {
                                 return (
@@ -378,7 +379,7 @@ console.log(cookies.get('_role'));
                                 )
                             }
                         }
-                    })()}
+                    })()} */}
 
                     {(() => {
                         if (cookies.get('_role') === "admin"||cookies.get('_role') === "operator") {

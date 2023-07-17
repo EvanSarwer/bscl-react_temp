@@ -97,9 +97,9 @@ const Header = (props) => {
                                             <li class="col-6 col-xl-4"><a class="text-center mb-2 mt-75 mt-xl-0" href="/livechannels" target="_blank"><i class="la la-tencent-weibo font-large-1 mr-0"></i>
                                                 <p class="font-medium-2 mt-25 mb-50">Live Channels</p>
                                             </a></li>
-                                            <li class="col-6 col-xl-4"><a class="text-center mb-2 mt-75 mt-xl-0" href="/downloadreport" target="_blank"><i class="la la-download font-large-1 mr-0"></i>
+                                            {/* <li class="col-6 col-xl-4"><a class="text-center mb-2 mt-75 mt-xl-0" href="/downloadreport" target="_blank"><i class="la la-download font-large-1 mr-0"></i>
                                                 <p class="font-medium-2 mt-25 mb-50">Report Generation</p>
-                                            </a></li>
+                                            </a></li> */}
                                             <li class="col-6 col-xl-4"><a class="text-center mb-2 mt-75 mt-xl-0" href="/devicemonitor" target="_blank"><i class="la la-cogs font-large-1 mr-0"></i>
                                                 <p class="font-medium-2 mt-25 mb-50">Device Monitor</p>
                                             </a></li>

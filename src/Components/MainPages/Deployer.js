@@ -10,7 +10,7 @@ import DayRangedChannelStatus from '../Channel/DayRangedChannelStatus';
 import RangedChannelStatus from '../Channel/RangedChannelStatus';
 import DefinedChannelStatus from '../Channel/DefinedChannelStatus';
 import DeviceMonitor from '../DeviceMonitor/DeviceMonitor';
-import DownloadReport from '../DownloadReport/DownloadReport';
+//import DownloadReport from '../DownloadReport/DownloadReport';
 import UserStatus from '../User/UserStatus';
 import UserDefined from '../User/UserDefined';
 import Overview from '../Overview/Overview';
