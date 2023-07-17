@@ -365,7 +365,7 @@ console.log(cookies.get('_role'));
                             )
                         }
                     })()} */}
-                    {(() => {
+                    {/* {(() => {
                         if (cookies.get('_role') === "admin"||cookies.get('_role') === "operator" || cookies.get('_role') === "general") {
                             if (props.menu === "playoutupload") {
                                 return (
@@ -379,7 +379,7 @@ console.log(cookies.get('_role'));
                                 )
                             }
                         }
-                    })()}
+                    })()} */}
 
                     {(() => {
                         if (cookies.get('_role') === "admin"||cookies.get('_role') === "operator") {

@@ -9,7 +9,7 @@ import ExcelReport from '../Report/ExcelReport';
 import AdTrpv2 from '../AdTrpv2/AdTrpv2';
 import AdTrpv1 from '../AdTrpv1/AdTrpv1';
 //import ProgramTrp from '../ProgramTrp/ProgramTrp';
-import PlayoutUpload from '../PlayoutUpload/PlayoutUpload';
+//import PlayoutUpload from '../PlayoutUpload/PlayoutUpload';
 import Dashboard from '../Dashboard/Dashboard';
 import LiveChannels from '../LiveChannels/LiveChannels';
 import LiveMap from "../LiveChannels/LiveMap";
@@ -65,7 +65,7 @@ function Admin() {
         <Route exact path="/adtrpv1" element={<AdTrpv1 />}></Route>
         {/* <Route exact path="/programtrp" element={<ProgramTrp />}></Route>
         <Route exact path="/programtrp2" element={<ProgramTrp2 />}></Route> */}
-        <Route exact path="/playoutupload" element={<PlayoutUpload />}></Route>
+        {/* <Route exact path="/playoutupload" element={<PlayoutUpload />}></Route> */}
         <Route exact path="/excelreport" element={<ExcelReport />}></Route>
         {/* <Route exact path="/dailyadtrp" element={<AdTrp />}></Route> */}
         <Route exact path="/dailyadtrp" element={<KeywordTrpV2 />}></Route>

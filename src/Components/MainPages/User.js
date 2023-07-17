@@ -18,7 +18,7 @@ import RangedChannelStatus from "../Channel/RangedChannelStatus";
 import KeywordTrpV2 from "../KeywordTrp/KeywordTrpV2";
 import Dashboard from "../Dashboard/Dashboard";
 //import ProgramTrp from '../ProgramTrp/ProgramTrp';
-import PlayoutUpload from '../PlayoutUpload/PlayoutUpload';
+//import PlayoutUpload from '../PlayoutUpload/PlayoutUpload';
 
 function User() {
 
@@ -41,7 +41,7 @@ function User() {
         <Route exact path="/rangedchannelstatus" element={<RangedChannelStatus />}></Route>
         {/* <Route exact path="/downloadreport" element={<DownloadReport />}></Route> */}
         {/* <Route exact path="/programtrp" element={<ProgramTrp />}></Route> */}
-        <Route exact path="/playoutupload" element={<PlayoutUpload />}></Route>
+        {/* <Route exact path="/playoutupload" element={<PlayoutUpload />}></Route> */}
 
         <Route exact path="/dailyadtrp" element={<KeywordTrpV2 />}></Route>
         <Route exact path="/excelreport" element={<ExcelReport />}></Route>
