@@ -8,7 +8,7 @@ import ExcelReport from '../Report/ExcelReport';
 //import DailyAdTrp from '../DailyAdTrp/DailyAdTrp';
 import AdTrpv2 from '../AdTrpv2/AdTrpv2';
 import AdTrpv1 from '../AdTrpv1/AdTrpv1';
-import ProgramTrp from '../ProgramTrp/ProgramTrp';
+//import ProgramTrp from '../ProgramTrp/ProgramTrp';
 import PlayoutUpload from '../PlayoutUpload/PlayoutUpload';
 import Dashboard from '../Dashboard/Dashboard';
 import LiveChannels from '../LiveChannels/LiveChannels';
@@ -38,7 +38,7 @@ import EditDevice from "../DeviceUser/EditDevice";
 import AddUser from "../DeviceUser/User/AddUser";
 import EditUser from "../DeviceUser/User/EditUser";
 import DeviceDetails from "../DeviceUser/DeviceDetails";
-import{default as ProgramTrp2}  from "../TRPV4/ProgramTrp";
+//import{default as ProgramTrp2}  from "../TRPV4/ProgramTrp";
 //import AdTrp from "../TRPV4/AdTrp";
 import KeywordTrp from "../KeywordTrp/KeywordTrp";
 import DeviceDetailsView from "../DeviceUser/DeviceDetailsView";
@@ -63,8 +63,8 @@ function Admin() {
         <Route exact path="/overview" element={<Overview />}></Route>
         <Route exact path="/adtrpv2" element={<AdTrpv2 />}></Route>
         <Route exact path="/adtrpv1" element={<AdTrpv1 />}></Route>
-        <Route exact path="/programtrp" element={<ProgramTrp />}></Route>
-        <Route exact path="/programtrp2" element={<ProgramTrp2 />}></Route>
+        {/* <Route exact path="/programtrp" element={<ProgramTrp />}></Route>
+        <Route exact path="/programtrp2" element={<ProgramTrp2 />}></Route> */}
         <Route exact path="/playoutupload" element={<PlayoutUpload />}></Route>
         <Route exact path="/excelreport" element={<ExcelReport />}></Route>
         {/* <Route exact path="/dailyadtrp" element={<AdTrp />}></Route> */}
