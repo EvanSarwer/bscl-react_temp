@@ -411,7 +411,23 @@ console.log(cookies.get('_role'));
                                 )
                             }
                         }
-                    })()}       
+                    })()}
+
+                    {(() => {
+                        if (cookies.get('_role') === "admin") {
+                            if (props.menu === "passreset") {
+                                return (
+                                    <li class="active nav-item"><Link to="/user-passreset"><i class="la la-key"></i><span class="menu-title" data-i18n="Templates">Pass-Reset</span></Link>
+                                    </li>
+                                )
+                            } else {
+                                return (
+                                    <li class=" nav-item"><Link to="/user-passreset"><i class="la la-key"></i><span class="menu-title" data-i18n="Templates">Pass-Reset</span></Link>
+                                    </li>
+                                )
+                            }
+                        }
+                    })()}         
 
 
 

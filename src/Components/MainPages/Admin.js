@@ -46,6 +46,8 @@ import KeywordTrpV2 from "../KeywordTrp/KeywordTrpV2";
 import Notification from "../Header/Notification";
 import UserDataFilter from "../User/UserDataFilter";
 import DataCleanse from "../User/DataCleanse";
+import UserPassReset from "../AppUsers/PassReset/UserPassReset";
+import ResetPass from "../AppUsers/PassReset/ResetPass";
 
 
 
@@ -106,6 +108,8 @@ function Admin() {
         <Route exact path="/device/detail/:id" element={<DeviceDetailsView />}></Route>
         <Route exact path="/userdatafilter" element={<UserDataFilter />}></Route>
         <Route exact path="/datacleansing" element={<DataCleanse />}></Route>
+        <Route exact path="/user-passreset" element={<UserPassReset />}></Route>
+        <Route exact path="/user-passreset/:username" element={<ResetPass />}></Route>
         
 
         {/* <Navigate to="/" /> */}
