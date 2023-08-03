@@ -17,6 +17,7 @@ import Cookies from 'universal-cookie';
 
 const Overview = () => {
     const cookies = new Cookies();
+    const [lastUpdatedDate, setLastUpdatedDate] = useState("");
 
     function pad(n) {
         return n < 10 ? '0' + n : n
@@ -30,17 +31,21 @@ const Overview = () => {
     if (cookies.get('_role') === "admin"||cookies.get('_role') === "operator") {
         var role_datetime = today.getFullYear() + '-' + pad((today.getMonth() + 1)) + '-' + pad(today.getDate()) + ' ' + today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
     } else if (cookies.get('_role') === "general" || cookies.get('_role') === "add-agency") {
-        var changeData_date = today.getFullYear() + '-' + pad((today.getMonth() + 1)) + '-' + pad(today.getDate()) + ' 12:00:00';
-        if(new Date(changeData_date).getTime() <= new Date(datetime).getTime()){
-            var role_datetime = yesterday.getFullYear() + '-' + pad((yesterday.getMonth() + 1)) + '-' + pad(yesterday.getDate()) + ' 23:59:59';
-        }else{
-            var day_before_yesterday = new Date(new Date().setDate(new Date().getDate() - 2)),
-                role_datetime = day_before_yesterday.getFullYear() + '-' + pad((day_before_yesterday.getMonth() + 1)) + '-' + pad(day_before_yesterday.getDate()) + ' 23:59:59';
-        }
+        // var changeData_date = today.getFullYear() + '-' + pad((today.getMonth() + 1)) + '-' + pad(today.getDate()) + ' 12:00:00';
+        // if(new Date(changeData_date).getTime() <= new Date(datetime).getTime()){
+        //     var role_datetime = yesterday.getFullYear() + '-' + pad((yesterday.getMonth() + 1)) + '-' + pad(yesterday.getDate()) + ' 23:59:59';
+        // }else{
+        //     var day_before_yesterday = new Date(new Date().setDate(new Date().getDate() - 2)),
+        //         role_datetime = day_before_yesterday.getFullYear() + '-' + pad((day_before_yesterday.getMonth() + 1)) + '-' + pad(day_before_yesterday.getDate()) + ' 23:59:59';
+        // }
+        
+        
+        var last_updated_date = new Date(lastUpdatedDate);
+                    role_datetime = last_updated_date.getFullYear() + '-' + pad((last_updated_date.getMonth() + 1)) + '-' + pad(last_updated_date.getDate()) + ' 12:00:00';
     }
 
-    
-    //console.log(role_datetime);
+    console.log(new Date(lastUpdatedDate));
+    console.log(role_datetime);
 
     const [category, setCategory] = useState("Reach(000)");
     const [start, setStart] = useState(y_datetime);
@@ -59,6 +64,13 @@ const Overview = () => {
     });
 
     useEffect(() => {
+
+        axiosConfig.get("/data/cleanse/alldates").then((rsp) => {
+            // setCleans(rsp.data.data);
+            setLastUpdatedDate(rsp.data.lastUpdatedDate);
+
+        }, (err) => { });
+
         var data = {
             start: start,
             finish: finish,
