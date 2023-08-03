@@ -337,7 +337,7 @@ console.log(cookies.get('_role'));
                             )
                         }
                     })()} */}
-                    {(() => {
+                    {/* {(() => {
                         if (cookies.get('_role') === "admin"||cookies.get('_role') === "operator" || cookies.get('_role') === "add-agency") {
                             if (props.menu === "dailyadtrp") {
                                 return (
@@ -351,7 +351,7 @@ console.log(cookies.get('_role'));
                                 )
                             }
                         }
-                    })()}
+                    })()} */}
                     {/* {(() => {
                         if (props.menu === "adtrpv2") {
                             return (
