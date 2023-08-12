@@ -231,7 +231,7 @@ console.log(cookies.get('_role'));
                     })()} */}
 
                     {(() => {
-                        if (cookies.get('_role') === "admin"||cookies.get('_role') === "operator") {
+                        if (cookies.get('_role') === "admin"||cookies.get('_role') === "operator" || cookies.get('_role') === "deployer") {
                             if (props.menu === "devicemonitor") {
                                 return (
                                     <li class="active nav-item"><Link to="/devicemonitor"><i class="la la-cogs"></i><span class="menu-title" data-i18n="Templates">Device Monitor</span></Link>
