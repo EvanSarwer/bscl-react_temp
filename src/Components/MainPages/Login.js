@@ -28,6 +28,8 @@ const Login=()=> {
                 console.log(err.response.data);
                 setErr(err.response.data);
                 
+            } else if(err.response.status===423){
+                window.location.href="/account/notice";
             }
         });
     }
