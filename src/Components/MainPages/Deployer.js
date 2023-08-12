@@ -52,6 +52,7 @@ function Deployer() {
 
         <Route exact path="/device/user/create/:device_id/:user_index/:from" element={<AddUser />}></Route>
         <Route exact path="/device/user/edit/:id/:from" element={<EditUser />}></Route>
+        <Route exact path="/devicemonitor" element={<DeviceMonitor />}></Route>
         
 
         {/* <Navigate to="/" /> */}
