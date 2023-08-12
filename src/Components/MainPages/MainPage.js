@@ -4,6 +4,7 @@ import DeployerCheck from "../Deployer/DeployerCheck";
 import GetMail from "../ForgetPassword/GetMail";
 import PasswordChange from "../ForgetPassword/PasswordChange";
 import Login from "./Login";
+import InactiveUserNotice from "../ForgetPassword/InactiveUserNotice";
 
 function MainPage() {
 
@@ -17,6 +18,7 @@ function MainPage() {
           <Route exact path="/deployer/form/:token" element={<AddDeployer />}></Route>
           <Route exact path="/forget-Pass/email" element={<GetMail />}></Route>
           <Route exact path="/forget-pass/new-password/:token" element={<PasswordChange />}></Route>
+          <Route exact path="/account/notice" element={<InactiveUserNotice />}></Route>
           <Route
         path="*"
         element={<Navigate to="/" replace />}
