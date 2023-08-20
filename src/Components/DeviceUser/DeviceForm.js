@@ -600,7 +600,18 @@ const DeviceForm = (props) => {
                                                                 <option value={district.district}>{district.district}</option>
                                                             )}
                                                         </select> */}
-                                                        <input type="text" name="district" id="district" className="form-control" value={districtName} onChange={(e) => { setDistrictName(e.target.value) }} placeholder="Division" tabIndex={2} required data-validation-required-message="Please enter District." />
+                                                        {/* <input type="text" name="district" id="district" className="form-control" value={districtName} onChange={(e) => { setDistrictName(e.target.value) }} placeholder="Division" tabIndex={2} required data-validation-required-message="Please enter District." /> */}
+                                                        <select class="custom-select d-block w-100" name="district" id="district" className="form-control" value={districtName} onChange={(e) => { setDistrictName(e.target.value) }} placeholder="Select Division">
+                                    
+                                                            <option value="Dhaka">Dhaka</option>
+                                                            <option value="Chattogram">Chattogram</option>
+                                                            <option value="Mymensingh">Mymensingh</option>
+                                                            <option value="Rangpur">Rangpur</option>
+                                                            <option value="Sylhet">Sylhet</option>
+                                                            <option value="Khulna">Khulna</option>
+                                                            <option value="Barishal">Barishal</option>
+
+                                                        </select>
                                                         <div className="form-control-position">
                                                             <i className="ft-map-pin" />
                                                         </div>
