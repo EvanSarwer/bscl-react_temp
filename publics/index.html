@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" /> -->
+  <!--
+      manifest.json provides metadata used when your web app is installed on a
+      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
+  <!-- <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+
+    <title>React App</title> -->
+
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+  <meta name="description"
+    content="Modern admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities with bitcoin dashboard.">
+  <meta name="keywords"
+    content="admin template, modern admin template, dashboard template, flat admin template, responsive admin template, web app, crypto dashboard, bitcoin dashboard">
+  <meta name="author" content="PIXINVENT">
+  <title>BSCL (Bangladesh Satellite Company, Ltd.)</title>
+  <link rel="apple-touch-icon" href="/app-assets/images/ico/apple-icon-120.png">
+  <link rel="shortcut icon" type="image/x-icon" href="/app-assets/images/logo/bscl-logo.png">
+  <link
+    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i%7CQuicksand:300,400,500,700"
+    rel="stylesheet">
+
+  <!-- BEGIN: Vendor CSS-->
+  <link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/vendors.min.css">
+  <link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/weather-icons/climacons.min.css">
+  <link rel="stylesheet" type="text/css" href="/app-assets/fonts/meteocons/style.css">
+  <link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/charts/morris.css">
+  <link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/charts/chartist.css">
+  <link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/charts/chartist-plugin-tooltip.css">
+  <link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/tables/datatable/datatables.min.css">
+  <link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/tables/extensions/responsive.dataTables.min.css">
+  <!-- END: Vendor CSS-->
+
+  <!-- BEGIN: Theme CSS-->
+  <link rel="stylesheet" type="text/css" href="/app-assets/css/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="/app-assets/css/bootstrap-extended.css">
+  <link rel="stylesheet" type="text/css" href="/app-assets/css/colors.css">
+  <link rel="stylesheet" type="text/css" href="/app-assets/css/components.css">
+  <!-- END: Theme CSS-->
+
+  <!-- BEGIN: Page CSS-->
+  <link rel="stylesheet" type="text/css" href="/app-assets/css/core/menu/menu-types/vertical-menu.css">
+  <link rel="stylesheet" type="text/css" href="/app-assets/css/core/colors/palette-gradient.css">
+  <link rel="stylesheet" type="text/css" href="/app-assets/fonts/simple-line-icons/style.css">
+  <link rel="stylesheet" type="text/css" href="/app-assets/css/pages/timeline.css">
+  <link rel="stylesheet" type="text/css" href="/app-assets/css/pages/dashboard-ecommerce.css">
+  <!-- END: Page CSS-->
+
+  <!-- BEGIN: Custom CSS-->
+  <link rel="stylesheet" type="text/css" href="/assets/css/style.css">
+  <!-- END: Custom CSS-->
+
+
+  <!-- BEGIN: Vendor CSS-->
+  <link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/extensions/nouislider.min.css">
+  <link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/ui/prism.min.css">
+  <link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/forms/icheck/icheck.css">
+  <!-- END: Vendor CSS-->
+
+  <!-- BEGIN: Page CSS-->
+  <link rel="stylesheet" type="text/css" href="/app-assets/css/core/menu/menu-types/vertical-menu-modern.css">
+  <link rel="stylesheet" type="text/css" href="/app-assets/css/plugins/extensions/noui-slider.min.css">
+  <link rel="stylesheet" type="text/css" href="/app-assets/css/core/colors/palette-noui.css">
+  <link rel="stylesheet" type="text/css" href="/app-assets/css/pages/ecommerce-shop.css">
+  <link rel="stylesheet" type="text/css" href="/app-assets/css/plugins/forms/checkboxes-radios.css">
+  <!-- END: Page CSS-->
+
+  <!-- BEGIN: Vendor CSS-->
+  <link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/forms/spinner/jquery.bootstrap-touchspin.css">
+  <!-- END: Vendor CSS-->
+
+  <!-- BEGIN: Page CSS-->
+  <link rel="stylesheet" type="text/css" href="/app-assets/css/pages/ecommerce-cart.css">
+  <!-- END: Page CSS-->
+
+  <!-- BEGIN: Vendor CSS-->
+  <link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/pickers/daterange/daterangepicker.css">
+  <link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/pickers/pickadate/pickadate.css">
+  <!-- END: Vendor CSS-->
+
+  <!-- BEGIN: Page CSS-->
+  <link rel="stylesheet" type="text/css" href="/app-assets/css/plugins/pickers/daterange/daterange.css">
+  <!-- END: Page CSS-->
+  <!-- BEGIN: Vendor CSS-->
+  <link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/forms/icheck/custom.css">
+  <!-- END: Vendor CSS-->
+
+  <!-- BEGIN: Page CSS-->
+  <link rel="stylesheet" type="text/css" href="/app-assets/css/pages/login-register.css">
+  <!-- END: Page CSS-->
+
+  <!-- BEGIN: Page CSS-->
+  <link rel="stylesheet" type="text/css" href="/app-assets/css/core/menu/menu-types/vertical-compact-menu.css">
+  <link rel="stylesheet" type="text/css" href="/app-assets/fonts/mobiriseicons/24px/mobirise/style.css">
+  <!-- END: Page CSS-->
+
+
+</head>
+
+<body class="vertical-layout vertical-menu 2-columns   fixed-navbar" data-open="click" data-menu="vertical-menu"
+  data-col="2-columns">
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+  <div id="root"></div>
+  <!--
+      This HTML file is a template.
+      If you open it directly in the browser, you will see an empty page.
+
+      You can add webfonts, meta tags, or analytics to this file.
+      The build step will place the bundled scripts into the <body> tag.
+
+      To begin the development, run `npm start` or `yarn start`.
+      To create a production bundle, use `npm run build` or `yarn build`.
+    -->
+
+  <!-- BEGIN: Vendor JS-->
+  <script src="/app-assets/vendors/js/vendors.min.js"></script>
+  <!-- BEGIN Vendor JS-->
+
+  <!-- BEGIN: Page Vendor JS-->
+  <script src="/app-assets/vendors/js/charts/chartist.min.js"></script>
+  <script src="/app-assets/vendors/js/charts/chartist-plugin-tooltip.min.js"></script>
+  <script src="/app-assets/vendors/js/charts/raphael-min.js"></script>
+  <script src="/app-assets/vendors/js/charts/morris.min.js"></script>
+  <script src="/app-assets/vendors/js/timeline/horizontal-timeline.js"></script>
+  <!-- END: Page Vendor JS-->
+
+  <!-- BEGIN: Theme JS-->
+  <script src="/app-assets/js/core/app-menu.js"></script>
+  <script src="/app-assets/js/core/app.js"></script>
+  <!-- END: Theme JS-->
+
+  <!-- BEGIN: Page JS-->
+  <script src="/app-assets/js/scripts/pages/dashboard-ecommerce.js"></script>
+  <!-- END: Page JS-->
+
+  <!-- BEGIN: Page JS-->
+  <script src="/app-assets/js/scripts/pages/dashboard-crypto.js"></script>
+  <!-- END: Page JS-->
+
+  <!-- BEGIN: Page Vendor JS-->
+  <script src="/app-assets/vendors/js/extensions/listjs/list.min.js"></script>
+  <script src="/app-assets/vendors/js/extensions/listjs/list.fuzzysearch.min.js"></script>
+  <script src="/app-assets/vendors/js/extensions/listjs/list.pagination.min.js"></script>
+  <!-- END: Page Vendor JS-->
+
+  <!-- BEGIN: Page JS-->
+  <script src="/app-assets/js/scripts/extensions/list.js"></script>
+
+
+  <!-- BEGIN: Page Vendor JS-->
+  <script src="/app-assets/vendors/js/ui/prism.min.js"></script>
+  <script src="/app-assets/vendors/js/extensions/jquery.raty.js"></script>
+  <script src="/app-assets/vendors/js/extensions/jquery.cookie.js"></script>
+  <script src="/app-assets/vendors/js/extensions/jquery.treeview.js"></script>
+  <script src="/app-assets/vendors/js/extensions/wNumb.js"></script>
+  <script src="/app-assets/vendors/js/extensions/nouislider.min.js"></script>
+  <script src="/app-assets/vendors/js/forms/icheck/icheck.min.js"></script>
+  <!-- END: Page Vendor JS-->
+
+  <!-- BEGIN: Page JS-->
+  <script src="/app-assets/js/scripts/pages/content-panel-sidebar.js"></script>
+  <script src="/app-assets/js/scripts/pages/ecommerce-product-shop.js"></script>
+  <!-- END: Page JS-->
+
+  <!-- BEGIN: Page JS-->
+  <script src="/app-assets/js/scripts/tables/datatables/datatable-basic.js"></script>
+  <!-- END: Page JS-->
+
+   <!-- BEGIN: Page Vendor JS-->
+   <script src="/app-assets/vendors/js/tables/datatable/datatables.min.js"></script>
+   <script src="/app-assets/vendors/js/tables/datatable/dataTables.responsive.min.js"></script>
+   <!-- END: Page Vendor JS-->
+
+   <!-- BEGIN: Page JS-->
+   <script src="/app-assets/js/scripts/tables/datatables/datatable-api.js"></script>
+   <!-- END: Page JS-->
+
+    <!-- BEGIN: Page Vendor JS-->
+    <script src="/app-assets/vendors/js/pickers/pickadate/picker.js"></script>
+    <script src="/app-assets/vendors/js/pickers/pickadate/picker.date.js"></script>
+    <script src="/app-assets/vendors/js/pickers/pickadate/picker.time.js"></script>
+    <script src="/app-assets/vendors/js/pickers/pickadate/legacy.js"></script>
+    <script src="/app-assets/vendors/js/pickers/dateTime/moment-with-locales.min.js"></script>
+    <script src="/app-assets/vendors/js/pickers/daterange/daterangepicker.js"></script>
+    <!-- END: Page Vendor JS-->
+
+    <!-- BEGIN: Page JS-->
+    <script src="/app-assets/js/scripts/pickers/dateTime/pick-a-datetime.js"></script>
+    <!-- END: Page JS-->
+
+    <!-- BEGIN: Page Vendor JS-->
+    <script src="/app-assets/vendors/js/forms/validation/jqBootstrapValidation.js"></script>
+    <!-- END: Page Vendor JS-->
+
+    <!-- BEGIN: Page JS-->
+    <script src="/app-assets/js/scripts/forms/form-login-register.js"></script>
+    <!-- END: Page JS-->
+
+
+</body>
+
+</html>
