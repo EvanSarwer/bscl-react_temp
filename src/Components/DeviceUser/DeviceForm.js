@@ -602,14 +602,14 @@ const DeviceForm = (props) => {
                                                         </select> */}
                                                         {/* <input type="text" name="district" id="district" className="form-control" value={districtName} onChange={(e) => { setDistrictName(e.target.value) }} placeholder="Division" tabIndex={2} required data-validation-required-message="Please enter District." /> */}
                                                         <select class="custom-select d-block w-100" name="district" id="district" className="form-control" value={districtName} onChange={(e) => { setDistrictName(e.target.value) }} placeholder="Select Division">
-                                    
-                                                            <option value="Dhaka">Dhaka</option>
-                                                            <option value="Chattogram">Chattogram</option>
-                                                            <option value="Mymensingh">Mymensingh</option>
-                                                            <option value="Rangpur">Rangpur</option>
-                                                            <option value="Sylhet">Sylhet</option>
-                                                            <option value="Khulna">Khulna</option>
-                                                            <option value="Barishal">Barishal</option>
+                                                            <option value="dhaka">Dhaka</option>
+                                                            <option value="chattogram">Chattogram</option>
+                                                            <option value="mymensingh">Mymensingh</option>
+                                                            <option value="rajshahi">Rajshahi</option>
+                                                            <option value="sylhet">Sylhet</option>
+                                                            <option value="rangpur">Rangpur</option>
+                                                            <option value="khulna">Khulna</option>
+                                                            <option value="barishal">Barishal</option>
 
                                                         </select>
                                                         <div className="form-control-position">
