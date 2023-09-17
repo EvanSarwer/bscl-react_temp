@@ -73,6 +73,29 @@ const ChannelStatus = () => {
                     <div class="content-header row">
                     </div>
                     <div class="content-body">
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card p-1 text-white bg-warning">
+                                <div class="card-content">
+                                    <div class="card-body">
+                                        <div class="float-left">
+                                            <p class="white"><strong>Upgrade in Progress</strong></p>
+                                        </div>
+                                        <div class="float-right">
+                                            <p class="card-title"><i class="la la-info-circle"></i> Warning</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+
                         <div class="card">
                             <div class="card-content">
                                 <div class="card-body">
