@@ -13,6 +13,7 @@ import { Chart as ChartJS } from 'chart.js/auto';
 import Header from '../Header/Header';
 import MainMenu from '../MainMenu/MainMenu';
 import Cookies from 'universal-cookie';
+import { localeData } from 'moment/moment';
 
 
 const Overview = () => {
@@ -57,6 +58,7 @@ const Overview = () => {
     const [socio, setSocio] = useState("");
     const [err, setErr] = useState("error");
     const [loading, setloading] = useState(false);
+    const [inputData, setInputData] = useState({});
 
     const [channelData, setChannelData] = useState({
         labels: [],
@@ -100,6 +102,7 @@ const Overview = () => {
                         barPercentage: 1
                     }]
                 }));
+                setInputData(rsp.data.input_data);
             }).catch(err => {
 
             });
@@ -111,12 +114,12 @@ const Overview = () => {
     }, [])
     const BasicchannelDownloadfunc = () => {
         //console.log(liveChannelData.labels[0]);
-        if (userType == "") {
-            var csv = [["Graph Category-",category],["Audience/User Type-","All_User_type"],["Time Duration-", "Start-" + modify_date(start) + "_Finish-" + modify_date(finish)],["",""] ,["Channel", "Value"]];
-        } else if (userType == "OTT") {
-            var csv = [["Graph Category-",category],[ "Audience/User Type-",userType],["Time Duration-", "Start-" + modify_date(start) + "_Finish-" + modify_date(finish)],["",""], ["Channel", "Value"]];
-        } else if (userType == "STB") {
-            var csv = [["Graph Category-",category],["Audience/User Type-",userType],["Region-", (region ? region : "All_Region")],["Gender-" ,(gender ? gender == "m" ? "Male" : "Female" : "All-Gender")],["SEC-", (economic ? (economic === "a" ? "Poorest" : economic === "b" ? "Poorer" : economic === "c" ? "Middle" : economic === "d" ? "Richer" : "Richest") : "All SEC")],["Socio-", (socio ? socio == "u" ? "Urban" : "Rural" : "Urban&Rural")],[ "Age Range-" , parseInt(document.querySelector("#small-slider > div > div:nth-child(2) > div > div.noUi-tooltip").innerHTML) + " to " + parseInt(document.querySelector("#small-slider > div > div:nth-child(3) > div > div.noUi-tooltip").innerHTML)],["Time Duration-", "Start-" + modify_date(start) + "_Finish-" + modify_date(finish)],["",""], ["Channel", "Value"]];
+        if (inputData.userType == "") {
+            var csv = [["Graph Category-",inputData.category], ["Universe-",parseInt(inputData.universe)], ["Sample-",inputData.sample],["Audience/User Type-","All_User_type"],["Time Duration-", "Start-" + modify_date(inputData.start) + "_Finish-" + modify_date(inputData.finish)],["",""] ,["Channel", "Value"]];
+        } else if (inputData.userType == "OTT") {
+            var csv = [["Graph Category-",inputData.category], ["Universe-",parseInt(inputData.universe)], ["Sample-",inputData.sample],[ "Audience/User Type-",inputData.userType],["Time Duration-", "Start-" + modify_date(inputData.start) + "_Finish-" + modify_date(inputData.finish)],["",""], ["Channel", "Value"]];
+        } else if (inputData.userType == "STB") {
+            var csv = [["Graph Category-",inputData.category], ["Universe-",parseInt(inputData.universe)], ["Sample-",inputData.sample],["Audience/User Type-",inputData.userType],["Region-", (inputData.region ? inputData.region : "All_Region")],["Gender-" ,(inputData.gender ? inputData.gender == "m" ? "Male" : "Female" : "All-Gender")],["SEC-", (inputData.economic ? (inputData.economic === "a" ? "Poorest" : inputData.economic === "b" ? "Poorer" : inputData.economic === "c" ? "Middle" : inputData.economic === "d" ? "Richer" : "Richest") : "All SEC")],["Socio-", (inputData.socio ? inputData.socio == "u" ? "Urban" : "Rural" : "Urban&Rural")],[ "Age Range-" , inputData.age1 + " to " + inputData.age2 ],["Time Duration-", "Start-" + modify_date(inputData.start) + "_Finish-" + modify_date(inputData.finish)],["",""], ["Channel", "Value"]];
         }
 
         //var csv = [["Channel", "Value"]];
@@ -168,12 +171,12 @@ const Overview = () => {
         }
     }
     var getCSV = (scsv) => {
-        if (userType == "") {
-            exportToCsv("Basic_Report(" + category + "_All-User-Type_" + modify_date(start) + " - " + modify_date(finish) + ").csv", scsv)
-        } else if (userType == "OTT") {
-            exportToCsv("Basic_Report(" + category + "_" + userType + "_" + modify_date(start) + " - " + modify_date(finish) + ").csv", scsv)
-        } else if (userType == "STB") {
-            exportToCsv("Basic_Report(" + category + "_" + userType + "_" + (region ? region : "All_Region") + "_" + (gender ? gender == "m" ? "Male" : "Female" : "All-Gender") + "_" + (economic ? (economic === "a" ? "Poorest" : economic === "b" ? "Poorer" : economic === "c" ? "Middle" : economic === "d" ? "Richer" : "Richest") : "All SEC") + "_" + (socio ? socio == "u" ? "Urban" : "Rural" : "Urban&Rural") + "_Age-" + parseInt(document.querySelector("#small-slider > div > div:nth-child(2) > div > div.noUi-tooltip").innerHTML) + " - " + parseInt(document.querySelector("#small-slider > div > div:nth-child(3) > div > div.noUi-tooltip").innerHTML) + "_" + modify_date(start) + " - " + modify_date(finish) + ").csv", scsv)
+        if (inputData.userType == "") {
+            exportToCsv("Basic_Report(" + inputData.category + "_All-User-Type_" + modify_date(inputData.start) + " - " + modify_date(inputData.finish) + ").csv", scsv)
+        } else if (inputData.userType == "OTT") {
+            exportToCsv("Basic_Report(" + inputData.category + "_" + inputData.userType + "_" + modify_date(inputData.start) + " - " + modify_date(inputData.finish) + ").csv", scsv)
+        } else if (inputData.userType == "STB") {
+            exportToCsv("Basic_Report(" + inputData.category + "_" + inputData.userType + "_" + (inputData.region ? inputData.region : "All_Region") + "_" + (inputData.gender ? inputData.gender == "m" ? "Male" : "Female" : "All-Gender") + "_" + (inputData.economic ? (inputData.economic === "a" ? "Poorest" : inputData.economic === "b" ? "Poorer" : inputData.economic === "c" ? "Middle" : inputData.economic === "d" ? "Richer" : "Richest") : "All SEC") + "_" + (inputData.socio ? inputData.socio == "u" ? "Urban" : "Rural" : "Urban&Rural") + "_Age-" + inputData.age1 + " - " + inputData.age2 + "_" + modify_date(inputData.start) + " - " + modify_date(inputData.finish) + ").csv", scsv)
         }
 
     }
@@ -208,6 +211,7 @@ const Overview = () => {
                             barPercentage: 1
                         }]
                     }));
+                    setInputData(rsp.data.input_data);
                 }).catch(err => {
 
                 });
@@ -226,6 +230,7 @@ const Overview = () => {
                             barPercentage: 1
                         }]
                     }));
+                    setInputData(rsp.data.input_data);
                 }).catch(err => {
 
                 });
@@ -244,6 +249,7 @@ const Overview = () => {
                             barPercentage: 1
                         }]
                     }));
+                    setInputData(rsp.data.input_data);
                 }).catch(err => {
 
                 });
@@ -262,6 +268,7 @@ const Overview = () => {
                             barPercentage: 1
                         }]
                     }));
+                    setInputData(rsp.data.input_data);
                 }).catch(err => {
 
                 });
@@ -281,6 +288,7 @@ const Overview = () => {
                             barPercentage: 1
                         }]
                     }));
+                    setInputData(rsp.data.input_data);
                 }).catch(err => {
 
                 });
@@ -300,6 +308,7 @@ const Overview = () => {
                             barPercentage: 1
                         }]
                     }));
+                    setInputData(rsp.data.input_data);
                 }).catch(err => {
 
                 });
@@ -313,14 +322,14 @@ const Overview = () => {
 
     }
 
-    var start_string = new Date(start).toLocaleString(undefined, {
+    var start_string = new Date(inputData.start).toLocaleString(undefined, {
         day: 'numeric',
         month: 'long',
         year: 'numeric',
         hour: '2-digit',
         minute: '2-digit',
     });
-    var finish_string = new Date(finish).toLocaleString(undefined, {
+    var finish_string = new Date(inputData.finish).toLocaleString(undefined, {
         day: 'numeric',
         month: 'long',
         year: 'numeric',
@@ -355,30 +364,6 @@ const Overview = () => {
                     </div>
                     <div class="content-body">
 
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="card p-1 text-white bg-warning">
-                                <div class="card-content">
-                                    <div class="card-body">
-                                        <div class="float-left">
-                                            <p class="white"><strong>Upgrade in Progress</strong></p>
-                                        </div>
-                                        <div class="float-right">
-                                            <p class="card-title"><i class="la la-info-circle"></i> Warning</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-
-
-
-
-
-
                         <div class="card">
                             <div class="card-content">
                                 <div class="card-body">
@@ -409,12 +394,12 @@ const Overview = () => {
                                             <select class="custom-select d-block w-100" disabled={userType == "OTT" || userType == ""} onChange={(e) => { setRegion(e.target.value) }}>
                                                 <option value="">All Region</option>
                                                 <option value="Dhaka">Dhaka</option>
-                                                <option value="Chittagong">Chittagong</option>
+                                                <option value="Chattogram">Chattogram</option>
                                                 <option value="Rajshahi">Rajshahi</option>
                                                 <option value="Sylhet">Sylhet</option>
                                                 <option value="Mymensingh">Mymensingh</option>
                                                 <option value="Khulna">Khulna</option>
-                                                <option value="Rongpur">Rongpur</option>
+                                                <option value="Rangpur">Rangpur</option>
                                                 <option value="Barishal">Barishal</option>
                                             </select>
                                         </div>
@@ -533,7 +518,7 @@ const Overview = () => {
                                             return (
                                                 <div class="card">
                                                     <div class="card-header">
-                                                        <div class="row"><div class="col-6 h2 card-title font-weight-bold">Channels {category}</div><div class="row col h2 card-title text-left">From [<p class="text-primary bold"> {start_string}</p>] to [<p class="text-primary bold">{finish_string}</p>] </div></div>
+                                                        <div class="row"><div class="col-6 h2 card-title font-weight-bold">Channels {inputData.category} <p><small>Universe: {parseInt(inputData.universe)} <br></br> Sample: {inputData.sample}</small></p></div><div class="row col h2 card-title text-left">From [<p class="text-primary bold"> {start_string}</p>] to [<p class="text-primary bold">{finish_string}</p>] </div></div>
 
                                                     </div>
                                                     <div class="card-body collapse show" style={{ height: "35em" }}>
