@@ -74,7 +74,7 @@ const ChannelStatus = () => {
                     </div>
                     <div class="content-body">
 
-                    <div class="row">
+                    {/* <div class="row">
                         <div class="col-md-12">
                             <div class="card p-1 text-white bg-warning">
                                 <div class="card-content">
@@ -89,7 +89,7 @@ const ChannelStatus = () => {
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> */}
 
 
 
