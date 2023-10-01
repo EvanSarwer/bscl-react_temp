@@ -18,7 +18,7 @@ const DeviceList = () => {
     useEffect(() => {
         axiosConfig.get("/device/list").then((rsp) => {
             setDevices(rsp.data);
-            console.log(rsp.data[0].users[0].user_name);
+            console.log(rsp.data[0]);
         }, (err) => { });
 
 
@@ -37,7 +37,7 @@ const DeviceList = () => {
         return data.filter(
             (item) =>
                 item.device_name.toLowerCase().includes(query.toLowerCase()) ||
-                item.id.toString().includes(query)
+                item.deviceBoxId && item.deviceBoxId.toString().includes(query)
         );
     };
 
@@ -116,13 +116,13 @@ const DeviceList = () => {
 
     const exportDevices = () => {
         //console.log(liveChannelData.labels[0]);
-        var csv = [["Id", "Name","Contact Person","Contact No","Alt No","Email","Payment (Type & Number)","Other Payment (Type & Number)","SEC","Adress","Area/State","Ward","City Corp","District","Lat, Lang","Household Cond","TV Details","GSM Status","Wifi","STB Provider","STB Subscription","Installation Date","Deployer","Survey Date","1st_Index_User_Name","1st_Index_User_Info","2nd_Index_User_Name","2nd_Index_User_Info","3rd_Index_User_Name","3rd_Index_User_Info","4th_Index_User_Name","4th_Index_User_Info","5th_Index_User_Name","5th_Index_User_Info","6th_Index_User_Name","6th_Index_User_Info","7th_Index_User_Name","7th_Index_User_Info","8th_Index_User_Name","8th_Index_User_Info"]];
+        var csv = [["Device Name","Box Id","Contact Person","Contact No","Alt No","Email","Payment (Type & Number)","Other Payment (Type & Number)","SEC","Adress","Area/State","Ward","City Corp","District","Lat, Lang","Household Cond","TV Details","GSM Status","Wifi","STB Provider","STB Subscription","Installation Date","Deployer","Survey Date","1st_Index_User_Name","1st_Index_User_Info","2nd_Index_User_Name","2nd_Index_User_Info","3rd_Index_User_Name","3rd_Index_User_Info","4th_Index_User_Name","4th_Index_User_Info","5th_Index_User_Name","5th_Index_User_Info","6th_Index_User_Name","6th_Index_User_Info","7th_Index_User_Name","7th_Index_User_Info","8th_Index_User_Name","8th_Index_User_Info"]];
         
         for (var i = 0; i < devices.length; i++) {
             if(devices[i].contact_person){
                 csv.push([
-                            devices[i].id, 
                             devices[i].device_name,
+                            devices[i].deviceBoxId,
                             devices[i].contact_person,
                             devices[i].contact_number,
                             devices[i].alt_number,
@@ -195,18 +195,18 @@ const DeviceList = () => {
 
                                                         <div class="row">
                                                             <div class="col-md-7"><div class="h3 font-weight-bold">Device List</div></div>
-                                                            <div class="col-md-5"><input type="text" class="search form-control round border-primary mb-1" placeholder="Search" onChange={e => setQuery(e.target.value)} />
+                                                            <div class="col-md-5"><input type="text" class="search form-control round border-primary mb-1" placeholder="Search by Device Name or Box ID" onChange={e => setQuery(e.target.value)} />
                                                             </div>
 
                                                         </div>
-                                                        <a class="btn btn-primary" href="/device/create">Create New</a>
+                                                        {/* <a class="btn btn-primary" href="/device/create">Create New</a> */}
                                                         <button class="btn btn-success pull-right" onClick={exportDevices}>Export</button>
                                                         <div class="table-responsive" style={{ maxHeight: '400px', minHeight: '500px' }}>
                                                             <table class="table display nowrap table-striped table-bordered">
                                                                 <thead>
                                                                     <tr>
-                                                                        <th>Device ID</th>
                                                                         <th>Device Name</th>
+                                                                        <th>Box ID</th>
                                                                         <th>Address</th>
                                                                         <th>Type</th>
                                                                         <th>Economic Status</th>
@@ -218,10 +218,11 @@ const DeviceList = () => {
                                                                 <tbody>
                                                                     {Search(devices).map((device) =>
                                                                         <tr key={device.id}>
-                                                                            <td>{device.id}</td>
+                                                                            {/* <td>{device.id}</td> */}
                                                                             {/* <td><a href={`/device/details/${device.id}`}>{device.device_name}</a></td> */}
                                                                             {/*<td><a data-toggle="modal" data-target={`#exampleModal_${device.id}`}>{device.device_name}</a>*<PopUpDetails id={device.id}/></td>*/}
                                                                             <td><a href={`/device/detail/${device.id}`}>{device.device_name}</a></td>
+                                                                            <td>{device.deviceBoxId ?? <span class="text-danger">Box Not Contented</span>}</td>
                                                                             <td>{device.district}</td>
                                                                             <td>{device.type}</td>
                                                                             {/* <td>{user.gender}</td>

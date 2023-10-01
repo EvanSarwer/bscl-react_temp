@@ -3,9 +3,12 @@ import { useParams } from "react-router-dom";
 import { useState,useEffect } from 'react';
 import Header from '../Header/Header';
 import MainMenu from '../MainMenu/MainMenu';
+import Select from 'react-select';
+
 const DeviceDetailsView=()=>{
     const { id } = useParams();
     const [deviceID, setDeviceID] = useState("");
+    const [deviceBoxID, setDeviceBoxID] = useState("");
     const [deviceName, setDeviceName] = useState("");
     const [monthlyIncome, setMonthlyIncome] = useState("");
     const [socioStatus, setSocioStatus] = useState("");
@@ -50,12 +53,16 @@ const DeviceDetailsView=()=>{
     const [stbProviderName, setStbProviderName] = useState("");
     const [stbSubscriptionType, setStbSubscriptionType] = useState("");
     const [stbSubscriptionCharge, setStbSubscriptionCharge] = useState("");
-    useEffect(()=>{
+    const [availableBoxes, setAvailableBoxes] = useState([]);
+    const [msg, setMsg] = useState("");
+
+    useEffect(() => {
         axiosConfig.get("/device/get/" + id).then((rsp)=>{
             var obj = rsp.data.device;
-            console.log(deviceUsers);
+            console.log(rsp.data);
             setDeviceUsers(rsp.data.deviceUser);
                 setDeviceID(obj.id);
+                setDeviceBoxID(obj.deviceBoxId)
                 setDeviceName(obj.device_name);
                 setMonthlyIncome(obj.monthly_income);
                 
@@ -96,6 +103,7 @@ const DeviceDetailsView=()=>{
                 setGetLongitude(obj.lng);
                 setLatitude(obj.lat);
                 setLongitude(obj.lng);
+
                 switch(obj.economic_status){
                     case "a":
                         setEconomicStatus("Poorest");;
@@ -113,6 +121,7 @@ const DeviceDetailsView=()=>{
                         setEconomicStatus("Richest");
                         break;
                 }
+
                 switch(obj.socio_status){
                     case "u":
                         setSocioStatus("Urban");
@@ -130,7 +139,55 @@ const DeviceDetailsView=()=>{
             }
 
         });
-    });
+
+
+
+        axiosConfig.get("/device/available-boxes").then((rsp)=>{
+            setAvailableBoxes(rsp.data);
+        },(err)=>{
+            if (err.response.status === 422) {
+                //setErrMsg(err.response.data);
+            }
+
+        });
+
+    }, []);
+
+
+    const updateDeviceBoxID = () => {
+        axiosConfig.post("/device/update-box-id", {
+            device_id: deviceID,
+            device_box_id: deviceBoxID
+        }).then((rsp)=>{
+            console.log(rsp.data);
+            setMsg(rsp.data.message);
+            setDeviceBoxID(rsp.data.device_box_id);
+        },(err)=>{
+            if (err.response.status === 422) {
+                setMsg(err.response.data.message);
+
+            }else if (err.response.status === 423) {
+                setMsg(err.response.data.error_message);
+
+            }
+            console.log(err.response);
+
+        });
+    }
+
+
+    const NewDeviceBoxID = () => {
+        axiosConfig.post("/device/new-box-id", {
+            device_id: deviceID,
+        }).then((rsp)=>{
+            console.log(rsp.data);
+            setMsg(rsp.data.message);
+            setDeviceBoxID(rsp.data.device_box_id);
+        },(err)=>{
+            console.log(err.response);
+
+        }); 
+    }
 
     return (
         <div>
@@ -144,6 +201,28 @@ const DeviceDetailsView=()=>{
                 <div class="col-md-8">
                 <h1 class="text-center">Device : {deviceID} {deviceName}</h1>
                 <table class="table display nowrap table-striped table-bordered">
+                    <tr>
+                        <td>Device Box ID:</td>
+                        <td class="border-0 row">
+                            <div class="col-md-8">
+                                <Select
+                                    placeholder="Select Box ID"
+                                    options={availableBoxes.map(box => ({ label: box.id, value: box.id }))}
+                                    onChange={opt => setDeviceBoxID(opt.value)}
+                                    value={{ label: deviceBoxID, value: deviceBoxID }}
+                                /> 
+                            </div>
+                            <div class="col-md-2">
+                                <button class="btn btn-primary btn-sm" onClick={() => updateDeviceBoxID() } >Update</button>
+                            </div>
+                            <div class="col-md-2">
+                                <button class="btn btn-info btn-sm ml-1" onClick={() => NewDeviceBoxID() } >New</button>
+                            </div>
+
+                            <span >{msg}</span>
+                            
+                        </td>
+                    </tr>
                     <tr>
                         <td>Contact Person</td>
                         <td>{contactPerson}</td>
