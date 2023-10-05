@@ -3,14 +3,23 @@ import axiosConfig from '../axiosConfig';
 import Header from "../Header/Header";
 import MainMenu from "../MainMenu/MainMenu";
 import Dashboard from "../Dashboard/Dashboard";
+import * as XLSX from 'xlsx';
+import { set } from "date-fns";
 
 const DataCleanse = () => {
     const [cleans, setCleans] = useState([]);
     const [lastUpdatedDate, setLastUpdatedDate] = useState("");
     const [viewLog, setViewLog] = useState({});
     const [logs, setLogs] = useState([]);
+    const [excelFile, setExcelFile] = useState(null);
+    const [excelFileError, setExcelFileError] = useState(null);
+    const [excelFileSuccess, setExcelFileSuccess] = useState(null);
+
+    console.log(excelFile);
+
     const hours = new Date().getHours();
     const mins = new Date().getMinutes();
+    
     useEffect(() => {
         axiosConfig.get("/data/cleanse/alldates").then((rsp) => {
             setCleans(rsp.data.data);
@@ -60,6 +69,72 @@ const DataCleanse = () => {
     };
 
     console.log(new Date().getHours());
+
+
+    //Excel/CSV file upload operation
+
+    const fileTypes=['application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'];
+    const handleFile=(e)=>{
+        
+        let selectedFile=e.target.files[0];
+        if(selectedFile){
+            if(fileTypes.includes(selectedFile.type)){
+                let reader = new FileReader();
+                reader.readAsArrayBuffer(selectedFile);
+                reader.onload=(e)=>{
+                    setExcelFileError(null);
+                    setExcelFile(e.target.result);
+                    setExcelFileSuccess(null);
+                };
+                
+                
+            }else{
+                setExcelFileError('Please select valid excel file');
+                setExcelFile(null);
+                setExcelFileSuccess(null);
+            }
+        }else{
+            setExcelFileError('Please select your file');
+            setExcelFile(null);
+            setExcelFileSuccess(null);
+        }
+    }
+
+    //submit excel file
+    const handleSubmit=(e)=>{
+        e.preventDefault();
+        if(excelFile){
+            const workbook = XLSX.read(excelFile,{type:'buffer'});
+            const workSheetName = workbook.SheetNames[0];
+            const workSheet = workbook.Sheets[workSheetName];
+            const data = XLSX.utils.sheet_to_json(workSheet);
+            // Extract the values of the first column into an array
+            //const firstColumnValues = data.map((row) => row['viewlog_id']); // Replace 'Column1' with the actual header name of the first column
+            const firstColumnValues = data.map((row) => row[Object.keys(row)[0]]);
+
+            console.log(firstColumnValues.length);
+
+            if(firstColumnValues && firstColumnValues.length > 0){
+                for (let i = 0; i < firstColumnValues.length; i++) {
+                    console.log(firstColumnValues[i]);
+                    axiosConfig.get("/clean/data/" + firstColumnValues[i]).then((rsp) => {
+                    }, (err) => { });
+                }
+            }
+
+            setExcelFile(null);
+            setExcelFileError(null);
+            setExcelFileSuccess('Viewlog Updated Successfully');
+
+            
+        }else{
+            setExcelFileError('Please select your file');
+        }
+    }
+
+
+
+
 
     return (
 
@@ -116,7 +191,7 @@ const DataCleanse = () => {
                                     </div>
                                 </div>
                                 <div className="col-md-7">
-                                    <div class="table-responsive" style={{ maxHeight: '400px', minHeight: '500px' }}>
+                                    <div class="table-responsive" style={{ maxHeight: '200px', minHeight: '300px' }}>
                                         <table class="table display nowrap table-striped table-bordered">
                                             <thead>
                                                 <tr><th>Log Id</th>
@@ -137,6 +212,29 @@ const DataCleanse = () => {
                                                 <td><button disabled={(c.status)} onClick={e => CleaData(viewLog.id)} className="btn btn-danger">Clean</button></td>
                                             </tbody>
                                         </table>
+                                    </div>
+
+
+
+                                    <div class="card">
+                                        <div class="card-header">Viewlog ID List</div>
+                                        <div class="card-content">
+                                            <div class="card-body">
+                                                {/* upload file section */}
+                                                { (!c.status) &&
+                                                    <div className='form'>
+                                                        <form className='form-group' autoComplete="off" onSubmit={handleSubmit}>
+                                                        <label><h5>Upload Excel file</h5></label>
+                                                        <br></br>
+                                                        <input type='file' className='form-control' onChange={handleFile} required></input>                  
+                                                        {excelFileError&&<div className='text-danger' style={{marginTop:5+'px'}}>{excelFileError}</div>}
+                                                        {excelFileSuccess&&<div className='text-success' style={{marginTop:5+'px'}}>{excelFileSuccess}</div>}
+                                                        <button type='submit' className='btn btn-success' style={{marginTop:5+'px'}}>Submit</button>
+                                                        </form>
+                                                    </div>
+                                                }
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
