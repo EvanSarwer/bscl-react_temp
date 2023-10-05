@@ -129,6 +129,7 @@ const DataCleanse = () => {
             
         }else{
             setExcelFileError('Please select your file');
+            setExcelFileSuccess(null);
         }
     }
 
