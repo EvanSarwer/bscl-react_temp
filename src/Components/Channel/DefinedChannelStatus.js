@@ -8,6 +8,7 @@ import MainMenu from '../MainMenu/MainMenu';
 import axios from 'axios';
 
 import * as XLSX from "xlsx";
+import { fi } from 'date-fns/locale';
 
 const DefinedChannelStatus = () => {
 
@@ -17,6 +18,7 @@ const DefinedChannelStatus = () => {
     const [type, setType] = useState("");
     const [channelName, setChannelName] = useState("");
     const [channels, setchannels] = useState([]);
+    const [lastDate, setlastDate] = useState("");
     const [start, setstart] = useState("");
     const [finish, setfinish] = useState("");
     const [allchannelf, setallchannelf] = useState(false);
@@ -136,13 +138,39 @@ const DefinedChannelStatus = () => {
 
         }).catch(err => {
 
-        })
+        });
+        axiosConfig.get("/daypart_date").then(rsp => {
+            //console.log(rsp.data);
+            setlastDate(rsp.data.date);
+            console.log(channels);
+
+
+        }).catch(err => {
+
+        });
 
     }, [])
 
     const updater = () => {
+        if(isDateGreaterThan(start,finish)){
+            alert("Start Date is greater than Finish Date");
+            return;
+        }
+        if(isDateGreaterThan(finish,lastDate)){
+            alert("Finish Date is greater than last available date");
+            return;
+        }
         setUpdate(update + 1);
     }
+    function isDateGreaterThan(date1, date2) {
+        const [year1, month1, day1] = date1.split('-');
+        const [year2, month2, day2] = date2.split('-');
+      
+        const dateObj1 = new Date(year1, month1 - 1, day1); // Month is 0-based
+        const dateObj2 = new Date(year2, month2 - 1, day2);
+      
+        return dateObj1 > dateObj2;
+      }
     var datagenerate=(label,data,channel)=>{
         var nlabel=['Mid Point of Range'];
     channel.forEach((i)=>{nlabel.push(i);})
@@ -296,6 +324,8 @@ const DefinedChannelStatus = () => {
                                                     </fieldset>
                                                 </div>
                                             </div>
+                                            
+                                            
                                         </div>
                                         <div class="col-md-1">
                                             <button onClick={updater} class="btn btn-info">View</button>
@@ -314,66 +344,9 @@ const DefinedChannelStatus = () => {
                                             </select>
                                         </div>
 
-                                        {/*<div class="col-md-3"></div>
-
-                                         <div class="col-md-2">
-                                            <label>Region</label>
-                                            <select class="custom-select d-block w-100" onChange={(e) => { }}>
-                                                <option value="">All Region</option>
-                                                <option value="Dhaka">Dhaka</option>
-                                                <option value="Tangail">Tangail</option>
-                                                <option value="Chittagong">Chittagong</option>
-                                                <option value="Rajshahi">Rajshahi</option>
-                                                <option value="Sylhet">Sylhet</option>
-                                                <option value="Mymensingh">Mymensingh</option>
-                                                <option value="Khulna">Khulna</option>
-                                                <option value="Rongpur">Rongpur</option>
-                                                <option value="Barishal">Barishal</option>
-                                            </select>
-                                        </div>
                                         <div class="col-md-2">
-                                            <label>Gender</label>
-                                            <select class="custom-select d-block w-100" onChange={(e) => { }}>
-                                                <option value="">All Gender</option>
-                                                <option value="m">Male</option>
-                                                <option value="f">Female</option>
-                                            </select>
+                                            
                                         </div>
-
-                                        <div class="col-md-2">
-                                            <label>SEC</label>
-                                            <select class="custom-select d-block w-100" onChange={(e) => { }}>
-                                                <option value="">All SEC</option>
-                                                <option value="a1">Lower Class</option>
-                                                <option value="c1">Upper Middle Class</option>
-                                                <option value="d1">Lower Middle Class</option>
-                                                <option value="b1">Upper Class</option>
-                                            </select>
-                                        </div>
-
-                                        <div class="col-md-2">
-                                            <label>Urban/Rural</label>
-                                            <select class="custom-select d-block w-100" onChange={(e) => { }}>
-                                                <option value="">Urban & Rural</option>
-                                                <option value="u">Urban</option>
-                                                <option value="r">Rural</option>
-                                            </select>
-                                        </div>
-
-                                        <div class="col-md-2">
-                                            <div class="price-range">
-                                                <div class="form-group">
-                                                    <div class="slider-sm slider-success my-1" id="small-slider"></div>
-                                                </div>
-                                                <div class="price-slider">
-                                                    <div class="price_slider_amount mb-2">
-                                                        <div class="range-amt"><strong>Age Range : </strong> 15
-                                                            - 100</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div> */}
-                                        <div class="col-md-2"></div>
                                         <div class="col-md-3">
                                         {(() => {
                                             if (allchannelf) {
@@ -408,8 +381,22 @@ const DefinedChannelStatus = () => {
 
                                             }
                                         })()}
+                                        
                                     </div>
+                                    <div class="row">
+                                            {(() => {
+                                            if (true) {
+                                                return (<div><br/> <h6>Data available upto {lastDate}</h6></div>)
 
+                                                
+
+                                            } else {
+                                                return null;
+
+
+                                            }
+                                        })()}
+                                            </div>
 
 
                                 </div>
