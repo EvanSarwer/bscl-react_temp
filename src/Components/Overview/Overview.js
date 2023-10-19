@@ -518,7 +518,7 @@ const Overview = () => {
                                             return (
                                                 <div class="card">
                                                     <div class="card-header">
-                                                        <div class="row"><div class="col-6 h2 card-title font-weight-bold">Channels {inputData.category} <p><small>Universe: {parseInt(inputData.universe)} <br></br> Sample: {inputData.sample}</small></p></div><div class="row col h2 card-title text-left">From [<p class="text-primary bold"> {start_string}</p>] to [<p class="text-primary bold">{finish_string}</p>] </div></div>
+                                                        <div class="row"><div class="col-6 h2 card-title font-weight-bold">Channels {inputData.category} <p><small>Universe (000): {parseInt(inputData.universe)} <br></br> Sample: {inputData.sample}</small></p></div><div class="row col h2 card-title text-left">From [<p class="text-primary bold"> {start_string}</p>] to [<p class="text-primary bold">{finish_string}</p>] </div></div>
 
                                                     </div>
                                                     <div class="card-body collapse show" style={{ height: "35em" }}>
