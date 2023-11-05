@@ -67,7 +67,7 @@ const CurrentStatus = (props) => {
         <div class="row gx-1">
 
             <div class="col-xl-2 col-lg-1 col-12">
-                <CountComponent title="Total Device" count={props.totalUser} stb={props.stbAll} ott={props.ottCountTotal} icon="la la-hdd-o success" color="success" percentage="100%" />
+                <CountComponent title="Total Device" count={props.totalUser} stb={500} ott={props.ottCountTotal} icon="la la-hdd-o success" color="success" percentage="100%" />
             </div>
             <div class="col-xl-2 col-lg-1 col-12">
                 <CountComponent title="Total Viewer" count={props.totalUser} stb={props.stbCountTotal} ott={props.ottCountTotal} icon="icon-users success" color="success" percentage="100%" />

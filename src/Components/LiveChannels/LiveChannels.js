@@ -84,7 +84,7 @@ const LiveChannels = () => {
         } else if (userType == "OTT") {
             exportToCsv("Active_User(" + userType + "_" + modify_date(datetime) + ").csv", scsv)
         } else if (userType == "STB") {
-            exportToCsv("Active_User(" + userType + "_" + (region ? region : "All_Region") + "_" + (gender ? gender == "m" ? "Male" : "Female" : "All-Gender") + "_" + (economic ? (economic === "a" ? "Poorest" : economic === "b" ? "Poorer" : economic === "c" ? "Middle" : economic === "d" ? "Richer" : "Richest") : "All SEC") + "_" + (socio ? socio == "u" ? "Urban" : "Rural" : "Urban&Rural") + "_Age-" + parseInt(document.querySelector("#small-slider > div > div:nth-child(2) > div > div.noUi-tooltip").innerHTML) + " - " + parseInt(document.querySelector("#small-slider > div > div:nth-child(3) > div > div.noUi-tooltip").innerHTML) + "_" + modify_date(datetime) + ").csv", scsv)
+            exportToCsv("Active_User(" + userType + "_" + (region ? region : "All_Region") + "_" + (gender ? gender == "m" ? "Male" : "Female" : "All-Gender") + "_" + (economic ? (economic === "a" ? "SEC A" : economic === "b" ? "SEC B" : economic === "c" ? "SEC C" : economic === "d" ? "SEC D" : "SEC E") : "All SEC") + "_" + (socio ? socio == "u" ? "Urban" : "Rural" : "Urban&Rural") + "_Age-" + parseInt(document.querySelector("#small-slider > div > div:nth-child(2) > div > div.noUi-tooltip").innerHTML) + " - " + parseInt(document.querySelector("#small-slider > div > div:nth-child(3) > div > div.noUi-tooltip").innerHTML) + "_" + modify_date(datetime) + ").csv", scsv)
         }
 
         //exportToCsv("Acive-User.csv", scsv)
@@ -97,7 +97,7 @@ const LiveChannels = () => {
         } else if (userType == "OTT") {
             var csv = [["Audience/User Type-",userType],[ "Time-" , modify_date(datetime)],["",""], ["Channel", "Active_Users"]];
         } else if (userType == "STB") {
-            var csv = [["Audience/User Type-",userType],["Region-", (region ? region : "All_Region")],["Gender-", (gender ? gender == "m" ? "Male" : "Female" : "All-Gender")],["SEC-", (economic ? (economic === "a" ? "Poorest" : economic === "b" ? "Poorer" : economic === "c" ? "Middle" : economic === "d" ? "Richer" : "Richest") : "All SEC")],["Socio-", (socio ? socio == "u" ? "Urban" : "Rural" : "Urban&Rural")],[ "Age Range-" , parseInt(document.querySelector("#small-slider > div > div:nth-child(2) > div > div.noUi-tooltip").innerHTML) + " to " + parseInt(document.querySelector("#small-slider > div > div:nth-child(3) > div > div.noUi-tooltip").innerHTML)],[ "Time-" , modify_date(datetime)],["",""], ["Channel", "Active_Users"]];
+            var csv = [["Audience/User Type-",userType],["Region-", (region ? region : "All_Region")],["Gender-", (gender ? gender == "m" ? "Male" : "Female" : "All-Gender")],["SEC-", (economic ? (economic === "a" ? "SEC A" : economic === "b" ? "SEC B" : economic === "c" ? "SEC C" : economic === "d" ? "SEC D" : "SEC E") : "All SEC")],["Socio-", (socio ? socio == "u" ? "Urban" : "Rural" : "Urban&Rural")],[ "Age Range-" , parseInt(document.querySelector("#small-slider > div > div:nth-child(2) > div > div.noUi-tooltip").innerHTML) + " to " + parseInt(document.querySelector("#small-slider > div > div:nth-child(3) > div > div.noUi-tooltip").innerHTML)],[ "Time-" , modify_date(datetime)],["",""], ["Channel", "Active_Users"]];
         }
 
 
@@ -201,11 +201,11 @@ const LiveChannels = () => {
 
                                 <select class="custom-select d-block w-100" disabled={userType == "OTT" || userType == ""} onChange={(e) => { setEconomic(e.target.value) }}>
                                     <option value="">All SEC</option>
-                                    <option value="a">Poorest</option>
-                                    <option value="b">Poorer</option>
-                                    <option value="c">Middle</option>
-                                    <option value="d">Richer</option>
-                                    <option value="e">Richest</option>
+                                    <option value="a">SEC A</option>
+                                    <option value="b">SEC B</option>
+                                    <option value="c">SEC C</option>
+                                    <option value="d">SEC D</option>
+                                    <option value="e">SEC E</option>
                                 </select>
                             </div>
                             <div class="col-md-2">

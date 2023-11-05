@@ -119,7 +119,7 @@ const Overview = () => {
         } else if (inputData.userType == "OTT") {
             var csv = [["Graph Category-",inputData.category], ["Universe-",parseInt(inputData.universe)], ["Sample-",inputData.sample],[ "Audience/User Type-",inputData.userType],["Time Duration-", "Start-" + modify_date(inputData.start) + "_Finish-" + modify_date(inputData.finish)],["",""], ["Channel", "Value"]];
         } else if (inputData.userType == "STB") {
-            var csv = [["Graph Category-",inputData.category], ["Universe-",parseInt(inputData.universe)], ["Sample-",inputData.sample],["Audience/User Type-",inputData.userType],["Region-", (inputData.region ? inputData.region : "All_Region")],["Gender-" ,(inputData.gender ? inputData.gender == "m" ? "Male" : "Female" : "All-Gender")],["SEC-", (inputData.economic ? (inputData.economic === "a" ? "Poorest" : inputData.economic === "b" ? "Poorer" : inputData.economic === "c" ? "Middle" : inputData.economic === "d" ? "Richer" : "Richest") : "All SEC")],["Socio-", (inputData.socio ? inputData.socio == "u" ? "Urban" : "Rural" : "Urban&Rural")],[ "Age Range-" , inputData.age1 + " to " + inputData.age2 ],["Time Duration-", "Start-" + modify_date(inputData.start) + "_Finish-" + modify_date(inputData.finish)],["",""], ["Channel", "Value"]];
+            var csv = [["Graph Category-",inputData.category], ["Universe-",parseInt(inputData.universe)], ["Sample-",inputData.sample],["Audience/User Type-",inputData.userType],["Region-", (inputData.region ? inputData.region : "All_Region")],["Gender-" ,(inputData.gender ? inputData.gender == "m" ? "Male" : "Female" : "All-Gender")],["SEC-", (inputData.economic ? (inputData.economic === "a" ? "SEC A" : inputData.economic === "b" ? "SEC B" : inputData.economic === "c" ? "SEC C" : inputData.economic === "d" ? "SEC D" : "SEC E") : "All SEC")],["Socio-", (inputData.socio ? inputData.socio == "u" ? "Urban" : "Rural" : "Urban&Rural")],[ "Age Range-" , inputData.age1 + " to " + inputData.age2 ],["Time Duration-", "Start-" + modify_date(inputData.start) + "_Finish-" + modify_date(inputData.finish)],["",""], ["Channel", "Value"]];
         }
 
         //var csv = [["Channel", "Value"]];
@@ -176,7 +176,7 @@ const Overview = () => {
         } else if (inputData.userType == "OTT") {
             exportToCsv("Basic_Report(" + inputData.category + "_" + inputData.userType + "_" + modify_date(inputData.start) + " - " + modify_date(inputData.finish) + ").csv", scsv)
         } else if (inputData.userType == "STB") {
-            exportToCsv("Basic_Report(" + inputData.category + "_" + inputData.userType + "_" + (inputData.region ? inputData.region : "All_Region") + "_" + (inputData.gender ? inputData.gender == "m" ? "Male" : "Female" : "All-Gender") + "_" + (inputData.economic ? (inputData.economic === "a" ? "Poorest" : inputData.economic === "b" ? "Poorer" : inputData.economic === "c" ? "Middle" : inputData.economic === "d" ? "Richer" : "Richest") : "All SEC") + "_" + (inputData.socio ? inputData.socio == "u" ? "Urban" : "Rural" : "Urban&Rural") + "_Age-" + inputData.age1 + " - " + inputData.age2 + "_" + modify_date(inputData.start) + " - " + modify_date(inputData.finish) + ").csv", scsv)
+            exportToCsv("Basic_Report(" + inputData.category + "_" + inputData.userType + "_" + (inputData.region ? inputData.region : "All_Region") + "_" + (inputData.gender ? inputData.gender == "m" ? "Male" : "Female" : "All-Gender") + "_" + (inputData.economic ? (inputData.economic === "a" ? "SEC A" : inputData.economic === "b" ? "SEC B" : inputData.economic === "c" ? "SEC C" : inputData.economic === "d" ? "SEC D" : "SEC E") : "All SEC") + "_" + (inputData.socio ? inputData.socio == "u" ? "Urban" : "Rural" : "Urban&Rural") + "_Age-" + inputData.age1 + " - " + inputData.age2 + "_" + modify_date(inputData.start) + " - " + modify_date(inputData.finish) + ").csv", scsv)
         }
 
     }
@@ -416,11 +416,11 @@ const Overview = () => {
                                             <label>SEC</label>
                                             <select class="custom-select d-block w-100" disabled={userType == "OTT" || userType == ""} onChange={(e) => { setEconomic(e.target.value) }}>
                                                 <option value="">All SEC</option>
-                                                <option value="a">Poorest</option>
-                                                <option value="b">Poorer</option>
-                                                <option value="c">Middle</option>
-                                                <option value="d">Richer</option>
-                                                <option value="e">Richest</option>
+                                                <option value="a">SEC A</option>
+                                                <option value="b">SEC B</option>
+                                                <option value="c">SEC C</option>
+                                                <option value="d">SEC D</option>
+                                                <option value="e">SEC D</option>
 
                                             </select>
                                         </div>
