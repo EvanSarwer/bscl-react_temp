@@ -12,7 +12,7 @@ const CountComponent = (props) => {
                         return <div class="card-body">
                             <div class="media d-flex">
                                 <div class="media-body text-left">
-                                    <h3 class={clrCount}>{props.stb + props.ott}<div style={{ fontSize: '75%' }}>STB({props.stb}), OTT({props.ott})</div></h3>
+                                    <h3 class={clrCount}>{props.stb}<div style={{ fontSize: '75%' }}>STB({props.stb})</div></h3>
                                 </div>
                                 <div>
                                     <i class={cls}></i>
@@ -27,7 +27,7 @@ const CountComponent = (props) => {
                         return <div class="card-body">
                             <div class="media d-flex">
                                 <div class="media-body text-left">
-                                    <h3 class={clrCount}>{props.count + props.ott}<div style={{ fontSize: '75%' }}>STB({props.count}),  OTT({props.ott}) </div></h3>
+                                    <h3 class={clrCount}>{props.count}<div style={{ fontSize: '75%' }}>STB({props.count})</div></h3>
                                 </div>
                                 <div>
                                     <i class={cls}></i>
