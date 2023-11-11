@@ -51,7 +51,7 @@ const ActiveUserTable = (props) => {
                                 <thead>
                                     <tr>
                                         <th>User Name</th>
-                                        <th>Device Name</th>
+                                        <th>Household</th>
                                         <th>Started watching</th>
                                         <th>Duration</th>
                                         <th>Channel</th>

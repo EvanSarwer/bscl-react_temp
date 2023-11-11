@@ -205,7 +205,7 @@ const DeviceList = () => {
                                                             <table class="table display nowrap table-striped table-bordered">
                                                                 <thead>
                                                                     <tr>
-                                                                        <th>Device Name</th>
+                                                                        <th>Household</th>
                                                                         <th>Box ID</th>
                                                                         <th>Address</th>
                                                                         <th>Type</th>
