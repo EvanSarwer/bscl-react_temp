@@ -142,7 +142,8 @@ const ViewLog = () => {
                                 <div class="row">
 
                                     <div class="col-md-4">
-                                        <Select
+                                       <strong>User Name</strong>
+                                                                                <Select
                                             placeholder="Select User"
                                             options={users.map(user => ({ label: user.user_name, value: user.id }))}
                                             onChange={opt => setUser(opt.value) & setUserName(opt.label)}
