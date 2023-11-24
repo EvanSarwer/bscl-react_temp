@@ -102,7 +102,7 @@ const ProgramLogUpload = () => {
           if(
              json[i].program_date && json[i].Week_No && json[i].Day && json[i]['Channel Name'] 
              && 
-             json[i].peak_offpeak && json[i].start && json[i].finish && json[i].program_duration_min
+             json[i].peak_offpeak && isValidDateFormat(json[i].start) && isValidDateFormat(json[i].finish) && json[i].program_duration_min
               && 
              json[i].program_type_genre && json[i].Program_Name && json[i].Language
           ){
