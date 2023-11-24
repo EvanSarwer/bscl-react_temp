@@ -365,21 +365,36 @@ console.log(cookies.get('_role'));
                             )
                         }
                     })()} */}
-                    {/* {(() => {
+                    {(() => {
                         if (cookies.get('_role') === "admin"||cookies.get('_role') === "operator" || cookies.get('_role') === "general") {
-                            if (props.menu === "playoutupload") {
+                            if (props.menu === "adlogupload") {
                                 return (
-                                    <li class="active nav-item"><Link to="/playoutupload"><i class="la la-upload"></i><span class="menu-title" data-i18n="Templates">Playout Log Upload</span></Link>
+                                    <li class="active nav-item"><Link to="/adlogupload"><i class="la la-upload"></i><span class="menu-title" data-i18n="Templates">Ad Log Upload</span></Link>
                                     </li>
                                 )
                             } else {
                                 return (
-                                    <li class=" nav-item"><Link to="/playoutupload"><i class="la la-upload"></i><span class="menu-title" data-i18n="Templates">Playout Log Upload</span></Link>
+                                    <li class=" nav-item"><Link to="/adlogupload"><i class="la la-upload"></i><span class="menu-title" data-i18n="Templates">Ad Log Upload</span></Link>
                                     </li>
                                 )
                             }
                         }
-                    })()} */}
+                    })()}
+                    {(() => {
+                        if (cookies.get('_role') === "admin"||cookies.get('_role') === "operator" || cookies.get('_role') === "general") {
+                            if (props.menu === "programlogupload") {
+                                return (
+                                    <li class="active nav-item"><Link to="/ProgramLogUpload"><i class="la la-upload"></i><span class="menu-title" data-i18n="Templates">Program Log Upload</span></Link>
+                                    </li>
+                                )
+                            } else {
+                                return (
+                                    <li class=" nav-item"><Link to="/ProgramLogUpload"><i class="la la-upload"></i><span class="menu-title" data-i18n="Templates">Program Log Upload</span></Link>
+                                    </li>
+                                )
+                            }
+                        }
+                    })()}
 
                     {(() => {
                         if (cookies.get('_role') === "admin"||cookies.get('_role') === "operator") {
