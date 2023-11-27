@@ -9,6 +9,8 @@ import Dashboard from '../Dashboard/Dashboard';
 import LiveChannels from '../LiveChannels/LiveChannels';
 import LiveMap from "../LiveChannels/LiveMap";
 import ChannelStatus from '../Channel/ChannelStatus';
+import AdLogUpload from '../LogUpload/AdLogUpload';
+import ProgramLogUpload from '../LogUpload/ProgramLogUpload';
 import DayRangedChannelStatus from '../Channel/DayRangedChannelStatus';
 import RangedChannelStatus from '../Channel/RangedChannelStatus';
 import DefinedChannelStatus from '../Channel/DefinedChannelStatus';
@@ -69,6 +71,14 @@ function Admin() {
         
         { (cookies.get('_role')==='admin') && 
           <Route exact path="/app/users" element={<AppUserList />}></Route>
+          
+        }
+        { (cookies.get('_role')==='admin') && 
+          <Route exact path="/ProgramLogUpload" element={<ProgramLogUpload />}></Route>
+          
+        }
+        { (cookies.get('_role')==='admin') && 
+          <Route exact path="/AdLogUpload" element={<AdLogUpload />}></Route>
           
         }
         { (cookies.get('_role')==='admin') && 
