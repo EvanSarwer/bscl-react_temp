@@ -310,14 +310,16 @@ const UserStatus = () => {
                                     return <table class="table table-bordered " style={{ backgroundColor: "#FFFF" }}>
                                     <tr>
                                         <th>User Name</th>
-                                        <th>Device</th>
+                                        <th>Household Name</th>
+                                        <th>Device Box ID</th>
                                         <th>Gender</th>
                                         <th>Age</th>
                                         <th>Economic Status</th>
                                     </tr>
                                     <tr>
                                         <td>{userInfo.user_name}</td>
-                                        <td>{userInfo.device_name} ({userInfo.device_id})</td>
+                                        <td>{userInfo.device_name}</td>
+                                        <td>{userInfo.device_box_id}</td>
                                         <td>{userInfo.gender}</td>
                                         <td>{userInfo.age}</td>
                                         <td>{userInfo.economic_status}</td>

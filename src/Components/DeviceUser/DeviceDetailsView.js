@@ -106,19 +106,19 @@ const DeviceDetailsView=()=>{
 
                 switch(obj.economic_status){
                     case "a":
-                        setEconomicStatus("Poorest");;
+                        setEconomicStatus("SEC A");;
                         break;
                     case "b":
-                        setEconomicStatus("Poorer");
+                        setEconomicStatus("SEC B");
                         break;
                     case "c":
-                        setEconomicStatus("Middle");
+                        setEconomicStatus("SEC C");
                         break;
                     case "d":
-                        setEconomicStatus("Richer");
+                        setEconomicStatus("SEC D");
                         break;
                     case "e":
-                        setEconomicStatus("Richest");
+                        setEconomicStatus("SEC E");
                         break;
                 }
 
@@ -199,7 +199,8 @@ const DeviceDetailsView=()=>{
             <div class="content-body row">
                 <div class="col-md-2"></div>
                 <div class="col-md-8">
-                <h1 class="text-center">Device : {deviceID} {deviceName}</h1>
+                {/* <h1 class="text-center">Household Name : {deviceID} {deviceName}</h1> */}
+                <h1 class="text-center">Household Name : {deviceName}</h1>
                 <table class="table display nowrap table-striped table-bordered">
                     <tr>
                         <td>Device Box ID:</td>
