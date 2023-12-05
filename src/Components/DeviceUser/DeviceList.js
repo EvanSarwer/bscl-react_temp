@@ -116,11 +116,12 @@ const DeviceList = () => {
 
     const exportDevices = () => {
         //console.log(liveChannelData.labels[0]);
-        var csv = [["Device Name","Box Id","Contact Person","Contact No","Alt No","Email","Payment (Type & Number)","Other Payment (Type & Number)","SEC","Adress","Area/State","Ward","City Corp","District","Lat, Lang","Household Cond","TV Details","GSM Status","Wifi","STB Provider","STB Subscription","Installation Date","Deployer","Survey Date","1st_Index_User_Name","1st_Index_User_Info","2nd_Index_User_Name","2nd_Index_User_Info","3rd_Index_User_Name","3rd_Index_User_Info","4th_Index_User_Name","4th_Index_User_Info","5th_Index_User_Name","5th_Index_User_Info","6th_Index_User_Name","6th_Index_User_Info","7th_Index_User_Name","7th_Index_User_Info","8th_Index_User_Name","8th_Index_User_Info"]];
+        var csv = [["Household ID","Household Name","Box Id","Contact Person","Contact No","Alt No","Email","Payment (Type & Number)","Other Payment (Type & Number)","SEC","Adress","Area/State","Ward","City Corp","District","Lat, Lang","Household Cond","TV Details","GSM Status","Wifi","STB Provider","STB Subscription","Installation Date","Deployer","Survey Date","1st_Index_User_Name","1st_Index_User_Info","2nd_Index_User_Name","2nd_Index_User_Info","3rd_Index_User_Name","3rd_Index_User_Info","4th_Index_User_Name","4th_Index_User_Info","5th_Index_User_Name","5th_Index_User_Info","6th_Index_User_Name","6th_Index_User_Info","7th_Index_User_Name","7th_Index_User_Info","8th_Index_User_Name","8th_Index_User_Info"]];
         
         for (var i = 0; i < devices.length; i++) {
             if(devices[i].contact_person){
                 csv.push([
+                            devices[i].id,
                             devices[i].device_name,
                             devices[i].deviceBoxId,
                             devices[i].contact_person,
@@ -206,8 +207,8 @@ const DeviceList = () => {
                                                                 <thead>
                                                                     <tr>
                                                                         <th>Household</th>
-                                                                        <th>Box ID</th>
-                                                                        <th>Address</th>
+                                                                        <th>Device Box ID</th>
+                                                                        <th>Address(Division)</th>
                                                                         <th>Type</th>
                                                                         <th>Economic Status</th>
                                                                         <th>Socio Status</th>
@@ -223,7 +224,7 @@ const DeviceList = () => {
                                                                             {/*<td><a data-toggle="modal" data-target={`#exampleModal_${device.id}`}>{device.device_name}</a>*<PopUpDetails id={device.id}/></td>*/}
                                                                             <td><a href={`/device/detail/${device.id}`}>{device.device_name}</a></td>
                                                                             <td>{device.deviceBoxId ?? <span class="text-danger">Box Not Contented</span>}</td>
-                                                                            <td>{device.district}</td>
+                                                                            <td>{device.district && device.district.charAt(0).toUpperCase() + device.district.slice(1)}</td>
                                                                             <td>{device.type}</td>
                                                                             {/* <td>{user.gender}</td>
                                                                             <td>{user.age}</td> */}
