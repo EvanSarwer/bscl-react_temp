@@ -100,18 +100,18 @@ const ProgramLogUpload = () => {
           //  console.log(getIdFromChannelName(json[i]['Channel Name']));
             //break;
           if(
-             json[i].program_date && json[i].Week_No && json[i].Day && json[i]['Channel Name'] 
+             (json[i].program_date||json[i]['program_date ']) && json[i].Week_No && json[i].Day && json[i]['Channel Name'] 
              && 
              json[i].peak_offpeak && isValidDateFormat(json[i].start) && isValidDateFormat(json[i].finish) && json[i].program_duration_min
               && 
-             json[i].program_type_genre && json[i].Program_Name && json[i].Language
+             json[i].program_type_genre && ((json[i].Program_Name||json[i]['Program_Name ']) && json[i].Language
           ){
             //alert(11);
             //break;
           //var obj = json[i];
           
           var obj={
-            program_date:json[i].program_date,
+            program_date:(json[i].program_date)?json[i].program_date:json[i]['program_date '],
             week_no:json[i].Week_No,
             day:json[i].Day,
             channel_id:getIdFromChannelName(json[i]['Channel Name']),
@@ -120,7 +120,7 @@ const ProgramLogUpload = () => {
             finish:json[i].finish,
             program_duration_min:json[i].program_duration_min,
             program_type_genre:json[i].program_type_genre,
-            program_name:json[i].Program_Name,
+            program_name:(json[i].Program_Name)?json[i].Program_Name:json[i]['Program_Name '],
             language:json[i].Language
             }
             
