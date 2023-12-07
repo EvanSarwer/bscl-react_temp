@@ -276,7 +276,7 @@ const DeviceForm = (props) => {
                                     <div className="card-title text-center">
                                         <img style={{ width: '13%', height: '0%' }} src="/app-assets/images/logo/app-user.png" alt="user logo" />
                                     </div>
-                                    <h6 className="card-subtitle line-on-side text-muted text-center font-medium-5 pt-2"><span>{props.mode} Device</span>
+                                    <h6 className="card-subtitle line-on-side text-muted text-center font-medium-5 pt-2"><span>{props.mode} Household</span>
                                     </h6>
                                 </div>
                                 <div className="card-content" >
@@ -302,7 +302,7 @@ const DeviceForm = (props) => {
 
                                             <table style={{ width: '100%' }} >
                                                 <tr>
-                                                    <td class="form-label">Device Name<span class="text-danger font-weight-bold ">* </span>:</td>
+                                                    <td class="form-label">Household Name<span class="text-danger font-weight-bold ">* </span>:</td>
                                                     <td style={{ width: '68%' }} colspan={3}><fieldset className="form-group position-relative has-icon-left">
                                                         <input type="text" name="device_id" id="device_id" value={deviceName} onChange={(e) => { setDeviceName(e.target.value) }} readOnly={props.mode == "Edit"} className="form-control" placeholder="Device name" tabIndex={1} required data-validation-required-message="Please enter device name." />
                                                         <div className="form-control-position">
