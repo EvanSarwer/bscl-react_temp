@@ -29,30 +29,51 @@ const AdLogUpload = () => {
     })
 
   }, [])
-
   const IncrementCount = () => {
     // Update state with incremented value
     setupdater(updater + 1);
   }
+  
   useEffect(() => {
     if (updater > 0) {
-      var data = {
+      //console.log("sending"+updater);
+      const chunkSize = 2000;
+      const totalRows = range.length;
+      const numberOfChunks = Math.ceil(totalRows / chunkSize);
+      var count=0;
+  
+      for (let i = 0; i < numberOfChunks; i++) {
+        const start = i * chunkSize;
+        const end = Math.min((i + 1) * chunkSize, totalRows);
         
-        data:range
+        //console.log(start+" "+end);
+        const chunk = range.slice(start, end);
+  
+        const data = {
+          data: chunk
+        };
+  
+        axiosConfig.post("/ad/receive", data)
+          .then(rsp => {
+            count++;
+            if(count==numberOfChunks){
+              document.querySelector("#excelld").style.display = "none";
+              alert("Ad Log Uploaded Successfully");
+              //window.location.href="/adlogupload";
+            }
+
+            console.log(`Chunk ${i + 1}/${numberOfChunks} successfully sent`);
+          })
+          .catch(err => {
+            
+        console.log(start+" "+end);
+            console.error(`Error sending chunk ${i + 1}/${numberOfChunks}:`, err);
+          });
       }
-      //console.log(data.id);
-      //console.log(updater);
-      console.log(JSON.stringify(data));
-
-
-      axiosConfig.post("/ad/receive", data).then(rsp => {
-        alert("Data Succesfully Inserted");
-        //console.log("done");
-      }).catch(err => {
-        alert("Server Error");
-      });
-
-      // axiosConfig.post("/adtrpv3/reachp", data).then(rsp => {
+      console.log("done");
+    }
+  }, [updater, range]);
+        // axiosConfig.post("/adtrpv3/reachp", data).then(rsp => {
       //   setreachpf(true);
       //   setreachp(rsp.data.value);
       //   console.log(reachp);
@@ -63,8 +84,6 @@ const AdLogUpload = () => {
       //   setbadf(true);
       // });
 
-    }
-  }, [updater]);
 
   
   function getIdFromChannelName(channelName) {
@@ -100,14 +119,14 @@ const AdLogUpload = () => {
           //  console.log(getIdFromChannelName(json[i]['Channel Name']));
             //break;
           if(
-             json[i].Ad_Date && json[i].Company && json[i].Ad_Type  && json[i].Peak && json[i].Telecast_Time && json[i].duration  && 
+             json[i].Ad_Date && json[i].Company && json[i].Ad_Type  && json[i].Peak && json[i].Telecast_Time && json[i].duration  && getIdFromChannelName(json[i]['Channel Name'])!=null &&
             isValidDateFormat(json[i].start) && isValidDateFormat(json[i].finish)  && json[i].Ad_Name && json[i].Brand  && json[i].Sub_Brand && json[i].Product_Type && json[i].Product && json[i].Program_Type && json[i].Program_Name 
             && json[i].Break_Type && json[i].Ad_Qty && json[i].Ad_Pos && json[i].ad_price
           ){
             //alert(11);
             //break;
           //var obj = json[i];
-          
+          //console.log(getIdFromChannelName(json[i]['Channel Name']));
           var obj={
             ad_date:json[i].Ad_Date,
             channel_id:getIdFromChannelName(json[i]['Channel Name']),
@@ -142,7 +161,11 @@ const AdLogUpload = () => {
           //console.log(obj);
           }
           else{
+            console.log(json[i]);
+            console.log(getIdFromChannelName(json[i]['Channel Name']));
+            
             alert("Some data has faulty properties, Check row no "+(i+2)+" and try again");
+
             break;
           }
         }
