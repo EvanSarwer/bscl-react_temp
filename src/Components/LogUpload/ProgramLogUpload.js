@@ -104,7 +104,7 @@ const ProgramLogUpload = () => {
              && 
              json[i].peak_offpeak && isValidDateFormat(json[i].start) && isValidDateFormat(json[i].finish) && json[i].program_duration_min
               && 
-             json[i].program_type_genre && ((json[i].Program_Name||json[i]['Program_Name ']) && json[i].Language
+             json[i].program_type_genre && ((json[i].Program_Name||json[i]['Program_Name '])) && json[i].Language
           ){
             //alert(11);
             //break;
