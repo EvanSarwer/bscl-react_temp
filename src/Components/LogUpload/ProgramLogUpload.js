@@ -100,7 +100,7 @@ const ProgramLogUpload = () => {
           //  console.log(getIdFromChannelName(json[i]['Channel Name']));
             //break;
           if(
-             (json[i].program_date||json[i]['program_date ']) && json[i].Week_No && json[i].Day && json[i]['Channel Name'] 
+             (json[i].program_date||json[i]['program_date ']) && json[i].Week_No && json[i].Day && getIdFromChannelName(json[i]['Channel Name'])!=null 
              && 
              json[i].peak_offpeak && isValidDateFormat(json[i].start) && isValidDateFormat(json[i].finish) && json[i].program_duration_min
               && 
