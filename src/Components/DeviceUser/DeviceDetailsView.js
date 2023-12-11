@@ -195,6 +195,8 @@ const DeviceDetailsView=()=>{
         <MainMenu menu="Program TRP" />
         <div class="app-content content" style={{ backgroundColor: "azure" }}>
         <div class="content-wrapper" >
+        <a href={"/device/box/history/"+deviceID} class="btn btn-primary btn-sm float-right">Box History</a>
+
            
             <div class="content-body row">
                 <div class="col-md-2"></div>

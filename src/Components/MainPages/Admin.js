@@ -40,6 +40,7 @@ import UserDataFilter from "../User/UserDataFilter";
 import DataCleanse from "../User/DataCleanse";
 import UserPassReset from "../AppUsers/PassReset/UserPassReset";
 import ResetPass from "../AppUsers/PassReset/ResetPass";
+import DeviceHistoryLog from "../DeviceUser/DeviceHistoryLog";
 
 
 
@@ -98,6 +99,7 @@ function Admin() {
         <Route exact path="/device/user/edit/:id/:from" element={<EditUser />}></Route>
         <Route exact path="/device/details/:id" element={<DeviceDetails />}></Route>
         <Route exact path="/device/detail/:id" element={<DeviceDetailsView />}></Route>
+        <Route exact path="/device/box/history/:id" element={<DeviceHistoryLog />}></Route>
         <Route exact path="/userdatafilter" element={<UserDataFilter />}></Route>
         <Route exact path="/datacleansing" element={<DataCleanse />}></Route>
         <Route exact path="/user-passreset" element={<UserPassReset />}></Route>
