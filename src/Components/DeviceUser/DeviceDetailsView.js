@@ -189,6 +189,23 @@ const DeviceDetailsView=()=>{
         }); 
     }
 
+    const DisconnectDeviceBoxID = () => {
+        axiosConfig.post("/device/disconnect-box-id", {
+            device_id: deviceID,
+            device_box_id: deviceBoxID
+        }).then((rsp)=>{
+            console.log(rsp.data);
+            setMsg(rsp.data.message);
+            setDeviceBoxID('');
+            Window.location.reload();
+            
+        },(err)=>{
+            
+            console.log(err.response);
+
+        });
+    }
+
     return (
         <div>
         <Header title="Program TRP" />
@@ -207,7 +224,7 @@ const DeviceDetailsView=()=>{
                     <tr>
                         <td>Device Box ID:</td>
                         <td class="border-0 row">
-                            <div class="col-md-8">
+                            <div class="col-md-6">
                                 <Select
                                     placeholder="Select Box ID"
                                     options={availableBoxes.map(box => ({ label: box.id, value: box.id }))}
@@ -216,7 +233,10 @@ const DeviceDetailsView=()=>{
                                 /> 
                             </div>
                             <div class="col-md-2">
-                                <button class="btn btn-primary btn-sm" onClick={() => updateDeviceBoxID() } >Update</button>
+                                <button class="btn btn-warning btn-sm" onClick={() => updateDeviceBoxID() } >Update</button>
+                            </div>
+                            <div class="col-md-2">
+                                <button class="btn btn-danger btn-sm" onClick={() => DisconnectDeviceBoxID() } >Disband</button>
                             </div>
                             <div class="col-md-2">
                                 <button class="btn btn-info btn-sm ml-1" onClick={() => NewDeviceBoxID() } >New</button>
