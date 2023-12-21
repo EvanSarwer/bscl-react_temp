@@ -236,7 +236,7 @@ const DeviceDetailsView=()=>{
                                 <button class="btn btn-warning btn-sm" onClick={() => updateDeviceBoxID() } >Update</button>
                             </div>
                             <div class="col-md-2">
-                                <button class="btn btn-danger btn-sm" onClick={() => DisconnectDeviceBoxID() } >Disband</button>
+                                <button class="btn btn-danger btn-sm" onClick={() => DisconnectDeviceBoxID() } >Dismantle</button>
                             </div>
                             <div class="col-md-2">
                                 <button class="btn btn-info btn-sm ml-1" onClick={() => NewDeviceBoxID() } >New</button>
