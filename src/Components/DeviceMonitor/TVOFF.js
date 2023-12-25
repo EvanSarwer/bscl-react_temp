@@ -30,7 +30,8 @@ const TVOFF = () => {
         return data.filter(
             (item) =>
                 item.device_name.toLowerCase().includes(query.toLowerCase()) ||
-                item.id.toString().includes(query)
+                item.id.toString().includes(query) ||
+                item.box_id.toString().includes(query)
         );
     };
 
@@ -57,6 +58,7 @@ const TVOFF = () => {
                                     <tr>
                                         <th>ID</th>
                                         <th>Device Name</th>
+                                        <th>Device Box ID</th>
                                         <th>Status</th>
                                     </tr>
                                 </thead>
@@ -66,8 +68,8 @@ const TVOFF = () => {
                                                     
                                                     <td>{device.id}</td>
                                                     <td>{device.device_name}</td>
-                                                    
-                                        <td><span style={{ height: "1em",  width: "1em",  backgroundColor: "orange",  borderRadius: "50%",  display: "inline-block"}}></span></td>
+                                                    <td>{device.box_id}</td>
+                                                    <td><span style={{ height: "1em",  width: "1em",  backgroundColor: "orange",  borderRadius: "50%",  display: "inline-block"}}></span></td>
                                                 </tr>
                                             )}
 
