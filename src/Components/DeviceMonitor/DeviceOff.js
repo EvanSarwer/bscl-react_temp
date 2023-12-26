@@ -56,8 +56,8 @@ const DeviceOff = () => {
                             <table id="users-list-datatable" class="table table-bordered">
                                 <thead>
                                     <tr>
-                                        <th>ID</th>
-                                        <th>Device Name</th>
+                                        <th>Household ID</th>
+                                        <th>Household</th>
                                         <th>Device Box ID</th>
                                         <th>Status</th>
                                     </tr>
