@@ -167,7 +167,7 @@ const AppUserList = () => {
                                                                         <td>{user.email}</td>
                                                                         <td>{user.address}</td>
                                                                         <td>{user.phone}</td>
-                                                                        <td><a class="btn btn-primary" href={`/app/user/login/sessions/${user.id}`}>Sessions</a></td>
+                                                                        <td><a class="btn btn-primary" href={`/app/user/login/sessions/${user.login.id}`}>Sessions</a></td>
                                                                         <td style={{ whiteSpace: 'nowrap' }}>
                                                                             <a class="btn btn-secondary" href={`/app/user/edit/${user.user_name}`}>Edit</a>
                                                                             <button class="offset-1 btn btn-danger" onClick={() => { if (window.confirm('Delete the item?')) { deleteUser(user.user_name) }; }} >Delete</button>
@@ -216,7 +216,7 @@ const AppUserList = () => {
                                                                     <td>{user.email}</td>
                                                                     <td>{user.address}</td>
                                                                     <td>{user.phone}</td>
-                                                                    <td><a class="btn btn-primary" href={`/app/user/login/sessions/${user.id}`}>Sessions</a></td>
+                                                                    <td><a class="btn btn-primary" href={`/app/user/login/sessions/${user.login.id}`}>Sessions</a></td>
                                                                     <td style={{ whiteSpace: 'nowrap' }}>
                                                                         <a class="btn btn-secondary" href={`/app/user/edit/${user.user_name}`}>Edit</a>
                                                                         <button class="offset-1 btn btn-danger" onClick={() => { if (window.confirm('Delete the item?')) { deleteUser(user.user_name) }; }} >Delete</button>
@@ -263,7 +263,7 @@ const AppUserList = () => {
                                                                         <td>{user.email}</td>
                                                                         <td>{user.state_name}</td>
                                                                         <td>{user.number}</td>
-                                                                        <td><a class="btn btn-primary" href={`/app/user/login/sessions/${user.id}`}>Sessions</a></td>
+                                                                        <td><a class="btn btn-primary" href={`/app/user/login/sessions/${user.login.id}`}>Sessions</a></td>
                                                                         <td style={{ whiteSpace: 'nowrap' }}>
                                                                             <a class="btn btn-secondary" href={`/app/user/edit/${user.user_name}`}>Edit</a>
                                                                             <button class="offset-1 btn btn-danger" onClick={() => { if (window.confirm('Delete the item?')) { deleteUser(user.user_name) }; }} >Delete</button>
@@ -312,7 +312,7 @@ const AppUserList = () => {
                                                                         <td>{user.email}</td>
                                                                         <td>{user.address}</td>
                                                                         <td>{user.phone}</td>
-                                                                        <td><a class="btn btn-primary" href={`/app/user/login/sessions/${user.id}`}>Sessions</a></td>
+                                                                        <td><a class="btn btn-primary" href={`/app/user/login/sessions/${user.login.id}`}>Sessions</a></td>
                                                                         <td style={{ whiteSpace: 'nowrap' }}>
                                                                             <a class="btn btn-secondary" href={`/app/user/edit/${user.user_name}`}>Edit</a>
                                                                             <button class="offset-1 btn btn-danger" onClick={() => { if (window.confirm('Delete the item?')) { deleteUser(user.user_name) }; }} >Delete</button>
@@ -363,7 +363,7 @@ const AppUserList = () => {
                                                                     <td>{user.email}</td>
                                                                     <td>{user.address}</td>
                                                                     <td>{user.phone}</td>
-                                                                    <td><a class="btn btn-primary" href={`/app/user/login/sessions/${user.id}`}>Sessions</a></td>
+                                                                    <td><a class="btn btn-primary" href={`/app/user/login/sessions/${user.login.id}`}>Sessions</a></td>
                                                                     <td style={{ whiteSpace: 'nowrap' }}>
                                                                         <a class="btn btn-secondary" href={`/app/user/edit/${user.user_name}`}>Edit</a>
                                                                         <button class="offset-1 btn btn-danger" onClick={() => { if (window.confirm('Delete the item?')) { deleteUser(user.user_name) }; }} >Delete</button>
