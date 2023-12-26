@@ -116,7 +116,7 @@ const DeviceList = () => {
 
     const exportDevices = () => {
         //console.log(liveChannelData.labels[0]);
-        var csv = [["Household ID","Household Name","Box Id","Last Active At","Contact Person","Contact No","Alt No","Email","Payment (Type & Number)","Other Payment (Type & Number)","SEC","Adress","Area/State","Ward","City Corp","Division","Lat, Lang","Household Cond","TV Details","GSM Status","Wifi","STB Provider","STB Subscription","Installation Date","Deployer","Survey Date","1st_Index_User_Name","1st_Index_User_Info","2nd_Index_User_Name","2nd_Index_User_Info","3rd_Index_User_Name","3rd_Index_User_Info","4th_Index_User_Name","4th_Index_User_Info","5th_Index_User_Name","5th_Index_User_Info","6th_Index_User_Name","6th_Index_User_Info","7th_Index_User_Name","7th_Index_User_Info","8th_Index_User_Name","8th_Index_User_Info"]];
+        var csv = [["Household ID","Household Name","Box Id","Last Active At","Deselection Status","Contact Person","Contact No","Alt No","Email","Payment (Type & Number)","Other Payment (Type & Number)","SEC","Adress","Area/State","Ward","City Corp","Division","Lat, Lang","Household Cond","TV Details","GSM Status","Wifi","STB Provider","STB Subscription","Installation Date","Deployer","Survey Date","1st_Index_User_Name","1st_Index_User_Info","2nd_Index_User_Name","2nd_Index_User_Info","3rd_Index_User_Name","3rd_Index_User_Info","4th_Index_User_Name","4th_Index_User_Info","5th_Index_User_Name","5th_Index_User_Info","6th_Index_User_Name","6th_Index_User_Info","7th_Index_User_Name","7th_Index_User_Info","8th_Index_User_Name","8th_Index_User_Info"]];
         
         for (var i = 0; i < devices.length; i++) {
             if(devices[i].contact_person){
@@ -125,6 +125,7 @@ const DeviceList = () => {
                             devices[i].device_name,
                             devices[i].deviceBoxId,
                             devices[i].last_request,
+                            devices[i].deselect === "deselect" ? "Deselected" : "Selected",
                             devices[i].contact_person,
                             devices[i].contact_number,
                             devices[i].alt_number,
