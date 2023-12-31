@@ -29,7 +29,7 @@ const Overview = () => {
     var today = new Date(),
         datetime = today.getFullYear() + '-' + pad((today.getMonth() + 1)) + '-' + pad(today.getDate()) + ' ' + today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
 
-    if (cookies.get('_role') === "admin"||cookies.get('_role') === "operator") {
+    if (cookies.get('_role') === "admin" || cookies.get('_role') === "operator") {
         var role_datetime = today.getFullYear() + '-' + pad((today.getMonth() + 1)) + '-' + pad(today.getDate()) + ' ' + today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
     } else if (cookies.get('_role') === "general" || cookies.get('_role') === "add-agency") {
         // var changeData_date = today.getFullYear() + '-' + pad((today.getMonth() + 1)) + '-' + pad(today.getDate()) + ' 12:00:00';
@@ -39,10 +39,10 @@ const Overview = () => {
         //     var day_before_yesterday = new Date(new Date().setDate(new Date().getDate() - 2)),
         //         role_datetime = day_before_yesterday.getFullYear() + '-' + pad((day_before_yesterday.getMonth() + 1)) + '-' + pad(day_before_yesterday.getDate()) + ' 23:59:59';
         // }
-        
-        
+
+
         var last_updated_date = new Date(lastUpdatedDate);
-                    role_datetime = last_updated_date.getFullYear() + '-' + pad((last_updated_date.getMonth() + 1)) + '-' + pad(last_updated_date.getDate()) + ' 12:00:00';
+        role_datetime = last_updated_date.getFullYear() + '-' + pad((last_updated_date.getMonth() + 1)) + '-' + pad(last_updated_date.getDate()) + ' 12:00:00';
     }
 
     console.log(new Date(lastUpdatedDate));
@@ -55,7 +55,8 @@ const Overview = () => {
     const [region, setRegion] = useState("");
     const [gender, setGender] = useState("");
     const [economic, setEconomic] = useState("");
-    const [socio, setSocio] = useState("");
+    // const [socio, setSocio] = useState("");
+    const [ageGroup, setAgeGroup] = useState(["0-14", "15-24", "25-34", "35-44", "45 & Above"]);
     const [err, setErr] = useState("error");
     const [loading, setloading] = useState(false);
     const [inputData, setInputData] = useState({});
@@ -64,6 +65,20 @@ const Overview = () => {
         labels: [],
         datasets: []
     });
+
+    const handleCheckboxChange = (event) => {
+        const value = event.target.value;
+        setAgeGroup(prevState => {
+          const newState = [...prevState];
+          const index = newState.indexOf(value);
+          if (index === -1) {
+            newState.push(value);
+          } else {
+            newState.splice(index, 1);
+          }
+          return newState;
+        });
+      }
 
     useEffect(() => {
 
@@ -80,12 +95,13 @@ const Overview = () => {
             region: region,
             gender: gender,
             economic: economic,
-            socio: socio,
-            age1: parseInt(document.querySelector("#small-slider > div > div:nth-child(2) > div > div.noUi-tooltip").innerHTML),
-            age2: parseInt(document.querySelector("#small-slider > div > div:nth-child(3) > div > div.noUi-tooltip").innerHTML)
+            //socio: socio,
+            ageGroup: ageGroup,
+            // age1: parseInt(document.querySelector("#small-slider > div > div:nth-child(2) > div > div.noUi-tooltip").innerHTML),
+            // age2: parseInt(document.querySelector("#small-slider > div > div:nth-child(3) > div > div.noUi-tooltip").innerHTML)
         };
 
-        if (start !== "" && finish !== "" && (new Date(start).getTime() <= new Date(role_datetime).getTime()) && (new Date(finish).getTime() <= new Date(role_datetime).getTime())) {
+        if (start !== "" && finish !== "" && ageGroup.length > 0 && (new Date(start).getTime() <= new Date(role_datetime).getTime()) && (new Date(finish).getTime() <= new Date(role_datetime).getTime())) {
             setErr("");
             setloading(false);
             axiosConfig.post("/overview/reachusergraph", data).then(rsp => {
@@ -115,11 +131,23 @@ const Overview = () => {
     const BasicchannelDownloadfunc = () => {
         //console.log(liveChannelData.labels[0]);
         if (inputData.userType == "") {
-            var csv = [["Graph Category-",inputData.category], ["Universe-",parseInt(inputData.universe)], ["Sample-",inputData.sample],["Audience/User Type-","All_User_type"],["Time Duration-", "Start-" + modify_date(inputData.start) + "_Finish-" + modify_date(inputData.finish)],["",""] ,["Channel", "Value"]];
+            var csv = [["Graph Category-", inputData.category], ["Universe-", parseInt(inputData.universe)], ["Sample-", inputData.sample], ["Audience/User Type-", "All_User_type"], ["Time Duration-", "Start-" + modify_date(inputData.start) + "_Finish-" + modify_date(inputData.finish)], ["", ""], ["Channel", "Value"]];
         } else if (inputData.userType == "OTT") {
-            var csv = [["Graph Category-",inputData.category], ["Universe-",parseInt(inputData.universe)], ["Sample-",inputData.sample],[ "Audience/User Type-",inputData.userType],["Time Duration-", "Start-" + modify_date(inputData.start) + "_Finish-" + modify_date(inputData.finish)],["",""], ["Channel", "Value"]];
+            var csv = [["Graph Category-", inputData.category], ["Universe-", parseInt(inputData.universe)], ["Sample-", inputData.sample], ["Audience/User Type-", inputData.userType], ["Time Duration-", "Start-" + modify_date(inputData.start) + "_Finish-" + modify_date(inputData.finish)], ["", ""], ["Channel", "Value"]];
         } else if (inputData.userType == "STB") {
-            var csv = [["Graph Category-",inputData.category], ["Universe-",parseInt(inputData.universe)], ["Sample-",inputData.sample],["Audience/User Type-",inputData.userType],["Region-", (inputData.region ? inputData.region : "All_Region")],["Gender-" ,(inputData.gender ? inputData.gender == "m" ? "Male" : "Female" : "All-Gender")],["SEC-", (inputData.economic ? (inputData.economic === "a" ? "SEC A" : inputData.economic === "b" ? "SEC B" : inputData.economic === "c" ? "SEC C" : inputData.economic === "d" ? "SEC D" : "SEC E") : "All SEC")],["Socio-", (inputData.socio ? inputData.socio == "u" ? "Urban" : "Rural" : "Urban&Rural")],[ "Age Range-" , inputData.age1 + " to " + inputData.age2 ],["Time Duration-", "Start-" + modify_date(inputData.start) + "_Finish-" + modify_date(inputData.finish)],["",""], ["Channel", "Value"]];
+            var csv = [
+                ["Graph Category-", inputData.category],
+                ["Universe-", parseInt(inputData.universe)],
+                ["Sample-", inputData.sample],
+                ["Audience/User Type-", inputData.userType],
+                ["Region-", (inputData.region ? inputData.region : "All_Region")],
+                ["Gender-", (inputData.gender ? inputData.gender == "m" ? "Male" : "Female" : "All-Gender")],
+                ["SEC-", (inputData.economic ? (inputData.economic === "a" ? "SEC A" : inputData.economic === "b" ? "SEC B" : inputData.economic === "c" ? "SEC C" : inputData.economic === "d" ? "SEC D" : "SEC E") : "All SEC")],
+                ["Age Group-", ageGroup.join(', ')],
+                ["Time Duration-", "Start- " + modify_date(inputData.start) + " _ Finish- " + modify_date(inputData.finish)],
+                ["", ""],
+                ["Channel", "Value"]
+            ];        
         }
 
         //var csv = [["Channel", "Value"]];
@@ -176,7 +204,7 @@ const Overview = () => {
         } else if (inputData.userType == "OTT") {
             exportToCsv("Basic_Report(" + inputData.category + "_" + inputData.userType + "_" + modify_date(inputData.start) + " - " + modify_date(inputData.finish) + ").csv", scsv)
         } else if (inputData.userType == "STB") {
-            exportToCsv("Basic_Report(" + inputData.category + "_" + inputData.userType + "_" + (inputData.region ? inputData.region : "All_Region") + "_" + (inputData.gender ? inputData.gender == "m" ? "Male" : "Female" : "All-Gender") + "_" + (inputData.economic ? (inputData.economic === "a" ? "SEC A" : inputData.economic === "b" ? "SEC B" : inputData.economic === "c" ? "SEC C" : inputData.economic === "d" ? "SEC D" : "SEC E") : "All SEC") + "_" + (inputData.socio ? inputData.socio == "u" ? "Urban" : "Rural" : "Urban&Rural") + "_Age-" + inputData.age1 + " - " + inputData.age2 + "_" + modify_date(inputData.start) + " - " + modify_date(inputData.finish) + ").csv", scsv)
+            exportToCsv("Basic_Report(" + inputData.category + "_" + inputData.userType + "_" + (inputData.region ? inputData.region : "All_Region") + "_" + (inputData.gender ? inputData.gender == "m" ? "Male" : "Female" : "All-Gender") + "_" + (inputData.economic ? (inputData.economic === "a" ? "SEC A" : inputData.economic === "b" ? "SEC B" : inputData.economic === "c" ? "SEC C" : inputData.economic === "d" ? "SEC D" : "SEC E") : "All SEC") +"_Age-" + "invalid" + " - " + "invalid" + "_" + modify_date(inputData.start) + " - " + modify_date(inputData.finish) + ").csv", scsv)
         }
 
     }
@@ -189,12 +217,13 @@ const Overview = () => {
             region: region,
             gender: gender,
             economic: economic,
-            socio: socio,
-            age1: parseInt(document.querySelector("#small-slider > div > div:nth-child(2) > div > div.noUi-tooltip").innerHTML),
-            age2: parseInt(document.querySelector("#small-slider > div > div:nth-child(3) > div > div.noUi-tooltip").innerHTML)
+            //socio: socio,
+            ageGroup: ageGroup,
+            // age1: parseInt(document.querySelector("#small-slider > div > div:nth-child(2) > div > div.noUi-tooltip").innerHTML),
+            // age2: parseInt(document.querySelector("#small-slider > div > div:nth-child(3) > div > div.noUi-tooltip").innerHTML)
         };
 
-        if (start !== "" && finish !== "" && (new Date(start).getTime() <= new Date(role_datetime).getTime()) && (new Date(finish).getTime() <= new Date(role_datetime).getTime())) {
+        if (start !== "" && finish !== "" && ageGroup.length > 0 && (new Date(start).getTime() <= new Date(role_datetime).getTime()) && (new Date(finish).getTime() <= new Date(role_datetime).getTime())) {
             setErr("");
             if (category === "Reach(000)") {
                 setloading(false);
@@ -381,7 +410,7 @@ const Overview = () => {
                                         </div>
                                         <div class="col-md-2">
                                             <label>Type (STB/OTT)</label>
-                                            <select class="custom-select d-block w-100" value={userType} onChange={(e) => { setUserType(e.target.value) }}>
+                                            <select class="custom-select d-block w-100" disabled value={userType} onChange={(e) => { setUserType(e.target.value) }}>
                                                 <option value="">All</option>
                                                 <option value="STB">STB</option>
                                                 <option value="OTT">OTT</option>
@@ -412,6 +441,45 @@ const Overview = () => {
                                             </select>
                                         </div>
 
+                                        
+                                        <div className="col-md-4">
+                                            <div className="form-group">
+                                                <label>
+                                                    Age Group
+                                                </label>
+                                                <div className="border border-secondary p-1" >
+                                                    <label className=""><input type="checkbox" value="0-14" checked={ageGroup.includes("0-14")} onChange={handleCheckboxChange} /> 0-14 Yrs </label>
+                                                    <label className="ml-1"><input type="checkbox" value="15-24" checked={ageGroup.includes("15-24")} onChange={handleCheckboxChange} /> 15-24 Yrs</label>
+                                                    <label className="ml-1"><input type="checkbox" value="25-34" checked={ageGroup.includes("25-34")} onChange={handleCheckboxChange} /> 25-34 Yrs</label>
+                                                    <label className="ml-1"><input type="checkbox" value="35-44" checked={ageGroup.includes("35-44")} onChange={handleCheckboxChange} /> 35-44 Yrs</label>
+                                                    <label className="ml-1"><input type="checkbox" value="45 & Above" checked={ageGroup.includes("45 & Above")} onChange={handleCheckboxChange} /> 45 & Above Yrs</label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+                                        {/* <div class="col-md-2">
+                                            <div class="price-range">
+                                                <div class="form-group">
+                                                    <div class="slider-sm slider-success my-1" id="small-slider"></div>
+                                                </div>
+                                                <div class="price-slider">
+                                                    <div class="price_slider_amount mb-2">
+                                                        <div class="range-amt"><strong>Age Range : </strong> 1
+                                                            - 100</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> */}
+
+
+                                    </div>
+
+
+                                    <div class="row" style={{ paddingTop: '25px' }}>
+                                        <div class="col-md-2"></div>
+
                                         <div class="col-md-2">
                                             <label>SEC</label>
                                             <select class="custom-select d-block w-100" disabled={userType == "OTT" || userType == ""} onChange={(e) => { setEconomic(e.target.value) }}>
@@ -425,35 +493,13 @@ const Overview = () => {
                                             </select>
                                         </div>
 
-
-                                        <div class="col-md-2">
-                                            <div class="price-range">
-                                                <div class="form-group">
-                                                    <div class="slider-sm slider-success my-1" id="small-slider"></div>
-                                                </div>
-                                                <div class="price-slider">
-                                                    <div class="price_slider_amount mb-2">
-                                                        <div class="range-amt"><strong>Age Range : </strong> 1
-                                                            - 100</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-
-                                    </div>
-
-
-                                    <div class="row" style={{ paddingTop: '25px' }}>
-                                        <div class="col-md-2"></div>
-
-                                        <div class="col-md-2">
+                                        {/* <div class="col-md-2">
                                             <select class="custom-select d-block w-100" disabled={userType == "OTT" || userType == ""} onChange={(e) => { setSocio(e.target.value) }}>
                                                 <option value="">Urban & Rural</option>
                                                 <option value="u">Urban</option>
                                                 <option value="r">Rural</option>
                                             </select>
-                                        </div>
+                                        </div> */}
 
                                         <fieldset class="form-group form-group-style col-md-2">
                                             <label for="dateTime1">Start Time</label>
