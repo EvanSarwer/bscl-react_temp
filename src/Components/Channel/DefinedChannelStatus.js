@@ -15,7 +15,7 @@ const DefinedChannelStatus = () => {
     const [update, setUpdate] = useState(0);
     const [time, setTime] = useState("15");
     const [id, setId] = useState("0");
-    const [type, setType] = useState("");
+    const [type, setType] = useState("STB");
     const [channelName, setChannelName] = useState("");
     const [channels, setchannels] = useState([]);
     const [lastDate, setlastDate] = useState("");
@@ -337,9 +337,9 @@ const DefinedChannelStatus = () => {
 
                                         <div class="col-md-2">
                                         <label>Type (STB/OTT)</label>
-                                            <select class="custom-select d-block w-100" onChange={(e) => { setType(e.target.value)}}>
-                                                <option value="">All</option>
+                                            <select class="custom-select d-block w-100" disabled onChange={(e) => { setType(e.target.value)}}>
                                                 <option value="STB">STB</option>
+                                                <option value="">All</option>
                                                 <option value="OTT">OTT</option>
                                             </select>
                                         </div>
