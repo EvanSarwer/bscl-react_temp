@@ -7,6 +7,7 @@ import MainMenu from '../MainMenu/MainMenu';
 import ExcelReport from '../Report/ExcelReport';
 import Dashboard from '../Dashboard/Dashboard';
 import LiveChannels from '../LiveChannels/LiveChannels';
+import LiveDevices from '../LiveDevices/LiveDevices';
 import LiveMap from "../LiveChannels/LiveMap";
 import ChannelStatus from '../Channel/ChannelStatus';
 import AdLogUpload from '../LogUpload/AdLogUpload';
@@ -59,6 +60,7 @@ function Admin() {
         <Route exact path="/overview" element={<Overview />}></Route>
         <Route exact path="/excelreport" element={<ExcelReport />}></Route>
         <Route exact path="/livechannels" element={<LiveChannels />}></Route>
+        <Route exact path="/LiveDevices" element={<LiveDevices />}></Route>
         <Route exact path="/map" element={<LiveMap />}></Route>
         <Route exact path="/channelstatus" element={<ChannelStatus />}></Route>
         <Route exact path="/definedchannelstatus" element={<DefinedChannelStatus />}></Route>
