@@ -42,6 +42,7 @@ import UserPassReset from "../AppUsers/PassReset/UserPassReset";
 import ResetPass from "../AppUsers/PassReset/ResetPass";
 import DeviceHistoryLog from "../DeviceUser/DeviceHistoryLog";
 import AppUserLoginSessions from "../AppUsers/AppUserLoginSessions";
+import AppUserActivityLog from "../AppUsers/AppUserActivityLog";
 
 
 
@@ -92,6 +93,7 @@ function Admin() {
         <Route exact path="/profile/edit" element={<EditProfile />}></Route>
         <Route exact path="/app/user/changepass" element={<ChangePass />}></Route>
         <Route exact path="/app/user/login/sessions/:id" element={<AppUserLoginSessions />}></Route>
+        <Route exact path="/app/user/activity/log/:id" element={<AppUserActivityLog />}></Route>
         <Route exact path="/device/user/details/:id" element={<DeviceInfo />}></Route>
         <Route exact path="/device/create" element={<AddDevice />}></Route>
         <Route exact path="/device/edit/:id" element={<EditDevice />}></Route>

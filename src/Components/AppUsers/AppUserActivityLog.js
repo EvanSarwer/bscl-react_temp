@@ -8,17 +8,17 @@ import { useParams } from "react-router-dom";
 
 
 
-const AppUserLoginSessions = () => {
+const AppUserActivityLog = () => {
     const { id } = useParams();
 
     const [appUser, setAppUser] = useState([]);
-    const [appUserLoginSessions, setAppUserLoginSessions] = useState([]);
+    const [appUserActivityLog, setAppUserActivityLog] = useState([]);
 
     const [query, setQuery] = useState("");
     useEffect(() => {
-        axiosConfig.get("/appuser/login/sessions/"+ id).then((rsp) => {
+        axiosConfig.get("/appuser/activity/log/" + id).then((rsp) => {
             setAppUser(rsp.data.userData);
-            setAppUserLoginSessions(rsp.data.user_login_sessions);
+            setAppUserActivityLog(rsp.data.user_activity_logs);
             console.log(rsp.data);
         }, (err) => { });
 
@@ -29,7 +29,9 @@ const AppUserLoginSessions = () => {
     const Search = (data) => {
         return data.filter(
             (item) =>
-                item.user_id && item.user_id.toString().includes(query)
+                item.operation_type.toLowerCase().includes(query.toLowerCase()) ||
+                item.data.type && item.user_id.toString().includes(query) ||
+                item.data.category && item.user_id.toString().includes(query)
         );
     };
 
@@ -80,7 +82,7 @@ const AppUserLoginSessions = () => {
     // const exportDevices = () => {
     //     //console.log(liveChannelData.labels[0]);
     //     var csv = [["Household ID","Household Name","Box Id","Last Active At","Contact Person","Contact No","Alt No","Email","Payment (Type & Number)","Other Payment (Type & Number)","SEC","Adress","Area/State","Ward","City Corp","Division","Lat, Lang","Household Cond","TV Details","GSM Status","Wifi","STB Provider","STB Subscription","Installation Date","Deployer","Survey Date","1st_Index_User_Name","1st_Index_User_Info","2nd_Index_User_Name","2nd_Index_User_Info","3rd_Index_User_Name","3rd_Index_User_Info","4th_Index_User_Name","4th_Index_User_Info","5th_Index_User_Name","5th_Index_User_Info","6th_Index_User_Name","6th_Index_User_Info","7th_Index_User_Name","7th_Index_User_Info","8th_Index_User_Name","8th_Index_User_Info"]];
-        
+
     //     for (var i = 0; i < devices.length; i++) {
     //         if(devices[i].contact_person){
     //             csv.push([
@@ -128,7 +130,7 @@ const AppUserLoginSessions = () => {
     //                         (devices[i]?.users[7]?.gender? ("Gender:" +(devices[i].users[7].gender =="m"? "Male":"Female")) : "") +""+(devices[i]?.users[7]?.dob? ", DOB:"+devices[i].users[7].dob : ""),
     //                     ]);
     //         }
-                
+
     //     }
     //     console.log(csv);
     //     getCSV(csv);
@@ -159,7 +161,7 @@ const AppUserLoginSessions = () => {
                                                     <div class="card-body card-dashboard">
 
                                                         <div class="row">
-                                                            <div class="col-md-7"><div class="h3 font-weight-bold">{ appUser.user_name} - Login Sessions</div></div>
+                                                            <div class="col-md-7"><div class="h3 font-weight-bold">{appUser.user_name} - Activity Logs</div></div>
                                                             <div class="col-md-5"><input type="text" class="search form-control round border-primary mb-1" placeholder="Search" onChange={e => setQuery(e.target.value)} />
                                                             </div>
 
@@ -168,34 +170,35 @@ const AppUserLoginSessions = () => {
                                                         {/* <button class="btn btn-success pull-right" onClick={exportDevices}>Export</button> */}
                                                         <div class="table-responsive" style={{ maxHeight: '400px', minHeight: '500px' }}>
                                                             {
-                                                                appUserLoginSessions.length > 0 ? 
+                                                                appUserActivityLog.length > 0 ?
                                                                     <table class="table display nowrap table-striped table-bordered">
-                                                                    <thead>
-                                                                        <tr>
-                                                                            <th>Session ID</th>
-                                                                            <th>Start</th>
-                                                                            <th>End</th>
-                                                                            <th>Session Duration(Min)</th>
-                                                                            <th>Details</th>
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody>
-                                                                        {Search(appUserLoginSessions).map((session) =>
-                                                                            <tr key={session.id}>
-                                                                                <td class="text-warning">#{session.id}</td>
-                                                                                <td>{session.start}</td>
-                                                                                <td>{session.end !== null ? <span class="">{session.end}</span> : <span class="text-success">Active</span>}</td>
-                                                                                <td>{session.duration !== null ? <span class="">{session.duration}</span> : 'Not Available'}</td>
-                                                                                <td><a href={"/app/user/activity/log/"+session.id} class="btn btn-primary">View</a></td>
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th>Operation</th>
+                                                                                <th>Type</th>
+                                                                                <th>Date</th>
+                                                                                <th>Query Data (Raw)</th>
                                                                             </tr>
-                                                                        )}
-                                                                    </tbody>
-                                                                </table>
-                                                                : <div class="h3 font-weight-bold text-center">No Session Found</div>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            {Search(appUserActivityLog).map((log) =>
+                                                                                <tr key={log.id}>
+                                                                                    <td class="text-warning">{log.operation_type}</td>
+                                                                                    <td>{log.operation_type == "report_generate_new" ? log.data.type : log.data.category}</td>
+                                                                                    <td>{log.date_time}</td>
+                                                                                    <td>
+                                                                                        {log.operation_type == "report_generate_new" ? <>ResultRow: {log.data.ResultRow}<br /></> : null}
+                                                                                        <textarea className="form-control" style={{ height: '100px' }} disabled value={`Query: ${log.data_json}`} />
+                                                                                    </td>
+                                                                                </tr>
+                                                                            )}
+                                                                        </tbody>
+                                                                    </table>
+                                                                    : <div class="h3 font-weight-bold text-center">No Log Found in this session</div>
                                                             }
-                                                            
-                  
-                                                            
+
+
+
                                                         </div>
                                                     </div>
                                                 </div>
@@ -228,4 +231,4 @@ const AppUserLoginSessions = () => {
     )
 
 }
-export default AppUserLoginSessions;
+export default AppUserActivityLog;
