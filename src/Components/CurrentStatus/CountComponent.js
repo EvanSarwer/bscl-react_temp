@@ -47,8 +47,7 @@ const CountComponent = (props) => {
                         return <div class="card-body">
                             <div class="media d-flex">
                                 <div class="media-body text-left">
-                                    {/* <h3 class={clrCount}>{props.stb}<div style={{ fontSize: '75%' }}>STB Viewer({props.count}) </div></h3> */}
-                                    <h3 class={clrCount}>{props.stb}<div style={{ fontSize: '75%' }}></div></h3>
+                                    <h3 class={clrCount}>{props.stb}<div style={{ fontSize: '75%' }}>Viewer({props.count}) </div></h3>
                                 </div>
                                 <div>
                                     <i class={cls}></i>
