@@ -172,12 +172,12 @@ const Dashboard = () => {
                                 {/* <div class="col-xl-12 col-12">
                                 <ActiveUserTable />
                             </div> */}
-                                <div class="card col-xl-6 col-12" style={{ minHeight: '500px', maxHeight: '550px' }}>
+                                <div class="col-xl-12 col-12">
                                     <ActiveChannelTable activeChannelList={activeChannelList} />
                                 </div>
-                                <div class="col-xl-6 col-12" style={{ minHeight: '500px', maxHeight: '550px' }}>
+                                {/* <div class="col-xl-6 col-12" style={{ minHeight: '500px', maxHeight: '550px' }}>
                                     <PieGraph title="Daily Top Share" text="Channel vs TVR" channel={shareChannel} value={shareValue} color="yellow" loading={loading} start={startrange} finish={finishrange} />
-                                </div>
+                                </div> */}
                             </div>
                         }
 
