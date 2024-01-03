@@ -31,7 +31,7 @@ const CurrentlyWatching = () => {
             (item) =>
                 item.device_name.toLowerCase().includes(query.toLowerCase()) ||
                 item.id.toString().includes(query) ||
-                item.box_id.toString().includes(query)
+                item.box_id && item.box_id.toString().includes(query)
         );
     };
 
