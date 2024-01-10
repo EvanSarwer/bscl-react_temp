@@ -17,6 +17,7 @@ const DefinedChannelStatus = () => {
     const [id, setId] = useState("0");
     const [type, setType] = useState("STB");
     const [channelName, setChannelName] = useState("");
+    const [channelNameDownload, setChannelNameDownload] = useState("");
     const [channels, setchannels] = useState([]);
     const [lastDate, setlastDate] = useState("");
     const [start, setstart] = useState("");
@@ -48,6 +49,7 @@ const DefinedChannelStatus = () => {
                         setTvrp(rsp.data.value.tvrp);
                         setTvr0(rsp.data.value.tvr0);
                         setlabel(rsp.data.value.label);
+                        setChannelNameDownload(rsp.data.channel);
                     }).catch(err => {
         alert("Server Error");
         setUpdate(0);
@@ -113,7 +115,7 @@ const DefinedChannelStatus = () => {
         csv.push(["Finish:",finish]);
         csv.push(["Range:",time]);
         
-        csv.push(["Channel:",channels[id].name]);
+        csv.push(["Channel:",channelNameDownload]);
         
         console.log(csv);
         
@@ -122,7 +124,7 @@ const DefinedChannelStatus = () => {
         var ws = XLSX.utils.aoa_to_sheet(csv);
         XLSX.utils.book_append_sheet(wb, ws, "Day Parts");
         
-        XLSX.writeFile(wb, "Day Parts "+channels[id].name+".xlsx");
+        XLSX.writeFile(wb, "Day Parts "+channelNameDownload+".xlsx");
         //getCSV(csv);
     }
 
@@ -142,7 +144,7 @@ const DefinedChannelStatus = () => {
         axiosConfig.get("/daypart_date").then(rsp => {
             //console.log(rsp.data);
             setlastDate(rsp.data.date);
-            console.log(channels);
+            //console.log(channels);
 
 
         }).catch(err => {
