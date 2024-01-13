@@ -42,7 +42,7 @@ const Overview = () => {
 
 
         var last_updated_date = new Date(lastUpdatedDate);
-        role_datetime = last_updated_date.getFullYear() + '-' + pad((last_updated_date.getMonth() + 1)) + '-' + pad(last_updated_date.getDate()) + ' 12:00:00';
+        role_datetime = last_updated_date.getFullYear() + '-' + pad((last_updated_date.getMonth() + 1)) + '-' + pad(last_updated_date.getDate()) + ' 23:59:59';
     }
 
     console.log(new Date(lastUpdatedDate));
