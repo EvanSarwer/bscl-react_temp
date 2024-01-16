@@ -604,6 +604,7 @@ const DeviceForm = (props) => {
                                                         </select> */}
                                                         {/* <input type="text" name="district" id="district" className="form-control" value={districtName} onChange={(e) => { setDistrictName(e.target.value) }} placeholder="Division" tabIndex={2} required data-validation-required-message="Please enter District." /> */}
                                                         <select class="custom-select d-block w-100" name="district" id="district" className="form-control" value={districtName} onChange={(e) => { setDistrictName(e.target.value) }} placeholder="Select Division">
+                                                            <option value="">Please Select Division</option>
                                                             <option value="dhaka">Dhaka</option>
                                                             <option value="chattogram">Chattogram</option>
                                                             <option value="mymensingh">Mymensingh</option>
