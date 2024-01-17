@@ -9,7 +9,7 @@ const DeviceForm = (props) => {
     const cookies = new Cookies();
     const [deviceID, setDeviceID] = useState("");
     const [deviceName, setDeviceName] = useState("");
-    const [monthlyIncome, setMonthlyIncome] = useState("");
+    // const [monthlyIncome, setMonthlyIncome] = useState("");
     const [socioStatus, setSocioStatus] = useState("");
     const [latitude, setLatitude] = useState("");
     const [longitude, setLongitude] = useState("");
@@ -37,7 +37,7 @@ const DeviceForm = (props) => {
     const [cityName, setCityName] = useState("");
     const [zipCode, setZipCode] = useState("");
     const [districtName, setDistrictName] = useState("");
-    const [householdCondition, setHouseholdCondition] = useState("");
+    // const [householdCondition, setHouseholdCondition] = useState("");
     const [installerName, setInstallerName] = useState("");
     const [serveyDate, setServeyDate] = useState("");
     const [installationDate, setInstallationDate] = useState("");
@@ -51,6 +51,7 @@ const DeviceForm = (props) => {
     const [stbProviderName, setStbProviderName] = useState("");
     const [stbSubscriptionType, setStbSubscriptionType] = useState("");
     const [stbSubscriptionCharge, setStbSubscriptionCharge] = useState("");
+    const [economicStatus , setEconomicStatus] = useState("");
 
     const [districtList, setDistrictList] = useState([]);
 
@@ -64,7 +65,8 @@ const DeviceForm = (props) => {
                 setDeviceUsers(rsp.data.deviceUser);
                 setDeviceID(obj.id);
                 setDeviceName(obj.device_name);
-                setMonthlyIncome(obj.monthly_income);
+                setEconomicStatus(obj.economic_status);
+                //setMonthlyIncome(obj.monthly_income);
                 setSocioStatus(obj.socio_status);
                 setContactPerson(obj.contact_person);
                 setContactEmail(obj.contact_email);
@@ -84,7 +86,7 @@ const DeviceForm = (props) => {
                 setCityName(obj.city_Name);
                 setZipCode(obj.zip_code);
                 setDistrictName(obj.district);
-                setHouseholdCondition(obj.household_condition);
+                //setHouseholdCondition(obj.household_condition);
                 setDescription(obj.description);
                 setTvType(obj.tv_type);
                 setTvBrand(obj.tv_brand);
@@ -183,8 +185,8 @@ const DeviceForm = (props) => {
         e.preventDefault();
         if (props.mode == "Edit") {
             const obj = {
-                id: deviceID, device_name: deviceName, lat: latitude, lng: longitude, monthly_income: monthlyIncome, socio_status: socioStatus, installer_name: installerName, contact_person: contactPerson, contact_email: contactEmail, contact_number: contactNumber, alt_number: altContactNumber, payment_type: mobileFinancialService, payment_number: mobileFinancialNumber, other_payment_type: otherFinancialService, other_payment_number: otherFinancialNumber,
-                house_name: houseName, house_number: houseNumber, road_number: roadNumber, state_name: stateName, ward_no: wardNo, zone_thana: zoneThana, city_corporation: cityCorporation, city_Name: cityName, zip_code: zipCode, district: districtName, household_condition: householdCondition, description: description, tv_type: tvType, tv_brand: tvBrand, tv_placement: tvPlacement, gsm_signal_strength: gsmSignalStrength, wifi: wifi, wifi_signal_strength: wifiSignalStrength,
+                id: deviceID, device_name: deviceName, lat: latitude, lng: longitude, economic_status: economicStatus, socio_status: socioStatus, installer_name: installerName, contact_person: contactPerson, contact_email: contactEmail, contact_number: contactNumber, alt_number: altContactNumber, payment_type: mobileFinancialService, payment_number: mobileFinancialNumber, other_payment_type: otherFinancialService, other_payment_number: otherFinancialNumber,
+                house_name: houseName, house_number: houseNumber, road_number: roadNumber, state_name: stateName, ward_no: wardNo, zone_thana: zoneThana, city_corporation: cityCorporation, city_Name: cityName, zip_code: zipCode, district: districtName, description: description, tv_type: tvType, tv_brand: tvBrand, tv_placement: tvPlacement, gsm_signal_strength: gsmSignalStrength, wifi: wifi, wifi_signal_strength: wifiSignalStrength,
                 stb_provider_name: stbProviderName, stb_subscription_type: stbSubscriptionType, stb_subscription_charge: stbSubscriptionCharge, type: 'STB'
             };
             console.log(obj);
@@ -203,8 +205,8 @@ const DeviceForm = (props) => {
 
         else {
             const obj = {
-                device_name: deviceName, lat: latitude, lng: longitude, monthly_income: monthlyIncome, socio_status: socioStatus, installer_name: cookies.get('username'), contact_person: contactPerson, contact_email: contactEmail, contact_number: contactNumber, alt_number: altContactNumber, payment_type: mobileFinancialService, payment_number: mobileFinancialNumber, other_payment_type: otherFinancialService, other_payment_number: otherFinancialNumber,
-                house_name: houseName, house_number: houseNumber, road_number: roadNumber, state_name: stateName, ward_no: wardNo, zone_thana: zoneThana, city_corporation: cityCorporation, city_Name: cityName, zip_code: zipCode, district: districtName, household_condition: householdCondition, description: description, tv_type: tvType, tv_brand: tvBrand, tv_placement: tvPlacement, gsm_signal_strength: gsmSignalStrength, wifi: wifi, wifi_signal_strength: wifiSignalStrength,
+                device_name: deviceName, lat: latitude, lng: longitude, economic_status: economicStatus, socio_status: socioStatus, installer_name: cookies.get('username'), contact_person: contactPerson, contact_email: contactEmail, contact_number: contactNumber, alt_number: altContactNumber, payment_type: mobileFinancialService, payment_number: mobileFinancialNumber, other_payment_type: otherFinancialService, other_payment_number: otherFinancialNumber,
+                house_name: houseName, house_number: houseNumber, road_number: roadNumber, state_name: stateName, ward_no: wardNo, zone_thana: zoneThana, city_corporation: cityCorporation, city_Name: cityName, zip_code: zipCode, district: districtName, description: description, tv_type: tvType, tv_brand: tvBrand, tv_placement: tvPlacement, gsm_signal_strength: gsmSignalStrength, wifi: wifi, wifi_signal_strength: wifiSignalStrength,
                 stb_provider_name: stbProviderName, stb_subscription_type: stbSubscriptionType, stb_subscription_charge: stbSubscriptionCharge, type: 'STB'
             };
             axiosConfig.post("/device/create", obj).then((rsp) => {
@@ -276,7 +278,7 @@ const DeviceForm = (props) => {
                                     <div className="card-title text-center">
                                         <img style={{ width: '13%', height: '0%' }} src="/app-assets/images/logo/app-user.png" alt="user logo" />
                                     </div>
-                                    <h6 className="card-subtitle line-on-side text-muted text-center font-medium-5 pt-2"><span>{props.mode} Device</span>
+                                    <h6 className="card-subtitle line-on-side text-muted text-center font-medium-5 pt-2"><span>{props.mode} Household</span>
                                     </h6>
                                 </div>
                                 <div className="card-content" >
@@ -302,7 +304,7 @@ const DeviceForm = (props) => {
 
                                             <table style={{ width: '100%' }} >
                                                 <tr>
-                                                    <td class="form-label">Device Name<span class="text-danger font-weight-bold ">* </span>:</td>
+                                                    <td class="form-label">Household Name<span class="text-danger font-weight-bold ">* </span>:</td>
                                                     <td style={{ width: '68%' }} colspan={3}><fieldset className="form-group position-relative has-icon-left">
                                                         <input type="text" name="device_id" id="device_id" value={deviceName} onChange={(e) => { setDeviceName(e.target.value) }} readOnly={props.mode == "Edit"} className="form-control" placeholder="Device name" tabIndex={1} required data-validation-required-message="Please enter device name." />
                                                         <div className="form-control-position">
@@ -547,10 +549,10 @@ const DeviceForm = (props) => {
                                                             </td>
                                                         </tr>
                                                             <tr>
-                                                                <td>City Name:</td>
+                                                                <td>District:</td>
                                                                 <td colspan={3}>
                                                                     <fieldset className="form-group position-relative has-icon-left">
-                                                                        <input type="text" name="city_Name" id="city_Name" className="form-control" value={cityName} onChange={(e) => { setCityName(e.target.value) }} placeholder="City Name" tabIndex={14} required data-validation-required-message="Please enter city name." />
+                                                                        <input type="text" name="city_Name" id="city_Name" className="form-control" value={cityName} onChange={(e) => { setCityName(e.target.value) }} placeholder="District Name" tabIndex={14} required data-validation-required-message="Please enter city name." />
                                                                         <div className="form-control-position">
                                                                             <i className="la icon-home" />
                                                                         </div>
@@ -586,7 +588,7 @@ const DeviceForm = (props) => {
 
 
                                                 <tr>
-                                                    <td class="form-label">District<span class="text-danger font-weight-bold ">* </span>: <br /><br /><br /><br /><br /> {(() => {
+                                                    <td class="form-label">Division<span class="text-danger font-weight-bold ">* </span>: <br /><br /><br /><br /><br /> {(() => {
                                                         if (props.mode !== "aEdit") {
                                                             return <div><input type="checkbox" id="location" onChange={handleChange} value={isSubscribed} name="location" />
                                                                 <label class="form-label" for="vehicle1">&nbsp; Update Location</label></div>
@@ -600,7 +602,19 @@ const DeviceForm = (props) => {
                                                                 <option value={district.district}>{district.district}</option>
                                                             )}
                                                         </select> */}
-                                                        <input type="text" name="district" id="district" className="form-control" value={districtName} onChange={(e) => { setDistrictName(e.target.value) }} placeholder="District" tabIndex={2} required data-validation-required-message="Please enter District." />
+                                                        {/* <input type="text" name="district" id="district" className="form-control" value={districtName} onChange={(e) => { setDistrictName(e.target.value) }} placeholder="Division" tabIndex={2} required data-validation-required-message="Please enter District." /> */}
+                                                        <select class="custom-select d-block w-100" name="district" id="district" className="form-control" value={districtName} onChange={(e) => { setDistrictName(e.target.value) }} placeholder="Select Division">
+                                                            <option value="">Please Select Division</option>
+                                                            <option value="dhaka">Dhaka</option>
+                                                            <option value="chattogram">Chattogram</option>
+                                                            <option value="mymensingh">Mymensingh</option>
+                                                            <option value="rajshahi">Rajshahi</option>
+                                                            <option value="sylhet">Sylhet</option>
+                                                            <option value="rangpur">Rangpur</option>
+                                                            <option value="khulna">Khulna</option>
+                                                            <option value="barishal">Barishal</option>
+
+                                                        </select>
                                                         <div className="form-control-position">
                                                             <i className="ft-map-pin" />
                                                         </div>
@@ -655,11 +669,11 @@ const DeviceForm = (props) => {
 
                                                 <tr>
                                                     <td colspan={4}>
-                                                        <h6 className="card-subtitle line-on-side text-muted text-center font-medium-1"><span>Household Condition</span> </h6>
+                                                        <h6 className="card-subtitle line-on-side text-muted text-center font-medium-1"><span>Social Economic Condition</span> </h6>
                                                     </td>
                                                 </tr>
 
-
+                                            {/* 
                                                 {(() => {
                                                     if (socioStatus == "u") {
                                                         return <tr>
@@ -689,7 +703,7 @@ const DeviceForm = (props) => {
                                                         </tr>
 
                                                     }
-                                                })()}
+                                                })()} */}
 
 
 
@@ -698,19 +712,19 @@ const DeviceForm = (props) => {
 
 
                                                 <tr>
-                                                    <td>Household Monthly Income Range<span class="text-danger font-weight-bold ">* </span>:</td>
+                                                    <td>SEC Level<span class="text-danger font-weight-bold ">* </span>:</td>
                                                     <td colspan={3}><fieldset className="form-group position-relative">
-                                                        <select class="custom-select d-block w-100" value={monthlyIncome} onChange={(e) => { setMonthlyIncome(e.target.value) }}>
+                                                        <select class="custom-select d-block w-100" value={economicStatus} onChange={(e) => { setEconomicStatus(e.target.value) }}>
                                                             <option value="">Select</option>
-                                                            <option value="e">Income above 1,00,000 Taka</option>
-                                                            <option value="d">Income 70,000 to 99,999 Taka</option>
-                                                            <option value="c">Income 40,000 to 69,999 Taka</option>
-                                                            <option value="b">Income 10,000 to 39,999 Taka</option>
-                                                            <option value="a">Income below 10,000 Taka</option>
+                                                            <option value="a">SEC A</option>
+                                                            <option value="b">SEC B</option>
+                                                            <option value="c">SEC C</option>
+                                                            <option value="d">SEC D</option>
+                                                            <option value="e">SEC E</option>
 
                                                         </select>
                                                         <div className="help-block font-small-3" />
-                                                        <span class="text-danger">{err_msg.monthly_income ? err_msg.monthly_income[0] : ''}</span>
+                                                        <span class="text-danger">{err_msg.economic_status ? err_msg.economic_status[0] : ''}</span>
                                                     </fieldset></td>
                                                 </tr>
 
