@@ -74,7 +74,7 @@ console.log(cookies.get('_role'));
 
 
                     {(() => {
-                        if (cookies.get('_role') === "admin") {
+                        if (cookies.get('_role') === "admin"||cookies.get('_role') === "operator") {
                             if (props.menu === "LiveDevices") {
                                 return (
                                     <li class="active nav-item"><Link to="/LiveDevices"><i class="la la-tencent-weibo"></i><span class="menu-title" data-i18n="Templates">Live Devices</span></Link>
