@@ -11,6 +11,7 @@ import LiveDevices from '../LiveDevices/LiveDevices';
 import LiveMap from "../LiveChannels/LiveMap";
 import ChannelStatus from '../Channel/ChannelStatus';
 import AdLogUpload from '../LogUpload/AdLogUpload';
+import CategorialAudienceCount from '../CategorialAudienceCount/CategorialAudienceCount';
 import ProgramLogUpload from '../LogUpload/ProgramLogUpload';
 import DayRangedChannelStatus from '../Channel/DayRangedChannelStatus';
 import RangedChannelStatus from '../Channel/RangedChannelStatus';
@@ -84,6 +85,10 @@ function Admin() {
         }
         { (cookies.get('_role')==='admin') && 
           <Route exact path="/AdLogUpload" element={<AdLogUpload />}></Route>
+          
+        }
+        { (cookies.get('_role')==='admin'||cookies.get('_role')==='operator') && 
+          <Route exact path="/CategorialAudienceCount" element={<CategorialAudienceCount />}></Route>
           
         }
         { (cookies.get('_role')==='admin') && 
