@@ -1,10 +1,6 @@
 import { BrowserRouter, Routes, Route ,Navigate} from "react-router-dom";
-import AddDeployer from "../Deployer/AddDeployer";
-import DeployerCheck from "../Deployer/DeployerCheck";
-import GetMail from "../ForgetPassword/GetMail";
-import PasswordChange from "../ForgetPassword/PasswordChange";
-import Login from "./Login";
-import InactiveUserNotice from "../ForgetPassword/InactiveUserNotice";
+import Overview from "../Overview/Overview";
+import DeviceViewingStatusList from "../DeviceUser/DeviceViewingStatusList";
 
 function MainPage() {
 
@@ -13,16 +9,15 @@ function MainPage() {
       
       <BrowserRouter>
         <Routes>
-          <Route exact path="/" element={<Login />}></Route>
-          <Route exact path="/deployer/validation" element={<DeployerCheck />}></Route>
-          <Route exact path="/deployer/form/:token" element={<AddDeployer />}></Route>
-          <Route exact path="/forget-Pass/email" element={<GetMail />}></Route>
-          <Route exact path="/forget-pass/new-password/:token" element={<PasswordChange />}></Route>
-          <Route exact path="/account/notice" element={<InactiveUserNotice />}></Route>
+
+           {/* //// Define Routes */}
+          <Route exact path="/overview" element={<Overview />}></Route>
+          <Route exact path="/device/viewing-status" element={<DeviceViewingStatusList />}></Route>
+
           <Route
-        path="*"
-        element={<Navigate to="/" replace />}
-    />
+          path="*"
+          element={<Navigate to="/" replace />}
+          />
         </Routes>
       </BrowserRouter>
       </div>

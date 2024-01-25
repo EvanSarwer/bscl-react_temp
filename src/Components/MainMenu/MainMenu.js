@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import Cookies from 'universal-cookie';
-import { useState, useEffect } from "react";
 
 const MainMenu = (props) => {
     const cookies = new Cookies();
@@ -247,6 +246,7 @@ const MainMenu = (props) => {
                         }
                     })()} */}
 
+
                     {(() => {
                         if (cookies.get('_role') === "admin" || cookies.get('_role') === "operator" || cookies.get('_role') === "deployer") {
                             if (props.menu === "devicemonitor") {
@@ -291,6 +291,22 @@ const MainMenu = (props) => {
                             } else {
                                 return (
                                     <li class=" nav-item"><Link to="/device"><i class="la la-street-view"></i><span class="menu-title" data-i18n="Templates">Devices</span></Link>
+                                    </li>
+                                )
+                            }
+                        }
+                    })()}
+
+                    {(() => {
+                        if (cookies.get('_role') === "admin" || cookies.get('_role') === "operator") {
+                            if (props.menu === "deviceViewingStatus") {
+                                return (
+                                    <li class="active nav-item"><Link to="/device/viewing-status"><i class="la la-cogs"></i><span class="menu-title" data-i18n="Templates">Dev. Viewing Status</span></Link>
+                                    </li>
+                                )
+                            } else {
+                                return (
+                                    <li class=" nav-item"><Link to="/device/viewing-status"><i class="la la-cogs"></i><span class="menu-title" data-i18n="Templates">Dev. Viewing Status</span></Link>
                                     </li>
                                 )
                             }
@@ -429,7 +445,7 @@ const MainMenu = (props) => {
                         }
                     })()}
 
-{(() => {
+                    {(() => {
                         if (cookies.get('_role') === "admin" || cookies.get('_role') === "operator") {
                             if (props.menu === "datacleansing") {
                                 return (

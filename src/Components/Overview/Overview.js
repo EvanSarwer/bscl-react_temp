@@ -1,19 +1,10 @@
 import React from 'react';
-import CurrentStatus from "../CurrentStatus/CurrentStatus";
-import Graph from "../Graph/Graph";
-import PostGraph from "../Graph/PostGraph";
-import TvrGraph from "../Graph/TvrGraph";
-import ActiveChannelTable from "../Table/ActiveChannelTable";
-import ActiveUserTable from "../Table/ActiveUserTable";
-import Map from "../Map/Map";
 import { useState, useEffect } from "react";
 import axiosConfig from "../axiosConfig";
 import { Bar } from 'react-chartjs-2';
-import { Chart as ChartJS } from 'chart.js/auto';
 import Header from '../Header/Header';
 import MainMenu from '../MainMenu/MainMenu';
 import Cookies from 'universal-cookie';
-import { localeData } from 'moment/moment';
 
 
 const Overview = () => {
@@ -32,14 +23,6 @@ const Overview = () => {
     if (cookies.get('_role') === "admin" || cookies.get('_role') === "operator") {
         var role_datetime = today.getFullYear() + '-' + pad((today.getMonth() + 1)) + '-' + pad(today.getDate()) + ' ' + today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
     } else if (cookies.get('_role') === "general" || cookies.get('_role') === "add-agency") {
-        // var changeData_date = today.getFullYear() + '-' + pad((today.getMonth() + 1)) + '-' + pad(today.getDate()) + ' 12:00:00';
-        // if(new Date(changeData_date).getTime() <= new Date(datetime).getTime()){
-        //     var role_datetime = yesterday.getFullYear() + '-' + pad((yesterday.getMonth() + 1)) + '-' + pad(yesterday.getDate()) + ' 23:59:59';
-        // }else{
-        //     var day_before_yesterday = new Date(new Date().setDate(new Date().getDate() - 2)),
-        //         role_datetime = day_before_yesterday.getFullYear() + '-' + pad((day_before_yesterday.getMonth() + 1)) + '-' + pad(day_before_yesterday.getDate()) + ' 23:59:59';
-        // }
-
 
         var last_updated_date = new Date(lastUpdatedDate);
         role_datetime = last_updated_date.getFullYear() + '-' + pad((last_updated_date.getMonth() + 1)) + '-' + pad(last_updated_date.getDate()) + ' 23:59:59';
@@ -104,7 +87,7 @@ const Overview = () => {
         if (start !== "" && finish !== "" && ageGroup.length > 0 && (new Date(start).getTime() <= new Date(role_datetime).getTime()) && (new Date(finish).getTime() <= new Date(role_datetime).getTime())) {
             setErr("");
             setloading(false);
-            axiosConfig.post("/overview/reachusergraph", data).then(rsp => {
+            axiosConfig.post("/overview/reachusergraphh", data).then(rsp => {
                 setloading(true);
                 //console.log(rsp.data);
 
